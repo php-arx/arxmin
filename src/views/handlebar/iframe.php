@@ -1,0 +1,1 @@
+<iframe ng-controller="IframeCntl" src="{{ $location.path() }}" width="100%" height="100%" class="app" frameBorder="0"></iframe>
