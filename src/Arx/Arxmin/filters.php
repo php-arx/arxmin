@@ -36,6 +36,6 @@ App::after(function($request, $response)
 Route::filter('arxminauth', function()
 {
     if(!Session::get('arxminLogged')){
-        //return Redirect::to('arxmin');
+        //return Redirect::to('/arxmin');
     }
 });

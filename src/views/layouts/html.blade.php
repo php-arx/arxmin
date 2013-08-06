@@ -1,7 +1,7 @@
 @extends('arx::html')
 @section('doctype')
 <!doctype html>
-<html ng-app="ngAarxmin">
+<html ng-app="ngArxmin">
 @stop
 
 @section('head')

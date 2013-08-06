@@ -42,9 +42,9 @@ class Arxmin extends Container
     public static function getDbMenu(){
         return array(
             'facebook' => array(
-                'name' => 'Facebook frame',
+                'name' => 'Dashboard',
                 'type' => 'iframe',
-                'href' => 'https://facebook.com'
+                'href' => '/arxmin/dashboard'
             )
         );
     }

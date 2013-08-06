@@ -1,9 +1,11 @@
 <?php
 
-Route::any('arxmin/login', 'Arx\Arxmin\controllers\Route@login');
+Route::get('/arxmin', 'Arx\Arxmin\controllers\RouteController@index');
 
-Route::any('arxmin/home/{param1?}/{param2?}/{param3?}/{param4?}/{param5?}', 'Arx\Arxmin\controllers\Route@home');
+Route::any('arxmin/login', 'Arx\Arxmin\controllers\UserController@login');
 
-Route::resource('arxmin', 'Arx\Arxmin\controllers\Route');
+Route::controller('/arxmin/user', 'Arx\Arxmin\controllers\UserController');
 
-Route::when('arxmin/*', 'arxminauth');
+Route::controller('/arxmin', 'Arx\Arxmin\controllers\RouteController');
+
+Route::when('/arxmin/home*', 'arxminauth');
