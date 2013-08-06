@@ -19,12 +19,20 @@ class Route extends \BaseController {
             'attributes' => array(
                 'class' => 'form-signin',
                 'method' => 'GET',
+<<<<<<< HEAD
                 'action' => URL::to('/arxmin/login')
+=======
+                'action' => URL::to('arxmin/login')
+>>>>>>> 029213bdc5d821844bc8412d22c382274b91f9f2
             )
         );
 
         if(Session::get('arxminLogged')){
+<<<<<<< HEAD
             return Redirect::to('/arxmin/home');
+=======
+            return Redirect::to('home');
+>>>>>>> 029213bdc5d821844bc8412d22c382274b91f9f2
         }
 
 		return View::make('arxmin::login', get_defined_vars());
@@ -48,9 +56,15 @@ class Route extends \BaseController {
 
         if($response){
             Session::put('arxminLogged', true);
+<<<<<<< HEAD
             return Redirect::to('/arxmin/home');
         } else {
             return Redirect::to('/arxmin');
+=======
+            return Redirect::to('arxmin/home');
+        } else {
+            return Redirect::to('arxmin');
+>>>>>>> 029213bdc5d821844bc8412d22c382274b91f9f2
         }
     }
 
@@ -122,4 +136,8 @@ class Route extends \BaseController {
 		//
 	}
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 029213bdc5d821844bc8412d22c382274b91f9f2
