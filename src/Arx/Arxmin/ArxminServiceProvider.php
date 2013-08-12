@@ -35,7 +35,9 @@ class ArxminServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		//
+//		$this->app['arxmin'] = $this->app->share(function($app){
+//            return new Arxmin;
+//        });
 	}
 
 	/**
@@ -45,7 +47,7 @@ class ArxminServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return array();
+		return array('arxmin');
 	}
 
 }

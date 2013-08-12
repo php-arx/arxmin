@@ -39,7 +39,8 @@ class RouteController extends BaseController {
     }
 
     public function getDashboard(){
-        return View::make('arxmin::panels.dashboard');
+
+        return View::make('arxmin::layouts.dashboard', get_defined_vars());
     }
 
 

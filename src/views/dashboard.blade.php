@@ -2,7 +2,11 @@
 
 @section('head')
 @parent
+
+<link rel="stylesheet" href="/packages/arx/core/css/main.min.css?v=1" />
 <link rel="stylesheet" href="/packages/arx/arxmin/css/style.css"/>
+
+<!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 @stop
 
 @section('body')
@@ -29,4 +33,5 @@
 
 @section('javascripts')
 @parent
+<script src="//packages/arx/core/js/main.min.js"></script>
 @stop

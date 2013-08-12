@@ -1,1 +1,1 @@
-@extends('arx.layouts.login')
+@extends('arx::layouts.login')
