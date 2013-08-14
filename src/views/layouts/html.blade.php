@@ -5,15 +5,10 @@
 @stop
 
 @section('head')
-    @parent
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script>
-    <script src="https://cdn.firebase.com/v0/firebase.js"></script>
-    <script src="http://firebase.github.io/angularFire/angularFire.js"></script>
+
+<link rel="stylesheet" href="/packages/arx/ui/css/main.min.css?v=1" />
+
+<!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 @stop
 
 @section('body')
@@ -21,44 +16,8 @@
 @stop
 
 @section('js')
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>
-<script>
-    angular.module('ngArxmin', [], function($routeProvider, $locationProvider) {
-        $routeProvider.when('/Book/:bookId', {
-            templateUrl: 'book.html',
-            controller: BookCntl,
-            resolve: {
-                // I will cause a 1 second delay
-                delay: function($q, $timeout) {
-                    var delay = $q.defer();
-                    $timeout(delay.resolve, 1000);
-                    return delay.promise;
-                }
-            }
-        });
-        $routeProvider.when('/Book/:bookId/ch/:chapterId', {
-            templateUrl: 'chapter.html',
-            controller: ChapterCntl
-        });
-
-        // configure html5 to get links working on jsfiddle
-        $locationProvider.html5Mode(true);
-    });
-
-    function MainCntl($scope, $route, $routeParams, $location) {
-        $scope.$route = $route;
-        $scope.$location = $location;
-        $scope.$routeParams = $routeParams;
-    }
-
-    function BookCntl($scope, $routeParams) {
-        $scope.name = "BookCntl";
-        $scope.params = $routeParams;
-    }
-
-    function ChapterCntl($scope, $routeParams) {
-        $scope.name = "ChapterCntl";
-        $scope.params = $routeParams;
-    }
-</script>
+<script src="/packages/arx/ui/js/plugins/jquery/jquery.min.js"></script>
+<script src="/packages/arx/ui/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="/packages/arx/ui/js/plugins/bootstrap/bootstrap.min.js"></script>
+<script src="/packages/arx/ui/js/main.min.js"></script>
 @stop

@@ -1,1 +1,0 @@
-<iframe ng-controller="IframeCntl" src="" width="100%" height="1000px" class="app" frameBorder="0"></iframe>

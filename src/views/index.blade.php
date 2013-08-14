@@ -1,1 +1,0 @@
-@extends('arx.layouts.bootstrap')

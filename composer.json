@@ -15,10 +15,13 @@
     },
     "autoload": {
         "classmap": [
-            "src/migrations"
+            "src/migrations",
+            "src/Arxmin/controllers",
+            "src/Arxmin/models"
         ],
         "psr-0": {
-            "Arx\\Arxmin": "src/"
+            "Arx\\Arxmin": "src/",
+            "Arxmin": "src/"
         }
     },
     "minimum-stability": "dev"

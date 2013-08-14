@@ -1,51 +1,18 @@
-<!DOCTYPE html>
-<!--[if IEMobile 7]><html class="iem7" lang="fr" dir="ltr"><![endif]-->
-<!--[if lt IE 7]><html class="ie6" lang="fr" dir="ltr"><![endif]-->
-<!--[if (IE 7)&(!IEMobile)]><html class="ie7" lang="fr" dir="ltr"><![endif]-->
-<!--[if IE 8]><html class="ie8" lang="fr" dir="ltr"><![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--><html lang="fr" dir="ltr"><!--<![endif]-->
-<head>
-    <meta charset="UTF-8" />
-    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" /><![endif]-->
-    <!--[if lt IE 7]><meta http-equiv="imagetoolbar" content="false" /><![endif]-->
+@extends('arxmin::layouts.html')
 
-    <title></title>
-
-    <link rel="stylesheet" href="/packages/arx/core/css/main.css?v=1" />
-
-    <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-</head>
-<body>
-
+@section('body')
 <div class="container arx-container">
 <div class="row">
-<div class="col-sm-3 well arx-sidebar">
-    <h1>Dashboard</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+<div class="col-sm-12 arx-content">
 
-    <ul class="nav">
-        <li>
-            <a href="#"><i class="icon-envelope"></i> Email</a>
-        </li>
-        <li>
-            <a href="#"><i class="icon-tasks"></i> Tasks</a>
-        </li>
-        <li>
-            <a href="#"><i class="icon-lock"></i> Lock</a>
-        </li>
-        <li>
-            <a href="#"><i class="icon-heart"></i> Favorite</a>
-        </li>
-        <li>
-            <a href="#"><i class="icon-star"></i> Star</a>
-        </li>
+    <h2>{{ lg('arxmin::dashboard.title') }}</h2>
+    <ul class="breadcrumb">
+        <li><a href="#">Dashboard</a> <span class="divider">/</span></li>
+        <li><a href="#">Home</a></li>
     </ul>
-</div>
-<div class="col-sm-9 arx-content">
-    <h2>UI Elements</h2>
 
     <div class="row">
-        <div class="col-sm-6">
+        <div class="column col-sm-6">
             <div class="panel">
                 <div class="panel-heading">
                     <h3 class="panel-title"><i class="icon-chevron-sign-down"></i> Collapsible panel</h3>
@@ -56,7 +23,6 @@
                         <a class="btn btn-link" href="#"><i class="icon-save"></i></a>
                         <a class="btn btn-link" href="#"><i class="icon-wrench"></i></a>
                         <a class="btn btn-link" href="#"><i class="icon-cogs"></i></a>
-
                         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse1"><i class="icon-caret-down"></i> <i class="icon-caret-up"></i></button>
                     </div>
                 </div>
@@ -107,7 +73,7 @@
                 </ul>
             </div><!--/ .panel -->
         </div>
-        <div class="col-sm-6">
+        <div class="column col-sm-6">
             <div class="panel">
                 <div class="panel-heading">
                     <h3 class="panel-title"><i class="icon-collapse-alt"></i> Static panel</h3>
@@ -242,9 +208,4 @@
 </div>
 </div>
 </div>
-
-
-<script src="/packages/arx/core/js/main.min.js"></script>
-
-</body>
-</html>
+@stop

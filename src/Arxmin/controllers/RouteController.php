@@ -1,6 +1,6 @@
-<?php namespace Arx\Arxmin\controllers;
+<?php namespace Arxmin;
 
-use Arx\Arxmin\models\User, Arx\Arxmin\models\Arxmin;
+use Arxmin\models\Arxmin;
 use Illuminate\Support\Facades\URL;
 use Config, Session, Redirect, View, Input;
 
@@ -35,12 +35,11 @@ class RouteController extends BaseController {
         $menu = Arxmin::getMenu();
 
         $currentIframe = Input::get('url') ?: URL::to('/arxmin/dashboard');
-        $this->layout = View::make('arxmin::dashboard', get_defined_vars());
+        $this->layout = View::make('arxmin::home', get_defined_vars());
     }
 
     public function getDashboard(){
-
-        return View::make('arxmin::layouts.dashboard', get_defined_vars());
+        return View::make('arxmin::layouts.dashboard');
     }
 
 
@@ -87,7 +86,7 @@ class RouteController extends BaseController {
         if(method_exists($this, $page)){
             $this->{$page}();
         } else {
-            $this->layout = View::make('arxmin::dashboard');
+            $this->layout = View::make('arxmin::home');
         }
 	}
 
