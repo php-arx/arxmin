@@ -12,7 +12,7 @@
 @stop
 
 @section('body')
-    @include('snippets.container')
+    @include('arx::snippets.container')
 @stop
 
 @section('js')

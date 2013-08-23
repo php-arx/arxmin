@@ -27,7 +27,9 @@ class Arxmin extends Container
 
         $menu = self::getDbMenu();
 
-        foreach($finder->name('manifest.json')->in(Config::get('paths.workbench')) as $file){
+        $results = $finder->name('manifest.json')->in(Config::get('arxmin::paths.workbench'));
+
+        foreach($results as $file){
 
             $json = json_decode(file_get_contents($file->getRealpath()), true);
 

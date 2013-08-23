@@ -27,6 +27,8 @@ class RouteController extends BaseController {
             return Redirect::to('/arxmin/home');
         }
 
+        $headtitle = 'Arxmin title';
+
 		return View::make('arxmin::login', get_defined_vars());
 	}
 
