@@ -1,12 +1,12 @@
-<?php namespace Arx\Arxmin\controllers;
+<?php namespace Arxmin;
 
-use Arx\Arxmin\models\User, Arx\Arxmin\models\Arxmin;
+use Arxmin\models\Arxmin;
 use Illuminate\Support\Facades\URL;
 use Config, Session, Redirect, View, Input;
 
 include __DIR__.'/../settings.php';
 
-class Route extends \BaseController {
+class RouteController extends BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -19,7 +19,7 @@ class Route extends \BaseController {
             'attributes' => array(
                 'class' => 'form-signin',
                 'method' => 'GET',
-                'action' => URL::to('/arxmin/login')
+                'action' => URL::to('/arxmin/user/login')
             )
         );
 
@@ -30,20 +30,21 @@ class Route extends \BaseController {
 		return View::make('arxmin::login', get_defined_vars());
 	}
 
-    public function home(){
+    public function anyHome(){
 
         $menu = Arxmin::getMenu();
 
-        $currentIframe = Url::to('arxmin/Dashboard');
-        $this->layout = View::make('arxmin::dashboard', get_defined_vars());
+        $currentIframe = Input::get('url') ?: URL::to('/arxmin/dashboard');
+        $this->layout = View::make('arxmin::home', get_defined_vars());
     }
 
-    public function dashboard(){
-        return View::make('arxmin::panels.dashboard');
+    public function getDashboard(){
+        return View::make('arxmin::layouts.dashboard');
     }
 
 
     public function login(){
+
         $response = User::login(Input::get('email'), Input::get('password'));
 
         if($response){
@@ -85,7 +86,7 @@ class Route extends \BaseController {
         if(method_exists($this, $page)){
             $this->{$page}();
         } else {
-            $this->layout = View::make('arxmin::dashboard');
+            $this->layout = View::make('arxmin::home');
         }
 	}
 
