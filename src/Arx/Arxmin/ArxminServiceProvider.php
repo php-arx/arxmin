@@ -1,9 +1,8 @@
-<?php namespace Arxmin;
+<?php namespace Arx\Arxmin;
 
 use Illuminate\Support\ServiceProvider;
+use Arx\facades\View;
 use Arx\classes\Controller;
-
-use \View,\Lang,\Config;
 
 class ArxminServiceProvider extends ServiceProvider {
 
@@ -25,10 +24,8 @@ class ArxminServiceProvider extends ServiceProvider {
 
         include __DIR__.'/filters.php';
         include __DIR__.'/routes.php';
-        Lang::addNamespace('arxmin', __DIR__.'/../lang');
-        Config::addNamespace('arxmin', __DIR__.'/../config');
-        View::addNamespace('arxmin', __DIR__.'/../views');
-        View::addNamespace('arx', \Arx::path('views'));
+        View::addNamespace('arxmin', __DIR__.'/../../views');
+        View::addNamespace('arx', \Arx::path().'/views');
 	}
 
 	/**
@@ -38,7 +35,7 @@ class ArxminServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-
+		//
 	}
 
 	/**

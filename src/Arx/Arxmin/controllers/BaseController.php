@@ -1,6 +1,6 @@
-<?php namespace Arxmin;
+<?php namespace Arx\Arxmin\controllers;
 
-use Controller, View;
+use Controller;
 
 class BaseController extends \Arx\classes\Controller {
 

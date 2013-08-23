@@ -1,4 +1,4 @@
-<?php namespace Arxmin\models;
+<?php namespace Arx\Arxmin\models;
 
 use Arx\classes\Model;
 

@@ -1,4 +1,4 @@
-<?php namespace Arxmin;
+<?php namespace Arx\Arxmin\controllers;
 
 use Illuminate\Support\Facades\Redirect;
 use Input;
