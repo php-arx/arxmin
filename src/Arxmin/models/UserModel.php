@@ -1,8 +1,8 @@
-<?php namespace Arxmin\models;
+<?php namespace Arxmin;
 
 use Arx\classes\Model;
 
-class User extends Model {
+class UserModel extends Model {
     /**
      * The database table used by the model.
      *

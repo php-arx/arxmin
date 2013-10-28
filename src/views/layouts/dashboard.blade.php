@@ -1,11 +1,11 @@
-@extends('arxmin::layouts.html')
+@extends('arxmin::html')
 
 @section('body')
 <div class="container arx-container">
 <div class="row">
 <div class="col-sm-12 arx-content">
 
-    <h2>{{ lg('arxmin::dashboard.title') }}</h2>
+    <h2>{{ __('arxmin::dashboard.title') }}</h2>
     <ul class="breadcrumb">
         <li><a href="#">Dashboard</a> <span class="divider">/</span></li>
         <li><a href="#">Home</a></li>

@@ -1,10 +1,8 @@
 <?php namespace Arxmin;
 
-use Arxmin\models\Arxmin;
+use Arxmin\ArxminModel;
 use Illuminate\Support\Facades\URL;
 use Config, Session, Redirect, View, Input;
-
-include __DIR__.'/../settings.php';
 
 class RouteController extends BaseController {
 
@@ -34,7 +32,7 @@ class RouteController extends BaseController {
 
     public function anyHome(){
 
-        $menu = Arxmin::getMenu();
+        $menu = ArxminModel::getMenu();
 
         $currentIframe = Input::get('url') ?: URL::to('/arxmin/dashboard');
         $this->layout = View::make('arxmin::home', get_defined_vars());

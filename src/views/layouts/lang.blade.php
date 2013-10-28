@@ -1,4 +1,4 @@
-@extends('arxmin::layouts.html')
+@extends('arxmin::html')
 
 @section('head')
 @parent
