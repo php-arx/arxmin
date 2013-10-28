@@ -30,9 +30,6 @@
                         ?>
                         <form action="<?php echo url('install') ?>" ng-controller="formDatabase">
                             <?php echo Form::select('dbtype', Config::get('database.connections')) ?>
-                            <?php echo Form::input('dbtype', Config::get('database.connections')) ?>
-                            <?php echo Form::select('dbtype', Config::get('database.connections')) ?>
-                            <?php echo Form::select('dbtype', Config::get('database.connections')) ?>
                         </form>
                     </div>
                 </div>
