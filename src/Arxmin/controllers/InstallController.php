@@ -18,9 +18,6 @@ class InstallController extends BaseController{
 
     public function anyIndex()
     {
-        $menu = ArxminModel::getMenu();
-
-        $widgets = ArxminModel::getWidgets();
 
         try {
             UserModel::exists();

@@ -20,11 +20,70 @@ $l['menu'] = array(
     )
 );
 
+$l['action'] = array(
+    'refresh' => 'Refresh',
+    'delete' => 'delete',
+    'submit' => 'submit'
+);
+
 $l['step']['check'] = array(
     'title' => 'Check your configuration',
     'description' => <<<description
 
 description
+);
+
+$l['step']['db'] = array(
+    'title' => 'Configure your database',
+    'description' => <<<description
+
+description
+);
+
+$l['step']['project'] = array(
+    'title' => 'Configure your project',
+    'description' => <<<description
+
+description
+);
+
+$l['dbconfig'] = array(
+    'sqlite' => array(
+        'driver'   => 'sqlite',
+        'database' => __DIR__.'/../database/production.sqlite',
+        'prefix'   => '',
+    ),
+
+    'mysql' => array(
+        'driver'    => 'mysql',
+        'host'      => 'localhost',
+        'database'  => 'database',
+        'username'  => 'root',
+        'password'  => '',
+        'charset'   => 'utf8',
+        'collation' => 'utf8_unicode_ci',
+        'prefix'    => '',
+    ),
+
+    'pgsql' => array(
+        'driver'   => 'pgsql',
+        'host'     => 'localhost',
+        'database' => 'database',
+        'username' => 'root',
+        'password' => '',
+        'charset'  => 'utf8',
+        'prefix'   => '',
+        'schema'   => 'public',
+    ),
+
+    'sqlsrv' => array(
+        'driver'   => 'sqlsrv',
+        'host'     => 'localhost',
+        'database' => 'database',
+        'username' => 'root',
+        'password' => '',
+        'prefix'   => '',
+    ),
 );
 
 return $l;

@@ -87,6 +87,6 @@ class ArxminModel extends Container
      */
     public static function getWidgets()
     {
-
+        return false;
     }
 }
