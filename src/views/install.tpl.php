@@ -85,15 +85,19 @@
                 </div>
                 <div class="panel-body collapse in" id="collapse1">
                     <form action="<?php echo url('install') ?>">
-                        <?php echo \Arx\helpers\Bootstrap::formGroup('Arxmin Email :', 'text', 'arxmin[email]', '') ?>
-                        <?php echo \Arx\helpers\Bootstrap::formGroup('Arxmin Email :', 'text', 'arxmin[password]', '') ?>
-                        <?php echo\Arx\helpers\Bootstrap::formGroup('Arxmin Email :', 'text', 'arxmin[project]', '') ?>
+                        <?php echo \Arx\helpers\Bootstrap::formGroup('Arxmin Email : ', 'text', 'arxmin[email]', '') ?>
+                        <?php echo \Arx\helpers\Bootstrap::formGroup('Arxmin password : ', 'text', 'arxmin[password]', '') ?>
+                        <?php echo\Arx\helpers\Bootstrap::formGroup('Arxmin project name : ', 'text', 'arxmin[project]', '') ?>
                     </form>
                 </div>
             </div>
 
         </div>
         <!--/ #step2 -->
+
+        <div id="send" class="col-12 column">
+            <a class="btn btn-default pull-right" ng-click="" href="#submit">Submit</a>
+        </div>
     </div>
 </div>
 <!--/ .container -->
