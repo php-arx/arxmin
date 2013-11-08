@@ -85,9 +85,9 @@
                 </div>
                 <div class="panel-body collapse in" id="collapse1">
                     <form action="<?php echo url('install') ?>">
-                        <?php echo \Arx\helpers\Bootstrap::form('Arxmin Email :', 'text', 'arxmin[email]', '') ?>
-                        <?php echo \Arx\helpers\Bootstrap::form('Arxmin Email :', 'text', 'arxmin[password]', '') ?>
-                        <?php echo\Arx\helpers\Bootstrap::form('Arxmin Email :', 'text', 'arxmin[project]', '') ?>
+                        <?php echo \Arx\helpers\Bootstrap::formGroup('Arxmin Email :', 'text', 'arxmin[email]', '') ?>
+                        <?php echo \Arx\helpers\Bootstrap::formGroup('Arxmin Email :', 'text', 'arxmin[password]', '') ?>
+                        <?php echo\Arx\helpers\Bootstrap::formGroup('Arxmin Email :', 'text', 'arxmin[project]', '') ?>
                     </form>
                 </div>
             </div>
