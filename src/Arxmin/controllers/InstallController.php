@@ -27,6 +27,8 @@ class InstallController extends BaseController{
 
         $requirements = $this->anyCheck();
 
+        $ngApp = 'InstallModule';
+
         $data = get_defined_vars();
 
         $this->assign($data);
