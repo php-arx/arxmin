@@ -23,8 +23,14 @@ class ArxminServiceProvider extends ServiceProvider {
 	{
 		$this->package('arx/arxmin');
 
-        include __DIR__.'/filters.php';
-        include __DIR__.'/routes.php';
+        include_once __DIR__.'/../filters.php';
+        include_once __DIR__.'/../routes.php';
+        include_once __DIR__.'/../helpers.php';
+
+
+        include_once __DIR__.'/models/LangModel.php';
+
+
         Lang::addNamespace('arxmin', __DIR__.'/../lang');
         Config::addNamespace('arxmin', __DIR__.'/../config');
         View::addNamespace('arxmin', __DIR__.'/../views');

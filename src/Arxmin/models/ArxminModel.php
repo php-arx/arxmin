@@ -6,7 +6,7 @@
  * @author  : danielsum
  */
 
-namespace Arxmin\models;
+namespace Arxmin;
 
 use Arx;
 use Arx\classes\Container;
@@ -14,7 +14,7 @@ use Arx\classes\File;
 use Symfony\Component\Finder\Finder;
 use Config,URL;
 
-class Arxmin extends Container
+class ArxminModel extends Container
 {
 
     protected $menu = array();
@@ -87,6 +87,6 @@ class Arxmin extends Container
      */
     public static function getWidgets()
     {
-
+        return false;
     }
 }

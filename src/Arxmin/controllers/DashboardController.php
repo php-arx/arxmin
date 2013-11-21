@@ -26,9 +26,9 @@ class DashboardController extends BaseController{
     {
         $infos = self::getInfos();
 
-        $menu = models\Arxmin::getMenu();
+        $menu = ArxminModel::getMenu();
 
-        $widgets = models\Arxmin::getWidgets();
+        $widgets = ArxminModel::getWidgets();
 
         $this->assign(get_defined_vars());
     }

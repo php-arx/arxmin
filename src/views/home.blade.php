@@ -1,63 +1,43 @@
-@extends('arxmin::layouts.html')
-
+@extends('arxmin::html')
 @section('body')
-
-<div class="container arx-container">
-    <div class="row">
-        <div class="col-2 hidden-print arx-sidebar">
-            <div data-spy="affix" data-offset-bottom="50" data-offset-top="50">
-                <ul class="nav nav-clean">
-<!--                    <li>
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#yourstuff">Your stuff <i class="icon-caret-down"></i> <i class="icon-caret-up"></i></button>
-
-                        <ul class="nav collapse in" id="yourstuff">
-                            <li>
-                                <a href="./dashboard.html" target="appiframe"><i class="icon-dashboard"></i> Dashboard</a>
-                            </li>
-                            <li>
-                                <a href="./forms-elements.html" target="appiframe"><i class="icon-tasks"></i> Forms elements</a>
-                            </li>
-                            <li>
-                                <a href="./ui-widgets.html" target="appiframe"><i class="icon-tasks"></i> UI Widgets</a>
-                            </li>
-                            <li>
-                                <a href="./calendar.html" target="appiframe"><i class="icon-tasks"></i> Calendar</a>
-                            </li>
-                            <li>
-                                <a href="./charts.html" target="appiframe"><i class="icon-tasks"></i> Charts</a>
-                            </li>
-                            <li>
-                                <a href="./settings.html" target="appiframe"><i class="icon-tasks"></i> Settings</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-
-                    </li>-->
-
-
-                    @foreach($menu as $key => $link)
-                        @if(isset($link['children']))
-                            <li>
-                                <button class="btn btn-link" data-toggle="collapse" data-target="#{{$key}}"><i class="icon-home"></i> {{ $link['name'] }} <i class="icon-caret-down"></i> <i class="icon-caret-up"></i></button>
-                                <ul class="nav collapse in" id="{{$key}}">
-                                @foreach($link['children'] as $link2)
-                                    <li><a href="{{ URL::to('arxmin/home') }}?url={{ $link2['href'] }}"><i class="icon-home"></i> {{ $link2['name'] }}</a></li>
-                                @endforeach
-                                </ul>
-                            </li>
-                        @else
-                            <li><a href="{{ URL::to('arxmin/home') }}?url={{$link['href']}}"><i class="icon-home"></i> {{ $link['name'] }}</a></li>
-                        @endif
-                    @endforeach
-
-                </ul>
-            </div>
-        </div>
-        <div class="col-10 arx-content">
-            <iframe ng-controller="IframeCntl" src="{{ $currentIframe }}" frameborder="0" name="appiframe"></iframe>
-        </div>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Brand</a>
     </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            @foreach($menu as $key => $link)
+            @if(isset($link['children']))
+            <li class="dropdown">
+                <a  class="dropdown-toggle" data-toggle="dropdown">{{ $link['name'] }} <b class="caret"></b></a>
+
+                <ul class="dropdown-menu">
+                    @foreach($link['children'] as $link2)
+                    <li><a href="{{ URL::to('arxmin/home') }}?url={{ $link2['href'] }}"><i class="icon-home"></i> {{ $link2['name'] }}</a></li>
+                    @endforeach
+                </ul>
+            </li>
+            @else
+            <li><a href="{{ URL::to('arxmin/home') }}?url={{$link['href']}}"><i class="icon-home"></i> {{ $link['name'] }}</a></li>
+            @endif
+            @endforeach
+        </ul>
+    </div><!-- /.navbar-collapse -->
+</nav>
+<div class="background-fixed" style="top: 50px;">
+    <iframe ng-controller="IframeCntl" src="{{ $currentIframe }}" frameborder="0" name="appiframe"></iframe>
 </div>
 
+@stop
+
+@section('js')
+<script type="text/javascript" data-main="{{ asset('packages/arx/dist/js/arx.min.js') }}" src="{{ asset('packages/requirejs/require.js') }}"></script>
 @stop
