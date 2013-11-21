@@ -28,7 +28,6 @@ class ArxminServiceProvider extends ServiceProvider {
         Lang::addNamespace('arxmin', __DIR__.'/../lang');
         Config::addNamespace('arxmin', __DIR__.'/../config');
         View::addNamespace('arxmin', __DIR__.'/../views');
-        View::addNamespace('arx', \Arx::path('views'));
 	}
 
 	/**

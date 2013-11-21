@@ -1,0 +1,26 @@
+{
+    "name": "arx/arxmin",
+    "description": "Arx Arxmin is the Back-office CMS ready part of Arx",
+    "homepage": "http://www.arx.io/docs/arxmin",
+    "license": "MIT",
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.0.x",
+        "arx/core" : "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Arxmin": "src"
+        },
+        "classmap": [
+            "src/Arxmin/commands",
+            "src/Arxmin/controllers",
+            "src/Arxmin/models",
+            "src/Arxmin/database/migrations",
+            "src/Arxmin/database/seeds",
+            "src/Arxmin/tests"
+        ]
+    },
+
+    "minimum-stability": "dev"
+}
