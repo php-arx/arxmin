@@ -1,5 +1,13 @@
 {
     "name": "arx/arxmin",
+    "description": "Arx Arxmin is the Back-office CMS ready part of Arx",
+    "homepage": "http://www.arx.io/docs/arxmin",
+    "license": "MIT",
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.0.x",
+        "arx/core" : "*"
+=======
     "type" : "Admin Management System",
     "description": "Arxmin is an universal admin management system for your project",
     "homepage": "http://www.arx.io",
@@ -21,14 +29,29 @@
     "require-dev": {
         "phpunit/phpunit": "3.7.*",
         "mockery/mockery": "0.7.2"
+>>>>>>> 8689927374fc7d8b564b9e5cbca40bfd449675b9
     },
     "autoload": {
         "psr-0": {
             "Arxmin": "src"
+<<<<<<< HEAD
+        },
+        "classmap": [
+            "src/Arxmin/commands",
+            "src/Arxmin/controllers",
+            "src/Arxmin/models",
+            "src/Arxmin/database/migrations",
+            "src/Arxmin/database/seeds",
+            "src/Arxmin/tests"
+        ]
+    },
+
+=======
         }
     },
     "config": {
         "preferred-install": "dist"
     },
+>>>>>>> 8689927374fc7d8b564b9e5cbca40bfd449675b9
     "minimum-stability": "dev"
 }
