@@ -31,6 +31,10 @@ $l['step']['check'] = array(
     'description' => <<<description
 
 description
+    , 'requirements' => 'Requirements'
+    , 'value' => 'Value'
+    , 'comments' => 'Comments'
+
 );
 
 $l['step']['db'] = array(

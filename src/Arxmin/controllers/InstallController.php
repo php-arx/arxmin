@@ -36,31 +36,40 @@ class InstallController extends BaseController{
 
     public function anyCheck(){
 
+        $requirements = array();
+
         # Server information.
-        $requirements['software'] = $_SERVER['SERVER_SOFTWARE'];
+        $requirements['software']['value'] = $_SERVER['SERVER_SOFTWARE'];
 
         # Test PHP version
-        $requirements['php'] = phpversion();
+        $requirements['php']['value'] = phpversion();
 
         # Test PHP register_globals setting.
-        $requirements['php_register_globals'] = trim(ini_get('register_globals'));
+        $requirements['php_register_globals']['value'] = trim(ini_get('register_globals'));
 
         # Requirements
-        $requirements['memory_limit'] =  ini_get('memory_limit');
+        $requirements['memory_limit']['value'] =  ini_get('memory_limit');
 
-        $requirements['short_open_tag'] = ini_get('short_open_tag');
+        $requirements['short_open_tag']['value'] = ini_get('short_open_tag');
 
-        $requirements['mcrypt'] = extension_loaded('mcrypt');
+        $requirements['mcrypt']['value'] = extension_loaded('mcrypt');
 
-        $requirements['gd'] = extension_loaded('gd');
+        $requirements['gd']['value'] = extension_loaded('gd');
 
-        $requirements['pdo'] = defined('PDO::ATTR_DRIVER_NAME');
+        $requirements['pdo']['value'] = defined('PDO::ATTR_DRIVER_NAME');
 
-        $requirements['imagick'] = extension_loaded('imagick');
+        $requirements['imagick']['value'] = extension_loaded('imagick');
 
         //check if we can execute code
 
         $requirements['exec'] = function_exists('exec');
+
+        /**
+         * @todo : requirements
+         */
+        foreach($requirements as $key => $value){
+
+        }
 
         if(Request::isJson()){
             return Response::json($requirements);

@@ -27,9 +27,32 @@
                     </div>
                 </div>
                 <div class="panel-body collapse in" id="collapse1">
-                    <?php
-                    echo \Arx\helpers\Bootstrap::table(array($requirements));
-                    ?>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h2><?= __("arxmin::install.step.check.requirements") ?></h2>
+                            <?php
+                            foreach ($requirements as $key => $value) {
+                                echo '<dt>'.$key.'</dt>';
+                            }
+                            ?>
+                        </div>
+                        <div class="col-sm-3">
+                            <h2><?= __("arxmin::install.step.check.value") ?></h2>
+                            <?php
+                            foreach ($requirements as $key => $value) {
+                                echo '<dt>'.$value['value'].'</dt>';
+                            }
+                            ?>
+                        </div>
+                        <div class="col-sm-6">
+                            <h2><?= __("arxmin::install.step.check.comments") ?></h2>
+                            <?php
+                            foreach ($requirements as $key => $value) {
+                                echo '<dt>'.$value['comment'].'</dt>';
+                            }
+                            ?>
+                        </div>
+                    </div>
                     <a class="btn btn-success pull-right"
                        href="#"><?php echo Lang::get('arxmin::install.action.refresh') ?></a>
                 </div>
