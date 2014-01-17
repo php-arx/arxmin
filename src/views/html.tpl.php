@@ -6,8 +6,8 @@
 @stop
 
 @section('js')
-<script src="<% asset('packages/arxmin/js/plugins.css') %>"></script>
-<script src="<% asset('packages/arxmin/js/arx.css') %>"></script>
+<script src="<% asset('packages/arxmin/js/plugins.js') %>"></script>
+<script src="<% asset('packages/arxmin/js/arx.js') %>"></script>
 @stop
 
 @section('body')
