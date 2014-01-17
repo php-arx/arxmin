@@ -105,11 +105,12 @@ module.exports = function(grunt) {
                     '/public/packages/jquery/jquery.js',
                     '/public/packages/bootstrap/dist/js/bootstrap.js',
                     '/public/packages/angular/angular.js',
+                    '/public/packages/angular-loading-bar/src/loading-bar.js',
                     '/public/packages/angular-ui/angular-ui.js',
                     '/public/packages/angular-ui-bootstrap/dist/ui-bootstrap-0.9.0.js',
                     '/public/packages/angular-ui-bootstrap/dist/ui-bootstrap-tpls-0.9.0.js',
                 ],
-                dest: 'web/assets/js/plugins.js'
+                dest: '../../../public/packages/arxmin/js/plugins.js'
             }, // plugins
 
             main: {
@@ -155,12 +156,13 @@ module.exports = function(grunt) {
             plugins: {
                 files: {
                     '../../../public/packages/arxmin/js/plugins.js': [
-                        '/public/packages/jquery/jquery.js',
-                        '/public/packages/bootstrap/dist/js/bootstrap.js',
-                        '/public/packages/angular/angular.js',
-                        '/public/packages/angular-ui/angular-ui.js',
-                        '/public/packages/angular-ui-bootstrap/dist/ui-bootstrap-0.9.0.js',
-                        '/public/packages/angular-ui-bootstrap/dist/ui-bootstrap-tpls-0.9.0.js',
+                        '../../../public/packages/jquery/jquery.js',
+                        '../../../public/packages/bootstrap/dist/js/bootstrap.js',
+                        '../../../public/packages/angular/angular.js',
+                        '../../../public/packages/angular-loading-bar/src/loading-bar.js',
+                        '../../../public/packages/angular-ui/angular-ui.js',
+                        '../../../public/packages/angular-ui-bootstrap/dist/ui-bootstrap-0.9.0.js',
+                        '../../../public/packages/angular-ui-bootstrap/dist/ui-bootstrap-tpls-0.9.0.js',
                     ]
                 }
             }, // plugins
@@ -196,6 +198,7 @@ module.exports = function(grunt) {
                 },
                 files: {
                     '../../../public/packages/arxmin/css/plugins.css': [
+                        '../../../public/packages/angular-loading-bar/src/loading-bar.css',
                         'src/assets/less/plugins.less'
                     ]
                 }
