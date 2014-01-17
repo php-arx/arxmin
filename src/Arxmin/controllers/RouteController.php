@@ -38,6 +38,17 @@ class RouteController extends BaseController {
         $this->layout = View::make('arxmin::home', get_defined_vars());
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function anyTest($name)
+    {
+
+        return View::make('arxmin::layouts.'.$name);
+    }
+
     public function getDashboard(){
         return View::make('arxmin::layouts.dashboard');
     }
