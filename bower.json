@@ -1,0 +1,36 @@
+{
+    "name": "arx-armin",
+    "version": "0.0.1",
+    "authors": [
+        "Daniel Sum <daniel@cherrypulp.com>",
+        "Stéphan Zych <stephan@cherrypulp.com>"
+    ],
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {},
+    "devDependencies": {
+        "angular": "latest",
+        "angular-growl": "latest",
+        "angular-loading-bar": "latest",
+        "angular-resource": "latest",
+        "angular-ui": "latest",
+        "angular-ui-bootstrap": "latest",
+        "angular-ui-calendar": "latest",
+        "angular-ui-select2": "latest",
+        "angular-ui-sortable": "latest",
+        "angular-ui-tinymce": "latest",
+        "angular-ui-utils": "latest",
+        "bootstrap": "latest",
+        "bootstrap-multiselect": "latest",
+        "font-awesome": "latest",
+        "fullcalendar": "latest",
+        "jquery": "latest",
+        "jquery-ui": "~1.10.3",
+        "select2": "latest"
+    }
+}
