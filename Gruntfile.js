@@ -26,13 +26,13 @@ module.exports = function(grunt) {
         clean: {
             css: [
 //                '../../../public/packages/arxmin/css/plugins.css',
-//                '../../../public/packages/arxmin/css/app.css',
+//                '../../../public/packages/arxmin/css/arx.css',
             ],
             js: [
                 'src/assets/js/app-generated.js',
 
 //                '../../../public/packages/arxmin/js/plugins.js',
-//                '../../../public/packages/arxmin/js/app.js'
+//                '../../../public/packages/arxmin/js/arx.js'
             ]
         }, // clean
 
@@ -126,7 +126,7 @@ module.exports = function(grunt) {
                     'src/assets/js/filters.js',
                     'src/assets/js/directives.js',
                 ],
-                dest: '../../../public/packages/arxmin/js/app.js'
+                dest: '../../../public/packages/arxmin/js/arx.js'
             } // main
         }, // concat
 
@@ -174,7 +174,7 @@ module.exports = function(grunt) {
                     report: 'min'
                 },
                 files: {
-                    '../../../public/packages/arxmin/js/app.js': [
+                    '../../../public/packages/arxmin/js/arx.js': [
                         'src/assets/js/scripts.js',
                         'src/assets/js/services.js',
                         'src/assets/js/controllers.js',
@@ -210,7 +210,7 @@ module.exports = function(grunt) {
                     compress: true
                 },
                 files: {
-                    '../../../public/packages/arxmin/css/app.css': [
+                    '../../../public/packages/arxmin/css/arx.css': [
                         'src/assets/less/app.less'
                     ]
                 }
