@@ -5,21 +5,18 @@
     <div class="col-sm-2 hidden-print arx-sidebar">
         <div data-spy="affix" data-offset-bottom="50" data-offset-top="50">
             <ul class="nav nav-clean">
-                <?php
-                echo \Arx\helpers\Bootstrap::nav(__('arxmin::install.menu', $user));
-                ?>
+
             </ul>
         </div>
     </div>
     <!--/ .arx-sidebar -->
     <div class="col-sm-10 arx-content">
         <h2>Welcome in Arx Installation</h2>
-
         <div id="step1" class="col-12 column">
             <div class="panel">
                 <div class="panel-heading">
                     <h3 class="panel-title"><i
-                            class="icon-list-alt"></i> <?php echo __('arxmin::install.step.check.title') ?></h3>
+                            class="icon-list-alt"></i> <?php echo Lang::get('arxmin::install.step.check.title') ?></h3>
 
                     <div class="btn-group">
                         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse1"><i
@@ -29,7 +26,7 @@
                 <div class="panel-body collapse in" id="collapse1">
                     <div class="row">
                         <div class="col-sm-3">
-                            <h2><?= __("arxmin::install.step.check.requirements") ?></h2>
+                            <h2><?= Lang::get("arxmin::install.step.check.requirements") ?><br></h2>
                             <?php
                             foreach ($requirements as $key => $value) {
                                 echo '<dt>'.$key.'</dt>';
@@ -37,7 +34,7 @@
                             ?>
                         </div>
                         <div class="col-sm-3">
-                            <h2><?= __("arxmin::install.step.check.value") ?></h2>
+                            <h2><?=  Lang::get("arxmin::install.step.check.value") ?></h2>
                             <?php
                             foreach ($requirements as $key => $value) {
                                 echo '<dt>'.$value['value'].'</dt>';
@@ -45,7 +42,7 @@
                             ?>
                         </div>
                         <div class="col-sm-6">
-                            <h2><?= __("arxmin::install.step.check.comments") ?></h2>
+                            <h2><?=  Lang::get("arxmin::install.step.check.comments") ?></h2>
                             <?php
                             foreach ($requirements as $key => $value) {
                                 echo '<dt>'.$value['comment'].'</dt>';
@@ -128,8 +125,8 @@
 @stop
 
 @section('js')
-<script type="text/javascript" data-main="{% asset('packages/arx/require/arxmin-form.js') %}"
-        src="{% asset('packages/requirejs/require.js') %}"></script>
+
+<script type="text/javascript" src="<% url() %>/packages/arx/dist/js/arx-combined.js"></script>
 
 <script type="text/javascript">
 

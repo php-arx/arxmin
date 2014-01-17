@@ -28,13 +28,10 @@ $l['action'] = array(
 
 $l['step']['check'] = array(
     'title' => 'Check your configuration',
-    'description' => <<<description
-
-description
-    , 'requirements' => 'Requirements'
-    , 'value' => 'Value'
-    , 'comments' => 'Comments'
-
+    'description' => 'Check configuration',
+    'requirements' => 'Requirements',
+    'value' => 'Value',
+    'comments' => 'Comments'
 );
 
 $l['step']['db'] = array(

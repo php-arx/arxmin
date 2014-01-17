@@ -20,7 +20,7 @@ class InstallController extends BaseController{
     {
 
         try {
-            UserModel::exists();
+            $user = UserModel::exists();
         } catch (\Exception $e) {
             $user = array('first_name' => null);
         }
@@ -68,7 +68,9 @@ class InstallController extends BaseController{
          * @todo : requirements
          */
         foreach($requirements as $key => $value){
-
+            if(is_array($requirements[$key])){
+                $requirements[$key]['comment'] = 'Valid';
+            }
         }
 
         if(Request::isJson()){
