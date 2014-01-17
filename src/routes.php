@@ -19,4 +19,4 @@ Route::group(array('before' => 'arxminauth'), function(){
 
 Route::controller('/arxmin', 'Arxmin\RouteController');
 
-Route::controller('arxmintest', 'ArxminController');
+Route::controller('arxmintest', 'Arxmin\RouteController');
