@@ -102,13 +102,12 @@ module.exports = function(grunt) {
 
             plugins: {
                 src: [
-                    '../../../public/packages/jquery/jquery.js',
-                    '../../../public/packages/bootstrap/dist/js/bootstrap.js',
-                    '../../../public/packages/angular/angular.js',
-                    '../../../public/packages/angular-ui/angular-ui.js',
-                    '../../../public/packages/angular-ui-bootstrap/dist/ui-bootstrap-0.9.0.js',
-                    '../../../public/packages/angular-ui-bootstrap/dist/ui-bootstrap-tpls-0.9.0.js',
-                    '../../../public/packages/ng-mobile-menu/src/ng-mobile-menu.js',
+                    '/public/packages/jquery/jquery.js',
+                    '/public/packages/bootstrap/dist/js/bootstrap.js',
+                    '/public/packages/angular/angular.js',
+                    '/public/packages/angular-ui/angular-ui.js',
+                    '/public/packages/angular-ui-bootstrap/dist/ui-bootstrap-0.9.0.js',
+                    '/public/packages/angular-ui-bootstrap/dist/ui-bootstrap-tpls-0.9.0.js',
                 ],
                 dest: 'web/assets/js/plugins.js'
             }, // plugins
@@ -156,13 +155,12 @@ module.exports = function(grunt) {
             plugins: {
                 files: {
                     '../../../public/packages/arxmin/js/plugins.js': [
-                        '../../../public/packages/jquery/jquery.js',
-                        '../../../public/packages/bootstrap/dist/js/bootstrap.js',
-                        '../../../public/packages/angular/angular.js',
-                        '../../../public/packages/angular-ui/angular-ui.js',
-                        '../../../public/packages/angular-ui-bootstrap/dist/ui-bootstrap-0.9.0.js',
-                        '../../../public/packages/angular-ui-bootstrap/dist/ui-bootstrap-tpls-0.9.0.js',
-                        '../../../public/packages/ng-mobile-menu/src/ng-mobile-menu.js',
+                        '/public/packages/jquery/jquery.js',
+                        '/public/packages/bootstrap/dist/js/bootstrap.js',
+                        '/public/packages/angular/angular.js',
+                        '/public/packages/angular-ui/angular-ui.js',
+                        '/public/packages/angular-ui-bootstrap/dist/ui-bootstrap-0.9.0.js',
+                        '/public/packages/angular-ui-bootstrap/dist/ui-bootstrap-tpls-0.9.0.js',
                     ]
                 }
             }, // plugins
@@ -176,11 +174,11 @@ module.exports = function(grunt) {
                 files: {
                     '../../../public/packages/arxmin/js/arx.js': [
                         'src/assets/js/scripts.js',
+                        'src/assets/js/app.js',
                         'src/assets/js/services.js',
                         'src/assets/js/controllers.js',
                         'src/assets/js/filters.js',
                         'src/assets/js/directives.js',
-                        'src/assets/js/app.js',
                     ]
                 }
             } // main
