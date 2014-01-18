@@ -43,8 +43,7 @@ class RouteController extends BaseController {
      *
      * @return Response
      */
-    public function anyTest($name)
-    {
+    public function anyTest($name = 'login') {
 
         return View::make('arxmin::layouts.'.$name);
     }
