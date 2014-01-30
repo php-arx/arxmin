@@ -1,7 +1,5 @@
 <?php
 
-k();
-
 Route::get('/arxmin', 'Arxmin\RouteController@index');
 
 Route::any('arxmin/login', 'Arxmin\UserController@login');
