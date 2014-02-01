@@ -1,4 +1,4 @@
-<?php
+<?php namespace Arxmin;
 /**
  * DashboardController
  *
@@ -6,15 +6,22 @@
  * @author : Daniel Sum <daniel@cherrypulp.com>
  */
 
-namespace Arxmin;
-
 use Symfony\Component\Finder\Finder;
-use View, Lang, Config, DB, URL;
+use View, Lang, Config, DB, URL, Auth, Confide, Redirect;
 
 
-class DashboardController extends BaseController{
+class MyController extends BaseController{
 
-    public $layout = 'arxmin::layouts.dashboard';
+    public $layout = 'arxmin::layouts.bootstrap';
+
+    public function __construct()
+    {
+        if(!\Confide::user()){
+            return Redirect::to('user/login');
+        } else {
+
+        }
+    }
 
     public function anyIndex(){
         $infos = self::getInfos();
@@ -22,15 +29,17 @@ class DashboardController extends BaseController{
         $this->assign(get_defined_vars());
     }
 
-    public function anyHome()
+    public function anyDashboard()
     {
         $infos = self::getInfos();
+
+        $user = Auth::getUser();
 
         $menu = ArxminModel::getMenu();
 
         $widgets = ArxminModel::getWidgets();
 
-        $this->assign(get_defined_vars());
+        return View::make('arxmin::my.dashboard', get_defined_vars());
     }
 
     public function anyLang(){
