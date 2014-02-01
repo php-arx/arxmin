@@ -26,10 +26,7 @@ class ArxminServiceProvider extends ServiceProvider {
         include_once __DIR__.'/../filters.php';
         include_once __DIR__.'/../routes.php';
         include_once __DIR__.'/../helpers.php';
-
-
         include_once __DIR__.'/models/LangModel.php';
-
 
         Lang::addNamespace('arxmin', __DIR__.'/../lang');
         Config::addNamespace('arxmin', __DIR__.'/../config');

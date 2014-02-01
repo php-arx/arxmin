@@ -21,13 +21,7 @@ class RouteController extends BaseController {
             )
         );
 
-        if(Session::get('arxminLogged')){
-            return Redirect::to('/arxmin/home');
-        }
-
-        $headtitle = 'Arxmin title';
-
-		return View::make('arxmin::login', get_defined_vars());
+		return View::make('arxmin::user.login', get_defined_vars());
 	}
 
     public function anyHome(){

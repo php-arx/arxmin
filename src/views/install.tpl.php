@@ -1,4 +1,4 @@
-@extends('arxmin::html')
+@extends('arx::layouts.bootstrap')
 
 @section('body')
 <div class="container arx-container" ng-controller="installController">

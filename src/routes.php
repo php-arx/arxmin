@@ -1,22 +1,28 @@
 <?php
-
-Route::get('/arxmin', 'Arxmin\RouteController@index');
-
-Route::any('arxmin/login', 'Arxmin\UserController@login');
-
-Route::controller('/arxmin/user', 'Arxmin\UserController');
-
-Route::when('/arxmin/home*', 'arxminauth');
+/**
+ * @todo fix get Config file
+ */
+$prefix = Config::get('arxmin.prefix', 'arxmin');
 
 Route::group(array('before' => 'arxminCheck'), function(){
     Route::any('/arxmin/install', 'Arxmin\anyIndex');
     Route::controller('/arxmin/install', 'Arxmin\InstallController');
 });
 
-Route::group(array('before' => 'arxminauth'), function(){
-    Route::controller('/arxmin/dashboard', 'Arxmin\DashboardController');
+Route::group(array('prefix' => $prefix), function(){
+
+    Route::get('/', 'Arxmin\RouteController@index');
+
+    Route::post('user', 'Arxmin\UserController@store');
+    Route::get('user/login', 'Arxmin\UserController@login');
+    Route::post('user/login', 'Arxmin\UserController@do_login');
+    Route::get('user/confirm/{code}', 'Arxmin\UserController@confirm');
+    Route::get('user/forgot_password', 'Arxmin\UserController@forgot_password');
+    Route::post('user/forgot_password', 'Arxmin\UserController@do_forgot_password');
+    Route::get('user/reset_password/{token}', 'Arxmin\UserController@reset_password');
+    Route::post('user/reset_password', 'Arxmin\UserController@do_reset_password');
+    Route::get('user/logout', 'Arxmin\UserController@logout');
+
+    Route::when('/my*', 'arxminauth');
+
 });
-
-Route::controller('/arxmin', 'Arxmin\RouteController');
-
-Route::controller('arxmintest', 'Arxmin\RouteController');
