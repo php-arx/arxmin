@@ -1,1 +1,1 @@
-@extends('layouts.admin')
+@extends('arxmin::layouts.admin')
