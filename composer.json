@@ -1,7 +1,7 @@
 {
     "name": "arx/arxmin",
     "type" : "Admin Management System",
-    "description": "Arxmin is an universal admin management system for new Laravel project",
+    "description": "Arxmin is an universal admin management system for Arx project",
     "homepage": "http://www.arx.io",
     "license": "MIT",
     "authors": [
@@ -15,9 +15,7 @@
     "require": {
         "php": ">=5.3.7",
         "arx/core" : "4.1.*",
-        "laravel/laravel" : "4.1.*",
-        "laravelbook/ardent": "2.4.*",
-        "zizaco/confide": "3.1.x",
+        "zizaco/confide": "dev-master",
         "zizaco/entrust": "dev-master",
         "bllim/datatables": "*"
     },

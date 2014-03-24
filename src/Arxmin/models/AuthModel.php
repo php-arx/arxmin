@@ -1,12 +1,4 @@
-<?php
-/**
- * AuthModel.php.
- *
- * @project : buzzmachine
- * @author : Daniel Sum <daniel@cherrypulp.com>
- */
-
-namespace Arxmin;
+<?php namespace Arxmin;
 
 
 class AuthModel extends \Eloquent {
