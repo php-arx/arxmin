@@ -1,0 +1,165 @@
+/**
+ * Angular Admin - assets/less/mixins.less
+ */
+
+
+@import '/packages/bootstrap/less/mixins.less';
+
+.a-color(@color) {
+    color: @color;
+
+    &:hover,
+    &:focus,
+    &.active {
+        color: mix(@color, black, 80%);
+    }
+} // .a-color(@color)
+
+
+.a-color(@color, @color-active) {
+    color: @color;
+
+    &:hover,
+    &:focus,
+    &.active {
+        color: @color-active;
+    }
+} // .a-color(@color, @color-active)
+
+
+.background-size(@size) {
+    -moz-background-size: @size;
+    -webkit-background-size: @size;
+    -o-background-size: @size;
+    background-size: @size;
+} // .background-size(@size)
+
+
+.border-radius(@radius) {
+    -webkit-border-radius: @radius;
+       -moz-border-radius: @radius;
+            border-radius: @radius;
+} // .border-radius(@radius)
+
+
+.dropdown-arrow(@color: @base, @top: 5px, @left: 15px, @size: 9px) {
+    &:before {
+        content: "";
+        border-style: solid;
+        border-width: 0 @size @size @size;
+        border-color: transparent transparent @color transparent;
+        height: 0;
+        position: absolute;
+        left: @left;
+        top: @top;
+        width: 0;
+        // Make corners smooth
+        -webkit-transform: rotate(360deg);
+    }
+} // .dropdown-arrow(@color: @base, @top: 5px, @left: 15px, @size: 9px)
+
+
+.inline-block {
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+} // .inline-block
+
+
+.input-states(@color) {
+    border-color: @color;
+    .box-shadow(none);
+    color: @color;
+
+    &:focus,
+    &.active {
+        .box-shadow(none);
+    }
+} // .input-states(@color)
+
+
+.placeholder-height(@height) {
+    &:-moz-placeholder {
+        line-height: @height;
+    }
+
+    &::-webkit-input-placeholder {
+        line-height: @height;
+    }
+
+    &.placeholder {
+        line-height: @height;
+    }
+} // .placeholder-height(@height)
+
+
+.selection(@background, @color: @text-color) {
+    &::selection {
+        background: @background;
+        color: @color;
+    }
+
+    &::-moz-selection {
+        background: @background;
+        color: @color;
+    }
+} // .selection(@background, @color)
+
+
+.user-select(@select) {
+    -webkit-user-select: @select;
+       -moz-user-select: @select;
+        -ms-user-select: @select;
+         -o-user-select: @select;
+            user-select: @select;
+} // .user-select(@select)
+
+
+.v-center() {
+    &,
+    .v-center {
+        display: table;
+        width: 100%;
+
+        > div {
+            display: table-cell;
+            float: none;
+            margin-bottom:0;
+            margin-top: 0;
+            vertical-align: middle;
+        }
+
+        @media (min-width: @screen-sm) {
+            &.row {
+                &:before,
+                &:after {
+                    display: none;
+                }
+            }
+        }
+
+        @media (max-width: @screen-sm-max) {
+            .box-sizing(border-box);
+
+            &.row {
+                display: block;
+                width: auto;
+
+                &:before,
+                &:after {
+                    display: none;
+                }
+
+                > * {
+                    display: block;
+                    vertical-align: baseline;
+                }
+            }
+        }
+    }
+} // .v-center()
+
+
+.reset-filter() {
+    filter: e(%("progid:DXImageTransform.Microsoft.gradient(enabled = false)"));
+} // .reset-filter()

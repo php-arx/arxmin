@@ -9,8 +9,8 @@
     <meta content="" name="author"/>
     @show
     @section('css')
-    <link href="/packages/webarch/dist/css/plugins.css" rel="stylesheet" type="text/css"/>
-    <link href="/packages/webarch/dist/css/arx.css" rel="stylesheet" type="text/css"/>
+    <link href="/packages/arxmin/dist/css/plugins.css" rel="stylesheet" type="text/css"/>
+    <link href="/packages/arxmin/dist/css/arxmin.css" rel="stylesheet" type="text/css"/>
     @show
 </head>
 <!-- END HEAD -->

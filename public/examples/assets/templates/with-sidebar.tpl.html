@@ -1,0 +1,28 @@
+
+<div class="layout-container">
+    <div class="layout-sidebar sidebar-left">
+        <div class="sidebar-heading">
+            <a class="logo animated flipInX" href="/"><span><img src="assets/img/logo-180x50.png" alt="" /></span></a>
+        </div>
+
+        <div class="sidebar-content">
+            <ul class="nav nav-pills nav-stacked">
+                <li ui-route="/dashboard" ng-class="{active:$uiRoute}">
+                    <a href="dashboard.html"><i class="fa fa-home fa-lg fa-fw"></i> <span>Dashboard</span></a>
+                </li>
+                <li ui-route="/iframe" ng-class="{active:$uiRoute}">
+                    <a href="iframe.html"><i class="fa fa-home fa-lg fa-fw"></i> <span>Iframe</span></a>
+                </li>
+                <li ui-route="/logout" ng-class="{active:$uiRoute}">
+                    <a href="logout.html"><i class="fa fa-home fa-lg fa-fw"></i> <span>Logout</span></a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="sidebar-footer"></div>
+    </div>
+
+    <div class="layout-content content">
+        <iframe src="{{ url }}" frameborder="0" class="content-iframe"></iframe>
+    </div>
+</div>

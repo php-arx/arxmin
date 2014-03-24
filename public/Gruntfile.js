@@ -20,8 +20,8 @@ module.exports = function(grunt) {
                     compress: true
                 },
                 files: {
-                    '../../../../public/packages/arx/core/dist/css/arx.css': [
-                        'src/less/arx.less'
+                    '../../../../public/packages/arxmin/arxmin/dist/css/arxmin.css': [
+                        'src/less/arxmin.less'
                     ]
                 }
             }, // arx
@@ -32,9 +32,9 @@ module.exports = function(grunt) {
                     compress: true
                 },
                 files: {
-                    '../../../../public/packages/arx/core/dist/css/arx-combined.css': [
+                    '../../../../public/packages/arxmin/arxmin/dist/css/arxmin-combined.css': [
                         'src/less/plugins.less',
-                        'src/less/arx-combined.less'
+                        'src/less/arxmin.less'
                     ]
                 }
             } // arxcombined
@@ -57,8 +57,8 @@ module.exports = function(grunt) {
                     banner: ''
                 },
                 files: {
-                    '../../../../public/packages/arx/core/dist/js/arx.js': [
-                        'src/js/arx.js'
+                    '../../../../public/packages/arx/arxmin/dist/js/arxmin.js': [
+                        'src/js/arxmin.js'
                     ]
                 }
             }, // arx
@@ -68,7 +68,7 @@ module.exports = function(grunt) {
                     banner: ''
                 },
                 files: {
-                    '../../../../public/packages/arx/core/dist/js/arx-combined.js': [
+                    '../../../../public/packages/arx/arxmin/dist/js/arxmin-combined.js': [
                         '../../../../public/packages/jquery/jquery.min.js',
                         '../../../../public/packages/jquery-ui/ui/jquery-ui.js',
                         '../../../../public/packages/bootstrap/dist/js/bootstrap.min.js',
@@ -77,7 +77,7 @@ module.exports = function(grunt) {
                         '../../../../public/packages/select2/select2.min.js',
                         '../../../../public/packages/datatables/media/js/jquery.dataTables.js',
                         'src/js/utils.js',
-                        'src/js/arx.js'
+                        'src/js/arxmin.js'
                     ]
                 }
             }, // arxcombined

@@ -1,4 +1,5 @@
 @extends('arxmin::html')
+
 @section('body')
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="navbar-header">

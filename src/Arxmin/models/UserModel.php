@@ -2,9 +2,9 @@
 
 namespace Arxmin;
 
-use Cartalyst\Sentry\Users\Eloquent\User as SentryUserModel;
+use Arx\EloquentModel;
 
-class UserModel extends SentryUserModel {
+class UserModel extends EloquentModel {
 
     /**
      * Indicates if the model should soft delete.

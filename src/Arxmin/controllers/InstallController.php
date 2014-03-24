@@ -16,24 +16,6 @@ class InstallController extends BaseController{
 
     public $layout = 'arxmin::install';
 
-    public function anyIndex()
-    {
-
-        try {
-            $user = UserModel::exists();
-        } catch (\Exception $e) {
-            $user = array('first_name' => null);
-        }
-
-        $requirements = $this->anyCheck();
-
-        $ngApp = 'InstallModule';
-
-        $data = get_defined_vars();
-
-        $this->assign($data);
-    }
-
     public function anyCheck(){
 
         $requirements = array();
@@ -78,6 +60,28 @@ class InstallController extends BaseController{
         }
 
         return $requirements;
+    }
+
+    public function anyIndex()
+    {
+
+        try {
+            $user = UserModel::exists();
+        } catch (\Exception $e) {
+            $user = array('first_name' => null);
+        }
+
+        $requirements = $this->anyCheck();
+
+        $ngApp = 'InstallModule';
+
+        $data = get_defined_vars();
+
+        $this->assign($data);
+    }
+
+    public function postInstall(){
+        
     }
 
     public function getPhpinfo(){

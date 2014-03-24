@@ -1,6 +1,10 @@
 <?php namespace Arxmin;
 
-use Input, View, User, Config, Role, Redirect, Confide, Lang;
+use Zizaco\Confide\Confide;
+
+use Zizaco\Entrust\EntrustRole as Role;
+
+use Input, View, User, Config, Redirect, Lang;
 
 class UserController extends BaseController {
 

@@ -36,14 +36,13 @@ App::after(function($request, $response)
 Route::filter('arxmincheck', function()
 {
     if(Config::has('arxmin')){
-
+        return Redirect::to(Config::get('arxmin.route.home'));
     }
 });
 
 Route::filter('arxminauth', function()
 {
-
     if(!Session::get('arxminLogged')){
-        //return Redirect::to('/arxmin');
+        return Redirect::to('/arxmin/login');
     }
 });

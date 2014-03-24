@@ -1,6 +1,6 @@
 <?php
 /**
- * helpers.php.
+ * Helpers
  *
  * @project : arx-contrib
  * @author : Daniel Sum <daniel@cherrypulp.com>

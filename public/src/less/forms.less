@@ -1,0 +1,87 @@
+/**
+ * Angular Admin - assets/less/forms.less
+ */
+
+
+textarea {
+    resize: vertical;
+}
+
+
+.form {
+    .form-group {
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.input-group-btn {
+    .btn-default {
+        border: 1px solid #ccc;
+    }
+}
+
+.has-feedback {
+    .form-control-feedback {
+        color: #ccc;
+        top: 0;
+
+        &:hover,
+        &:focus {
+            color: darken(#ccc, 10%);
+        }
+
+        &.btn {
+            padding: 0;
+        }
+    }
+}
+
+
+.select2-container {
+    &.form-search {
+        .select2-choice {
+            background: #f2f2f2;
+            border-color: #f2f2f2;
+            color: #7f7f7f;
+            height: 36px;
+            line-height: 22px;
+            padding: 6px 12px;
+
+            .select2-arrow {
+                background: #f2f2f2;
+                border: 0;
+                text-align: center;
+                width: 33px;
+
+                b {
+                    background: none;
+                    color: @link-color;
+                    display: inline-block;
+                    font-family: FontAwesome;
+                    font-style: normal;
+                    font-weight: normal;
+                    line-height: 33px;
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+
+                    &:before {
+                        content: @fa-var-search;
+                    }
+                }
+            }
+        }
+
+        &.select2-dropdown-open {
+            .select2-choice {
+                border-color: #5897fb;
+                border-bottom-color: transparent;
+            }
+        }
+    }
+
+    .select2-drop-active {
+        border-color: @brand-success;
+    }
+} // .select2-container
