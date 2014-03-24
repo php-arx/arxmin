@@ -1,10 +1,8 @@
-<?php
+<?php namespace Arxmin;
 
-namespace Arxmin;
+use \Zizaco\Confide\ConfideUser;
 
-use Arx\EloquentModel;
-
-class UserModel extends EloquentModel {
+class UserModel extends ConfideUser {
 
     /**
      * Indicates if the model should soft delete.
@@ -19,7 +17,7 @@ class UserModel extends EloquentModel {
      *
      * @return string
      */
-    public function fullName()
+    public function full_name()
     {
         return "{$this->first_name} {$this->last_name}";
     }
@@ -32,7 +30,7 @@ class UserModel extends EloquentModel {
     public function gravatar()
     {
         // Generate the Gravatar hash
-        $gravatar = md5(strtolower(trim($this->gravatar)));
+        $gravatar = md5(strtolower(trim($this->email)));
 
         // Return the Gravatar url
         return "//gravatar.org/avatar/{$gravatar}";
