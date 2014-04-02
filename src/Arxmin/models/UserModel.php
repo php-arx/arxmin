@@ -5,13 +5,6 @@ use \Zizaco\Confide\ConfideUser;
 class UserModel extends ConfideUser {
 
     /**
-     * Indicates if the model should soft delete.
-     *
-     * @var bool
-     */
-    protected $softDelete = true;
-
-    /**
      * Returns the user full name, it simply concatenates
      * the user first and last name.
      *
