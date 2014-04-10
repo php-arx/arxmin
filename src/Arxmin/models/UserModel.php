@@ -4,6 +4,18 @@ use \Zizaco\Confide\ConfideUser;
 
 class UserModel extends ConfideUser {
 
+    private static $_aInstances = array();
+
+    public static function getInstance(){
+        $sClass = get_called_class();
+
+        if (!isset(self::$_aInstances[$sClass])) {
+            self::$_aInstances[$sClass] = new $sClass;
+        }
+
+        return self::$_aInstances[$sClass];
+    }
+
     /**
      * Returns the user full name, it simply concatenates
      * the user first and last name.
@@ -12,7 +24,7 @@ class UserModel extends ConfideUser {
      */
     public function full_name()
     {
-        return "{$this->first_name} {$this->last_name}";
+        return $this->first_name." ".$this->last_name;
     }
 
     /**
