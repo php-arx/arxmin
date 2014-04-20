@@ -1,19 +1,52 @@
 <?php namespace Arxmin;
 
 use \Zizaco\Confide\ConfideUser;
+use Arx\classes\Utils;
 
 class UserModel extends ConfideUser {
 
-    private static $_aInstances = array();
+    protected static $jsonable = array();
 
-    public static function getInstance(){
-        $sClass = get_called_class();
+    public static function boot()
+    {
+        parent::boot();
 
-        if (!isset(self::$_aInstances[$sClass])) {
-            self::$_aInstances[$sClass] = new $sClass;
+        static::creating(function($model)
+        {
+            foreach(self::$jsonable as $key){
+                if(is_array($model->{$key})){
+                    $model->{$key} = json_encode($model->{$key});
+                }
+            }
+        });
+
+        static::updating(function($model)
+        {
+            foreach(self::$jsonable as $key){
+                if(is_array($model->{$key})){
+                    $model->{$key} = json_encode($model->{$key});
+                }
+            }
+        });
+    }
+
+    /**
+     * Transform to Array even Data encoded
+     *
+     * @return array
+     */
+    public function toArrayAll()
+    {
+        $data = $this->toArray();
+
+        foreach(self::$jsonable as $key){
+
+            if(isset($data[$key]) && Utils::isJson($data[$key])){
+                $data[$key] = json_decode($this->{$key});
+            }
         }
 
-        return self::$_aInstances[$sClass];
+        return $data;
     }
 
     /**
@@ -24,7 +57,7 @@ class UserModel extends ConfideUser {
      */
     public function full_name()
     {
-        return $this->first_name." ".$this->last_name;
+        return "{$this->first_name} {$this->last_name}";
     }
 
     /**
