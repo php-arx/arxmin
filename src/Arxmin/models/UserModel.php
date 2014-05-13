@@ -13,7 +13,7 @@ class UserModel extends ConfideUser {
 
         static::creating(function($model)
         {
-            foreach (\Arxmin\UserModel::$jsonable as $key){
+            foreach (self::$jsonable as $key){
                 if(is_array($model->{$key})){
                     $model->{$key} = json_encode($model->{$key});
                 }
@@ -22,7 +22,7 @@ class UserModel extends ConfideUser {
 
         static::updating(function($model)
         {
-            foreach(\Arxmin\UserModel::$jsonable as $key){
+            foreach(self::$jsonable as $key){
                 if(is_array($model->{$key})){
                     $model->{$key} = json_encode($model->{$key});
                 }
