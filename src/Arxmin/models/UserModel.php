@@ -74,4 +74,32 @@ class UserModel extends ConfideUser {
         return "//gravatar.org/avatar/{$gravatar}";
     }
 
+    public static function forceJsonable($model){
+
+        foreach($model::$jsonable as $key){
+            if(is_array($model->{$key})){
+                $model->{$key} = json_encode($model->{$key});
+            }
+        }
+
+        return $model;
+    }
+
+    /**
+     * Decode JsonModel
+     *
+     * @return $this
+     */
+    public function decodeJson(){
+
+        foreach(self::$jsonable as $key){
+
+            if(isset($this->{$key}) && Utils::isJson($$this->{$key})){
+                $this->{$key} = json_decode($this->{$key});
+            }
+        }
+
+        return $this;
+    }
+
 }
