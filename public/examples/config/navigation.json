@@ -1,7 +1,0 @@
-{
-    "dashboard": {
-        "url": "/",
-        "label": "dashboard",
-        "icon": "fa fa-fw fa-dashboard"
-    }
-}

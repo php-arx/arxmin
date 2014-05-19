@@ -9,8 +9,8 @@
     <meta content="" name="author"/>
     @show
     @section('css')
-    <link href="/packages/arxmin/dist/css/plugins.css" rel="stylesheet" type="text/css"/>
-    <link href="/packages/arxmin/dist/css/arxmin.css" rel="stylesheet" type="text/css"/>
+    <link href="/packages/arx/arxmin/dist/css/plugins.css" rel="stylesheet" type="text/css"/>
+    <link href="/packages/arx/arxmin/dist/css/arxmin.css" rel="stylesheet" type="text/css"/>
     @show
 </head>
 <!-- END HEAD -->
@@ -148,6 +148,6 @@
         @show
     </div>
 
-    <script src="/packages/webarch/dist/js/arx-combined.js"></script>
+    <script src="/packages/arx/arxmin/dist/js/arx-combined.js"></script>
 </body>
 </html>
