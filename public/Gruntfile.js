@@ -1,44 +1,153 @@
-'use strict';
+module.exports = function (grunt) {
+    'use strict';
 
-module.exports = function(grunt) {
-
-    grunt.initConfig({
+    var taskConfig = {
         // Metadata
-        pkg: grunt.file.readJSON('bower.json'),
+        pkg: grunt.file.readJSON('package.json'),
 
-        // -- Tasks
-        clean: {
-            dist: [
+        bowerrc: grunt.file.readJSON('.bowerrc'),
 
-            ]
-        }, // clean
+        src: 'src', //Change the source that you need
+        dist: 'dist', //Change this to publish where you want !
+        packages : 'bower_components', //Change this change the general packages directory
 
-        recess: {
-            arx: {
+        uglify: {
+            options: {
+                compress: false
+            },
+            arxmin: {
+                files: {
+                    '<%= dist %>/js/arxmin.js' : [
+                        "<%= src %>/js/core.js"
+                    ]
+                }
+            } // arxmin
+        }, // uglify
+
+        less: {
+            plugins: {
                 options: {
-                    compile: true,
+                    compress: true,
+                    relativeUrls: true,
+                    strictImports: true
+                },
+                files: {
+                    '<%= dist %>/css/plugins.css': [
+                        "<%= src %>/plugins/fullcalendar/fullcalendar.css",
+                        "<%= src %>/plugins/pace/pace-theme-flash.css",
+                        "<%= src %>/plugins/gritter/css/jquery.gritter.css",
+                        "<%= src %>/plugins/bootstrap-datepicker/css/datepicker.css",
+                        "<%= src %>/plugins/jquery-morris-chart/css/morris.css",
+                        "<%= src %>/plugins/jquery-slider/css/jquery.sidr.light.css",
+                        "<%= src %>/plugins/bootstrap-select2/select2.css",
+                        "<%= src %>/plugins/jquery-jvectormap/css/jquery-jvectormap-1.2.2.css",
+                        "<%= src %>/plugins/boostrap-checkbox/css/bootstrap-checkbox.css",
+                        "<%= src %>/plugins/boostrapv3/css/bootstrap.min.css",
+                        "<%= src %>/plugins/boostrapv3/css/bootstrap-theme.min.css",
+                        "<%= src %>/css/animate.min.css"
+                    ]
+                }
+            }, // plugins
+
+            main: {
+                options: {
+                    separator: '\n',
                     compress: true
                 },
                 files: {
-                    '../../../../public/packages/arxmin/arxmin/dist/css/arxmin.css': [
-                        'src/less/arxmin.less'
+                    '<%= dist %>/css/arxmin.css': [
+                        "<%= src %>/less/style.less",
+                        "<%= src %>/less/responsive.less"
                     ]
                 }
-            }, // arx
+            } // main
+        }, // less
 
-            arxcombined: {
+        concat: {
+
+            // CSS
+
+            pluginscss: {
                 options: {
-                    compile: true,
-                    compress: true
+                    separator: '\n',
+                    stripBanners: true
                 },
-                files: {
-                    '../../../../public/packages/arxmin/arxmin/dist/css/arxmin-combined.css': [
-                        'src/less/plugins.less',
-                        'src/less/arxmin.less'
-                    ]
-                }
-            } // arxcombined
-        },
+                src: [
+                    "<%= src %>/plugins/fullcalendar/fullcalendar.css",
+                    "<%= src %>/plugins/pace/pace-theme-flash.css",
+                    "<%= src %>/plugins/gritter/css/jquery.gritter.css",
+                    "<%= src %>/plugins/bootstrap-datepicker/css/datepicker.css",
+                    "<%= src %>/plugins/jquery-morris-chart/css/morris.css",
+                    "<%= src %>/plugins/jquery-slider/css/jquery.sidr.light.css",
+                    "<%= src %>/plugins/bootstrap-select2/select2.css",
+                    "<%= src %>/plugins/jquery-jvectormap/css/jquery-jvectormap-1.2.2.css",
+                    "<%= src %>/plugins/boostrap-checkbox/css/bootstrap-checkbox.css",
+                    "<%= src %>/plugins/boostrapv3/css/bootstrap.min.css",
+                    "<%= src %>/plugins/boostrapv3/css/bootstrap-theme.min.css",
+                    "<%= src %>/css/animate.min.css"
+                ],
+                dest: '<%= dist %>/css/plugins.css'
+            },
+
+
+            arxmincombinedcss: {
+                options: {
+                    separator: '\n',
+                    stripBanners: true
+                },
+                src: [
+                    '<%= dist %>/css/plugins.css',
+                    '<%= dist %>/css/arxmin.css',
+                    "<%= src %>/css/custom-icon-set.css"
+                ],
+                dest: 'dist/css/arxmin-combined.css'
+            },
+
+            // JS
+
+            pluginsjs: {
+                options: {
+                    separator: ';\n',
+                    stripBanners: true
+                },
+                src: [
+                    "<%= packages %>/jquery/jquery.js",
+                    "<%= src %>/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js",
+                    "<%= packages %>/angular/angular.min.js",
+                    "<%= src %>/plugins/boostrapv3/js/bootstrap.min.js",
+                    "<%= src %>/plugins/breakpoints.js",
+                    "<%= src %>/plugins/jquery-unveil/jquery.unveil.min.js",
+                    "<%= src %>/plugins/pace/pace.min.js",
+                    "<%= src %>/plugins/jquery-slimscroll/jquery.slimscroll.min.js",
+                    "<%= src %>/plugins/jquery-numberAnimate/jquery.animateNumbers.js",
+                    "<%= src %>/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js",
+                    "<%= src %>/plugins/jquery-slimscroll/jquery.slimscroll.min.js",
+                    "<%= src %>/plugins/jquery-block-ui/jqueryblockui.js",
+                    "<%= src %>/plugins/bootstrap-select2/select2.min.js",
+                    "<%= src %>/plugins/jquery-morris-chart/js/morris.min.js",
+                    "<%= src %>/plugins/jquery-easy-pie-chart/js/jquery.easypiechart.min.js",
+                    "<%= src %>/plugins/jquery-slider/jquery.sidr.min.js",
+                    "<%= src %>/plugins/jquery-jvectormap/js/jquery-jvectormap-1.2.2.min.js",
+                    "<%= src %>/plugins/jquery-jvectormap/js/jquery-jvectormap-us-lcc-en.js",
+                    "<%= src %>/plugins/jquery-sparkline/jquery-sparkline.js",
+                    "<%= src %>/plugins/jquery-flot/jquery.flot.min.js",
+                    "<%= src %>/plugins/jquery-flot/jquery.flot.animator.min.js",
+                    "<%= src %>/plugins/skycons/skycons.js"
+                ],
+                dest: '<%= dist %>/js/plugins.js'
+            },
+            arxmincombinedjs: {
+                options: {
+                    separator: ';\n',
+                    stripBanners: true
+                },
+                src: [
+                    '<%= dist %>/js/plugins.js',
+                    '<%= dist %>/js/arxmin.js'
+                ],
+                dest: '<%= dist %>/js/arxmin-combined.js'
+            }
+        }, // concat
 
         jshint: {
             options: {
@@ -46,113 +155,96 @@ module.exports = function(grunt) {
             },
             all: [
                 'Gruntfile.js',
-                'src/js/*.js',
-                '!dist/js/*.min.js'
+                '<%= src %>/js*//*.js',
+                '!<%= dist %>/js*//*.min.js'
             ]
         }, // jshint
 
-        uglify: {
-            arx: {
-                options: {
-                    banner: ''
-                },
-                files: {
-                    '../../../../public/packages/arx/arxmin/dist/js/arxmin.js': [
-                        'src/js/arxmin.js'
-                    ]
-                }
-            }, // arx
 
-            arxcombined: {
-                options: {
-                    banner: ''
-                },
-                files: {
-                    '../../../../public/packages/arx/arxmin/dist/js/arxmin-combined.js': [
-                        '../../../../public/packages/jquery/jquery.min.js',
-                        '../../../../public/packages/jquery-ui/ui/jquery-ui.js',
-                        '../../../../public/packages/bootstrap/dist/js/bootstrap.min.js',
-                        '../../../../public/packages/angular/angular.min.js',
-                        '../../../../public/packages/bootstrap-multiselect/js/bootstrap-multiselect.js',
-                        '../../../../public/packages/select2/select2.min.js',
-                        '../../../../public/packages/datatables/media/js/jquery.dataTables.js',
-                        'src/js/utils.js',
-                        'src/js/arxmin.js'
-                    ]
-                }
-            }, // arxcombined
-        }, // uglify
+        watch: {
+            less: {
+                files: [
+                    '<%= src %>/less/*.less',
+                    '<%= src %>/css/*.css'
+                ],
 
+                tasks: ['recess', 'shell:done']
+            },
+
+            js: {
+                files: [
+                    '<%= jshint.all %>'
+                ],
+
+                tasks: ['uglify', 'shell:done']
+            }
+        }, // watch
 
         shell: {
             done: {
-                command: 'terminal-notifier -message "Tasks done!" -title "Gruntfile.js"'
+                command: 'terminal-notifier -message "Bazinga! Grunt tasks done!" -title "Gruntfile.js" -sound Pop'
             }
         }, // shell
+
 
         connect: {
             server: {
                 options: {
-                    port: 8800,
+                    port: 8870,
                     base: '.'
                 }
             }
-        }, // connect
+        } // connect
+    };
 
-        watch: {
-            less: {
-                  files: [
-                        'src/less/*.less'
-                  ],
 
-                  tasks: ['recess', 'shell:done']
-            },
+    grunt.initConfig(grunt.util._.extend(taskConfig));
 
-            js: {
-                  files: [
-                    '<%= jshint.all %>'
-                  ],
 
-                  tasks: [/*'jshint',*/ 'uglify', 'shell:done']
-            }
-        }, // watch
-    });
+    require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    // grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-recess');
-    grunt.loadNpmTasks('grunt-shell');
+
+    /**
+     * Only CSS
+     */
+    grunt.registerTask('css', [
+        'less',
+        'shell:done'
+    ]);
+
+    /**
+     * Only JS
+     */
+    grunt.registerTask('js', [
+        'uglify',
+        'concat',
+        'shell:done'
+    ]);
+
+    /**
+     * Dev is the regular watch tasks
+     */
+    grunt.registerTask('dev', [
+        'less',
+        'concat',
+        'shell:done',
+        'connect',
+        'watch'
+    ]);
+
+    /**
+     * The default task is to build and compile.
+     */
+    grunt.registerTask('default', [
+        'less',
+        'uglify',
+        'concat',
+        'shell:done'
+    ]);
 
 
     grunt.event.on('watch', function(action, filepath, target) {
         grunt.log.writeln(target + ': ' + filepath + ' has ' + action);
     });
 
-
-    // -- Tasks
-
-    grunt.registerTask('before-test', [
-        'clean'
-    ]);
-    grunt.registerTask('test', [
-        'recess',
-        'uglify'
-    ]);
-    grunt.registerTask('after-test', [
-        'shell:done'
-    ]);
-
-    grunt.registerTask('js', [
-        'uglify',
-        'shell:done'
-    ]);
-    grunt.registerTask('css', [
-        'recess',
-        'shell:done'
-    ]);
-
-    grunt.registerTask('default', ['before-test', 'test', 'after-test']);
 };
