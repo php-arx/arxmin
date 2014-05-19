@@ -34,9 +34,22 @@ Page header
 	border:none;
 	border-radius:0px;
 }
-.header-seperation{
+.header-seperation {
 	background-color:#22262e;
 
+    .logo {
+        display: table;
+        height: 100%;
+        margin: 0;
+        vertical-align: middle;
+        width: 100%;
+
+        > span {
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
+        }
+    }
 }
 .header .navbar-inner {
   filter:none !important;
