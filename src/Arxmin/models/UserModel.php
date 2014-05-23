@@ -3,6 +3,13 @@
 use \Zizaco\Confide\ConfideUser;
 use Arx\classes\Utils;
 
+/**
+ * Class UserModel
+ *
+ * Default UserModel
+ *
+ * @package Arxmin
+ */
 class UserModel extends ConfideUser {
 
     protected static $jsonable = array();
