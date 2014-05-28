@@ -73,6 +73,7 @@ module.exports = function (grunt) {
                     stripBanners: true
                 },
                 src: [
+                    "<%= packages %>/datatables-tabletools/css/dataTables.tableTools.css",
                     "<%= src %>/plugins/fullcalendar/fullcalendar.css",
                     "<%= src %>/plugins/pace/pace-theme-flash.css",
                     "<%= src %>/plugins/gritter/css/jquery.gritter.css",
@@ -115,6 +116,8 @@ module.exports = function (grunt) {
                     "<%= src %>/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js",
                     "<%= packages %>/angular/angular.min.js",
                     "<%= src %>/plugins/boostrapv3/js/bootstrap.min.js",
+                    "<%= packages %>/datatables/media/js/jquery.dataTables.js",
+                    "<%= packages %>/datatables-tabletools/js/dataTables.tableTools.js",
                     "<%= src %>/plugins/breakpoints.js",
                     "<%= src %>/plugins/jquery-unveil/jquery.unveil.min.js",
                     "<%= src %>/plugins/pace/pace.min.js",
