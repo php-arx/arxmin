@@ -1,12 +1,16 @@
 <?php namespace Arxmin;
 
-use Zizaco\Confide\Confide;
-
-use Zizaco\Entrust\EntrustRole as Role;
+use Zizaco\Confide\ConfideFacade as Confide;
 
 use Input, View, User, Config, Redirect, Lang, Auth;
 
 class UserController extends BaseController {
+
+    public $layout = "arxmin::layouts.bootstrap";
+
+    public function __construct(){
+        $this->auth = Config::get('arxmin::auth');
+    }
 
     /**
      * Displays the form for account creation
@@ -14,7 +18,8 @@ class UserController extends BaseController {
      */
     public function create()
     {
-        return View::make(Config::get('confide::signup_form'));
+        $auth = $this->auth;
+        return View::make($this->auth['signup_form'], get_defined_vars());
     }
 
     /**
@@ -36,8 +41,6 @@ class UserController extends BaseController {
 
         // Save if valid. Password field will be hashed before save
         $user->save();
-
-        $user->attachRole( Role::$buzzer );
 
         if ( $user->id )
         {

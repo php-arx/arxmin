@@ -8,18 +8,33 @@
 
 namespace Arxmin;
 
-use Symfony\Component\Finder\Finder;
-use View, Lang, Config, DB, URL, Request, Response;
+use Arx\BaseController as ParentClass;
 
 
-class ArxminController extends BaseController{
+class ArxminController extends ParentClass {
 
     public $layout = 'arxmin::layouts.admin';
 
     public $data = array();
 
-    public function anyIndex()
+    public function __construct()
     {
-        $user = UserModel::auth();
+        global $user;
+
+        $user = UserModel::getAuth();
+
+        $this->assign('user', $user);
     }
+
+
+    /**
+     *
+     * @todo better login handler !
+     * @return \Illuminate\View\View
+     */
+    public function anyLogin()
+    {
+        return $this->viewMake('arxmin::layouts.login', get_defined_vars());
+    }
+
 }

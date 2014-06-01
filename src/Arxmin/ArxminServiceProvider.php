@@ -23,18 +23,17 @@ class ArxminServiceProvider extends ServiceProvider {
 	{
 		$this->package('arx/arxmin');
 
-
-
-        include_once __DIR__.'/../start/global.php';
-        include_once __DIR__.'/../start/artisan.php';
-        include_once __DIR__.'/../filters.php';
-        include_once __DIR__.'/../routes.php';
-        include_once __DIR__.'/../helpers.php';
-        include_once __DIR__.'/models/LangModel.php';
-
         Lang::addNamespace('arxmin', __DIR__.'/../lang');
         Config::addNamespace('arxmin', __DIR__.'/../config');
         View::addNamespace('arxmin', __DIR__.'/../views');
+
+        include_once __DIR__.'/../start/global.php';
+        include_once __DIR__.'/../start/artisan.php';
+        include_once __DIR__.'/../helpers.php';
+        include_once __DIR__.'/models/LangModel.php';
+
+        include_once __DIR__.'/../filters.php';
+        include_once __DIR__.'/../routes.php';
 	}
 
 	/**
@@ -54,7 +53,7 @@ class ArxminServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return array();
+		return array('Zizaco\Confide\ConfideServiceProvider');
 	}
 
 }

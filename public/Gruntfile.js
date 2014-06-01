@@ -8,8 +8,10 @@ module.exports = function (grunt) {
         bowerrc: grunt.file.readJSON('.bowerrc'),
 
         src: 'src', //Change the source that you need
-        dist: 'dist', //Change this to publish where you want !
-        packages : 'bower_components', //Change this change the general packages directory
+        dist: '../../../../public/arx/arxmin/dist',
+        //dist: 'dist', //Change this to publish where you want !
+        bower_components : 'bower_components', //Change this change the general packages directory
+        packages : '../../../../public/packages', //Change this change the general packages directory
 
         uglify: {
             options: {
@@ -111,9 +113,9 @@ module.exports = function (grunt) {
                     stripBanners: true
                 },
                 src: [
-                    "<%= packages %>/jquery/jquery.js",
+                    "<%= bower_components %>/jquery/jquery.js",
                     "<%= src %>/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js",
-                    "<%= packages %>/angular/angular.min.js",
+                    "<%= bower_components %>/angular/angular.min.js",
                     "<%= src %>/plugins/boostrapv3/js/bootstrap.min.js",
                     "<%= src %>/plugins/breakpoints.js",
                     "<%= src %>/plugins/jquery-unveil/jquery.unveil.min.js",

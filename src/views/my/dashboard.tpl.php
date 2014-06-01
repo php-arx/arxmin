@@ -1,1 +1,0 @@
-@extends('arxmin::layouts.admin')

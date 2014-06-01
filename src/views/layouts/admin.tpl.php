@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+@section('html')
+<?php if (isset($ngapp)) { $ngapp = 'ng-app="'.$ngapp.'" id="ng-app"';}  ?>
+<!--[if lt IE 7]><html <% $ngapp or '' %> class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"><![endif]-->
+<!--[if IE 7]><html <% $ngapp or '' %> class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if IE 8]><html <% $ngapp or '' %> class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html <% $ngapp or '' %> class="no-js" lang="en"><!--<![endif]-->
+@show
 <head>
     @section('head')
     <meta charset="utf-8"/>
     <title><% $this->title %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <meta content="" name="description"/>
-    <meta content="" name="author"/>
     @show
     @section('css')
-    <link href="/packages/arx/arxmin/dist/css/plugins.css" rel="stylesheet" type="text/css"/>
-    <link href="/packages/arx/arxmin/dist/css/arxmin.css" rel="stylesheet" type="text/css"/>
+        <link href="/packages/arx/arxmin/dist/css/arxmin-combined.css" rel="stylesheet" type="text/css"/>
     @show
 </head>
 <!-- END HEAD -->
@@ -22,29 +25,8 @@
     <!-- BEGIN TOP NAVIGATION BAR -->
     <div class="navbar-inner">
         <div class="header-seperation">
-            <ul class="nav pull-left notifcation-center" id="main-menu-toggle-wrapper" style="display:none">
-                <li class="dropdown"><a id="main-menu-toggle" href="index.html#main-menu" class="">
-                        <div class="iconset top-menu-toggle-white"></div>
-                    </a></li>
-            </ul>
-            <!-- BEGIN LOGO -->
-            <a href="index.html"><img src="<% asset('/packages/webarch/dist/img/logo.png') %>" class="logo" data-src="/assets/img/logo.png"
-                                      data-src-retina="/assets/img/logo2x.png" height="21"/></a>
-            <!-- END LOGO -->
-            <ul class="nav pull-right notifcation-center">
-                <li class="dropdown" id="header_task_bar"><a href="<% url('home') %>" class="dropdown-toggle active"
-                                                             data-toggle="">
-                        <div class="iconset top-home"></div>
-                    </a></li>
-                <li class="dropdown" id="header_inbox_bar"><a href="email.html" class="dropdown-toggle">
-                        <div class="iconset top-messages"></div>
-                        <span class="badge" id="msgs-badge">2</span> </a>
-                <li class="dropdown" id="portrait-chat-toggler" style="display:none"><a href="index.html#sidr"
-                                                                                        class="chat-menu-toggle">
-                        <div class="iconset top-chat-white "></div>
-                    </a>
-            </li>
-            </ul>
+            <a href="<?php echo url(); ?>">
+                <img src="<% $user->gravatar() %>" alt="" width="60" height="60"/><% $user->full_name() ?: 'Admin' %></a>
         </div>
         <!-- END RESPONSIVE MENU TOGGLER -->
         <div class="header-quick-nav">
@@ -67,7 +49,7 @@
                         <span class="add-on"> <a href="index.html#" class="">
                                 <div class="iconset top-search"></div>
                             </a></span>
-                        <input name="" type="text" class="no-boarder " placeholder="Search Dashboard"
+                        <input name="" type="text" class="no-boarder " placeholder="Search"
                                style="width:250px;">
                     </div>
                 </ul>
@@ -83,62 +65,47 @@
 <!-- BEGIN CONTAINER -->
 <div class="page-container row">
     <!-- BEGIN SIDEBAR -->
-    <div class="page-sidebar" id="main-menu">
-        <!-- BEGIN MINI-PROFILE -->
-        <div class="user-info-wrapper">
-            <div class="profile-wrapper">
-                <img src="/packages/webarch/dist/img/profiles/avatar.jpg"
-                     data-src="/packages/webarch/dist/img/profiles/avatar.jpg"
-                     data-src-retina="/packages/webarch/dist/img/profiles/avatar2x.jpg" width="69" height="69"/>
-            </div>
-            <div class="user-info">
-                <div class="greeting">Welcome</div>
-                <div class="username"><% $user->first_name %> <span class="semi-bold"><% $user->last_name %></span>
-                </div>
-                <div class="status">Status<a href="index.html#">
-                        <div class="status-icon green"></div>
-                        Online</a></div>
-            </div>
-        </div>
-        <!-- END MINI-PROFILE -->
-
-        <!-- BEGIN MINI-WIGETS -->
-
-        <!-- END MINI-WIGETS -->
-
-        <!-- BEGIN SIDEBAR MENU -->
-        <p class="menu-title">Menu <span class="pull-right"><a href="javascript:;"><i
-                        class="icon-refresh"></i></a></span></p>
+    <div class="page-sidebar affix affix-top" id="main-menu">
         @section('menu')
         <ul>
-            <li class="start active ">
-                <a href="dashboard"> <i class="icon-custom-home"></i> <span class="title">Dashboard</span>
-                    <span class="selected"></span> <span class="badge badge-important pull-right">5</span>
-                </a>
-            </li>
-            <li class="start active ">
-                <a href="dashboard"> <i class="icon-custom-home"></i> <span class="title">Account</span>
-                    <span class="selected"></span> <span class="badge badge-important pull-right">5</span>
-                </a>
-            </li>
+            @if(isset($menu))
+                @foreach((array) $menu as $key => $item)
+                <li @if(Request::url() === $item['link'])class="active"@endif >
+                    <a href="<?php echo $item['link'] ?>" title="">
+                        <?php if (isset($item['ico'])) {
+                            echo '<i class="fa '.$item['ico'].' fa-lg fa-fw"></i> ';
+                        } ?>
+                        <span><?php echo $item['name'] ?></span>
+                    </a>
+
+                    @if(isset($item['children']))
+                    <ul class="nav">
+                        @foreach($item['children'] as $key2 => $item2)
+                        <li>
+                            <a href="<?php echo $item2['link'] ?>" title="">
+                                <?php if (isset($item2['ico'])) {
+                                    echo '<i class="fa '.$item2['ico'].' fa-lg fa-fw"></i> ';
+                                } ?>
+                                <span><?php echo $item2['name'] ?></span>
+                            </a>
+                        </li>
+                        @endforeach
+                    </ul>
+                    @endif
+                </li>
+                @endforeach
+            @else
+                <ul>
+                    <li class="start active ">
+                        <a href="#dashboard">
+                            <i class="fa fa-home"></i> <span class="title">Dashboard</span>
+                        </a>
+                    </li>
+                </ul>
+            @endif
         </ul>
         @show
-        <a href="#" class="scrollup">Scroll</a>
-
-        <div class="clearfix"></div>
         <!-- END SIDEBAR MENU -->
-    </div>
-    <div class="footer-widget">
-        <div class="progress transparent progress-small no-radius no-margin">
-            <div class="progress-bar progress-bar-success animate-progress-bar"
-                 data-percentage="<% $this->percent ? : 0 %>%" style="width: <% $this->percent ? : 0 %>%;"></div>
-        </div>
-        <div class="pull-right">
-            <div class="details-status">
-                <span class="animate-number" data-value="86"
-                      data-animation-duration="560"><% $this->percent ? : 0 %></span>%
-            </div>
-            <a href="/user/logout"><i class="icon-off"></i></a></div>
     </div>
     <!-- END SIDEBAR -->
     <!-- BEGIN PAGE CONTAINER-->
@@ -148,6 +115,8 @@
         @show
     </div>
 
-    <script src="/packages/arx/arxmin/dist/js/arx-combined.js"></script>
+    @section('js')
+    <script src="/packages/arx/arxmin/dist/js/arxmin-combined.js"></script>
+    @show
 </body>
 </html>

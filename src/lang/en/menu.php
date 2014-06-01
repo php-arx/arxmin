@@ -1,11 +1,9 @@
 <?php
 
 return array(
-
-    'main' => array(
-
-    ),
-    'admin' => array(
-
+    array(
+        'name' => 'Dashboard',
+        'ico' => 'fa-home',
+        'link' => url('arxmin/dashboard')
     )
 );

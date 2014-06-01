@@ -10,9 +10,16 @@ use Arx\classes\Utils;
  *
  * @package Arxmin
  */
-class UserModel extends ConfideUser {
+class UserModel extends ConfideUser implements UserInterface {
 
     protected static $jsonable = array();
+
+    protected $fillable = array('*');
+
+    public static $rules = array(
+        'username' => 'unique:users,username',
+        'email' => 'email'
+    );
 
     public static function boot()
     {
@@ -64,8 +71,22 @@ class UserModel extends ConfideUser {
      */
     public function full_name()
     {
+        if(empty($this->first_name) && empty($this->last_name)){
+            return null;
+        }
+
         return "{$this->first_name} {$this->last_name}";
     }
+
+    /**
+     * Get Auth user
+     *
+     * @return \Illuminate\Auth\UserInterface|null
+     */
+    public static function getAuth(){
+        return \Auth::getUser();
+    }
+
 
     /**
      * Returns the user Gravatar image url.
