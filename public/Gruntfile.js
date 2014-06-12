@@ -75,7 +75,7 @@ module.exports = function (grunt) {
                     stripBanners: true
                 },
                 src: [
-                    "<%= packages %>/datatables-tabletools/css/dataTables.tableTools.css",
+                    "<%= bower_components %>/datatables-tabletools/css/dataTables.tableTools.css",
                     "<%= src %>/plugins/fullcalendar/fullcalendar.css",
                     "<%= src %>/plugins/pace/pace-theme-flash.css",
                     "<%= src %>/plugins/gritter/css/jquery.gritter.css",
@@ -119,9 +119,8 @@ module.exports = function (grunt) {
                     "<%= bower_components %>/angular/angular.min.js",
                     "<%= src %>/plugins/boostrapv3/js/bootstrap.min.js",
                     "<%= bower_components %>/angular-smart-table/Smart-Table.debug.js",
-                    "<%= packages %>/datatables/media/js/jquery.dataTables.js",
-                    "<%= packages %>/datatables-tabletools/js/dataTables.tableTools.js",
-                    "<%= packages %>/datatables-tabletools/js/dataTables.tableTools.js",
+                    "<%= bower_components %>/datatables/media/js/jquery.dataTables.js",
+                    "<%= bower_components %>/datatables-tabletools/js/dataTables.tableTools.js",
                     "<%= src %>/plugins/breakpoints.js",
                     "<%= src %>/plugins/jquery-unveil/jquery.unveil.min.js",
                     "<%= src %>/plugins/pace/pace.min.js",
