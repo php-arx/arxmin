@@ -35,6 +35,7 @@
     "jquery.tinymce": "*",
     "sidr": "~1.2.1",
     "datatables-tabletools": "*",
-    "angular-form-builder": "~0.0.2"
+    "angular-form-builder": "~0.0.2",
+    "smart-table": "*"
   }
 }

@@ -8,7 +8,7 @@ module.exports = function (grunt) {
         bowerrc: grunt.file.readJSON('.bowerrc'),
 
         src: 'src', //Change the source that you need
-        dist: '../../../../public/arx/arxmin/dist',
+        dist: 'dist',
         //dist: 'dist', //Change this to publish where you want !
         bower_components : 'bower_components', //Change this change the general packages directory
         packages : '../../../../public/packages', //Change this change the general packages directory
@@ -118,7 +118,9 @@ module.exports = function (grunt) {
                     "<%= src %>/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js",
                     "<%= bower_components %>/angular/angular.min.js",
                     "<%= src %>/plugins/boostrapv3/js/bootstrap.min.js",
+                    "<%= bower_components %>/angular-smart-table/Smart-Table.debug.js",
                     "<%= packages %>/datatables/media/js/jquery.dataTables.js",
+                    "<%= packages %>/datatables-tabletools/js/dataTables.tableTools.js",
                     "<%= packages %>/datatables-tabletools/js/dataTables.tableTools.js",
                     "<%= src %>/plugins/breakpoints.js",
                     "<%= src %>/plugins/jquery-unveil/jquery.unveil.min.js",
