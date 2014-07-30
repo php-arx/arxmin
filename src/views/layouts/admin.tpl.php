@@ -19,14 +19,16 @@
 <!-- END HEAD -->
 
 <!-- BEGIN BODY -->
-<body class="">
+<body>
+
+@if(!isset($noheader))
 <!-- BEGIN HEADER -->
 <div class="header navbar navbar-inverse ">
     <!-- BEGIN TOP NAVIGATION BAR -->
     <div class="navbar-inner">
         <div class="header-seperation">
             <a href="<?php echo url(); ?>">
-                <img src="<% $user->gravatar() %>" alt="" width="60" height="60"/><% $user->full_name() ?: 'Admin' %></a>
+                <img src="<% $user->gravatar() %>" alt="" width="60" height="60"/><span> <% $user->full_name() ?: 'Admin' %> </span></a>
         </div>
         <!-- END RESPONSIVE MENU TOGGLER -->
         <div class="header-quick-nav">
@@ -61,6 +63,7 @@
     <!-- END TOP NAVIGATION BAR -->
 </div>
 </div>
+@endif
 <!-- END HEADER -->
 <!-- BEGIN CONTAINER -->
 <div class="page-container row">
