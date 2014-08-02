@@ -1,0 +1,1 @@
+@extends('arx::layouts.login')
