@@ -15,8 +15,8 @@
     "require": {
         "php": ">=5.3.7",
         "arx/core" : "4.1.*",
-        "zizaco/confide": "dev-master",
-        "zizaco/entrust": "dev-master",
+        "zizaco/confide": "3.x",
+        "zizaco/entrust": "1.2.*@dev",
         "chumper/datatable" : "2.*"
     },
     "require-dev": {
