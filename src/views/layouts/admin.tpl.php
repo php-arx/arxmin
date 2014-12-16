@@ -28,7 +28,10 @@
     <div class="navbar-inner">
         <div class="header-seperation">
             <a href="<?php echo url(); ?>">
-                <img src="<% $user->gravatar() %>" alt="" width="60" height="60"/><span> <% $user->full_name() ?: 'Admin' %> </span></a>
+                @if(isset($user))
+                <img src="<% @$user->gravatar() %>" alt="" width="60" height="60"/><span> <% @$user->full_name() ?: 'Admin' %> </span>
+                @endif
+            </a>
         </div>
         <!-- END RESPONSIVE MENU TOGGLER -->
         <div class="header-quick-nav">
