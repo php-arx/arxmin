@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 @section('html')
-<?php if (isset($ngapp)) { $ngapp = 'ng-app="'.$ngapp.'" id="ng-app"';}  ?>
+<?php if (isset($ngapp)) { $ngapp = 'ng-app="'.$ngapp.'" id="ng-app"';} else { $ngapp = ''; }  ?>
 <!--[if lt IE 7]><html <% $ngapp or '' %> class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"><![endif]-->
 <!--[if IE 7]><html <% $ngapp or '' %> class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
 <!--[if IE 8]><html <% $ngapp or '' %> class="no-js lt-ie9" lang="en"><![endif]-->
@@ -34,9 +34,11 @@
             </a>
         </div>
         <!-- END RESPONSIVE MENU TOGGLER -->
+        @section('header-top')
         <div class="header-quick-nav">
             <!-- BEGIN TOP NAVIGATION MENU -->
             <div class="pull-left">
+                @section('top-left')
                 <ul class="nav quick-section">
                     <li class="quicklinks"><a href="index.html#" class="" id="layout-condensed-toggle">
                             <div class="iconset top-menu-toggle-dark"></div>
@@ -58,77 +60,11 @@
                                style="width:250px;">
                     </div>
                 </ul>
+                @stop
             </div>
 
             <div class="pull-right">
-                <div class="chat-toggler">
-                    <a href="#" class="dropdown-toggle" id="my-task-list" data-placement="bottom"
-                       data-content='
-						<div style="width:300px" class="scroller" data-height="100px">
-						  <div class="notification-messages info">
-									<div class="user-profile">
-										<img src="img/profiles/d.jpg" data-src="img/profiles/d.jpg" data-src-retina="img/profiles/d2x.jpg" width="35" height="35">
-									</div>
-									<div class="message-wrapper">
-										<div class="heading">
-											David Nester - Commented on your wall
-										</div>
-										<div class="description">
-											Meeting postponed to tomorrow
-										</div>
-										<div class="date pull-left">
-										A min ago
-										</div>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							<div class="notification-messages danger">
-								<div class="iconholder">
-									<i class="icon-warning-sign"></i>
-								</div>
-								<div class="message-wrapper">
-									<div class="heading">
-										Server load limited
-									</div>
-									<div class="description">
-										Database server has reached its daily capicity
-									</div>
-									<div class="date pull-left">
-									2 mins ago
-									</div>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-							<div class="notification-messages success">
-								<div class="user-profile">
-									<img src="img/profiles/h.jpg" data-src="img/profiles/h.jpg" data-src-retina="img/profiles/h2x.jpg" width="35" height="35">
-								</div>
-								<div class="message-wrapper">
-									<div class="heading">
-										You haveve got 150 messages
-									</div>
-									<div class="description">
-										150 newly unread messages in your inbox
-									</div>
-									<div class="date pull-left">
-									An hour ago
-									</div>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-						</div>' data-toggle="dropdown" data-original-title="Notifications">
-                        <div class="user-details">
-                            <div class="username">
-                                <span class="badge badge-important">3</span>
-                                John <span class="bold">Smith</span>
-                            </div>
-                        </div>
-                        <div class="iconset top-down-arrow"></div>
-                    </a>
-                    <div class="profile-pic">
-                        <img alt="" src="img/profiles/avatar_small.jpg" data-src="img/profiles/avatar_small.jpg" data-src-retina="img/profiles/avatar_small2x.jpg" width="35" height="35" />
-                    </div>
-                </div>
+                @section('top-right')
                 <ul class="nav quick-section ">
                     <li class="quicklinks">
                         <a data-toggle="dropdown" class="dropdown-toggle  pull-right" href="#">
@@ -159,11 +95,12 @@
                         </div>
                     </li>
                 </ul>
+                @stop
             </div>
             <!-- END CHAT TOGGLER -->
         </div>
         <!-- END TOP NAVIGATION MENU -->
-
+        @show
     </div>
     <!-- END TOP NAVIGATION BAR -->
 </div>
