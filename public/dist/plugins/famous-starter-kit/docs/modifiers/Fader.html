@@ -1,0 +1,424 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <meta name="description" content="A free, open source JavaScript framework for creating complex UIs for any screen. 3D layout and physics animation engines. Renders to DOM, Canvas, or WebGL"/>
+  <title>Famo.us</title>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <meta name="viewport" content="width=device-width"/>
+  <link href="http://fonts.googleapis.com/css?family=Lato&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css"/>
+  <link rel='icon' type='image/png' href='../favicon.png'/>
+  <link rel='stylesheet' href='../css/famous_styles.css'/>
+</head>
+<body>
+<div id="doc-container" class="col1">
+  <div class="col1 navigation-margin relative pad20">
+    <div class="col1">
+      <div class="col1-4">
+        <ul class="mar-20 sidebar nav">
+          <li>core</li>
+          <li><a href="../core/Context.html">Context</a>
+          </li>
+          <li><a href="../core/ElementAllocator.html">ElementAllocator</a>
+          </li>
+          <li><a href="../core/ElementOutput.html">ElementOutput</a>
+          </li>
+          <li><a href="../core/Engine.html">Engine</a>
+          </li>
+          <li><a href="../core/Entity.html">Entity</a>
+          </li>
+          <li><a href="../core/EventEmitter.html">EventEmitter</a>
+          </li>
+          <li><a href="../core/EventHandler.html">EventHandler</a>
+          </li>
+          <li><a href="../core/Group.html">Group</a>
+          </li>
+          <li><a href="../core/Modifier.html">Modifier</a>
+          </li>
+          <li><a href="../core/OptionsManager.html">OptionsManager</a>
+          </li>
+          <li><a href="../core/RenderNode.html">RenderNode</a>
+          </li>
+          <li><a href="../core/Scene.html">Scene</a>
+          </li>
+          <li><a href="../core/SpecParser.html">SpecParser</a>
+          </li>
+          <li><a href="../core/Transform.html">Transform</a>
+          </li>
+          <li><a href="../core/View.html">View</a>
+          </li>
+          <li><a href="../core/ViewSequence.html">ViewSequence</a>
+          </li>
+          <li>events</li>
+          <li><a href="../events/EventArbiter.html">EventArbiter</a>
+          </li>
+          <li><a href="../events/EventFilter.html">EventFilter</a>
+          </li>
+          <li><a href="../events/EventMapper.html">EventMapper</a>
+          </li>
+          <li>inputs</li>
+          <li><a href="../inputs/Accumulator.html">Accumulator</a>
+          </li>
+          <li><a href="../inputs/GenericSync.html">GenericSync</a>
+          </li>
+          <li><a href="../inputs/MouseSync.html">MouseSync</a>
+          </li>
+          <li><a href="../inputs/PinchSync.html">PinchSync</a>
+          </li>
+          <li><a href="../inputs/RotateSync.html">RotateSync</a>
+          </li>
+          <li><a href="../inputs/ScaleSync.html">ScaleSync</a>
+          </li>
+          <li><a href="../inputs/ScrollSync.html">ScrollSync</a>
+          </li>
+          <li><a href="../inputs/TouchSync.html">TouchSync</a>
+          </li>
+          <li><a href="../inputs/TouchTracker.html">TouchTracker</a>
+          </li>
+          <li><a href="../inputs/TwoFingerSync.html">TwoFingerSync</a>
+          </li>
+          <li>math</li>
+          <li><a href="../math/Matrix.html">Matrix</a>
+          </li>
+          <li><a href="../math/Quaternion.html">Quaternion</a>
+          </li>
+          <li><a href="../math/Random.html">Random</a>
+          </li>
+          <li><a href="../math/Utilities.html">Utilities</a>
+          </li>
+          <li><a href="../math/Vector.html">Vector</a>
+          </li>
+          <li>modifiers</li>
+          <li><a href="../modifiers/Draggable.html">Draggable</a>
+          </li>
+          <li><a href="../modifiers/Fader.html">Fader</a>
+          </li>
+          <li><a href="../modifiers/ModifierChain.html">ModifierChain</a>
+          </li>
+          <li><a href="../modifiers/StateModifier.html">StateModifier</a>
+          </li>
+          <li>physics</li>
+          <li><a href="../physics/PhysicsEngine.html">PhysicsEngine</a>
+          </li>
+          <li>physics/bodies</li>
+          <li><a href="../physics/bodies/Body.html">Body</a>
+          </li>
+          <li><a href="../physics/bodies/Circle.html">Circle</a>
+          </li>
+          <li><a href="../physics/bodies/Particle.html">Particle</a>
+          </li>
+          <li><a href="../physics/bodies/Rectangle.html">Rectangle</a>
+          </li>
+          <li>physics/constraints</li>
+          <li><a href="../physics/constraints/Surface.html">Surface</a>
+          </li>
+          <li><a href="../physics/constraints/Collision.html">Collision</a>
+          </li>
+          <li><a href="../physics/constraints/Constraint.html">Constraint</a>
+          </li>
+          <li><a href="../physics/constraints/Curve.html">Curve</a>
+          </li>
+          <li><a href="../physics/constraints/Distance.html">Distance</a>
+          </li>
+          <li><a href="../physics/constraints/Snap.html">Snap</a>
+          </li>
+          <li><a href="../physics/constraints/Wall.html">Wall</a>
+          </li>
+          <li><a href="../physics/constraints/Walls.html">Walls</a>
+          </li>
+          <li>physics/forces</li>
+          <li><a href="../physics/forces/Drag.html">Drag</a>
+          </li>
+          <li><a href="../physics/forces/Force.html">Force</a>
+          </li>
+          <li><a href="../physics/forces/Repulsion.html">Repulsion</a>
+          </li>
+          <li><a href="../physics/forces/RotationalDrag.html">RotationalDrag</a>
+          </li>
+          <li><a href="../physics/forces/RotationalSpring.html">RotationalSpring</a>
+          </li>
+          <li><a href="../physics/forces/Spring.html">Spring</a>
+          </li>
+          <li><a href="../physics/forces/VectorField.html">VectorField</a>
+          </li>
+          <li>physics/integrators</li>
+          <li><a href="../physics/integrators/SymplecticEuler.html">SymplecticEuler</a>
+          </li>
+          <li>surfaces</li>
+          <li><a href="../surfaces/CanvasSurface.html">CanvasSurface</a>
+          </li>
+          <li><a href="../surfaces/ContainerSurface.html">ContainerSurface</a>
+          </li>
+          <li><a href="../surfaces/ImageSurface.html">ImageSurface</a>
+          </li>
+          <li><a href="../surfaces/InputSurface.html">InputSurface</a>
+          </li>
+          <li><a href="../surfaces/TextareaSurface.html">TextareaSurface</a>
+          </li>
+          <li><a href="../surfaces/VideoSurface.html">VideoSurface</a>
+          </li>
+          <li>transitions</li>
+          <li><a href="../transitions/CachedMap.html">CachedMap</a>
+          </li>
+          <li><a href="../transitions/Easing.html">Easing</a>
+          </li>
+          <li><a href="../transitions/MultipleTransition.html">MultipleTransition</a>
+          </li>
+          <li><a href="../transitions/SnapTransition.html">SnapTransition</a>
+          </li>
+          <li><a href="../transitions/SpringTransition.html">SpringTransition</a>
+          </li>
+          <li><a href="../transitions/Transitionable.html">Transitionable</a>
+          </li>
+          <li><a href="../transitions/TransitionableTransform.html">TransitionableTransform</a>
+          </li>
+          <li><a href="../transitions/TweenTransition.html">TweenTransition</a>
+          </li>
+          <li><a href="../transitions/WallTransition.html">WallTransition</a>
+          </li>
+          <li>utilities</li>
+          <li><a href="../utilities/KeyCodes.html">KeyCodes</a>
+          </li>
+          <li><a href="../utilities/Timer.html">Timer</a>
+          </li>
+          <li><a href="../utilities/Utility.html">Utility</a>
+          </li>
+          <li>views</li>
+          <li><a href="../views/ContextualView.html">ContextualView</a>
+          </li>
+          <li><a href="../views/Deck.html">Deck</a>
+          </li>
+          <li><a href="../views/DrawerLayout.html">DrawerLayout</a>
+          </li>
+          <li><a href="../views/EdgeSwapper.html">EdgeSwapper</a>
+          </li>
+          <li><a href="../views/FlexibleLayout.html">FlexibleLayout</a>
+          </li>
+          <li><a href="../views/Flipper.html">Flipper</a>
+          </li>
+          <li><a href="../views/GridLayout.html">GridLayout</a>
+          </li>
+          <li><a href="../views/HeaderFooterLayout.html">HeaderFooterLayout</a>
+          </li>
+          <li><a href="../views/Lightbox.html">Lightbox</a>
+          </li>
+          <li><a href="../views/RenderController.html">RenderController</a>
+          </li>
+          <li><a href="../views/ScrollContainer.html">ScrollContainer</a>
+          </li>
+          <li><a href="../views/Scroller.html">Scroller</a>
+          </li>
+          <li><a href="../views/Scrollview.html">Scrollview</a>
+          </li>
+          <li><a href="../views/SequentialLayout.html">SequentialLayout</a>
+          </li>
+          <li>widgets</li>
+          <li><a href="../widgets/NavigationBar.html">NavigationBar</a>
+          </li>
+          <li><a href="../widgets/ToggleButton.html">TabBar</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col1-2">
+        <div id="docs-container" class="cf docs col1 pad-g1 main">
+          <div class="col1 pad-ls-g1 pad-t1">
+            <div class="col1 spacer">
+              <div class="col1 spacer-bar mar-b">
+                <h2 class="col1">Fader</h2>
+                <h6 class="miniSpacer">Modifier that allows you to fade the opacity of affected renderables in and out.</h6>
+              </div>
+              <div class="col1 miniSpacer spacer-bar mar-b">
+                <h3 class="col-1">Overview</h3>
+                <div class="col1-3">
+                  <h5>Options</h5><a href="#options-cull" class="col1">cull</a><a href="#options-transition" class="col1">transition</a><a href="#options-pulseInTransition" class="col1">pulseInTransition</a><a href="#options-pulseOutTransition" class="col1">pulseOutTransition</a>
+                </div>
+                <div class="col1-3">
+                  <h5>Methods</h5><a href="#setOptions" class="col1">setOptions</a><a href="#show" class="col1">show</a><a href="#hide" class="col1">hide</a><a href="#set" class="col1">set</a><a href="#halt" class="col1">halt</a><a href="#isVisible" class="col1">isVisible</a>
+                </div>
+              </div>
+              <div class="col1 linkable"><a href="#Fader" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                <h3 id="Fader" class="mar-t1 left">Fader(options)</h3>
+              </div>
+              <h5 class="medium-grey miniSpacer col1">Constructor Parameters</h5>
+              <div class="col1 spacer-bar mar-b">
+                <p class="col1-3">options</p>
+                <p class="col1-3 monospace">Object</p>
+                <p class="col1-3">options configuration object.</p>
+                <div class="left mar-20">
+                  <div id="options-cull" class="col1">
+                    <div class="col1 miniSpacer">
+                      <div class="col1-3 red miniSpacer">cull</div>
+                      <div class="col1-3 monospace">Boolean</div>
+                      <div class="col1-3">Stops returning affected renderables up the tree when they're fully faded when true.</div>
+                      <!-- todo: .col1-3= param.optional-->
+                    </div>
+                  </div>
+                  <div id="options-transition" class="col1">
+                    <div class="col1 miniSpacer">
+                      <div class="col1-3 red miniSpacer">transition</div>
+                      <div class="col1-3 monospace">Transition</div>
+                      <div class="col1-3">The main transition for showing and hiding.</div>
+                      <!-- todo: .col1-3= param.optional-->
+                    </div>
+                  </div>
+                  <div id="options-pulseInTransition" class="col1">
+                    <div class="col1 miniSpacer">
+                      <div class="col1-3 red miniSpacer">pulseInTransition</div>
+                      <div class="col1-3 monospace">Transition</div>
+                      <div class="col1-3">Controls the transition to a pulsed state when the Fader instance's pulse method is called.</div>
+                      <!-- todo: .col1-3= param.optional-->
+                    </div>
+                  </div>
+                  <div id="options-pulseOutTransition" class="col1">
+                    <div class="col1 miniSpacer">
+                      <div class="col1-3 red miniSpacer">pulseOutTransition</div>
+                      <div class="col1-3 monospace">Transition</div>
+                      <div class="col1-3">Controls the transition back from a pulsed state when the Fader instance's pulse method is called.</div>
+                      <!-- todo: .col1-3= param.optional-->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h5 class="medium-grey miniSpacer col1-2">Methods</h5>
+              <div class="col1-2">
+                <label for="input-private" class="right">Show Private Methods</label>
+                <input type="checkbox" id="input-private" data-type="private" class="right down5"/>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#setOptions" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="setOptions" class="mar-t1 left">setOptions(options)</h3>
+                  </div>
+                  <p>Set internal options, overriding any default options</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">options</div>
+                    <div class="col1-3 monospace">Object</div>
+                    <div class="col1-3">overrides of default options. See constructor.</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#show" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="show" class="mar-t1 left">show(transition, callback)</h3>
+                  </div>
+                  <p>Fully displays the Fader instance's associated renderables.</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">transition</div>
+                    <div class="col1-3 monospace">Transition</div>
+                    <div class="col1-3">The transition that coordinates setting to the new state.</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">callback</div>
+                    <div class="col1-3 monospace">Function</div>
+                    <div class="col1-3">A callback that executes once you've transitioned to the fully shown state.</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#hide" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="hide" class="mar-t1 left">hide(transition, callback)</h3>
+                  </div>
+                  <p>Fully fades the Fader instance's associated renderables.</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">transition</div>
+                    <div class="col1-3 monospace">Transition</div>
+                    <div class="col1-3">The transition that coordinates setting to the new state.</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">callback</div>
+                    <div class="col1-3 monospace">Function</div>
+                    <div class="col1-3">A callback that executes once you've transitioned to the fully faded state.</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#set" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="set" class="mar-t1 left">set(state, transition, callback)</h3>
+                  </div>
+                  <p>Manually sets the opacity state of the fader to the passed-in one. Executes with an optional transition and callback.</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">state</div>
+                    <div class="col1-3 monospace">Number</div>
+                    <div class="col1-3">A number from zero to one: the amount of opacity you want to set to.</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">transition</div>
+                    <div class="col1-3 monospace">Transition</div>
+                    <div class="col1-3">The transition that coordinates setting to the new state.</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">callback</div>
+                    <div class="col1-3 monospace">Function</div>
+                    <div class="col1-3">A callback that executes once you've finished executing the pulse.</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#halt" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="halt" class="mar-t1 left">halt()</h3>
+                  </div>
+                  <p>Halt the transition</p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#isVisible" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="isVisible" class="mar-t1 left">isVisible()</h3>
+                  </div>
+                  <p>Tells you if your Fader instance is above its visibility threshold.</p>
+                  <h5 class="medium-grey miniSpacer col1">Returns</h5>
+                  <col1 class="miniSpacer">
+                    <div class="col1-3 red">Boolean</div>
+                    <div class="col2-3">Whether or not your Fader instance is visible.</div>
+                  </col1>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer private-method hidden">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#modify" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="modify" class="mar-t1 left">modify(target)<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Private</small></h3>
+                  </div>
+                  <p>Return render spec for this Modifier, applying to the provided target component. This is similar to render() for Surfaces.</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">target</div>
+                    <div class="col1-3 monospace">Object</div>
+                    <div class="col1-3">(already rendered) render spec to which to apply the transform.</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                  <h5 class="medium-grey miniSpacer col1">Returns</h5>
+                  <col1 class="miniSpacer">
+                    <div class="col1-3 red">Object</div>
+                    <div class="col2-3">render spec for this Modifier, including the provided target</div>
+                  </col1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="../js/main.js"></script>
+</body>
+</html>

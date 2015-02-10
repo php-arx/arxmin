@@ -35,7 +35,7 @@ $l['step']['check'] = array(
 );
 
 $l['step']['db'] = array(
-    'title' => 'Configure your database',
+    'title' => 'Choose the default connection for Arxmin',
     'description' => <<<description
 
 description

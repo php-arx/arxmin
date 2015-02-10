@@ -1,0 +1,441 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <meta name="description" content="A free, open source JavaScript framework for creating complex UIs for any screen. 3D layout and physics animation engines. Renders to DOM, Canvas, or WebGL"/>
+  <title>Famo.us</title>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <meta name="viewport" content="width=device-width"/>
+  <link href="http://fonts.googleapis.com/css?family=Lato&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css"/>
+  <link rel='icon' type='image/png' href='../favicon.png'/>
+  <link rel='stylesheet' href='../css/famous_styles.css'/>
+</head>
+<body>
+<div id="doc-container" class="col1">
+  <div class="col1 navigation-margin relative pad20">
+    <div class="col1">
+      <div class="col1-4">
+        <ul class="mar-20 sidebar nav">
+          <li>core</li>
+          <li><a href="../core/Context.html">Context</a>
+          </li>
+          <li><a href="../core/ElementAllocator.html">ElementAllocator</a>
+          </li>
+          <li><a href="../core/ElementOutput.html">ElementOutput</a>
+          </li>
+          <li><a href="../core/Engine.html">Engine</a>
+          </li>
+          <li><a href="../core/Entity.html">Entity</a>
+          </li>
+          <li><a href="../core/EventEmitter.html">EventEmitter</a>
+          </li>
+          <li><a href="../core/EventHandler.html">EventHandler</a>
+          </li>
+          <li><a href="../core/Group.html">Group</a>
+          </li>
+          <li><a href="../core/Modifier.html">Modifier</a>
+          </li>
+          <li><a href="../core/OptionsManager.html">OptionsManager</a>
+          </li>
+          <li><a href="../core/RenderNode.html">RenderNode</a>
+          </li>
+          <li><a href="../core/Scene.html">Scene</a>
+          </li>
+          <li><a href="../core/SpecParser.html">SpecParser</a>
+          </li>
+          <li><a href="../core/Transform.html">Transform</a>
+          </li>
+          <li><a href="../core/View.html">View</a>
+          </li>
+          <li><a href="../core/ViewSequence.html">ViewSequence</a>
+          </li>
+          <li>events</li>
+          <li><a href="../events/EventArbiter.html">EventArbiter</a>
+          </li>
+          <li><a href="../events/EventFilter.html">EventFilter</a>
+          </li>
+          <li><a href="../events/EventMapper.html">EventMapper</a>
+          </li>
+          <li>inputs</li>
+          <li><a href="../inputs/Accumulator.html">Accumulator</a>
+          </li>
+          <li><a href="../inputs/GenericSync.html">GenericSync</a>
+          </li>
+          <li><a href="../inputs/MouseSync.html">MouseSync</a>
+          </li>
+          <li><a href="../inputs/PinchSync.html">PinchSync</a>
+          </li>
+          <li><a href="../inputs/RotateSync.html">RotateSync</a>
+          </li>
+          <li><a href="../inputs/ScaleSync.html">ScaleSync</a>
+          </li>
+          <li><a href="../inputs/ScrollSync.html">ScrollSync</a>
+          </li>
+          <li><a href="../inputs/TouchSync.html">TouchSync</a>
+          </li>
+          <li><a href="../inputs/TouchTracker.html">TouchTracker</a>
+          </li>
+          <li><a href="../inputs/TwoFingerSync.html">TwoFingerSync</a>
+          </li>
+          <li>math</li>
+          <li><a href="../math/Matrix.html">Matrix</a>
+          </li>
+          <li><a href="../math/Quaternion.html">Quaternion</a>
+          </li>
+          <li><a href="../math/Random.html">Random</a>
+          </li>
+          <li><a href="../math/Utilities.html">Utilities</a>
+          </li>
+          <li><a href="../math/Vector.html">Vector</a>
+          </li>
+          <li>modifiers</li>
+          <li><a href="../modifiers/Draggable.html">Draggable</a>
+          </li>
+          <li><a href="../modifiers/Fader.html">Fader</a>
+          </li>
+          <li><a href="../modifiers/ModifierChain.html">ModifierChain</a>
+          </li>
+          <li><a href="../modifiers/StateModifier.html">StateModifier</a>
+          </li>
+          <li>physics</li>
+          <li><a href="../physics/PhysicsEngine.html">PhysicsEngine</a>
+          </li>
+          <li>physics/bodies</li>
+          <li><a href="../physics/bodies/Body.html">Body</a>
+          </li>
+          <li><a href="../physics/bodies/Circle.html">Circle</a>
+          </li>
+          <li><a href="../physics/bodies/Particle.html">Particle</a>
+          </li>
+          <li><a href="../physics/bodies/Rectangle.html">Rectangle</a>
+          </li>
+          <li>physics/constraints</li>
+          <li><a href="../physics/constraints/Surface.html">Surface</a>
+          </li>
+          <li><a href="../physics/constraints/Collision.html">Collision</a>
+          </li>
+          <li><a href="../physics/constraints/Constraint.html">Constraint</a>
+          </li>
+          <li><a href="../physics/constraints/Curve.html">Curve</a>
+          </li>
+          <li><a href="../physics/constraints/Distance.html">Distance</a>
+          </li>
+          <li><a href="../physics/constraints/Snap.html">Snap</a>
+          </li>
+          <li><a href="../physics/constraints/Wall.html">Wall</a>
+          </li>
+          <li><a href="../physics/constraints/Walls.html">Walls</a>
+          </li>
+          <li>physics/forces</li>
+          <li><a href="../physics/forces/Drag.html">Drag</a>
+          </li>
+          <li><a href="../physics/forces/Force.html">Force</a>
+          </li>
+          <li><a href="../physics/forces/Repulsion.html">Repulsion</a>
+          </li>
+          <li><a href="../physics/forces/RotationalDrag.html">RotationalDrag</a>
+          </li>
+          <li><a href="../physics/forces/RotationalSpring.html">RotationalSpring</a>
+          </li>
+          <li><a href="../physics/forces/Spring.html">Spring</a>
+          </li>
+          <li><a href="../physics/forces/VectorField.html">VectorField</a>
+          </li>
+          <li>physics/integrators</li>
+          <li><a href="../physics/integrators/SymplecticEuler.html">SymplecticEuler</a>
+          </li>
+          <li>surfaces</li>
+          <li><a href="../surfaces/CanvasSurface.html">CanvasSurface</a>
+          </li>
+          <li><a href="../surfaces/ContainerSurface.html">ContainerSurface</a>
+          </li>
+          <li><a href="../surfaces/ImageSurface.html">ImageSurface</a>
+          </li>
+          <li><a href="../surfaces/InputSurface.html">InputSurface</a>
+          </li>
+          <li><a href="../surfaces/TextareaSurface.html">TextareaSurface</a>
+          </li>
+          <li><a href="../surfaces/VideoSurface.html">VideoSurface</a>
+          </li>
+          <li>transitions</li>
+          <li><a href="../transitions/CachedMap.html">CachedMap</a>
+          </li>
+          <li><a href="../transitions/Easing.html">Easing</a>
+          </li>
+          <li><a href="../transitions/MultipleTransition.html">MultipleTransition</a>
+          </li>
+          <li><a href="../transitions/SnapTransition.html">SnapTransition</a>
+          </li>
+          <li><a href="../transitions/SpringTransition.html">SpringTransition</a>
+          </li>
+          <li><a href="../transitions/Transitionable.html">Transitionable</a>
+          </li>
+          <li><a href="../transitions/TransitionableTransform.html">TransitionableTransform</a>
+          </li>
+          <li><a href="../transitions/TweenTransition.html">TweenTransition</a>
+          </li>
+          <li><a href="../transitions/WallTransition.html">WallTransition</a>
+          </li>
+          <li>utilities</li>
+          <li><a href="../utilities/KeyCodes.html">KeyCodes</a>
+          </li>
+          <li><a href="../utilities/Timer.html">Timer</a>
+          </li>
+          <li><a href="../utilities/Utility.html">Utility</a>
+          </li>
+          <li>views</li>
+          <li><a href="../views/ContextualView.html">ContextualView</a>
+          </li>
+          <li><a href="../views/Deck.html">Deck</a>
+          </li>
+          <li><a href="../views/DrawerLayout.html">DrawerLayout</a>
+          </li>
+          <li><a href="../views/EdgeSwapper.html">EdgeSwapper</a>
+          </li>
+          <li><a href="../views/FlexibleLayout.html">FlexibleLayout</a>
+          </li>
+          <li><a href="../views/Flipper.html">Flipper</a>
+          </li>
+          <li><a href="../views/GridLayout.html">GridLayout</a>
+          </li>
+          <li><a href="../views/HeaderFooterLayout.html">HeaderFooterLayout</a>
+          </li>
+          <li><a href="../views/Lightbox.html">Lightbox</a>
+          </li>
+          <li><a href="../views/RenderController.html">RenderController</a>
+          </li>
+          <li><a href="../views/ScrollContainer.html">ScrollContainer</a>
+          </li>
+          <li><a href="../views/Scroller.html">Scroller</a>
+          </li>
+          <li><a href="../views/Scrollview.html">Scrollview</a>
+          </li>
+          <li><a href="../views/SequentialLayout.html">SequentialLayout</a>
+          </li>
+          <li>widgets</li>
+          <li><a href="../widgets/NavigationBar.html">NavigationBar</a>
+          </li>
+          <li><a href="../widgets/ToggleButton.html">TabBar</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col1-2">
+        <div id="docs-container" class="cf docs col1 pad-g1 main">
+          <div class="col1 pad-ls-g1 pad-t1">
+            <div class="col1 spacer">
+              <div class="col1 spacer-bar mar-b">
+                <h2 class="col1">Draggable</h2>
+                <h6 class="miniSpacer">Makes added render nodes responsive to drag beahvior. Emits events 'start', 'update', 'end'.</h6>
+              </div>
+              <div class="col1 miniSpacer spacer-bar mar-b">
+                <h3 class="col-1">Overview</h3>
+                <div class="col1-3">
+                  <h5>Options</h5><a href="#options-snapX" class="col1">snapX</a><a href="#options-snapY" class="col1">snapY</a><a href="#options-xRange] maxmimum [negative, positive" class="col1">xRange] maxmimum [negative, positive</a><a href="#options-yRange] maxmimum [negative, positive" class="col1">yRange] maxmimum [negative, positive</a><a href="#options-scale" class="col1">scale</a><a href="#options-projection" class="col1">projection</a>
+                </div>
+                <div class="col1-3">
+                  <h5>Methods</h5><a href="#setOptions" class="col1">setOptions</a><a href="#getPosition" class="col1">getPosition</a><a href="#setRelativePosition" class="col1">setRelativePosition</a><a href="#setPosition" class="col1">setPosition</a><a href="#activate" class="col1">activate</a><a href="#deactivate" class="col1">deactivate</a><a href="#toggle" class="col1">toggle</a>
+                </div>
+              </div>
+              <div class="col1 linkable"><a href="#Draggable" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                <h3 id="Draggable" class="mar-t1 left">Draggable(options)</h3>
+              </div>
+              <h5 class="medium-grey miniSpacer col1">Constructor Parameters</h5>
+              <div class="col1 spacer-bar mar-b">
+                <p class="col1-3">options</p>
+                <p class="col1-3 monospace">Object</p>
+                <p class="col1-3">options configuration object.</p>
+                <div class="left mar-20">
+                  <div id="options-snapX" class="col1">
+                    <div class="col1 miniSpacer">
+                      <div class="col1-3 red miniSpacer">snapX</div>
+                      <div class="col1-3 monospace">Number</div>
+                      <div class="col1-3">grid width for snapping during drag</div>
+                      <!-- todo: .col1-3= param.optional-->
+                    </div>
+                  </div>
+                  <div id="options-snapY" class="col1">
+                    <div class="col1 miniSpacer">
+                      <div class="col1-3 red miniSpacer">snapY</div>
+                      <div class="col1-3 monospace">Number</div>
+                      <div class="col1-3">grid height for snapping during drag</div>
+                      <!-- todo: .col1-3= param.optional-->
+                    </div>
+                  </div>
+                  <div id="options-xRange] maxmimum [negative, positive" class="col1">
+                    <div class="col1 miniSpacer">
+                      <div class="col1-3 red miniSpacer">xRange] maxmimum [negative, positive</div>
+                      <div class="col1-3 monospace">Array.Number</div>
+                      <div class="col1-3">x displacement from start of drag</div>
+                      <!-- todo: .col1-3= param.optional-->
+                    </div>
+                  </div>
+                  <div id="options-yRange] maxmimum [negative, positive" class="col1">
+                    <div class="col1 miniSpacer">
+                      <div class="col1-3 red miniSpacer">yRange] maxmimum [negative, positive</div>
+                      <div class="col1-3 monospace">Array.Number</div>
+                      <div class="col1-3">y displacement from start of drag</div>
+                      <!-- todo: .col1-3= param.optional-->
+                    </div>
+                  </div>
+                  <div id="options-scale" class="col1">
+                    <div class="col1 miniSpacer">
+                      <div class="col1-3 red miniSpacer">scale</div>
+                      <div class="col1-3 monospace">Number</div>
+                      <div class="col1-3">one pixel of input motion translates to this many pixels of output drag motion</div>
+                      <!-- todo: .col1-3= param.optional-->
+                    </div>
+                  </div>
+                  <div id="options-projection" class="col1">
+                    <div class="col1 miniSpacer">
+                      <div class="col1-3 red miniSpacer">projection</div>
+                      <div class="col1-3 monospace">Number</div>
+                      <div class="col1-3">User should set to Draggable._direction.x or Draggable._direction.y to constrain to one axis.</div>
+                      <!-- todo: .col1-3= param.optional-->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h5 class="medium-grey miniSpacer col1-2">Methods</h5>
+              <div class="col1-2">
+                <label for="input-private" class="right">Show Private Methods</label>
+                <input type="checkbox" id="input-private" data-type="private" class="right down5"/>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#setOptions" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="setOptions" class="mar-t1 left">setOptions(options)</h3>
+                  </div>
+                  <p>Set internal options, overriding any default options</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">options</div>
+                    <div class="col1-3 monospace">Object</div>
+                    <div class="col1-3">overrides of default options. See constructor.</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#getPosition" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="getPosition" class="mar-t1 left">getPosition()</h3>
+                  </div>
+                  <p>Get current delta in position from where this draggable started.</p>
+                  <h5 class="medium-grey miniSpacer col1">Returns</h5>
+                  <col1 class="miniSpacer">
+                    <div class="col1-3 red">Array&lt;number&gt;</div>
+                    <div class="col2-3">[x, y] position delta from start.</div>
+                  </col1>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#setRelativePosition" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="setRelativePosition" class="mar-t1 left">setRelativePosition(position, transition, callback)</h3>
+                  </div>
+                  <p>Transition the element to the desired relative position via provided transition. For example, calling this with [0,0] will not change the position. Callback will be executed on completion.</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">position</div>
+                    <div class="col1-3 monospace">Array&lt;number&gt;</div>
+                    <div class="col1-3">end state to which we interpolate</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">transition</div>
+                    <div class="col1-3 monospace">Transition</div>
+                    <div class="col1-3">transition object specifying how object moves to new position</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">callback</div>
+                    <div class="col1-3 monospace">Function</div>
+                    <div class="col1-3">zero-argument function to call on observed completion</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#setPosition" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="setPosition" class="mar-t1 left">setPosition(position, transition, callback)</h3>
+                  </div>
+                  <p>Transition the element to the desired absolute position via provided transition. Callback will be executed on completion.</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">position</div>
+                    <div class="col1-3 monospace">Array&lt;number&gt;</div>
+                    <div class="col1-3">end state to which we interpolate</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">transition</div>
+                    <div class="col1-3 monospace">Transition</div>
+                    <div class="col1-3">transition object specifying how object moves to new position</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">callback</div>
+                    <div class="col1-3 monospace">Function</div>
+                    <div class="col1-3">zero-argument function to call on observed completion</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#activate" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="activate" class="mar-t1 left">activate()</h3>
+                  </div>
+                  <p>Set this draggable to respond to user input.</p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#deactivate" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="deactivate" class="mar-t1 left">deactivate()</h3>
+                  </div>
+                  <p>Set this draggable to ignore user input.</p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#toggle" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="toggle" class="mar-t1 left">toggle()</h3>
+                  </div>
+                  <p>Switch the input response stage between active and inactive.</p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer private-method hidden">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#modify" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="modify" class="mar-t1 left">modify(target)<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Private</small></h3>
+                  </div>
+                  <p>Return render spec for this Modifier, applying to the provided target component. This is similar to render() for Surfaces.</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">target</div>
+                    <div class="col1-3 monospace">Object</div>
+                    <div class="col1-3">(already rendered) render spec to which to apply the transform.</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                  <h5 class="medium-grey miniSpacer col1">Returns</h5>
+                  <col1 class="miniSpacer">
+                    <div class="col1-3 red">Object</div>
+                    <div class="col2-3">render spec for this Modifier, including the provided target</div>
+                  </col1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="../js/main.js"></script>
+</body>
+</html>

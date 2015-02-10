@@ -1,6 +1,6 @@
 # Arxmin
 
-UI elements for Arxmin interface
+UI elements for Arxmin interface. Add everything you need to make an admin.
 
 ## Installation
 

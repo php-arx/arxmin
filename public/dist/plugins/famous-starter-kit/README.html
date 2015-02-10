@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="A free, open source JavaScript framework for creating complex UIs for any screen. 3D layout and physics animation engines. Renders to DOM, Canvas, or WebGL">
+        <title>Famo.us</title>
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="icon" type="image/png" href="/favicon.png">
+        
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="./src/core/famous.css">
+        <link rel="stylesheet" href="./guides/css/style.css">
+        <link rel="stylesheet" href="./guides/css/code.css">
+    </head>
+
+    <body>
+        <div class="col1" id="doc-container">
+            <div class="col1 pad-l-g1 padt35 padb35">
+<h1 id="famo-us">Famo.us</h1>
+<p><a href="https://travis-ci.org/Famous/famous"><img src="https://travis-ci.org/Famous/famous.svg?branch=master" alt="Build Status"></a> <a href="https://david-dm.org/Famous/famous"><img src="https://david-dm.org/Famous/famous.svg" alt="Dependency Status"></a> <a href="https://david-dm.org/Famous/famous#info=devDependencies"><img src="https://david-dm.org/Famous/famous/dev-status.svg" alt="devDependency Status"></a></p>
+<p>Welcome to the Famo.us GitHub repo. If you are interested in evaluating Famo.us, we are now in open beta.</p>
+<table>
+<thead>
+<tr>
+<th>RESOURCE</th>
+<th>LINK</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DOWNLOAD</strong></td>
+<td><a href="http://code.famo.us/famous-starter-kit/famous-starter-kit.zip?source=repo">Famo.us Starter Kit</a></td>
+</tr>
+<tr>
+<td><strong>LEARN</strong></td>
+<td><a href="https://famo.us/university">Famo.us University</a></td>
+</tr>
+<tr>
+<td><strong>DOCS</strong></td>
+<td><a href="http://famo.us/docs">Documentation</a></td>
+</tr>
+<tr>
+<td><strong>HELP</strong></td>
+<td><a href="http://webchat.freenode.net/?channels=famous">IRC Channel</a></td>
+</tr>
+<tr>
+<td><strong>DEMOS</strong></td>
+<td><a href="http://famo.us/demos">Mobile Interactive Demos</a> (<em>built by the community</em>)</td>
+</tr>
+<tr>
+<td><strong>ANGULAR INTEGRATION</strong></td>
+<td><a href="http://famo.us/integrations/angular/">Famo.us/Angular</a></td>
+</tr>
+<tr>
+<td><strong>ANGULAR DOWNLOAD</strong></td>
+<td><a href="http://code.famo.us/famous-angular/latest/famous-angular-starter-kit.zip?source=repo">Angular Starter Kit</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="about">About</h2>
+<p>Famo.us is a free and open source JavaScript platform for building mobile apps and desktop experiences. What makes Famo.us unique is its JavaScript rendering engine and 3D physics engine that gives developers the power and tools to build native quality apps and animations using pure JavaScript. Famo.us runs on iOS, Android, Kindle and Firefox devices and integrates with <a href="http://famo.us/integrations/angular/">Angular</a>, Backbone, Meteor and Facebook React. </p>
+<h2 id="getting-started">Getting Started</h2>
+<h3 id="famo-us-university">Famo.us University</h3>
+<p><a href="https://famo.us/university">Famo.us University</a> is a free live coding classroom that teaches all levels of developers how to utilize Famo.us to build beautiful experiences on every screen.  If you are new to Famo.us or to coding you will find that <a href="https://famo.us/university">Famo.us University</a> is the best place to get started.</p>
+<h3 id="seed-projects">Seed Projects</h3>
+<p>There are a number of seed projects to get you started with the various ways of consuming Famo.us</p>
+<p><strong><a href="https://github.com/Famous/global-seed">Global Seed</a></strong></p>
+<p>This project shows the easiest way to get started with Famo.us, using a version that loads on the global (window) object.  This project requires zero tooling, and is ready to work out of the box.  For speed and simplicity this seed project points at a version of Famo.us that lives on our CDN (content delivery network).  You don&#39;t even have to do a git clone, you can get started right away simply by <a href="https://github.com/Famous/global-seed/archive/master.zip">downloading the zip</a>.</p>
+<p><strong><a href="https://github.com/Famous/requirejs-seed">Requirejs Seed</a></strong></p>
+<p>This project can be used to get you started using Famo.us with the AMD module loading pattern via <a href="http://requirejs.org/">RequireJS</a>.  This project is created using the latest version of our Yeoman Generator (see below), and includes an entire tooling stack neccessary to bring your product to development.</p>
+<p><strong><a href="https://github.com/Famous/browserify-seed/">Browserify Seed</a></strong></p>
+<p>This project can be used to get you started using Famo.us with the CommonJS module loading pattern with <a href="http://browserify.org/">Browserify</a> and <a href="http://npmjs.org">npm</a>.  This seed project should be treated as experimental, it is for those who want to try and develop client side code using npm.</p>
+<h3 id="yeoman-generator-grunt-toolbelt-">Yeoman Generator (<em>Grunt Toolbelt</em>)</h3>
+<p>If you would like to scaffold an app with Famo.us from the command line, install our <a href="http://github.com/Famous/generator-famous.git">yeoman generator</a> via npm.</p>
+<pre><code>npm install -g yo grunt-cli bower generator-famous
+mkdir newProject
+cd newProject
+yo famous
+grunt serve
+</code></pre><p>Preparing your project for distribution is then as simple as:</p>
+<pre><code>grunt
+</code></pre><h2 id="contributing">Contributing</h2>
+<p>Cloning this repository directly is primarily for those wishing to contribute to our codebase. Check out our <a href="https://github.com/Famous/famous/blob/master/CONTRIBUTING.md">contributing instructions</a> to get involved. </p>
+<p>Note: cloning only provides the Famo.us folder with all Famo.us code, but it does no application scaffolding. You will additionally need to create your own index.html, and include the <code>famous.css</code> file that is included in <code>famous/core</code>. Require.js is currently a hard dependency to work off of the Famo.us head.</p>
+<h2 id="documentation">Documentation</h2>
+<ul>
+<li>Guides and Examples can be found in the repo.</li>
+<li>Rendered versions of the source code reference documentation: <a href="http://famo.us/docs">docs</a>.</li>
+</ul>
+<h2 id="community">Community</h2>
+<ul>
+<li>If you would like to report a bug, please check the <a href="https://github.com/Famous/famous/blob/master/CONTRIBUTING.md#issues">issues</a> section in our <a href="https://github.com/Famous/famous/blob/master/CONTRIBUTING.md">contributing instructions</a>.</li>
+<li>Join us in our IRC channel #famous at irc.freenode.net. Freenode maintains this <a href="http://freenode.net/using_the_network.shtml">getting started guide</a> for those new to IRC.</li>
+<li>For contributors, read more instructions in <a href="https://github.com/Famous/famous/blob/master/CONTRIBUTING.md#issues">CONTRIBUTING.md</a>.</li>
+</ul>
+<h2 id="licensing-information">Licensing information</h2>
+<ul>
+<li>Famo.us&#39; client-side development package is licensed under the Mozilla public license version 2.0.  More information can be found at <a href="http://www.mozilla.org/MPL/2.0/">Mozilla</a>.</li>
+<li>Mozilla also maintains an <a href="http://www.mozilla.org/MPL/2.0/FAQ.html">MPL-2.0 FAQ</a> that should answer most questions you may have about the license.</li>
+<li>Contact license@famo.us for further inquiries.</li>
+</ul>
+<p>Copyright (c) 2014 Famous Industries, Inc.</p>
+<p><a href="https://github.com/igrigorik/ga-beacon"><img src="https://ga-beacon.appspot.com/UA-34653957-5/famous/famous/README.md?pixel" alt="Analytics"></a></p>
+
+            </div>
+        </div> 
+    </body>
+</html>

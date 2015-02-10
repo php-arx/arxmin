@@ -1,7 +1,7 @@
 {
     "name": "arx/arxmin",
     "type" : "Admin Management System",
-    "description": "Arxmin is an universal admin management system for Arx project",
+    "description": "Arxmin is an universal admin management system for an Arx project",
     "homepage": "http://www.arx.io",
     "license": "MIT",
     "authors": [
@@ -13,11 +13,12 @@
         }
     ],
     "require": {
-        "php": ">=5.3.7",
-        "arx/core" : "4.1.*",
-        "zizaco/confide": "dev-master",
-        "zizaco/entrust": "dev-master",
-        "chumper/datatable" : "2.*"
+        "arx/core" : "4.2.*",
+        "zizaco/confide": "*",
+        "zizaco/entrust": "1.2.*",
+        "chumper/datatable" : "2.*",
+        "fzaninotto/faker" : "*",
+        "anahkiasen/former" : "*"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*",
@@ -27,13 +28,18 @@
         "psr-0": {
             "Arxmin": "src"
         },
+        "psr-4": {
+            "Arxmin\\": "src/Arxmin"
+        },
         "classmap": [
             "src/Arxmin/commands",
             "src/Arxmin/controllers",
             "src/Arxmin/models",
-            "src/database/migrations",
-            "src/database/seeds",
-            "src/tests"
+            "src/Arxmin/interfaces",
+            "src/Arxmin/providers",
+            "seeds",
+            "migrations",
+            "tests"
         ]
     },
     "config": {

@@ -1,0 +1,660 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <meta name="description" content="A free, open source JavaScript framework for creating complex UIs for any screen. 3D layout and physics animation engines. Renders to DOM, Canvas, or WebGL"/>
+  <title>Famo.us</title>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <meta name="viewport" content="width=device-width"/>
+  <link href="http://fonts.googleapis.com/css?family=Lato&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css"/>
+  <link rel='icon' type='image/png' href='../favicon.png'/>
+  <link rel='stylesheet' href='../css/famous_styles.css'/>
+</head>
+<body>
+<div id="doc-container" class="col1">
+  <div class="col1 navigation-margin relative pad20">
+    <div class="col1">
+      <div class="col1-4">
+        <ul class="mar-20 sidebar nav">
+          <li>core</li>
+          <li><a href="../core/Context.html">Context</a>
+          </li>
+          <li><a href="../core/ElementAllocator.html">ElementAllocator</a>
+          </li>
+          <li><a href="../core/ElementOutput.html">ElementOutput</a>
+          </li>
+          <li><a href="../core/Engine.html">Engine</a>
+          </li>
+          <li><a href="../core/Entity.html">Entity</a>
+          </li>
+          <li><a href="../core/EventEmitter.html">EventEmitter</a>
+          </li>
+          <li><a href="../core/EventHandler.html">EventHandler</a>
+          </li>
+          <li><a href="../core/Group.html">Group</a>
+          </li>
+          <li><a href="../core/Modifier.html">Modifier</a>
+          </li>
+          <li><a href="../core/OptionsManager.html">OptionsManager</a>
+          </li>
+          <li><a href="../core/RenderNode.html">RenderNode</a>
+          </li>
+          <li><a href="../core/Scene.html">Scene</a>
+          </li>
+          <li><a href="../core/SpecParser.html">SpecParser</a>
+          </li>
+          <li><a href="../core/Transform.html">Transform</a>
+          </li>
+          <li><a href="../core/View.html">View</a>
+          </li>
+          <li><a href="../core/ViewSequence.html">ViewSequence</a>
+          </li>
+          <li>events</li>
+          <li><a href="../events/EventArbiter.html">EventArbiter</a>
+          </li>
+          <li><a href="../events/EventFilter.html">EventFilter</a>
+          </li>
+          <li><a href="../events/EventMapper.html">EventMapper</a>
+          </li>
+          <li>inputs</li>
+          <li><a href="../inputs/Accumulator.html">Accumulator</a>
+          </li>
+          <li><a href="../inputs/GenericSync.html">GenericSync</a>
+          </li>
+          <li><a href="../inputs/MouseSync.html">MouseSync</a>
+          </li>
+          <li><a href="../inputs/PinchSync.html">PinchSync</a>
+          </li>
+          <li><a href="../inputs/RotateSync.html">RotateSync</a>
+          </li>
+          <li><a href="../inputs/ScaleSync.html">ScaleSync</a>
+          </li>
+          <li><a href="../inputs/ScrollSync.html">ScrollSync</a>
+          </li>
+          <li><a href="../inputs/TouchSync.html">TouchSync</a>
+          </li>
+          <li><a href="../inputs/TouchTracker.html">TouchTracker</a>
+          </li>
+          <li><a href="../inputs/TwoFingerSync.html">TwoFingerSync</a>
+          </li>
+          <li>math</li>
+          <li><a href="../math/Matrix.html">Matrix</a>
+          </li>
+          <li><a href="../math/Quaternion.html">Quaternion</a>
+          </li>
+          <li><a href="../math/Random.html">Random</a>
+          </li>
+          <li><a href="../math/Utilities.html">Utilities</a>
+          </li>
+          <li><a href="../math/Vector.html">Vector</a>
+          </li>
+          <li>modifiers</li>
+          <li><a href="../modifiers/Draggable.html">Draggable</a>
+          </li>
+          <li><a href="../modifiers/Fader.html">Fader</a>
+          </li>
+          <li><a href="../modifiers/ModifierChain.html">ModifierChain</a>
+          </li>
+          <li><a href="../modifiers/StateModifier.html">StateModifier</a>
+          </li>
+          <li>physics</li>
+          <li><a href="../physics/PhysicsEngine.html">PhysicsEngine</a>
+          </li>
+          <li>physics/bodies</li>
+          <li><a href="../physics/bodies/Body.html">Body</a>
+          </li>
+          <li><a href="../physics/bodies/Circle.html">Circle</a>
+          </li>
+          <li><a href="../physics/bodies/Particle.html">Particle</a>
+          </li>
+          <li><a href="../physics/bodies/Rectangle.html">Rectangle</a>
+          </li>
+          <li>physics/constraints</li>
+          <li><a href="../physics/constraints/Surface.html">Surface</a>
+          </li>
+          <li><a href="../physics/constraints/Collision.html">Collision</a>
+          </li>
+          <li><a href="../physics/constraints/Constraint.html">Constraint</a>
+          </li>
+          <li><a href="../physics/constraints/Curve.html">Curve</a>
+          </li>
+          <li><a href="../physics/constraints/Distance.html">Distance</a>
+          </li>
+          <li><a href="../physics/constraints/Snap.html">Snap</a>
+          </li>
+          <li><a href="../physics/constraints/Wall.html">Wall</a>
+          </li>
+          <li><a href="../physics/constraints/Walls.html">Walls</a>
+          </li>
+          <li>physics/forces</li>
+          <li><a href="../physics/forces/Drag.html">Drag</a>
+          </li>
+          <li><a href="../physics/forces/Force.html">Force</a>
+          </li>
+          <li><a href="../physics/forces/Repulsion.html">Repulsion</a>
+          </li>
+          <li><a href="../physics/forces/RotationalDrag.html">RotationalDrag</a>
+          </li>
+          <li><a href="../physics/forces/RotationalSpring.html">RotationalSpring</a>
+          </li>
+          <li><a href="../physics/forces/Spring.html">Spring</a>
+          </li>
+          <li><a href="../physics/forces/VectorField.html">VectorField</a>
+          </li>
+          <li>physics/integrators</li>
+          <li><a href="../physics/integrators/SymplecticEuler.html">SymplecticEuler</a>
+          </li>
+          <li>surfaces</li>
+          <li><a href="../surfaces/CanvasSurface.html">CanvasSurface</a>
+          </li>
+          <li><a href="../surfaces/ContainerSurface.html">ContainerSurface</a>
+          </li>
+          <li><a href="../surfaces/ImageSurface.html">ImageSurface</a>
+          </li>
+          <li><a href="../surfaces/InputSurface.html">InputSurface</a>
+          </li>
+          <li><a href="../surfaces/TextareaSurface.html">TextareaSurface</a>
+          </li>
+          <li><a href="../surfaces/VideoSurface.html">VideoSurface</a>
+          </li>
+          <li>transitions</li>
+          <li><a href="../transitions/CachedMap.html">CachedMap</a>
+          </li>
+          <li><a href="../transitions/Easing.html">Easing</a>
+          </li>
+          <li><a href="../transitions/MultipleTransition.html">MultipleTransition</a>
+          </li>
+          <li><a href="../transitions/SnapTransition.html">SnapTransition</a>
+          </li>
+          <li><a href="../transitions/SpringTransition.html">SpringTransition</a>
+          </li>
+          <li><a href="../transitions/Transitionable.html">Transitionable</a>
+          </li>
+          <li><a href="../transitions/TransitionableTransform.html">TransitionableTransform</a>
+          </li>
+          <li><a href="../transitions/TweenTransition.html">TweenTransition</a>
+          </li>
+          <li><a href="../transitions/WallTransition.html">WallTransition</a>
+          </li>
+          <li>utilities</li>
+          <li><a href="../utilities/KeyCodes.html">KeyCodes</a>
+          </li>
+          <li><a href="../utilities/Timer.html">Timer</a>
+          </li>
+          <li><a href="../utilities/Utility.html">Utility</a>
+          </li>
+          <li>views</li>
+          <li><a href="../views/ContextualView.html">ContextualView</a>
+          </li>
+          <li><a href="../views/Deck.html">Deck</a>
+          </li>
+          <li><a href="../views/DrawerLayout.html">DrawerLayout</a>
+          </li>
+          <li><a href="../views/EdgeSwapper.html">EdgeSwapper</a>
+          </li>
+          <li><a href="../views/FlexibleLayout.html">FlexibleLayout</a>
+          </li>
+          <li><a href="../views/Flipper.html">Flipper</a>
+          </li>
+          <li><a href="../views/GridLayout.html">GridLayout</a>
+          </li>
+          <li><a href="../views/HeaderFooterLayout.html">HeaderFooterLayout</a>
+          </li>
+          <li><a href="../views/Lightbox.html">Lightbox</a>
+          </li>
+          <li><a href="../views/RenderController.html">RenderController</a>
+          </li>
+          <li><a href="../views/ScrollContainer.html">ScrollContainer</a>
+          </li>
+          <li><a href="../views/Scroller.html">Scroller</a>
+          </li>
+          <li><a href="../views/Scrollview.html">Scrollview</a>
+          </li>
+          <li><a href="../views/SequentialLayout.html">SequentialLayout</a>
+          </li>
+          <li>widgets</li>
+          <li><a href="../widgets/NavigationBar.html">NavigationBar</a>
+          </li>
+          <li><a href="../widgets/ToggleButton.html">TabBar</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col1-2">
+        <div id="docs-container" class="cf docs col1 pad-g1 main">
+          <div class="col1 pad-ls-g1 pad-t1">
+            <div class="col1 spacer">
+              <div class="col1 spacer-bar mar-b">
+                <h2 class="col1">PhysicsEngine</h2>
+                <h6 class="miniSpacer">The Physics Engine is responsible for mediating bodies with their interaction with forces and constraints (agents). Specifically, it is responsible for: - adding and removing bodies - updating a body's state over time - attaching and detaching agents - sleeping upon equillibrium and waking upon excitation</h6>
+              </div>
+              <div class="col1 miniSpacer spacer-bar mar-b">
+                <h3 class="col-1">Overview</h3>
+                <div class="col1-3">
+                  <h5>Options</h5>
+                </div>
+                <div class="col1-3">
+                  <h5>Methods</h5><a href="#undefined" class="col1"></a><a href="#constraintSteps" class="col1">constraintSteps</a><a href="#sleepTolerance" class="col1">sleepTolerance</a><a href="#velocityCap" class="col1">velocityCap</a><a href="#angularVelocityCap" class="col1">angularVelocityCap</a><a href="#setOptions" class="col1">setOptions</a><a href="#addBody" class="col1">addBody</a><a href="#removeBody" class="col1">removeBody</a><a href="#attach" class="col1">attach</a><a href="#attachTo" class="col1">attachTo</a><a href="#detach" class="col1">detach</a><a href="#detach" class="col1">detach</a><a href="#detachAll" class="col1">detachAll</a><a href="#getAgent" class="col1">getAgent</a><a href="#getParticles" class="col1">getParticles</a><a href="#getBodies" class="col1">getBodies</a><a href="#getBodies" class="col1">getBodies</a><a href="#forEachParticle" class="col1">forEachParticle</a><a href="#forEachBody" class="col1">forEachBody</a><a href="#forEach" class="col1">forEach</a><a href="#getAgentEnergy" class="col1">getAgentEnergy</a><a href="#getEnergy" class="col1">getEnergy</a><a href="#step" class="col1">step</a><a href="#isSleeping" class="col1">isSleeping</a><a href="#isActive" class="col1">isActive</a><a href="#sleep" class="col1">sleep</a><a href="#wake" class="col1">wake</a>
+                </div>
+              </div>
+              <div class="col1 linkable"><a href="#PhysicsEngine" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                <h3 id="PhysicsEngine" class="mar-t1 left">PhysicsEngine(options)</h3>
+              </div>
+              <h5 class="medium-grey miniSpacer col1">Constructor Parameters</h5>
+              <div class="col1 spacer-bar mar-b">
+                <p class="col1-3">options</p>
+                <p class="col1-3 monospace">Object</p>
+                <p class="col1-3">options</p>
+              </div>
+              <h5 class="medium-grey miniSpacer col1-2">Methods</h5>
+              <div class="col1-2">
+                <label for="input-private" class="right">Show Private Methods</label>
+                <input type="checkbox" id="input-private" data-type="private" class="right down5"/>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#undefined" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="undefined" class="mar-t1 left">()</h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer private-method hidden">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#PhysicsEngine.DEFAULT_OPTIONS" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="PhysicsEngine.DEFAULT_OPTIONS" class="mar-t1 left">PhysicsEngine.DEFAULT_OPTIONS()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Protected</small><small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#constraintSteps" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="constraintSteps" class="mar-t1 left">constraintSteps()</h3>
+                  </div>
+                  <p>The number of iterations the engine takes to resolve constraints</p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#sleepTolerance" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="sleepTolerance" class="mar-t1 left">sleepTolerance()</h3>
+                  </div>
+                  <p>The energy threshold required for the Physics Engine to update</p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#velocityCap" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="velocityCap" class="mar-t1 left">velocityCap()</h3>
+                  </div>
+                  <p>The maximum velocity magnitude of a physics body Range : [0, Infinity]</p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#angularVelocityCap" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="angularVelocityCap" class="mar-t1 left">angularVelocityCap()</h3>
+                  </div>
+                  <p>The maximum angular velocity magnitude of a physics body Range : [0, Infinity]</p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#setOptions" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="setOptions" class="mar-t1 left">setOptions(opts)</h3>
+                  </div>
+                  <p>Options setter</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">opts</div>
+                    <div class="col1-3 monospace">Object</div>
+                    <div class="col1-3"></div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#addBody" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="addBody" class="mar-t1 left">addBody(body)</h3>
+                  </div>
+                  <p>Method to add a physics body to the engine. Necessary to update the body over time.</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">body</div>
+                    <div class="col1-3 monospace">Body</div>
+                    <div class="col1-3"></div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                  <h5 class="medium-grey miniSpacer col1">Returns</h5>
+                  <col1 class="miniSpacer">
+                    <div class="col1-3 red">Body</div>
+                    <div class="col2-3">body</div>
+                  </col1>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#removeBody" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="removeBody" class="mar-t1 left">removeBody(body)</h3>
+                  </div>
+                  <p>Remove a body from the engine. Detaches body from all forces and constraints. TODO: Fix for in loop</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">body</div>
+                    <div class="col1-3 monospace">Body</div>
+                    <div class="col1-3"></div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#attach" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="attach" class="mar-t1 left">attach(agents, targets, source)</h3>
+                  </div>
+                  <p>Attaches a force or constraint to a Body. Returns an AgentId of the attached agent which can be used to detach the agent.</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">agents</div>
+                    <div class="col1-3 monospace">Agent|Array.Agent</div>
+                    <div class="col1-3">A force, constraint, or array of them.</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">targets</div>
+                    <div class="col1-3 monospace">Body|Array.Body</div>
+                    <div class="col1-3">The Body or Bodies affected by the agent</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">source</div>
+                    <div class="col1-3 monospace">Body</div>
+                    <div class="col1-3">The source of the agent</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                  <h5 class="medium-grey miniSpacer col1">Returns</h5>
+                  <col1 class="miniSpacer">
+                    <div class="col1-3 red">Number</div>
+                    <div class="col2-3">AgentId</div>
+                  </col1>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#attachTo" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="attachTo" class="mar-t1 left">attachTo(agentID, target)</h3>
+                  </div>
+                  <p>Append a body to the targets of a previously defined physics agent.</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">agentID</div>
+                    <div class="col1-3 monospace">AgentId</div>
+                    <div class="col1-3">The agentId of a previously defined agent</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">target</div>
+                    <div class="col1-3 monospace">Body</div>
+                    <div class="col1-3">The Body affected by the agent</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#detach" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="detach" class="mar-t1 left">detach(id)</h3>
+                  </div>
+                  <p>Undoes PhysicsEngine.attach. Removes an agent and its associated effect on its affected Bodies.</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">id</div>
+                    <div class="col1-3 monospace">AgentId</div>
+                    <div class="col1-3">The agentId of a previously defined agent</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#detach" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="detach" class="mar-t1 left">detach(id, target)</h3>
+                  </div>
+                  <p>Remove a single Body from a previously defined agent.</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">id</div>
+                    <div class="col1-3 monospace">AgentId</div>
+                    <div class="col1-3">The agentId of a previously defined agent</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">target</div>
+                    <div class="col1-3 monospace">Body</div>
+                    <div class="col1-3">The body to remove from the agent</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#detachAll" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="detachAll" class="mar-t1 left">detachAll()</h3>
+                  </div>
+                  <p>A convenience method to give the Physics Engine a clean slate of agents. Preserves all added Body objects.</p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#getAgent" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="getAgent" class="mar-t1 left">getAgent(id)</h3>
+                  </div>
+                  <p>Returns the corresponding agent given its agentId.</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">id</div>
+                    <div class="col1-3 monospace">AgentId</div>
+                    <div class="col1-3"></div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#getParticles" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="getParticles" class="mar-t1 left">getParticles()</h3>
+                  </div>
+                  <p>Returns all particles that are currently managed by the Physics Engine.</p>
+                  <h5 class="medium-grey miniSpacer col1">Returns</h5>
+                  <col1 class="miniSpacer">
+                    <div class="col1-3 red">Array.Particles</div>
+                    <div class="col2-3">particles</div>
+                  </col1>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#getBodies" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="getBodies" class="mar-t1 left">getBodies()</h3>
+                  </div>
+                  <p>Returns all bodies, except particles, that are currently managed by the Physics Engine.</p>
+                  <h5 class="medium-grey miniSpacer col1">Returns</h5>
+                  <col1 class="miniSpacer">
+                    <div class="col1-3 red">Array.Bodies</div>
+                    <div class="col2-3">bodies</div>
+                  </col1>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#getBodies" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="getBodies" class="mar-t1 left">getBodies()</h3>
+                  </div>
+                  <p>Returns all bodies that are currently managed by the Physics Engine.</p>
+                  <h5 class="medium-grey miniSpacer col1">Returns</h5>
+                  <col1 class="miniSpacer">
+                    <div class="col1-3 red">Array.Bodies</div>
+                    <div class="col2-3">bodies</div>
+                  </col1>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#forEachParticle" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="forEachParticle" class="mar-t1 left">forEachParticle(fn, dt)</h3>
+                  </div>
+                  <p>Iterates over every Particle and applies a function whose first argument is the Particle</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">fn</div>
+                    <div class="col1-3 monospace">Function</div>
+                    <div class="col1-3">Function to iterate over</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">dt</div>
+                    <div class="col1-3 monospace">Number</div>
+                    <div class="col1-3">Delta time</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#forEachBody" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="forEachBody" class="mar-t1 left">forEachBody(fn, dt)</h3>
+                  </div>
+                  <p>Iterates over every Body that isn't a Particle and applies a function whose first argument is the Body</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">fn</div>
+                    <div class="col1-3 monospace">Function</div>
+                    <div class="col1-3">Function to iterate over</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">dt</div>
+                    <div class="col1-3 monospace">Number</div>
+                    <div class="col1-3">Delta time</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#forEach" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="forEach" class="mar-t1 left">forEach(fn, dt)</h3>
+                  </div>
+                  <p>Iterates over every Body and applies a function whose first argument is the Body</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">fn</div>
+                    <div class="col1-3 monospace">Function</div>
+                    <div class="col1-3">Function to iterate over</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">dt</div>
+                    <div class="col1-3 monospace">Number</div>
+                    <div class="col1-3">Delta time</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#getAgentEnergy" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="getAgentEnergy" class="mar-t1 left">getAgentEnergy(agentId)</h3>
+                  </div>
+                  <p>Calculates the potential energy of an agent, like a spring, by its Id</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">agentId</div>
+                    <div class="col1-3 monospace">Number</div>
+                    <div class="col1-3">The attached agent Id</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                  <h5 class="medium-grey miniSpacer col1">Returns</h5>
+                  <col1 class="miniSpacer">
+                    <div class="col1-3 red">Number</div>
+                    <div class="col2-3">energy</div>
+                  </col1>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#getEnergy" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="getEnergy" class="mar-t1 left">getEnergy()</h3>
+                  </div>
+                  <p>Calculates the kinetic energy of all Body objects and potential energy of all attached agents. TODO: implement.</p>
+                  <h5 class="medium-grey miniSpacer col1">Returns</h5>
+                  <col1 class="miniSpacer">
+                    <div class="col1-3 red">Number</div>
+                    <div class="col2-3">energy</div>
+                  </col1>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#step" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="step" class="mar-t1 left">step()</h3>
+                  </div>
+                  <p>Updates all Body objects managed by the physics engine over the time duration since the last time step was called.</p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#isSleeping" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="isSleeping" class="mar-t1 left">isSleeping()</h3>
+                  </div>
+                  <p>Tells whether the Physics Engine is sleeping or awake.</p>
+                  <h5 class="medium-grey miniSpacer col1">Returns</h5>
+                  <col1 class="miniSpacer">
+                    <div class="col1-3 red">Boolean</div>
+                    <div class="col2-3"></div>
+                  </col1>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#isActive" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="isActive" class="mar-t1 left">isActive()</h3>
+                  </div>
+                  <p>Tells whether the Physics Engine is sleeping or awake.</p>
+                  <h5 class="medium-grey miniSpacer col1">Returns</h5>
+                  <col1 class="miniSpacer">
+                    <div class="col1-3 red">Boolean</div>
+                    <div class="col2-3"></div>
+                  </col1>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#sleep" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="sleep" class="mar-t1 left">sleep()</h3>
+                  </div>
+                  <p>Stops the Physics Engine update loop. Emits an 'end' event.</p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#wake" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="wake" class="mar-t1 left">wake()</h3>
+                  </div>
+                  <p>Restarts the Physics Engine update loop. Emits an 'start' event.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="../js/main.js"></script>
+</body>
+</html>

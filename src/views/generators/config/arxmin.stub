@@ -1,0 +1,3 @@
+<?php
+<% $this->comment %>
+return <% $this->array or var_export(array()); %>;

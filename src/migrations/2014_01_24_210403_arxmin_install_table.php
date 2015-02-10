@@ -1,5 +1,8 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
+
+use Arxmin\SchemaModel as Schema;
 
 class ArxminInstallTable extends Migration {
 
@@ -10,62 +13,68 @@ class ArxminInstallTable extends Migration {
      */
     public function up()
     {
-        // Creates the users table
-        Schema::create('users', function($table)
-        {
-            $table->increments('id');
-            $table->string('username');
-            $table->string('email');
-            $table->string('password');
-            $table->string('confirmation_code');
-            $table->boolean('confirmed')->default(false);
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('options')) {
+            Schema::create('options', function($table)
+            {
+                $table->increments('id');
+                $table->string('name')->unique();
+                $table->text('value')->nullable();
+                $table->string('type')->default('string');
+                $table->string('autoload')->default('yes');
+                $table->string('context')->nullable();
+                $table->timestamps();
+            });
+        }
 
-        // Creates password reminders table
-        Schema::create('password_reminders', function($t)
-        {
-            $t->string('email');
-            $t->string('token');
-            $t->timestamp('created_at');
-        });
+        if (!Schema::hasTable('users')) {
+            Schema::create('users', function($table)
+            {
+                $table->increments('id');
+                $table->string('username');
+                $table->string('email');
+                $table->string('password');
+                $table->string('confirmation_code');
+                $table->boolean('confirmed')->default(false);
+                $table->string('remember_token')->nullable();
+                $table->timestamps();
+            });
+        }
 
-        // Creates the roles table
-        Schema::create('roles', function($table)
-        {
-            $table->increments('id')->unsigned();
-            $table->string('name')->unique();
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('roles')) {
+            // Creates the roles table
+            Schema::create('roles', function ($table) {
+                $table->increments('id')->unsigned();
+                $table->string('name')->unique();
+                $table->timestamps();
+            });
 
-        // Creates the assigned_roles (Many-to-Many relation) table
-        Schema::create('assigned_roles', function($table)
-        {
-            $table->increments('id')->unsigned();
-            $table->integer('user_id')->unsigned();
-            $table->integer('role_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users'); // assumes a users table
-            $table->foreign('role_id')->references('id')->on('roles');
-        });
+            // Creates the assigned_roles (Many-to-Many relation) table
+            Schema::create('assigned_roles', function ($table) {
+                $table->increments('id')->unsigned();
+                $table->integer('user_id')->unsigned();
+                $table->integer('role_id')->unsigned();
+                $table->foreign('user_id')->references('id')->on('users')
+                    ->onUpdate('cascade')->onDelete('cascade');
+                $table->foreign('role_id')->references('id')->on('roles');
+            });
 
-        // Creates the permissions table
-        Schema::create('permissions', function($table)
-        {
-            $table->increments('id')->unsigned();
-            $table->string('name');
-            $table->string('display_name');
-            $table->timestamps();
-        });
+            // Creates the permissions table
+            Schema::create('permissions', function ($table) {
+                $table->increments('id')->unsigned();
+                $table->string('name')->unique();
+                $table->string('display_name');
+                $table->timestamps();
+            });
 
-        // Creates the permission_role (Many-to-Many relation) table
-        Schema::create('permission_role', function($table)
-        {
-            $table->increments('id')->unsigned();
-            $table->integer('permission_id')->unsigned();
-            $table->integer('role_id')->unsigned();
-            $table->foreign('permission_id')->references('id')->on('permissions'); // assumes a users table
-            $table->foreign('role_id')->references('id')->on('roles');
-        });
+            // Creates the permission_role (Many-to-Many relation) table
+            Schema::create('permission_role', function ($table) {
+                $table->increments('id')->unsigned();
+                $table->integer('permission_id')->unsigned();
+                $table->integer('role_id')->unsigned();
+                $table->foreign('permission_id')->references('id')->on('permissions'); // assumes a users table
+                $table->foreign('role_id')->references('id')->on('roles');
+            });
+        }
     }
 
     /**
@@ -75,15 +84,15 @@ class ArxminInstallTable extends Migration {
      */
     public function down()
     {
-        Schema::drop('password_reminders');
         Schema::drop('users');
+        Schema::drop('options');
 
-        Schema::table('assigned_roles', function(Blueprint $table) {
+        Schema::table('assigned_roles', function (Blueprint $table) {
             $table->dropForeign('assigned_roles_user_id_foreign');
             $table->dropForeign('assigned_roles_role_id_foreign');
         });
 
-        Schema::table('permission_role', function(Blueprint $table) {
+        Schema::table('permission_role', function (Blueprint $table) {
             $table->dropForeign('permission_role_permission_id_foreign');
             $table->dropForeign('permission_role_role_id_foreign');
         });

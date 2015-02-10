@@ -1,0 +1,560 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <meta name="description" content="A free, open source JavaScript framework for creating complex UIs for any screen. 3D layout and physics animation engines. Renders to DOM, Canvas, or WebGL"/>
+  <title>Famo.us</title>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <meta name="viewport" content="width=device-width"/>
+  <link href="http://fonts.googleapis.com/css?family=Lato&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css"/>
+  <link rel='icon' type='image/png' href='../favicon.png'/>
+  <link rel='stylesheet' href='../css/famous_styles.css'/>
+</head>
+<body>
+<div id="doc-container" class="col1">
+  <div class="col1 navigation-margin relative pad20">
+    <div class="col1">
+      <div class="col1-4">
+        <ul class="mar-20 sidebar nav">
+          <li>core</li>
+          <li><a href="../core/Context.html">Context</a>
+          </li>
+          <li><a href="../core/ElementAllocator.html">ElementAllocator</a>
+          </li>
+          <li><a href="../core/ElementOutput.html">ElementOutput</a>
+          </li>
+          <li><a href="../core/Engine.html">Engine</a>
+          </li>
+          <li><a href="../core/Entity.html">Entity</a>
+          </li>
+          <li><a href="../core/EventEmitter.html">EventEmitter</a>
+          </li>
+          <li><a href="../core/EventHandler.html">EventHandler</a>
+          </li>
+          <li><a href="../core/Group.html">Group</a>
+          </li>
+          <li><a href="../core/Modifier.html">Modifier</a>
+          </li>
+          <li><a href="../core/OptionsManager.html">OptionsManager</a>
+          </li>
+          <li><a href="../core/RenderNode.html">RenderNode</a>
+          </li>
+          <li><a href="../core/Scene.html">Scene</a>
+          </li>
+          <li><a href="../core/SpecParser.html">SpecParser</a>
+          </li>
+          <li><a href="../core/Transform.html">Transform</a>
+          </li>
+          <li><a href="../core/View.html">View</a>
+          </li>
+          <li><a href="../core/ViewSequence.html">ViewSequence</a>
+          </li>
+          <li>events</li>
+          <li><a href="../events/EventArbiter.html">EventArbiter</a>
+          </li>
+          <li><a href="../events/EventFilter.html">EventFilter</a>
+          </li>
+          <li><a href="../events/EventMapper.html">EventMapper</a>
+          </li>
+          <li>inputs</li>
+          <li><a href="../inputs/Accumulator.html">Accumulator</a>
+          </li>
+          <li><a href="../inputs/GenericSync.html">GenericSync</a>
+          </li>
+          <li><a href="../inputs/MouseSync.html">MouseSync</a>
+          </li>
+          <li><a href="../inputs/PinchSync.html">PinchSync</a>
+          </li>
+          <li><a href="../inputs/RotateSync.html">RotateSync</a>
+          </li>
+          <li><a href="../inputs/ScaleSync.html">ScaleSync</a>
+          </li>
+          <li><a href="../inputs/ScrollSync.html">ScrollSync</a>
+          </li>
+          <li><a href="../inputs/TouchSync.html">TouchSync</a>
+          </li>
+          <li><a href="../inputs/TouchTracker.html">TouchTracker</a>
+          </li>
+          <li><a href="../inputs/TwoFingerSync.html">TwoFingerSync</a>
+          </li>
+          <li>math</li>
+          <li><a href="../math/Matrix.html">Matrix</a>
+          </li>
+          <li><a href="../math/Quaternion.html">Quaternion</a>
+          </li>
+          <li><a href="../math/Random.html">Random</a>
+          </li>
+          <li><a href="../math/Utilities.html">Utilities</a>
+          </li>
+          <li><a href="../math/Vector.html">Vector</a>
+          </li>
+          <li>modifiers</li>
+          <li><a href="../modifiers/Draggable.html">Draggable</a>
+          </li>
+          <li><a href="../modifiers/Fader.html">Fader</a>
+          </li>
+          <li><a href="../modifiers/ModifierChain.html">ModifierChain</a>
+          </li>
+          <li><a href="../modifiers/StateModifier.html">StateModifier</a>
+          </li>
+          <li>physics</li>
+          <li><a href="../physics/PhysicsEngine.html">PhysicsEngine</a>
+          </li>
+          <li>physics/bodies</li>
+          <li><a href="../physics/bodies/Body.html">Body</a>
+          </li>
+          <li><a href="../physics/bodies/Circle.html">Circle</a>
+          </li>
+          <li><a href="../physics/bodies/Particle.html">Particle</a>
+          </li>
+          <li><a href="../physics/bodies/Rectangle.html">Rectangle</a>
+          </li>
+          <li>physics/constraints</li>
+          <li><a href="../physics/constraints/Surface.html">Surface</a>
+          </li>
+          <li><a href="../physics/constraints/Collision.html">Collision</a>
+          </li>
+          <li><a href="../physics/constraints/Constraint.html">Constraint</a>
+          </li>
+          <li><a href="../physics/constraints/Curve.html">Curve</a>
+          </li>
+          <li><a href="../physics/constraints/Distance.html">Distance</a>
+          </li>
+          <li><a href="../physics/constraints/Snap.html">Snap</a>
+          </li>
+          <li><a href="../physics/constraints/Wall.html">Wall</a>
+          </li>
+          <li><a href="../physics/constraints/Walls.html">Walls</a>
+          </li>
+          <li>physics/forces</li>
+          <li><a href="../physics/forces/Drag.html">Drag</a>
+          </li>
+          <li><a href="../physics/forces/Force.html">Force</a>
+          </li>
+          <li><a href="../physics/forces/Repulsion.html">Repulsion</a>
+          </li>
+          <li><a href="../physics/forces/RotationalDrag.html">RotationalDrag</a>
+          </li>
+          <li><a href="../physics/forces/RotationalSpring.html">RotationalSpring</a>
+          </li>
+          <li><a href="../physics/forces/Spring.html">Spring</a>
+          </li>
+          <li><a href="../physics/forces/VectorField.html">VectorField</a>
+          </li>
+          <li>physics/integrators</li>
+          <li><a href="../physics/integrators/SymplecticEuler.html">SymplecticEuler</a>
+          </li>
+          <li>surfaces</li>
+          <li><a href="../surfaces/CanvasSurface.html">CanvasSurface</a>
+          </li>
+          <li><a href="../surfaces/ContainerSurface.html">ContainerSurface</a>
+          </li>
+          <li><a href="../surfaces/ImageSurface.html">ImageSurface</a>
+          </li>
+          <li><a href="../surfaces/InputSurface.html">InputSurface</a>
+          </li>
+          <li><a href="../surfaces/TextareaSurface.html">TextareaSurface</a>
+          </li>
+          <li><a href="../surfaces/VideoSurface.html">VideoSurface</a>
+          </li>
+          <li>transitions</li>
+          <li><a href="../transitions/CachedMap.html">CachedMap</a>
+          </li>
+          <li><a href="../transitions/Easing.html">Easing</a>
+          </li>
+          <li><a href="../transitions/MultipleTransition.html">MultipleTransition</a>
+          </li>
+          <li><a href="../transitions/SnapTransition.html">SnapTransition</a>
+          </li>
+          <li><a href="../transitions/SpringTransition.html">SpringTransition</a>
+          </li>
+          <li><a href="../transitions/Transitionable.html">Transitionable</a>
+          </li>
+          <li><a href="../transitions/TransitionableTransform.html">TransitionableTransform</a>
+          </li>
+          <li><a href="../transitions/TweenTransition.html">TweenTransition</a>
+          </li>
+          <li><a href="../transitions/WallTransition.html">WallTransition</a>
+          </li>
+          <li>utilities</li>
+          <li><a href="../utilities/KeyCodes.html">KeyCodes</a>
+          </li>
+          <li><a href="../utilities/Timer.html">Timer</a>
+          </li>
+          <li><a href="../utilities/Utility.html">Utility</a>
+          </li>
+          <li>views</li>
+          <li><a href="../views/ContextualView.html">ContextualView</a>
+          </li>
+          <li><a href="../views/Deck.html">Deck</a>
+          </li>
+          <li><a href="../views/DrawerLayout.html">DrawerLayout</a>
+          </li>
+          <li><a href="../views/EdgeSwapper.html">EdgeSwapper</a>
+          </li>
+          <li><a href="../views/FlexibleLayout.html">FlexibleLayout</a>
+          </li>
+          <li><a href="../views/Flipper.html">Flipper</a>
+          </li>
+          <li><a href="../views/GridLayout.html">GridLayout</a>
+          </li>
+          <li><a href="../views/HeaderFooterLayout.html">HeaderFooterLayout</a>
+          </li>
+          <li><a href="../views/Lightbox.html">Lightbox</a>
+          </li>
+          <li><a href="../views/RenderController.html">RenderController</a>
+          </li>
+          <li><a href="../views/ScrollContainer.html">ScrollContainer</a>
+          </li>
+          <li><a href="../views/Scroller.html">Scroller</a>
+          </li>
+          <li><a href="../views/Scrollview.html">Scrollview</a>
+          </li>
+          <li><a href="../views/SequentialLayout.html">SequentialLayout</a>
+          </li>
+          <li>widgets</li>
+          <li><a href="../widgets/NavigationBar.html">NavigationBar</a>
+          </li>
+          <li><a href="../widgets/ToggleButton.html">TabBar</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col1-2">
+        <div id="docs-container" class="cf docs col1 pad-g1 main">
+          <div class="col1 pad-ls-g1 pad-t1">
+            <div class="col1 spacer">
+              <div class="col1 spacer-bar mar-b">
+                <h2 class="col1">Scrollview</h2>
+                <h6 class="miniSpacer">Scrollview will lay out a collection of renderables sequentially in the specified direction, and will allow you to scroll through them with mousewheel or touch events.</h6>
+              </div>
+              <div class="col1 miniSpacer spacer-bar mar-b">
+                <h3 class="col-1">Overview</h3>
+                <div class="col1-3">
+                  <h5>Options</h5><a href="#options-direction" class="col1">direction</a><a href="#options-rails" class="col1">rails</a>
+                </div>
+                <div class="col1-3">
+                  <h5>Methods</h5><a href="#undefined" class="col1"></a><a href="#undefined" class="col1"></a><a href="#undefined" class="col1"></a><a href="#getCurrentIndex" class="col1">getCurrentIndex</a><a href="#goToPreviousPage" class="col1">goToPreviousPage</a><a href="#goToNextPage" class="col1">goToNextPage</a><a href="#goToPage" class="col1">goToPage</a><a href="#getPosition" class="col1">getPosition</a><a href="#getAbsolutePosition" class="col1">getAbsolutePosition</a><a href="#getOffset" class="col1">getOffset</a><a href="#setPosition" class="col1">setPosition</a><a href="#setPosition" class="col1">setPosition</a><a href="#getVelocity" class="col1">getVelocity</a><a href="#setVelocity" class="col1">setVelocity</a><a href="#setOptions" class="col1">setOptions</a><a href="#sequenceFrom" class="col1">sequenceFrom</a><a href="#getSize" class="col1">getSize</a>
+                </div>
+              </div>
+              <div class="col1 linkable"><a href="#Scrollview" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                <h3 id="Scrollview" class="mar-t1 left">Scrollview(options, clipSize, margin, friction, drag, edgeGrip, egePeriod, edgeDamp, paginated, pagePeriod, pageDamp, pageStopSpeed, pageSwitchSpeed, speedLimit)</h3>
+              </div>
+              <h5 class="medium-grey miniSpacer col1">Constructor Parameters</h5>
+              <div class="col1 spacer-bar mar-b">
+                <p class="col1-3">options</p>
+                <p class="col1-3 monospace">Options</p>
+                <p class="col1-3">An object of configurable options.</p>
+                <div class="left mar-20">
+                  <div id="options-direction" class="col1">
+                    <div class="col1 miniSpacer">
+                      <div class="col1-3 red miniSpacer">direction</div>
+                      <div class="col1-3 monospace">Number</div>
+                      <div class="col1-3">Using the direction helper found in the famous Utility module, this option will lay out the Scrollview instance's renderables either horizontally (x) or vertically (y). Utility's direction is essentially either zero (X) or one (Y), so feel free to just use integers as well.</div>
+                      <!-- todo: .col1-3= param.optional-->
+                    </div>
+                  </div>
+                  <div id="options-rails" class="col1">
+                    <div class="col1 miniSpacer">
+                      <div class="col1-3 red miniSpacer">rails</div>
+                      <div class="col1-3 monospace">Boolean</div>
+                      <div class="col1-3">When true, Scrollview's genericSync will only process input in it's primary access.</div>
+                      <!-- todo: .col1-3= param.optional-->
+                    </div>
+                  </div>
+                </div>
+                <p class="col1-3">clipSize</p>
+                <p class="col1-3 monospace">Number</p>
+                <p class="col1-3">The size of the area (in pixels) that Scrollview will display content in.</p>
+                <p class="col1-3">margin</p>
+                <p class="col1-3 monospace">Number</p>
+                <p class="col1-3">The size of the area (in pixels) that Scrollview will process renderables' associated calculations in.</p>
+                <p class="col1-3">friction</p>
+                <p class="col1-3 monospace">Number</p>
+                <p class="col1-3">Input resistance proportional to the velocity of the input. Controls the feel of the Scrollview instance at low velocities.</p>
+                <p class="col1-3">drag</p>
+                <p class="col1-3 monospace">Number</p>
+                <p class="col1-3">Input resistance proportional to the square of the velocity of the input. Affects Scrollview instance more prominently at high velocities.</p>
+                <p class="col1-3">edgeGrip</p>
+                <p class="col1-3 monospace">Number</p>
+                <p class="col1-3">A coefficient for resistance against after-touch momentum.</p>
+                <p class="col1-3">egePeriod</p>
+                <p class="col1-3 monospace">Number</p>
+                <p class="col1-3">Sets the period on the spring that handles the physics associated with hitting the end of a scrollview.</p>
+                <p class="col1-3">edgeDamp</p>
+                <p class="col1-3 monospace">Number</p>
+                <p class="col1-3">Sets the damping on the spring that handles the physics associated with hitting the end of a scrollview.</p>
+                <p class="col1-3">paginated</p>
+                <p class="col1-3 monospace">Boolean</p>
+                <p class="col1-3">A paginated scrollview will scroll through items discretely rather than continously.</p>
+                <p class="col1-3">pagePeriod</p>
+                <p class="col1-3 monospace">Number</p>
+                <p class="col1-3">Sets the period on the spring that handles the physics associated with pagination.</p>
+                <p class="col1-3">pageDamp</p>
+                <p class="col1-3 monospace">Number</p>
+                <p class="col1-3">Sets the damping on the spring that handles the physics associated with pagination.</p>
+                <p class="col1-3">pageStopSpeed</p>
+                <p class="col1-3 monospace">Number</p>
+                <p class="col1-3">The threshold for determining the amount of velocity required to trigger pagination. The lower the threshold, the easier it is to scroll continuosly.</p>
+                <p class="col1-3">pageSwitchSpeed</p>
+                <p class="col1-3 monospace">Number</p>
+                <p class="col1-3">The threshold for momentum-based velocity pagination.</p>
+                <p class="col1-3">speedLimit</p>
+                <p class="col1-3 monospace">Number</p>
+                <p class="col1-3">The highest scrolling speed you can reach.</p>
+              </div>
+              <h5 class="medium-grey miniSpacer col1-2">Methods</h5>
+              <div class="col1-2">
+                <label for="input-private" class="right">Show Private Methods</label>
+                <input type="checkbox" id="input-private" data-type="private" class="right down5"/>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#undefined" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="undefined" class="mar-t1 left">()</h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#undefined" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="undefined" class="mar-t1 left">()</h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#undefined" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="undefined" class="mar-t1 left">()</h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#getCurrentIndex" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="getCurrentIndex" class="mar-t1 left">getCurrentIndex()</h3>
+                  </div>
+                  <p>Returns the index of the first visible renderable</p>
+                  <h5 class="medium-grey miniSpacer col1">Returns</h5>
+                  <col1 class="miniSpacer">
+                    <div class="col1-3 red">Number</div>
+                    <div class="col2-3">The current index of the ViewSequence</div>
+                  </col1>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#goToPreviousPage" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="goToPreviousPage" class="mar-t1 left">goToPreviousPage()</h3>
+                  </div>
+                  <p>goToPreviousPage paginates your Scrollview instance backwards by one item.</p>
+                  <h5 class="medium-grey miniSpacer col1">Returns</h5>
+                  <col1 class="miniSpacer">
+                    <div class="col1-3 red">ViewSequence</div>
+                    <div class="col2-3">The previous node.</div>
+                  </col1>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#goToNextPage" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="goToNextPage" class="mar-t1 left">goToNextPage()</h3>
+                  </div>
+                  <p>goToNextPage paginates your Scrollview instance forwards by one item.</p>
+                  <h5 class="medium-grey miniSpacer col1">Returns</h5>
+                  <col1 class="miniSpacer">
+                    <div class="col1-3 red">ViewSequence</div>
+                    <div class="col2-3">The next node.</div>
+                  </col1>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#goToPage" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="goToPage" class="mar-t1 left">goToPage()</h3>
+                  </div>
+                  <p>Paginates the Scrollview to an absolute page index.</p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#getPosition" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="getPosition" class="mar-t1 left">getPosition(node)<small class="mar-l-20 red medium-grey-bg pad-5 up3 bor-2">Deprecated</small></h3>
+                  </div>
+                  <p>Returns the position associated with the Scrollview instance's current node (generally the node currently at the top).</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">node</div>
+                    <div class="col1-3 monospace">Number</div>
+                    <div class="col1-3">If specified, returns the position of the node at that index in the Scrollview instance's currently managed collection.</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                  <h5 class="medium-grey miniSpacer col1">Returns</h5>
+                  <col1 class="miniSpacer">
+                    <div class="col1-3 red">Number</div>
+                    <div class="col2-3">The position of either the specified node, or the Scrollview's current Node, in pixels translated.</div>
+                  </col1>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#getAbsolutePosition" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="getAbsolutePosition" class="mar-t1 left">getAbsolutePosition()</h3>
+                  </div>
+                  <p>Returns the absolute position associated with the Scrollview instance</p>
+                  <h5 class="medium-grey miniSpacer col1">Returns</h5>
+                  <col1 class="miniSpacer">
+                    <div class="col1-3 red">Number</div>
+                    <div class="col2-3">The position of the Scrollview's current Node, in pixels translated.</div>
+                  </col1>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#getOffset" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="getOffset" class="mar-t1 left">getOffset(node)</h3>
+                  </div>
+                  <p>Returns the offset associated with the Scrollview instance's current node (generally the node currently at the top).</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">node</div>
+                    <div class="col1-3 monospace">Number</div>
+                    <div class="col1-3">If specified, returns the position of the node at that index in the Scrollview instance's currently managed collection.</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                  <h5 class="medium-grey miniSpacer col1">Returns</h5>
+                  <col1 class="miniSpacer">
+                    <div class="col1-3 red">Number</div>
+                    <div class="col2-3">The position of either the specified node, or the Scrollview's current Node, in pixels translated.</div>
+                  </col1>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#setPosition" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="setPosition" class="mar-t1 left">setPosition(x)<small class="mar-l-20 red medium-grey-bg pad-5 up3 bor-2">Deprecated</small></h3>
+                  </div>
+                  <p>Sets the position of the physics particle that controls Scrollview instance's &quot;position&quot;</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">x</div>
+                    <div class="col1-3 monospace">Number</div>
+                    <div class="col1-3">The amount of pixels you want your scrollview to progress by.</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#setPosition" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="setPosition" class="mar-t1 left">setPosition(x)</h3>
+                  </div>
+                  <p>Sets the offset of the physics particle that controls Scrollview instance's &quot;position&quot;</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">x</div>
+                    <div class="col1-3 monospace">Number</div>
+                    <div class="col1-3">The amount of pixels you want your scrollview to progress by.</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#getVelocity" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="getVelocity" class="mar-t1 left">getVelocity()</h3>
+                  </div>
+                  <p>Returns the Scrollview instance's velocity.</p>
+                  <h5 class="medium-grey miniSpacer col1">Returns</h5>
+                  <col1 class="miniSpacer">
+                    <div class="col1-3 red">Number</div>
+                    <div class="col2-3">The velocity.</div>
+                  </col1>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#setVelocity" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="setVelocity" class="mar-t1 left">setVelocity(v)</h3>
+                  </div>
+                  <p>Sets the Scrollview instance's velocity. Until affected by input or another call of setVelocity the Scrollview instance will scroll at the passed-in velocity.</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">v</div>
+                    <div class="col1-3 monospace">Number</div>
+                    <div class="col1-3">The magnitude of the velocity.</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#setOptions" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="setOptions" class="mar-t1 left">setOptions(options)</h3>
+                  </div>
+                  <p>Patches the Scrollview instance's options with the passed-in ones.</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">options</div>
+                    <div class="col1-3 monospace">Options</div>
+                    <div class="col1-3">An object of configurable options for the Scrollview instance.</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#sequenceFrom" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="sequenceFrom" class="mar-t1 left">sequenceFrom(node)</h3>
+                  </div>
+                  <p>Sets the collection of renderables under the Scrollview instance's control, by setting its current node to the passed in ViewSequence. If you pass in an array, the Scrollview instance will set its node as a ViewSequence instantiated with the passed-in array.</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">node</div>
+                    <div class="col1-3 monospace">Array|ViewSequence</div>
+                    <div class="col1-3">Either an array of renderables or a Famous viewSequence.</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#getSize" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="getSize" class="mar-t1 left">getSize()</h3>
+                  </div>
+                  <p>Returns the width and the height of the Scrollview instance.</p>
+                  <h5 class="medium-grey miniSpacer col1">Returns</h5>
+                  <col1 class="miniSpacer">
+                    <div class="col1-3 red">Array</div>
+                    <div class="col2-3">A two value array of the Scrollview instance's current width and height (in that order).</div>
+                  </col1>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer private-method hidden">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#render" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="render" class="mar-t1 left">render()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Private</small></h3>
+                  </div>
+                  <p>Generate a render spec from the contents of this component.</p>
+                  <h5 class="medium-grey miniSpacer col1">Returns</h5>
+                  <col1 class="miniSpacer">
+                    <div class="col1-3 red">Number</div>
+                    <div class="col2-3">Render spec for this component</div>
+                  </col1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="../js/main.js"></script>
+</body>
+</html>

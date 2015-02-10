@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="ngxDemoApp">
+<head>
+    <title>NGX Library demos</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="http://api4.mapy.cz/loader.js"></script>
+	<script type="text/javascript">Loader.load();</script>
+	<script type="text/javascript" src="scripts/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="scripts/libs/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="scripts/libs/angular-1.0.1.min.js"></script>
+    <script type="text/javascript" src="scripts/libs/angular-sanitize-1.0.1.min.js"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../dist/ngx.js"></script>
+    <script type="text/javascript" src="scripts/app.js"></script>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="styles/jquery-ui.css"/>
+	<link rel="stylesheet" type="text/css" href="../dist/styles/ngx.min.css"/>
+	<link rel="stylesheet" type="text/css" href="styles/app.css"/>
+</head>
+<body ng-cloak ng-controller="ngx">
+	<div class="header">
+		<div class="container">
+			<h1>NGX Library</h1>
+			<p class="lead">Extension library for AngularJS projects, <a href="https://github.com/lmc-eu/ngx-library">Github sources</a> </p>
+		</div>
+	</div>
+    <div class="container">
+        <div class="row">
+            <div class="span3">
+        		<ul class="nav nav-list well">
+                    <li class="nav-header">Demos</li>
+        			<li ng-repeat="m in modules" ng-switch="m == module" ng-class="{'active': m == module}" ng-click="load(m)">
+        				<a ng-click="load(m)">{{m}}</a>
+        			</li>
+        		</ul>
+            </div>
+            <div class="span9">
+				<h2>{{module}}</h2>
+                <div id="demo-content" ng-view ng-class="getContentClass()"></div>
+            </div>
+        </div>
+	</div>
+</body>
+</html>

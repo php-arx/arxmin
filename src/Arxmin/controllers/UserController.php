@@ -1,15 +1,13 @@
 <?php namespace Arxmin;
 
-use Zizaco\Confide\ConfideFacade as Confide;
-
-use Input, View, User, Config, Redirect, Lang, Auth;
+use Input, View, User, Config, Redirect, Lang, Auth, Confide;
 
 class UserController extends BaseController {
 
     public $layout = "arxmin::layouts.bootstrap";
 
     public function __construct(){
-        $this->auth = Config::get('arxmin::auth');
+        $this->auth = Config::get('arxmin::config.auth');
     }
 
     /**
@@ -65,15 +63,7 @@ class UserController extends BaseController {
      */
     public function login()
     {
-
-        if( Auth::check() )
-        {
-            return Redirect::to('/arxmin/my/dashboard');
-        }
-        else
-        {
-            return View::make('arxmin::user.login');
-        }
+        return View::make('arxmin::user.login');
     }
 
     /**
@@ -82,49 +72,23 @@ class UserController extends BaseController {
      */
     public function do_login()
     {
-        $input = array(
-            'email'    => Input::get( 'email' ), // May be the username too
-            'username' => Input::get( 'email' ), // so we have to pass both
-            'password' => Input::get( 'password' ),
-            'remember' => Input::get( 'remember' ),
-        );
+        $data = Input::all();
 
-        // If you wish to only allow login from confirmed users, call logAttempt
-        // with the second parameter as true.
-        // logAttempt will check if the 'email' perhaps is the username.
-        // Get the value from the config file instead of changing the controller
-        if ( Confide::logAttempt( $input, Config::get('confide::signup_confirm') ) )
-        {
-            // Redirect the user to the URL they were trying to access before
-            // caught by the authentication filter IE Redirect::guest('user/login').
-            // Otherwise fallback to '/'
-            // Fix pull #145
-            return Redirect::intended('/'); // change it to '/admin', '/dashboard' or something
+        if (Auth::attempt(Input::only('username', 'password'), Input::get('remember'))) {
+
+            $user = Auth::getUser();
+
+            return Redirect::action('Arxmin\\ArxminController@anyIndex');
         }
-        else
-        {
-            $user = new User;
 
-            // Check if there was too many login attempts
-            if( Confide::isThrottled( $input ) )
-            {
-                $err_msg = Lang::get('confide::confide.alerts.too_many_attempts');
-            }
-            elseif( $user->checkUserExists( $input ) and ! $user->isConfirmed( $input ) )
-            {
-                $err_msg = Lang::get('confide::confide.alerts.not_confirmed');
-            }
-            else
-            {
-                $err_msg = Lang::get('confide::confide.alerts.wrong_credentials');
-            }
-
-            return Redirect::action('UserController@login')
-                ->withInput(Input::except('password'))
-                ->with( 'error', $err_msg );
-        }
+        return Redirect::action(get_called_class() . '@login')->withErrors(array('wrong_password'));
     }
 
+    /**
+     * Attempt to confirm account with code
+     *
+     * @param  string  $code
+     */
     /**
      * Attempt to confirm account with code
      *

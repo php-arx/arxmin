@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="A free, open source JavaScript framework for creating complex UIs for any screen. 3D layout and physics animation engines. Renders to DOM, Canvas, or WebGL">
+        <title>Famo.us</title>
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="icon" type="image/png" href="/favicon.png">
+        
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="../../src/core/famous.css">
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="../css/code.css">
+    </head>
+
+    <body>
+        <div class="col1" id="doc-container">
+            <div class="col1 pad-l-g1 padt35 padb35">
+                
+<h1 id="event-guide">Event Guide</h1>
+<p>Events are a way of moving information between Famo.us Views and Widgets† in a<br>decoupled way, and also to listen to the native events of the DOM, like &quot;resize&quot;<br>or &quot;touchmove&quot;. When building nested views, a parent view will have access to<br>the subviews inside it. But what if a subview needs to alert a parent, as in the<br>case of a &quot;page next&quot; action that triggers a higher-order app behavior? A<br>subview could have a reference to its parent, but this results in tightly<br>coupled code. Instead, you can decouple your code  with events. Similarly, if<br>two unrelated views need to pass information between each other, rather than<br>saving data to some globally shared data structure, it&#39;s better practice to pass<br>data via events.</p>
+<p>The solution to these common issues is found in Famous/core&#39;s EventHandler.js,<br>and the eventing utility methods found in Famous/events. These tools allow views<br>and widgets to broadcast and receive events, additionally they allow<br>functionality such as piping, filtering and mapping events. Here we will take a<br>look at all the functionality events offer, and include basic code snippets for<br>each. All the example code is references the following scaffolding:</p>
+<pre><code class="lang-js"><div class="highlight"><pre>    <span class="kd">var</span> <span class="nx">EventHandler</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;famous/core/EventHandler&#39;</span><span class="p">);</span>
+
+    <span class="c1">// a bunch of event handlers</span>
+    <span class="kd">var</span> <span class="nx">eventHandlerA</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventHandler</span><span class="p">();</span>
+    <span class="kd">var</span> <span class="nx">eventHandlerB</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventHandler</span><span class="p">();</span>
+    <span class="kd">var</span> <span class="nx">eventHandlerC</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventHandler</span><span class="p">();</span>
+
+    <span class="c1">// a data &quot;payload&quot; to broadcast</span>
+    <span class="kd">var</span> <span class="nx">message</span> <span class="o">=</span> <span class="p">{</span><span class="nx">msg</span> <span class="o">:</span> <span class="s1">&#39;ALERT!&#39;</span><span class="p">};</span>
+
+    <span class="c1">// a widget module that can receive and broadcast events</span>
+    <span class="c1">// widgets created by extending View.js have this boilerplate by default</span>
+    <span class="kd">function</span> <span class="nx">Widget</span><span class="p">(){</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">eventOutput</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventHandler</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">eventInput</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventHandler</span><span class="p">();</span>
+        <span class="nx">EventHandler</span><span class="p">.</span><span class="nx">setInputHandler</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">eventInput</span><span class="p">);</span>
+        <span class="nx">EventHandler</span><span class="p">.</span><span class="nx">setOutputHandler</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">eventOutput</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="kd">var</span> <span class="nx">widget</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Widget</span><span class="p">();</span>
+</pre></div>
+
+</code></pre>
+<p>† <em>Famo.us comes with a base class View.js in Famous/Core. In Famo.us lingo, a<br>Widget is a class that inherits from View.js. In the scaffolding code above for<br><code>Widget</code>, we hand-code the necessary boilerplate to have an eventing class. It<br>should be emphasized that this boilerplate comes for free in View.js. To better<br>explain the magic, though, we start from first principles in this tutorial.</em></p>
+<h2 id="overview">Overview</h2>
+<ul>
+<li><a href="#eventHandlers"><strong>Event Handlers</strong></a><ul>
+<li><a href="#broadcastingAndListening">Broadcasting and Listening</a></li>
+<li><a href="#piping">Piping</a></li>
+<li><a href="#subscribing">Subscribing</a><ul>
+<li><a href="#pipingVsSubscribing">Piping vs Subscribing</a></li>
+</ul>
+</li>
+<li><a href="#processing">Processing</a></li>
+</ul>
+</li>
+<li><a href="#eventHelpers"><strong>Event Helpers</strong></a><ul>
+<li><a href="#filtering">Filtering</a></li>
+<li><a href="#mapping">Mapping</a></li>
+<li><a href="#arbitration">Arbitration</a></li>
+</ul>
+</li>
+<li><a href="#eventHandling_widget"><strong>Widgets</strong></a><ul>
+<li><a href="#listening_widget">Listening</a><ul>
+<li><a href="#inputHandler">Input Handler</a></li>
+<li><a href="#parentToChild">Example: Parent to Child</a></li>
+</ul>
+</li>
+<li><a href="#broadcasting_widget">Broadcasting</a><ul>
+<li><a href="#outputHandler">Output Handler</a></li>
+<li><a href="#childToParent">Example: Child to Parent</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="-a-name-eventhandlers-event-handlers-core-eventhandler-js-a-"><a name="eventHandlers">Event Handlers (Core/EventHandler.js)</a></h2>
+<p>This is the basic module used for event handling. It allows a user to broadcast,<br>listen, pipe to and subscribe from events.</p>
+<h2 id="-a-name-broadcastingandlistening-broadcasting-and-listening-a-"><a name="broadcastingAndListening">Broadcasting and Listening</a></h2>
+<p>Broadcasting from an event handler is done with either the <code>emit</code> method,</p>
+<pre><code class="lang-js"><div class="highlight"><pre>    <span class="nx">eventHandlerA</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span> <span class="nx">alert</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">msg</span><span class="p">);</span> <span class="p">});</span>  <span class="c1">// alerts &#39;ALERT!&#39;</span>
+    <span class="nx">eventHandlerA</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
+</pre></div>
+
+</code></pre>
+<p>or the <code>trigger</code> method.</p>
+<pre><code class="lang-js"><div class="highlight"><pre>    <span class="nx">eventHandlerA</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span> <span class="nx">alert</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">msg</span><span class="p">);</span> <span class="p">});</span>  <span class="c1">// alerts &#39;ALERT!&#39;</span>
+    <span class="nx">eventHandlerA</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
+</pre></div>
+
+</code></pre>
+<p>Deciding between using <code>emit</code> or <code>trigger</code> will be more clear when building an event handling widget.<br>Emitting has a connotation of outward flow, while triggering has a connotation of inward flow.<br>For event handlers, it is a matter of preference; they are aliases of one another.</p>
+<h2 id="-a-name-piping-piping-a-"><a name="piping">Piping</a></h2>
+<p>Piping is a way of pushing events downstream from one handler to another. An event handler<br>can broadcast data by calling its <code>.emit</code> method which takes two arguments: a key, and an optional JSON object to broadcast. Downstream handlers can listen to the event via the <code>.on</code> method, which takes<br>a key and callback as arguments.</p>
+<pre><code class="lang-js"><div class="highlight"><pre>    <span class="nx">eventHandlerA</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">eventHandlerB</span><span class="p">);</span>
+    <span class="nx">eventHandlerB</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span><span class="nx">alert</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">msg</span><span class="p">)});</span>  <span class="c1">// alerts &#39;ALERT!&#39;</span>
+    <span class="nx">eventHandlerA</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
+</pre></div>
+
+</code></pre>
+<p>Event handlers can be successively piped.</p>
+<pre><code class="lang-js"><div class="highlight"><pre>    <span class="nx">eventHandlerA</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">eventHandlerB</span><span class="p">);</span>
+    <span class="nx">eventHandlerB</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">eventHandlerC</span><span class="p">);</span>
+    <span class="nx">eventHandlerC</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span><span class="nx">alert</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">msg</span><span class="p">)});</span>  <span class="c1">// alerts &#39;ALERT!&#39;</span>
+    <span class="nx">eventHandlerA</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
+</pre></div>
+
+</code></pre>
+<p>Equivalently, they can be chained.</p>
+<pre><code class="lang-js"><div class="highlight"><pre>    <span class="nx">eventHandlerA</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">eventHandlerB</span><span class="p">).</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">eventHandlerC</span><span class="p">);</span>
+    <span class="nx">eventHandlerC</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span><span class="nx">alert</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">msg</span><span class="p">)});</span>  <span class="c1">// alerts &#39;ALERT!&#39;</span>
+    <span class="nx">eventHandlerA</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
+</pre></div>
+
+</code></pre>
+<h2 id="-a-name-subscribing-subscribing-a-"><a name="subscribing">Subscribing</a></h2>
+<p>While piping is a way of <em>pushing</em> events downstream, subscribing is the reverse: events are <em>pulled</em> upstream.</p>
+<pre><code class="lang-js"><div class="highlight"><pre>    <span class="nx">eventHandlerB</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">eventHandlerA</span><span class="p">);</span>
+    <span class="nx">eventHandlerB</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span><span class="nx">alert</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">msg</span><span class="p">)});</span>  <span class="c1">// alerts &#39;ALERT!&#39;</span>
+    <span class="nx">eventHandlerA</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
+</pre></div>
+
+</code></pre>
+<p>Like piping, subscribing can also be successively applied.</p>
+<pre><code class="lang-js"><div class="highlight"><pre>    <span class="nx">eventHandlerC</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">eventHandlerB</span><span class="p">);</span>
+    <span class="nx">eventHandlerB</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">eventHandlerA</span><span class="p">);</span>
+    <span class="nx">eventHandlerC</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span><span class="nx">alert</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">msg</span><span class="p">)});</span>  <span class="c1">// alerts &#39;ALERT!&#39;</span>
+    <span class="nx">eventHandlerA</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
+</pre></div>
+
+</code></pre>
+<h2 id="-a-name-pipingvssubscribing-piping-vs-subscribing-a-"><a name="pipingVsSubscribing">Piping vs Subscribing</a></h2>
+<p>When listening on DOM events, a subscribe pattern is more performant<br>because you can subscribe to only the events you need. In a piping model, all<br>events must be broadcast (even if they are never used) in order to listen to them downstream.<br>Hence, you should subscribe from Surfaces, the Engine (which can both listen to the DOM),<br>whereas you should pipe to (or subscribe from) custom events broadcast from widgets.</p>
+<pre><code class="lang-js"><div class="highlight"><pre>    <span class="nx">widget</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">surface</span><span class="p">);</span>                     <span class="c1">// surface is not broadcasting anything yet</span>
+    <span class="nx">widget</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;touchmove&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">){...});</span>  <span class="c1">// surface is now broadcasting &#39;touchmove&#39;</span>
+</pre></div>
+
+</code></pre>
+<p>The magic happens when subscribes are chained:</p>
+<pre><code class="lang-js"><div class="highlight"><pre>    <span class="nx">widgetB</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">widgetA</span><span class="p">);</span>
+    <span class="nx">widgetA</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">surface</span><span class="p">);</span>
+    <span class="nx">widgetB</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;touchmove&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">){...});</span> <span class="c1">// widget A and surface are now broadcasting &#39;touchmove&#39;</span>
+</pre></div>
+
+</code></pre>
+<p><em>Note</em>: piping from a Engine or Surface does nothing unless they have subscribed to the event!</p>
+<pre><code class="lang-js"><div class="highlight"><pre>    <span class="nx">surface</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">widgetA</span><span class="p">);</span>
+    <span class="nx">widgetA</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;touchmove&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">){...});</span> <span class="c1">// does nothing. Surface is not yet emitting &#39;touchmove&#39;</span>
+
+    <span class="nx">widgetA</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">surface</span><span class="p">);</span>
+    <span class="nx">widgetA</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;touchmove&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">){...});</span> <span class="c1">// works!</span>
+</pre></div>
+
+</code></pre>
+<h2 id="-a-name-processing-processing-a-"><a name="processing">Processing</a></h2>
+<p>Two event handlers can be linked together so that events coming into one can be<br>processed and re-broadcasted to the other.</p>
+<pre><code class="lang-js"><div class="highlight"><pre>    <span class="nx">eventHandlerA</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
+        <span class="nx">data</span><span class="p">.</span><span class="nx">msg</span> <span class="o">=</span> <span class="s1">&#39;processed&#39;</span><span class="p">;</span>
+        <span class="nx">eventHandlerB</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+    <span class="p">});</span>
+
+    <span class="nx">eventHandlerB</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span> <span class="nx">alert</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">msg</span><span class="p">);</span> <span class="p">});</span>  <span class="c1">// alerts &#39;processed&#39;</span>
+    <span class="nx">eventHandlerA</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
+</pre></div>
+
+</code></pre>
+<h2 id="-a-name-eventhelpers-event-helpers-a-"><a name="eventHelpers">Event Helpers</a></h2>
+<p>Our event library comes with convenience modules for conditionally processing events<br>including event filtering, mapping and arbitration.</p>
+<h2 id="-a-name-filtering-filtering-events-eventfilter-js-a-"><a name="filtering">Filtering (Events/EventFilter.js)</a></h2>
+<p>Often, an event should only be broadcasted if a certain condition is met, like a flag having value <code>true</code>.<br>Famo.us offers an event filter to do this.</p>
+<pre><code class="lang-js"><div class="highlight"><pre>    <span class="kd">var</span> <span class="nx">myFilter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventFilter</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">data</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">msg</span> <span class="o">===</span> <span class="s1">&#39;ALERT!&#39;</span><span class="p">);</span>
+    <span class="p">});</span>
+</pre></div>
+
+</code></pre>
+<p>With this filter, only an event with a <code>{msg : &#39;ALERT!&#39;}</code> payload will be broadcast.</p>
+<pre><code class="lang-js"><div class="highlight"><pre>    <span class="nx">eventHandlerA</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">myFilter</span><span class="p">).</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">eventHandlerB</span><span class="p">);</span>
+    <span class="nx">eventHandlerB</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;piped message: &#39;</span> <span class="o">+</span> <span class="nx">data</span><span class="p">.</span><span class="nx">msg</span><span class="p">);</span>
+    <span class="p">});</span>
+</pre></div>
+
+</code></pre>
+<p>Filtering also works in a subscribe model:</p>
+<pre><code class="lang-js"><div class="highlight"><pre>    <span class="nx">eventHandlerB</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">myFilter</span><span class="p">);</span>
+    <span class="nx">myFilter</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">eventHandlerA</span><span class="p">);</span>
+    <span class="nx">eventHandlerB</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;subscribed message: &#39;</span> <span class="o">+</span> <span class="nx">data</span><span class="p">.</span><span class="nx">msg</span><span class="p">);</span>
+    <span class="p">});</span>
+
+    <span class="nx">eventHandlerA</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
+</pre></div>
+
+</code></pre>
+<h2 id="-a-name-mapping-mapping-events-eventmapper-js-a-"><a name="mapping">Mapping (Events/EventMapper.js)</a></h2>
+<p>Often, events need to be routed based on some custom logic.<br>Famo.us offers an event mapper for this use case.</p>
+<pre><code class="lang-js"><div class="highlight"><pre>    <span class="kd">var</span> <span class="nx">myMapper</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventMapper</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nx">data</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">direction</span> <span class="o">===</span> <span class="s1">&#39;x&#39;</span><span class="p">))</span> <span class="o">?</span> <span class="nx">eventHandlerB</span> <span class="o">:</span> <span class="nx">eventHandlerC</span><span class="p">;</span>
+    <span class="p">});</span>
+
+    <span class="nx">eventHandlerA</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">myMapper</span><span class="p">);</span>
+
+    <span class="nx">eventHandlerB</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;B direction : &#39;</span> <span class="o">+</span> <span class="nx">data</span><span class="p">.</span><span class="nx">direction</span><span class="p">);</span>
+    <span class="p">});</span>
+    <span class="nx">eventHandlerC</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;C direction : &#39;</span> <span class="o">+</span> <span class="nx">data</span><span class="p">.</span><span class="nx">direction</span><span class="p">);</span>
+    <span class="p">});</span>
+
+    <span class="nx">eventHandlerA</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">direction</span> <span class="o">:</span> <span class="s1">&#39;x&#39;</span><span class="p">});</span>  <span class="c1">// pipes to eventHandlerB</span>
+    <span class="nx">eventHandlerA</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">direction</span> <span class="o">:</span> <span class="s1">&#39;y&#39;</span><span class="p">});</span>  <span class="c1">// pipes to eventHandlerC</span>
+</pre></div>
+
+</code></pre>
+<p><em>Note</em>: mapping only supports a piping interface and not a subscribing one.</p>
+<h2 id="-a-name-arbitration-arbitration-events-eventarbiter-js-a-"><a name="arbitration">Arbitration (Events/EventArbiter.js)</a></h2>
+<p>The Event Arbiter is like a switch or router. Events come in, and the arbiter<br>pipes them to their respective targets by changing its internal state. It is<br>similar to the Event Mapper, except that you never have to define event<br>handlers and the piping is automated.</p>
+<pre><code class="lang-js"><div class="highlight"><pre>    <span class="kd">var</span> <span class="nx">eventArbiter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventArbiter</span><span class="p">();</span>
+
+    <span class="nx">eventArbiter</span><span class="p">.</span><span class="nx">forMode</span><span class="p">(</span><span class="s1">&#39;routeA&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;subscribed message: &#39;</span> <span class="o">+</span> <span class="nx">data</span><span class="p">.</span><span class="nx">msg</span><span class="p">);</span>
+    <span class="p">});</span>
+
+    <span class="nx">eventArbiter</span><span class="p">.</span><span class="nx">forMode</span><span class="p">(</span><span class="s1">&#39;routeB&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;subscribed message: &#39;</span> <span class="o">+</span> <span class="nx">data</span><span class="p">.</span><span class="nx">msg</span><span class="p">);</span>
+    <span class="p">});</span>
+
+    <span class="nx">eventArbiter</span><span class="p">.</span><span class="nx">setMode</span><span class="p">(</span><span class="s1">&#39;routeA&#39;</span><span class="p">);</span>
+
+    <span class="nx">eventArbiter</span><span class="p">.</span><span class="nx">forMode</span><span class="p">(</span><span class="s1">&#39;routeA&#39;</span><span class="p">).</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span> <span class="c1">// alerts &#39;ALERT!&#39;</span>
+    <span class="nx">eventArbiter</span><span class="p">.</span><span class="nx">forMode</span><span class="p">(</span><span class="s1">&#39;routeB&#39;</span><span class="p">).</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span> <span class="c1">// does nothing. Mode is not set.</span>
+
+    <span class="nx">eventArbiter</span><span class="p">.</span><span class="nx">setMode</span><span class="p">(</span><span class="s1">&#39;routeB&#39;</span><span class="p">);</span>
+
+    <span class="nx">eventArbiter</span><span class="p">.</span><span class="nx">forMode</span><span class="p">(</span><span class="s1">&#39;routeA&#39;</span><span class="p">).</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span> <span class="c1">// does nothing. Mode is not set.</span>
+    <span class="nx">eventArbiter</span><span class="p">.</span><span class="nx">forMode</span><span class="p">(</span><span class="s1">&#39;routeB&#39;</span><span class="p">).</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span> <span class="c1">// alerts &#39;ALERT!&#39;</span>
+</pre></div>
+
+</code></pre>
+<h2 id="-a-name-eventhandling_widget-event-handling-inside-a-widget-a-"><a name="eventHandling_widget">Event Handling Inside a Widget</a></h2>
+<p>Views and Widgets can also broadcast, listen, and pipe events just as event handlers can,<br>and their interface is similar. However, event handling in widgets is complicated<br>by the fact that widgets have two handlers: an input and output handler.<br>The interface to communicating <em>to</em> the widget is via its input handler.<br>The interface for broadcasting <em>from</em> the widget is via its output handler.<br>This can best be summarized by the following rules of thumb:</p>
+<ul>
+<li><p>External to a Widget:</p>
+<ul>
+<li><code>widget.trigger</code> : the interface to talk to a widget</li>
+<li><code>widget.on</code> : the interface to listen to a widget</li>
+<li><code>widget.pipe</code> : the interface to pipe from a widget</li>
+<li><code>widget.subscribe</code> : the interface to subscribe from a widget</li>
+</ul>
+</li>
+<li><p>Internal to a Widget:</p>
+<ul>
+<li><em>receive</em> events via <code>widget.eventInput</code></li>
+<li><em>broadcast</em> events via <code>widget.eventOutput</code></li>
+</ul>
+</li>
+</ul>
+<p><em>Note</em>: <code>Widget.emit</code> does not exist! There is no interface to broadcast from<br>the widget while outside the widget. Emitting from the widget is the<br>responsibility of the widget, and should only be done from inside.</p>
+<h2 id="-a-name-listening_widget-listening-a-"><a name="listening_widget">Listening</a></h2>
+<p>Widgets listen to the external world via their input handler. The external world<br>can ping the widget via its <code>trigger</code> method.</p>
+<h2 id="-a-name-inputhandler-input-handler-a-"><a name="inputHandler">Input Handler</a></h2>
+<p>All widgets have access to an internal <code>eventInput</code> for receiving events<br>which is internally assigned using the <code>EventHandler.setInputHandler</code> method.<br>This adds the methods of <code>trigger</code> and <code>subscribe</code> to the widget.</p>
+<pre><code class="lang-js"><div class="highlight"><pre>    <span class="nx">EventHandler</span><span class="p">.</span><span class="nx">setInputHandler</span><span class="p">(</span><span class="nx">widget</span><span class="p">,</span> <span class="nx">eventHandlerA</span><span class="p">);</span>
+    <span class="nx">eventHandlerA</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span><span class="nx">alert</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">msg</span><span class="p">)});</span>
+    <span class="nx">widget</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
+</pre></div>
+
+</code></pre>
+<h2 id="-a-name-parenttochild-parent-to-child-a-"><a name="parentToChild">Parent to Child</a></h2>
+<p>A common use case of listening to a widget is when a child widget listens to a containing parent widget.<br>In the following example, a parent receives a &quot;bad report card&quot; from the external world,<br>and responds by hiring a tutor for her child. The child then gets accepted to Harvard. It&#39;s that simple.</p>
+<pre><code class="lang-js"><div class="highlight"><pre>    <span class="c1">// Child widget</span>
+    <span class="kd">function</span> <span class="nx">Child</span><span class="p">(){</span>
+        <span class="c1">// setup input and output handlers</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">eventOutput</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventHandler</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">eventInput</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventHandler</span><span class="p">();</span>
+        <span class="nx">EventHandler</span><span class="p">.</span><span class="nx">setInputHandler</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">eventInput</span><span class="p">);</span>
+        <span class="nx">EventHandler</span><span class="p">.</span><span class="nx">setOutputHandler</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">eventOutput</span><span class="p">);</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">eventInput</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;hires tutor&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+            <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Accepted to Harvard&#39;</span><span class="p">);</span>
+        <span class="p">}.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Parent widget</span>
+    <span class="kd">function</span> <span class="nx">Parent</span><span class="p">(){</span>
+        <span class="c1">// setup input and output handlers</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">eventOutput</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventHandler</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">eventInput</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventHandler</span><span class="p">();</span>
+        <span class="nx">EventHandler</span><span class="p">.</span><span class="nx">setInputHandler</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">eventInput</span><span class="p">);</span>
+        <span class="nx">EventHandler</span><span class="p">.</span><span class="nx">setOutputHandler</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">eventOutput</span><span class="p">);</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">child</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Child</span><span class="p">();</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">eventInput</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;bad report card&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">child</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;hires tutor&#39;</span><span class="p">);</span>
+        <span class="p">}.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="kd">var</span> <span class="nx">parent</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Parent</span><span class="p">();</span>
+    <span class="nx">parent</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;bad report card&#39;</span><span class="p">);</span>
+</pre></div>
+
+</code></pre>
+<p><em>Note</em>: in this use case, it is more customary to expose a method on the child that the parent can call.<br>Also, notice we did not need to hook up any output handlers in this case, though a widget would need both<br>if it is responsible for broadcasting events externally.</p>
+<h2 id="-a-name-broadcasting_widget-broadcasting-a-"><a name="broadcasting_widget">Broadcasting</a></h2>
+<p>Broadcasting from a widget is the responsibility of the widget via its output handler.</p>
+<h2 id="-a-name-outputhandler-output-handler-a-"><a name="outputHandler">Output Handler</a></h2>
+<p>All widgets have internal access to an <code>eventOutput</code>, which is internally created using<br><code>EventHandler.setOutputHandler</code> method. This adds the <code>pipe</code> and <code>on</code> methods to<br>the widget.</p>
+<pre><code><div class="highlight"><pre>    <span class="nx">EventHandler</span><span class="p">.</span><span class="nx">setOutputHandler</span><span class="p">(</span><span class="nx">widget</span><span class="p">,</span> <span class="nx">eventHandlerA</span><span class="p">);</span>
+    <span class="nx">widget</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span> <span class="nx">alert</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">msg</span><span class="p">)</span> <span class="p">};</span> <span class="p">);</span>  <span class="c1">// alerts &#39;ALERT!&#39;</span>
+    <span class="nx">eventHandlerA</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
+</pre></div>
+
+</code></pre><p>Typically, this is a more useful paradigm when the widget is piping to another handler,<br>or to another widget.</p>
+<pre><code class="lang-js"><div class="highlight"><pre>    <span class="nx">EventHandler</span><span class="p">.</span><span class="nx">setOutputHandler</span><span class="p">(</span><span class="nx">widget</span><span class="p">,</span> <span class="nx">eventHandlerA</span><span class="p">);</span>
+    <span class="nx">widget</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">eventHandlerB</span><span class="p">);</span>
+    <span class="nx">eventHandlerB</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span> <span class="nx">alert</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">msg</span><span class="p">)</span> <span class="p">};</span> <span class="p">);</span>  <span class="c1">// alerts &#39;ALERT!&#39;</span>
+    <span class="nx">eventHandlerA</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
+</pre></div>
+
+</code></pre>
+<h2 id="-a-name-childtoparent-child-to-parent-a-"><a name="childToParent">Child to Parent</a></h2>
+<p>A common use case of broadcasting from a widget is when a child widget broadcasts<br>to a containing parent widget. Here we have a parent that needs to respond when<br>its child starts &quot;crying&quot;. A child &quot;cries&quot; when it is &quot;hungry&quot;, and the parent responds<br>by feeding it.</p>
+<pre><code class="lang-js"><div class="highlight"><pre>    <span class="c1">// Child widget</span>
+    <span class="kd">function</span> <span class="nx">Child</span><span class="p">(){</span>
+        <span class="c1">// setup input and output handlers</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">eventOutput</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventHandler</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">eventInput</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventHandler</span><span class="p">();</span>
+        <span class="nx">EventHandler</span><span class="p">.</span><span class="nx">setInputHandler</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">eventInput</span><span class="p">);</span>
+        <span class="nx">EventHandler</span><span class="p">.</span><span class="nx">setOutputHandler</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">eventOutput</span><span class="p">);</span>
+
+        <span class="c1">// child broadcasts &#39;crying&#39; when it gets hungry using the event processing pattern</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">eventInput</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;hungry&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">eventOutput</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;crying&#39;</span><span class="p">);</span>
+        <span class="p">}.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+
+        <span class="c1">// randomly...the child gets hungry</span>
+        <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;hungry&#39;</span><span class="p">);</span>
+        <span class="p">}.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">),</span> <span class="mi">5000</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Parent widget</span>
+    <span class="kd">function</span> <span class="nx">Parent</span><span class="p">(){</span>
+        <span class="c1">// setup input and output handlers</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">eventOutput</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventHandler</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">eventInput</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventHandler</span><span class="p">();</span>
+        <span class="nx">EventHandler</span><span class="p">.</span><span class="nx">setInputHandler</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">eventInput</span><span class="p">);</span>
+        <span class="nx">EventHandler</span><span class="p">.</span><span class="nx">setOutputHandler</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">eventOutput</span><span class="p">);</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">child</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Child</span><span class="p">();</span>
+
+        <span class="c1">// parent reacts to child crying by feeding her</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">child</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;crying&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+            <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;feeds child&#39;</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+
+    <span class="kd">var</span> <span class="nx">parent</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Parent</span><span class="p">();</span>
+</pre></div>
+
+</code></pre>
+
+                
+            </div>
+        </div> 
+    </body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "jquery-table-editor",
+  "version": "0.1",
+  "dependencies": {
+    "jquery": "~1.7",
+    "datatables": "~1.10.4"
+  },
+  "ignore" : [
+    "bower_components",
+    "node_modules",
+    "tests"
+  ],
+  "devDependencies": {
+    "qunit": "~1.12.0"
+  }
+}

@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="A free, open source JavaScript framework for creating complex UIs for any screen. 3D layout and physics animation engines. Renders to DOM, Canvas, or WebGL">
+        <title>Famo.us</title>
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="icon" type="image/png" href="/favicon.png">
+        
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="../../src/core/famous.css">
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="../css/code.css">
+    </head>
+
+    <body>
+        <div class="col1" id="doc-container">
+            <div class="col1 pad-l-g1 padt35 padb35">
+                
+<h1 id="layout">Layout</h1>
+<p>Layout in Famo.us is managed by <code>Transforms</code> and <code>Modifiers</code>. <code>Transforms</code><br>encapsulate the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform">CSS3 transform specification</a><br>which define the position, orientation and distortion of a node. While a<br><code>Transform</code> is a static object, representing a snapshot in time, a <code>Modifier</code><br>encapsulates varying <code>Transforms</code> over time. <code>Modifiers</code> also bundle layout<br>properties like <code>size</code>, <code>origin</code> and <code>align</code> that allow for alignment and justification.<br><code>Modifiers</code> can be directly added to the Famo.us Scene Graph, acting on the nodes beneath them.</p>
+<h1 id="overview">Overview</h1>
+<ul>
+<li><a href="#transforms">Transforms</a><ul>
+<li><a href="#primitives">Transform Primitives</a></li>
+<li><a href="#building">Building Complex Transforms</a></li>
+<li><a href="#breakdown">Breaking Down Transforms</a></li>
+</ul>
+</li>
+<li><a href="#modifiers">Modifiers</a></li>
+<li><a href="#alignment">Alignment &amp; Sizing</a><ul>
+<li><a href="#size">Size</a></li>
+<li><a href="#align">Align</a></li>
+<li><a href="#origin">Origin</a></li>
+</ul>
+</li>
+<li><a href="#dynamic">Dynamic Layout</a></li>
+</ul>
+<h2 id="-a-name-transforms-transforms-a-"><a name="transforms">Transforms</a></h2>
+<p><code>Transforms</code> correspond directly to a <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform">CSS3 transformation matrix</a>.<br>A <code>Transform</code> combines <code>translation</code>, <code>rotation</code>, <code>scale</code> and <code>skew</code> components<br>into a 16-element array.</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th style="text-align:center">Description</th>
+<th style="text-align:center">Default Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>translation</td>
+<td style="text-align:center"><code>[x,y,z]</code></td>
+<td style="text-align:center"><code>[0,0,0]</code></td>
+</tr>
+<tr>
+<td>rotation</td>
+<td style="text-align:center"><code>[x,y,z]</code></td>
+<td style="text-align:center"><code>[0,0,0]</code></td>
+</tr>
+<tr>
+<td>scale</td>
+<td style="text-align:center"><code>[x,y,z]</code></td>
+<td style="text-align:center"><code>[1,1,1]</code></td>
+</tr>
+<tr>
+<td>skew</td>
+<td style="text-align:center"><code>[x,y,z]</code></td>
+<td style="text-align:center"><code>[0,0,0]</code></td>
+</tr>
+</tbody>
+</table>
+<p>The <code>Transform</code> class provides methods to break down a <code>Transform</code> into these<br>components, and also to build up <code>Transforms</code> from them.</p>
+<h2 id="-a-name-primitives-transform-primitives-a-"><a name="primitives">Transform Primitives</a></h2>
+<p>All <code>Transforms</code> are built up from these <code>Transforms</code> primitives</p>
+<table>
+<thead>
+<tr>
+<th>Transform</th>
+<th>Return Value</th>
+<th>Components</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Transform.identity</code></td>
+<td><pre>[1,      0,      0,      0, <br> 0,      1,      0,      0, <br> 0,      0,      1,      0, <br> 0,      0,      0,      1]</pre></td>
+<td><pre> translation : [0,0,0] <br> rotation : [0,0,0] <br> scale : [1,1,1] <br> skew : [0,0,0] </pre></td>
+<td>The identity transformation. This has no affect on layout.</td>
+</tr>
+<tr>
+<td><code>Transform.translate(x,y,z)</code></td>
+<td><pre>[1,      0,      0,      0, <br> 0,      1,      0,      0, <br> 0,      0,      1,      0, <br> x,      y,      z,      1]</pre></td>
+<td><pre> translation : [x,y,z] <br> rotation : [0,0,0] <br> scale : [1,1,1] <br> skew : [0,0,0] </pre></td>
+<td>Translates along the x-, y- and z-axes.</td>
+</tr>
+<tr>
+<td><code>Transform.scale(x,y,z)</code></td>
+<td><pre>[x,      0,      0,      0, <br> 0,      y,      0,      0, <br> 0,      0,      z,      0, <br> 0,      0,      0,      1]</pre></td>
+<td><pre> translation : [0,0,0] <br> rotation : [0,0,0] <br> scale : [x,y,z] <br> skew : [0,0,0] </pre></td>
+<td>Scales in the x-, y-, and z-axes relative to an origin.</td>
+</tr>
+<tr>
+<td><code>Transform.rotateX(θ)</code></td>
+<td><pre>[1,      0,      0,      0, <br> 0,      cos(θ),-sin(θ), 0, <br> 0,      sin(θ), cos(θ), 0, <br> 0,      0,      0,      1]</pre></td>
+<td><pre> translation : [0,0,0] <br> rotation : [θ,0,0] <br> scale : [1,1,1] <br> skew : [0,0,0] </pre></td>
+<td>Rotates clock-wise in the y/z-plane (along the x-axis).</td>
+</tr>
+<tr>
+<td><code>Transform.rotateY(θ)</code></td>
+<td><pre>[cos(θ), 0,      sin(θ), 0, <br> 0,      1,      0,      0, <br> sin(θ), 0,      cos(θ), 0, <br> 0,      0,      0,      1]</pre></td>
+<td><pre> translation : [0,0,0] <br> rotation : [0,θ,0] <br> scale : [1,1,1] <br> skew : [0,0,0] </pre></td>
+<td>Rotates clock-wise in the x/z-plane (along the y-axis).</td>
+</tr>
+<tr>
+<td><code>Transform.rotateZ(θ)</code></td>
+<td><pre>[cos(θ),-sin(θ), 0,      0, <br> sin(θ), cos(θ), 0,      0, <br> 0,      0,      0,      0, <br> 0,      0,      0,      1]</pre></td>
+<td><pre> translation : [0,0,0] <br> rotation : [0,0,θ] <br> scale : [1,1,1] <br> skew : [0,0,0] </pre></td>
+<td>Rotates clock-wise in the x/y-plane (along the z-axis).</td>
+</tr>
+<tr>
+<td><code>Transform.skewX(θ)</code></td>
+<td><pre>[1,      0,      0,      0, <br> tan(θ), 1,      0,      0, <br> 0,      0,      1,      0, <br> 0,      0,      0,      1]</pre></td>
+<td><pre> translation : [0,0,0] <br> rotation : [0,0,0] <br> scale : [1,1,1] <br> skew : [θ,0,0] </pre></td>
+<td>Skews along the x-axis. θ gives the angle between the top and left sides.</td>
+</tr>
+<tr>
+<td><code>Transform.skewY(θ)</code></td>
+<td><pre>[1,      tan(θ), 0,      0, <br> 0,      1,      0,      0, <br> 0,      0,      1,      0, <br> 0,      0,      0,      1]</pre></td>
+<td><pre> translation : [0,0,0] <br> rotation : [0,0,0] <br> scale : [1,1,1] <br> skew : [0,θ,0] </pre></td>
+<td>Skews along the y-axis. θ gives the angle between the top and left sides.</td>
+</tr>
+<tr>
+<td><code>Transform.inFront</code></td>
+<td><pre>[1,      0,      0,      0, <br> 0,      1,      0,      0, <br> 0,      0,      1,      0, <br> 0,      0,      0.001,  1]</pre></td>
+<td><pre> translation : [0,0, 0.001] <br> rotation : [0,0,0] <br> scale : [1,1,1] <br> skew : [0,0,0] </pre></td>
+<td>A small z-translation forwards toward the viewer. Useful for layering.</td>
+</tr>
+<tr>
+<td><code>Transform.behind</code></td>
+<td><pre>[1,      0,      0,      0, <br> 0,      1,      0,      0, <br> 0,      0,      1,      0, <br> 0,      0,     -0.001,  1]</pre></td>
+<td><pre> translation : [0,0,-0.001] <br> rotation : [0,0,0] <br> scale : [1,1,1] <br> skew : [0,0,0] </pre></td>
+<td>A small z-translation backwards away from the viewer. Useful for layering.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="-a-name-building-building-transforms-a-"><a name="building">Building Transforms</a></h2>
+<p>Complex <code>Transforms</code> can be built up from the above primitives in two ways</p>
+<ul>
+<li>Nesting <code>Modifiers</code> with <code>Transforms</code> in the Scene Graph</li>
+<li>Composing <code>Transforms</code></li>
+</ul>
+<p>For this guide, we will focus on the latter. See the Scene Graph guide for the former.<br><code>Transform</code> composition is done through the <code>.multiply</code> method. Though <code>.multiply</code><br>is useful for composing arbitrary transforms, it is heavyweight for simple compositions,<br>such as composing a translation on a rotation. Famo.us provides optimized methods for these<br>use cases.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Transform.multiply(T1,T2)</code></td>
+<td>Equivalent to applying a <code>transform</code> <em>T1</em> on top of a <code>transform</code> <em>T2</em>. <em>Note</em>: Order matters!</td>
+</tr>
+<tr>
+<td><code>Transform.thenMove(T,p)</code></td>
+<td>Translates a <code>transform</code> <em>T</em> by <em>p</em> = <code>[x,y,z]</code>. <br> Equivalent to <code>Transform.multiply(Transform.translate(x,y,z), T)</code>.</td>
+</tr>
+<tr>
+<td><code>Transform.moveThen(p,T)</code></td>
+<td>Translates by <em>p</em> = <code>[x,y,z]</code> prior to applying the <code>Transform</code> <em>T</em>. <br> Equivalent to <code>Transform.multiply(T, Transform.translate(x,y,z))</code>.</td>
+</tr>
+<tr>
+<td><code>Transform.thenScale(T,s)</code></td>
+<td>Scales a <code>transform</code> <em>T</em> by <em>s</em> = <code>[x,y,z]</code>. <br> Equivalent to <code>Transform.multiply(Transform.scale(x,y,z), T)</code>.</td>
+</tr>
+<tr>
+<td><code>Transform.aboutOrigin(T,p)</code></td>
+<td>Shifts the origin of a <code>Transform</code> to a new point <em>p</em> = <code>[x,y,z]</code> in pixels from the top/left. <br> For instance, <br> <code>Transform.aboutOrigin(Transform.rotateZ(Math.PI/4), [50,100,0])</code> <br> would rotate a renderable around a pivot at <code>[50,100,0]</code> instead of the top-left.</td>
+</tr>
+<tr>
+<td><code>Transform.average(T1,T2,w)</code></td>
+<td>Returns a weighted average between the two transforms with weight <em>w</em> by averaging their <code>rotate</code>, <code>translate</code>, <code>scale</code> and <code>skew</code> components.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="-a-name-breakdown-breaking-down-transforms-a-"><a name="breakdown">Breaking Down Transforms</a></h2>
+<p>Complex <code>Transforms</code> can be broken up into their individual components via the methods</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Transform.getTransform(T)</code></td>
+<td>Returns the <code>translate</code> components of the <code>Transform</code> <em>T</em>.</td>
+</tr>
+<tr>
+<td><code>Transform.interpret(T)</code></td>
+<td>Returns an object with <code>translate</code>, <code>rotate</code>, <code>scale</code>, and <code>skew</code> keys. <br> <em>Note</em>: This is a relatively expensive operation and its use is discouraged.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="-a-name-modifiers-modifiers-a-"><a name="modifiers">Modifiers</a></h2>
+<p><code>Transforms</code> by themselves can&#39;t be added to the Scene Graph. In order to apply<br>a <code>Transform</code> to a renderable, a <code>Modifier</code> is necessary. A <code>Modifier</code> is a node,<br>and can be directly added to the Scene Graph. A <code>Modifier</code> is best thought of as<br>a shell that accepts primitives, like <code>Transforms</code> that can modify the nodes (which<br>can be other <code>Modifiers</code>) below them either by applying a <code>Transform</code>, <code>opacity</code><br>or alignment.</p>
+<p>Below we demonstrate applying a translational <code>Transform</code> to a <code>Surface</code> 100px<br>in the x- and y- directions.</p>
+<pre><code class="lang-js"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">surface</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Surface</span><span class="p">({</span>
+    <span class="nx">size</span><span class="o">:</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">],</span>
+    <span class="nx">properties</span><span class="o">:</span> <span class="p">{</span> <span class="nx">background</span><span class="o">:</span> <span class="s1">&#39;red&#39;</span> <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">modifier</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Modifier</span><span class="p">({</span>
+    <span class="nx">transform</span> <span class="o">:</span> <span class="nx">Transform</span><span class="p">.</span><span class="nx">translate</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">});</span>
+
+<span class="nx">context</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">modifier</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">surface</span><span class="p">);</span>
+</pre></div>
+
+</code></pre>
+<p>Any <code>Transform</code> can be applied this way. As mentioned above, <code>Modifiers</code> have<br>convenience properties to affect alignment as well. Before we introduce this<br>concept, we will need to understand Famo.us sizing primitives: <code>size</code>, <code>origin</code><br>and <code>align</code>.</p>
+<h2 id="-a-name-alignment-alignment-sizing-a-"><a name="alignment">Alignment &amp; Sizing</a></h2>
+<p>In addition to positioning, <code>Modifiers</code> can also align renderables relative to a<br>size context. This allows users to &quot;center&quot; objects, or &quot;left-justify&quot; them, etc.<br>To understand how this is accomplished in Famo.us, we introduce the concepts of<br><code>size</code>, <code>align</code> and <code>origin</code> in <code>Modifier</code>.</p>
+<h2 id="-a-name-size-size-a-"><a name="size">Size</a></h2>
+<p><code>Size</code> defines a bounding-box for content. Nodes in the Scene Graph below sized<br><code>Modifiers</code> can use this bounding size to define their container&#39;s size. The<br>simplest example being a <code>Surface</code> with <code>size = [undefined, undefined]</code> that<br>takes the size of a parenting <code>Modifier</code>.</p>
+<p>In the following example, the created surface will have a <code>size</code> of <code>[200, 100]</code>,<br>even though its width was original set to <code>undefined</code>.</p>
+<pre><code class="lang-js"><div class="highlight"><pre>  <span class="kd">var</span> <span class="nx">sizeModifier</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Modifier</span><span class="p">({</span><span class="nx">size</span><span class="o">:</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">]});</span>
+
+  <span class="kd">var</span> <span class="nx">surface</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Surface</span><span class="p">({</span>
+    <span class="nx">size</span><span class="o">:</span> <span class="p">[</span><span class="kc">undefined</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span>
+    <span class="nx">properties</span><span class="o">:</span> <span class="p">{</span> <span class="nx">background</span> <span class="o">:</span> <span class="s1">&#39;red&#39;</span> <span class="p">}</span>
+  <span class="p">});</span>
+
+  <span class="nx">context</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">sizeModifier</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">surface</span><span class="p">);</span>
+</pre></div>
+
+</code></pre>
+<p>This concept extends beyond <code>Surfaces</code> to any Famo.us renderable, such as a <code>View</code>.<br>It is especially important in <code>Views</code> that handle layout, such as <code>GridLayout</code> or<br><code>SequentialLayout</code>. These layouts have no intrinsic notion of a boundind-box, and<br>need to have their <code>size</code> defined for them in a parenting <code>Modifier</code>.</p>
+<h2 id="-a-name-align-align-a-"><a name="align">Align</a></h2>
+<p>Layout is often easily described in terms of &quot;top left&quot;, &quot;bottom right&quot;, etc.<br><code>Align</code> is a way of defining an alignment relative to a bounding-box given by a<br><code>size</code>. <code>Align</code> is given by an array <code>[x, y]</code> of proportions between 0 and 1.<br>The default value for the <code>align</code> is top left, or <code>[0, 0]</code>. The following table<br>summarizes common alignment values.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Align Values</th>
+<th style="text-align:center">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>[0, 0]</code></td>
+<td style="text-align:center">Top Left</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[0.5, 0]</code></td>
+<td style="text-align:center">Top Center</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[1, 0]</code></td>
+<td style="text-align:center">Top Right</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[0.5, 0.5]</code></td>
+<td style="text-align:center">Center Center</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[1, 0.5]</code></td>
+<td style="text-align:center">Center Right</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[0.5, 1]</code></td>
+<td style="text-align:center">Bottom Center</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[1, 1]</code></td>
+<td style="text-align:center">Bottom Right</td>
+</tr>
+</tbody>
+</table>
+<p>For example, below is a way of aligning a <code>Surface&#39;s</code> top/left corner to the<br>left center of within a bounding-box of size <code>[100, 100]</code>.</p>
+<pre><code class="lang-js"><div class="highlight"><pre>    <span class="c1">////////////////////////////////////</span>
+    <span class="c1">//</span>
+    <span class="c1">//       100 x 100 bounding box</span>
+    <span class="c1">//                  ↙            </span>
+    <span class="c1">// ┌──────────────┐</span>
+    <span class="c1">// │              │</span>
+    <span class="c1">// │              │</span>
+    <span class="c1">// ├──────┐       │</span>
+    <span class="c1">// │      │       │</span>
+    <span class="c1">// ├──────┘       │</span>
+    <span class="c1">// └──────────────┘</span>
+    <span class="c1">//</span>
+    <span class="c1">////////////////////////////////////</span>
+
+    <span class="kd">var</span> <span class="nx">surface</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Surface</span><span class="p">({</span>
+        <span class="nx">size</span><span class="o">:</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span>
+        <span class="nx">properties</span><span class="o">:</span> <span class="p">{</span> <span class="nx">background</span><span class="o">:</span> <span class="s1">&#39;red&#39;</span> <span class="p">}</span>
+    <span class="p">});</span>
+
+    <span class="kd">var</span> <span class="nx">sizeModifier</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Modifier</span><span class="p">({</span>
+        <span class="nx">size</span><span class="o">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+    <span class="p">});</span>
+
+    <span class="kd">var</span> <span class="nx">alignModifier</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Modifier</span><span class="p">({</span>
+        <span class="nx">align</span><span class="o">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]</span>
+    <span class="p">});</span>
+
+    <span class="nx">context</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">sizeModifier</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">alignModifier</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">surface</span><span class="p">);</span>
+</pre></div>
+
+</code></pre>
+<h2 id="-a-name-origin-origin-a-"><a name="origin">Origin</a></h2>
+<p>In the above example, we aligned the <code>top left</code> corner of the Surface. What if<br>we want to align a different location of the Surface, such as its center? This<br>is done by setting the <code>origin</code> property of a <code>Modifier</code>.</p>
+<p>While alignment is relative to parenting size, origin is relative to the renderable.<br>The combination of the two places the renderable&#39;s origin at the location of the<br>parent&#39;s alignment. This is best described visually:</p>
+<pre><code><div class="highlight"><pre>    <span class="nx">align</span> <span class="nx">point</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span>       <span class="nx">origin</span> <span class="nx">point</span> <span class="p">(</span><span class="err">○</span><span class="p">)</span>
+  <span class="err">┌─────────────────┐</span>        <span class="err">┌───────┐</span>
+  <span class="err">│</span>                 <span class="err">│</span>        <span class="err">│</span>       <span class="err">│</span>
+  <span class="err">│</span>                 <span class="err">│</span>        <span class="err">│</span> <span class="err">○</span>     <span class="err">│</span>
+  <span class="err">│</span>        <span class="o">+</span>        <span class="err">│</span>        <span class="err">└───────┘</span>
+  <span class="err">│</span>                 <span class="err">│</span>       <span class="p">(</span><span class="nx">renderable</span><span class="p">)</span>
+  <span class="err">│</span>                 <span class="err">│</span> 
+  <span class="err">└─────────────────┘</span>
+     <span class="p">(</span><span class="nx">bounding</span> <span class="nx">box</span><span class="p">)</span>
+
+            <span class="nx">align</span> <span class="o">&amp;</span> <span class="nx">origin</span> <span class="p">(</span><span class="err">⊕</span><span class="p">)</span>
+           <span class="err">┌─────────────────┐</span>
+           <span class="err">│</span>      <span class="err">┌───────┐</span>  <span class="err">│</span>
+           <span class="err">│</span>      <span class="err">│</span>       <span class="err">│</span>  <span class="err">│</span>
+           <span class="err">│</span>      <span class="err">│</span> <span class="err">⊕</span>     <span class="err">│</span>  <span class="err">│</span>
+           <span class="err">│</span>      <span class="err">└───────┘</span>  <span class="err">│</span>
+           <span class="err">│</span>                 <span class="err">│</span>
+           <span class="err">└─────────────────┘</span>
+     <span class="p">(</span><span class="nx">renderable</span> <span class="nx">inside</span> <span class="nx">bounding</span> <span class="nx">box</span><span class="p">)</span>
+</pre></div>
+
+</code></pre><p>For example, if we want to have a <code>Surface</code> centered within some sized context,<br>we would need to place the <code>Surface</code>&#39;s center, on the sized context&#39;s center. In<br>code,</p>
+<pre><code class="lang-js"><div class="highlight"><pre>    <span class="c1">////////////////////////////////</span>
+    <span class="c1">//</span>
+    <span class="c1">//        100 x 100 bounding box</span>
+    <span class="c1">//                ↙</span>
+    <span class="c1">// ┌────────────┐</span>
+    <span class="c1">// │  ┌──────┐  │</span>
+    <span class="c1">// │  │      │  │</span>
+    <span class="c1">// │  │      │  │</span>
+    <span class="c1">// │  └──────┘  │</span>
+    <span class="c1">// └────────────┘</span>
+    <span class="c1">//</span>
+    <span class="c1">////////////////////////////////</span>
+
+    <span class="kd">var</span> <span class="nx">surface</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Surface</span><span class="p">({</span>
+        <span class="nx">size</span><span class="o">:</span> <span class="p">[</span><span class="mi">70</span><span class="p">,</span> <span class="mi">70</span><span class="p">],</span>
+        <span class="nx">properties</span><span class="o">:</span> <span class="p">{</span> <span class="nx">background</span><span class="o">:</span> <span class="s1">&#39;red&#39;</span> <span class="p">}</span>
+    <span class="p">});</span>
+
+    <span class="kd">var</span> <span class="nx">sizeModifier</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Modifier</span><span class="p">({</span>
+        <span class="nx">size</span><span class="o">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+    <span class="p">});</span>
+
+    <span class="kd">var</span> <span class="nx">centerModifier</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Modifier</span><span class="p">({</span>
+        <span class="nx">align</span><span class="o">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
+        <span class="nx">origin</span><span class="o">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]</span>
+    <span class="p">});</span>
+
+    <span class="nx">context</span>
+        <span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">sizeModifier</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">centerModifier</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">surface</span><span class="p">);</span>
+</pre></div>
+
+</code></pre>
+<p>The default value for the <code>origin</code> is top left, or <code>[0, 0]</code>. <em>Note</em>: The<br><code>sizeModifier</code> must come before the <code>alignModifier</code> as alignment must reference<br>a <em>parent</em> size. These modifiers can not be combined into one.</p>
+<h2 id="-a-name-dynamic-dynamic-layout-a-"><a name="dynamic">Dynamic Layout</a></h2>
+<p>Thus far, we have only considered setting the <code>transform</code>, <code>size</code>, <code>origin</code> and<br><code>align</code> parameters as a static property of a <code>Modifier</code>. However, each of these<br>properties can animate over time. This can be done in one of two methods</p>
+<ul>
+<li><a href="#push">push-based</a></li>
+<li><a href="#pull">pull-based</a></li>
+</ul>
+<h4 id="-a-name-push-push-based-animations-a-"><a name="push">Push-based animations</a></h4>
+<p>The <code>StateModifier</code> class found in Famous/modifiers/StateModifier.js is a push-based<br>implementation. Here, <code>StateModifier</code> has the methods</p>
+<table>
+<thead>
+<tr>
+<th>method</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>StateModifier.setTransform(T, definition, callback)</code></td>
+<td>Sets the <code>transform</code> state.</td>
+</tr>
+<tr>
+<td><code>StateModifier.setOpacity(opacity, definition, callack)</code></td>
+<td>Sets the <code>opacity</code> state.</td>
+</tr>
+<tr>
+<td><code>StateModifier.setSize(size, definition, callack)</code></td>
+<td>Sets the <code>size</code> state.</td>
+</tr>
+<tr>
+<td><code>StateModifier.setOrigin(origin, definition, callack)</code></td>
+<td>Sets the <code>origin</code> state.</td>
+</tr>
+<tr>
+<td><code>StateModifier.setAlign(align, definition, callack)</code></td>
+<td>Sets the <code>align</code> state.</td>
+</tr>
+</tbody>
+</table>
+<p>A push-based example of animating a renderable is</p>
+<pre><code class="lang-js"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">surface</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Surface</span><span class="p">({</span>
+    <span class="nx">size</span><span class="o">:</span> <span class="p">[</span><span class="mi">70</span><span class="p">,</span> <span class="mi">70</span><span class="p">],</span>
+    <span class="nx">properties</span><span class="o">:</span> <span class="p">{</span> <span class="nx">background</span><span class="o">:</span> <span class="s1">&#39;red&#39;</span> <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">stateModifier</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">StateModifier</span><span class="p">({</span>
+    <span class="nx">opacity</span><span class="o">:</span> <span class="mi">1</span>
+<span class="p">});</span>
+
+<span class="nx">context</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">stateModifier</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">surface</span><span class="p">);</span>
+
+<span class="c1">// animate the opacity from 1 to 0 over 500ms using a linear easing curve</span>
+<span class="nx">stateModifier</span><span class="p">.</span><span class="nx">setOpacity</span><span class="p">(</span>
+    <span class="mi">0</span><span class="p">,</span>
+    <span class="p">{</span><span class="nx">curve</span><span class="o">:</span> <span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="nx">duration</span> <span class="o">:</span> <span class="mi">500</span><span class="p">},</span>
+    <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;animation finished!&#39;</span><span class="p">)</span> <span class="p">}</span>
+<span class="p">);</span>
+</pre></div>
+
+</code></pre>
+<h4 id="-a-name-pull-pull-based-animations-a-"><a name="pull">Pull-based animations</a></h4>
+<p>The <code>Modifier</code> class found in Famous/core/Modifier.js is a pull-based<br>implementation. The <code>Modifier</code> itself doesn&#39;t keep any state (like what the<br>current <code>Transform</code> is); instead that state is provided externally by a getter,<br>which is either a function that returns the state, or an object with a <code>.get</code><br>method that returns the state. <code>Modifier</code> has the methods</p>
+<table>
+<thead>
+<tr>
+<th>method</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Modifier.transformFrom(transformGetter)</code></td>
+<td>The <code>transform</code> state is pulled from the <code>transformGetter</code>.</td>
+</tr>
+<tr>
+<td><code>Modifier.opacityFrom(opacityGetter)</code></td>
+<td>The <code>opacity</code> state is pulled from the <code>opacityGetter</code>.</td>
+</tr>
+<tr>
+<td><code>Modifier.sizeFrom(sizeGetter)</code></td>
+<td>The <code>size</code> state is pulled from the <code>sizeGetter</code>.</td>
+</tr>
+<tr>
+<td><code>Modifier.originFrom(originGetter)</code></td>
+<td>The <code>origin</code> state is pulled from the <code>originGetter</code>.</td>
+</tr>
+<tr>
+<td><code>Modifier.alignFrom(alignGetter)</code></td>
+<td>The <code>align</code> state is pulled from the <code>alignGetter</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>The same example above can be recreated in a pull-based way as</p>
+<pre><code class="lang-js"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">surface</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Surface</span><span class="p">({</span>
+    <span class="nx">size</span><span class="o">:</span> <span class="p">[</span><span class="mi">70</span><span class="p">,</span> <span class="mi">70</span><span class="p">],</span>
+    <span class="nx">properties</span><span class="o">:</span> <span class="p">{</span> <span class="nx">background</span><span class="o">:</span> <span class="s1">&#39;red&#39;</span> <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">modifier</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Modifier</span><span class="p">();</span>
+
+<span class="nx">context</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">modifier</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">surface</span><span class="p">);</span>
+
+<span class="c1">// the opacityGetter</span>
+<span class="kd">var</span> <span class="nx">opacityState</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Transitionable</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="nx">modifier</span><span class="p">.</span><span class="nx">opacityFrom</span><span class="p">(</span><span class="nx">opacityState</span><span class="p">);</span>
+
+<span class="c1">// animate the opacity from 1 to 0 over 500ms using a linear easing curve</span>
+<span class="nx">opacityState</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span>
+    <span class="mi">0</span><span class="p">,</span>
+    <span class="p">{</span><span class="nx">curve</span> <span class="o">:</span> <span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="nx">duration</span> <span class="o">:</span> <span class="mi">500</span><span class="p">},</span>
+    <span class="kd">function</span><span class="p">(){</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;animation finished!&#39;</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+
+</code></pre>
+
+
+            </div>
+        </div> 
+    </body>
+</html>

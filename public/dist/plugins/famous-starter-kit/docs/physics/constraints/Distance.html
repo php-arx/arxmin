@@ -1,0 +1,357 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <meta name="description" content="A free, open source JavaScript framework for creating complex UIs for any screen. 3D layout and physics animation engines. Renders to DOM, Canvas, or WebGL"/>
+  <title>Famo.us</title>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <meta name="viewport" content="width=device-width"/>
+  <link href="http://fonts.googleapis.com/css?family=Lato&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css"/>
+  <link rel='icon' type='image/png' href='../../favicon.png'/>
+  <link rel='stylesheet' href='../../css/famous_styles.css'/>
+</head>
+<body>
+<div id="doc-container" class="col1">
+  <div class="col1 navigation-margin relative pad20">
+    <div class="col1">
+      <div class="col1-4">
+        <ul class="mar-20 sidebar nav">
+          <li>core</li>
+          <li><a href="../../core/Context.html">Context</a>
+          </li>
+          <li><a href="../../core/ElementAllocator.html">ElementAllocator</a>
+          </li>
+          <li><a href="../../core/ElementOutput.html">ElementOutput</a>
+          </li>
+          <li><a href="../../core/Engine.html">Engine</a>
+          </li>
+          <li><a href="../../core/Entity.html">Entity</a>
+          </li>
+          <li><a href="../../core/EventEmitter.html">EventEmitter</a>
+          </li>
+          <li><a href="../../core/EventHandler.html">EventHandler</a>
+          </li>
+          <li><a href="../../core/Group.html">Group</a>
+          </li>
+          <li><a href="../../core/Modifier.html">Modifier</a>
+          </li>
+          <li><a href="../../core/OptionsManager.html">OptionsManager</a>
+          </li>
+          <li><a href="../../core/RenderNode.html">RenderNode</a>
+          </li>
+          <li><a href="../../core/Scene.html">Scene</a>
+          </li>
+          <li><a href="../../core/SpecParser.html">SpecParser</a>
+          </li>
+          <li><a href="../../core/Transform.html">Transform</a>
+          </li>
+          <li><a href="../../core/View.html">View</a>
+          </li>
+          <li><a href="../../core/ViewSequence.html">ViewSequence</a>
+          </li>
+          <li>events</li>
+          <li><a href="../../events/EventArbiter.html">EventArbiter</a>
+          </li>
+          <li><a href="../../events/EventFilter.html">EventFilter</a>
+          </li>
+          <li><a href="../../events/EventMapper.html">EventMapper</a>
+          </li>
+          <li>inputs</li>
+          <li><a href="../../inputs/Accumulator.html">Accumulator</a>
+          </li>
+          <li><a href="../../inputs/GenericSync.html">GenericSync</a>
+          </li>
+          <li><a href="../../inputs/MouseSync.html">MouseSync</a>
+          </li>
+          <li><a href="../../inputs/PinchSync.html">PinchSync</a>
+          </li>
+          <li><a href="../../inputs/RotateSync.html">RotateSync</a>
+          </li>
+          <li><a href="../../inputs/ScaleSync.html">ScaleSync</a>
+          </li>
+          <li><a href="../../inputs/ScrollSync.html">ScrollSync</a>
+          </li>
+          <li><a href="../../inputs/TouchSync.html">TouchSync</a>
+          </li>
+          <li><a href="../../inputs/TouchTracker.html">TouchTracker</a>
+          </li>
+          <li><a href="../../inputs/TwoFingerSync.html">TwoFingerSync</a>
+          </li>
+          <li>math</li>
+          <li><a href="../../math/Matrix.html">Matrix</a>
+          </li>
+          <li><a href="../../math/Quaternion.html">Quaternion</a>
+          </li>
+          <li><a href="../../math/Random.html">Random</a>
+          </li>
+          <li><a href="../../math/Utilities.html">Utilities</a>
+          </li>
+          <li><a href="../../math/Vector.html">Vector</a>
+          </li>
+          <li>modifiers</li>
+          <li><a href="../../modifiers/Draggable.html">Draggable</a>
+          </li>
+          <li><a href="../../modifiers/Fader.html">Fader</a>
+          </li>
+          <li><a href="../../modifiers/ModifierChain.html">ModifierChain</a>
+          </li>
+          <li><a href="../../modifiers/StateModifier.html">StateModifier</a>
+          </li>
+          <li>physics</li>
+          <li><a href="../../physics/PhysicsEngine.html">PhysicsEngine</a>
+          </li>
+          <li>physics/bodies</li>
+          <li><a href="../../physics/bodies/Body.html">Body</a>
+          </li>
+          <li><a href="../../physics/bodies/Circle.html">Circle</a>
+          </li>
+          <li><a href="../../physics/bodies/Particle.html">Particle</a>
+          </li>
+          <li><a href="../../physics/bodies/Rectangle.html">Rectangle</a>
+          </li>
+          <li>physics/constraints</li>
+          <li><a href="../../physics/constraints/Surface.html">Surface</a>
+          </li>
+          <li><a href="../../physics/constraints/Collision.html">Collision</a>
+          </li>
+          <li><a href="../../physics/constraints/Constraint.html">Constraint</a>
+          </li>
+          <li><a href="../../physics/constraints/Curve.html">Curve</a>
+          </li>
+          <li><a href="../../physics/constraints/Distance.html">Distance</a>
+          </li>
+          <li><a href="../../physics/constraints/Snap.html">Snap</a>
+          </li>
+          <li><a href="../../physics/constraints/Wall.html">Wall</a>
+          </li>
+          <li><a href="../../physics/constraints/Walls.html">Walls</a>
+          </li>
+          <li>physics/forces</li>
+          <li><a href="../../physics/forces/Drag.html">Drag</a>
+          </li>
+          <li><a href="../../physics/forces/Force.html">Force</a>
+          </li>
+          <li><a href="../../physics/forces/Repulsion.html">Repulsion</a>
+          </li>
+          <li><a href="../../physics/forces/RotationalDrag.html">RotationalDrag</a>
+          </li>
+          <li><a href="../../physics/forces/RotationalSpring.html">RotationalSpring</a>
+          </li>
+          <li><a href="../../physics/forces/Spring.html">Spring</a>
+          </li>
+          <li><a href="../../physics/forces/VectorField.html">VectorField</a>
+          </li>
+          <li>physics/integrators</li>
+          <li><a href="../../physics/integrators/SymplecticEuler.html">SymplecticEuler</a>
+          </li>
+          <li>surfaces</li>
+          <li><a href="../../surfaces/CanvasSurface.html">CanvasSurface</a>
+          </li>
+          <li><a href="../../surfaces/ContainerSurface.html">ContainerSurface</a>
+          </li>
+          <li><a href="../../surfaces/ImageSurface.html">ImageSurface</a>
+          </li>
+          <li><a href="../../surfaces/InputSurface.html">InputSurface</a>
+          </li>
+          <li><a href="../../surfaces/TextareaSurface.html">TextareaSurface</a>
+          </li>
+          <li><a href="../../surfaces/VideoSurface.html">VideoSurface</a>
+          </li>
+          <li>transitions</li>
+          <li><a href="../../transitions/CachedMap.html">CachedMap</a>
+          </li>
+          <li><a href="../../transitions/Easing.html">Easing</a>
+          </li>
+          <li><a href="../../transitions/MultipleTransition.html">MultipleTransition</a>
+          </li>
+          <li><a href="../../transitions/SnapTransition.html">SnapTransition</a>
+          </li>
+          <li><a href="../../transitions/SpringTransition.html">SpringTransition</a>
+          </li>
+          <li><a href="../../transitions/Transitionable.html">Transitionable</a>
+          </li>
+          <li><a href="../../transitions/TransitionableTransform.html">TransitionableTransform</a>
+          </li>
+          <li><a href="../../transitions/TweenTransition.html">TweenTransition</a>
+          </li>
+          <li><a href="../../transitions/WallTransition.html">WallTransition</a>
+          </li>
+          <li>utilities</li>
+          <li><a href="../../utilities/KeyCodes.html">KeyCodes</a>
+          </li>
+          <li><a href="../../utilities/Timer.html">Timer</a>
+          </li>
+          <li><a href="../../utilities/Utility.html">Utility</a>
+          </li>
+          <li>views</li>
+          <li><a href="../../views/ContextualView.html">ContextualView</a>
+          </li>
+          <li><a href="../../views/Deck.html">Deck</a>
+          </li>
+          <li><a href="../../views/DrawerLayout.html">DrawerLayout</a>
+          </li>
+          <li><a href="../../views/EdgeSwapper.html">EdgeSwapper</a>
+          </li>
+          <li><a href="../../views/FlexibleLayout.html">FlexibleLayout</a>
+          </li>
+          <li><a href="../../views/Flipper.html">Flipper</a>
+          </li>
+          <li><a href="../../views/GridLayout.html">GridLayout</a>
+          </li>
+          <li><a href="../../views/HeaderFooterLayout.html">HeaderFooterLayout</a>
+          </li>
+          <li><a href="../../views/Lightbox.html">Lightbox</a>
+          </li>
+          <li><a href="../../views/RenderController.html">RenderController</a>
+          </li>
+          <li><a href="../../views/ScrollContainer.html">ScrollContainer</a>
+          </li>
+          <li><a href="../../views/Scroller.html">Scroller</a>
+          </li>
+          <li><a href="../../views/Scrollview.html">Scrollview</a>
+          </li>
+          <li><a href="../../views/SequentialLayout.html">SequentialLayout</a>
+          </li>
+          <li>widgets</li>
+          <li><a href="../../widgets/NavigationBar.html">NavigationBar</a>
+          </li>
+          <li><a href="../../widgets/ToggleButton.html">TabBar</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col1-2">
+        <div id="docs-container" class="cf docs col1 pad-g1 main">
+          <div class="col1 pad-ls-g1 pad-t1">
+            <div class="col1 spacer">
+              <div class="col1 spacer-bar mar-b">
+                <h2 class="col1">Distance</h2>
+                <h6 class="miniSpacer">A constraint that keeps a physics body a given distance away from a given anchor, or another attached body.</h6>
+              </div>
+              <div class="col1 miniSpacer spacer-bar mar-b">
+                <h3 class="col-1">Overview</h3>
+                <div class="col1-3">
+                  <h5>Options</h5><a href="#options-anchor" class="col1">anchor</a><a href="#options-length" class="col1">length</a><a href="#options-minLength" class="col1">minLength</a><a href="#options-period" class="col1">period</a><a href="#options-dampingRatio" class="col1">dampingRatio</a>
+                </div>
+                <div class="col1-3">
+                  <h5>Methods</h5><a href="#undefined" class="col1"></a><a href="#setOptions" class="col1">setOptions</a><a href="#applyConstraint" class="col1">applyConstraint</a>
+                </div>
+              </div>
+              <div class="col1 linkable"><a href="#Distance" class="relative"><img src="../../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                <h3 id="Distance" class="mar-t1 left">Distance(options)</h3>
+              </div>
+              <h5 class="medium-grey miniSpacer col1">Constructor Parameters</h5>
+              <div class="col1 spacer-bar mar-b">
+                <p class="col1-3">options</p>
+                <p class="col1-3 monospace">Options</p>
+                <p class="col1-3">An object of configurable options.</p>
+                <div class="left mar-20">
+                  <div id="options-anchor" class="col1">
+                    <div class="col1 miniSpacer">
+                      <div class="col1-3 red miniSpacer">anchor</div>
+                      <div class="col1-3 monospace">Array</div>
+                      <div class="col1-3">The location of the anchor</div>
+                      <!-- todo: .col1-3= param.optional-->
+                    </div>
+                  </div>
+                  <div id="options-length" class="col1">
+                    <div class="col1 miniSpacer">
+                      <div class="col1-3 red miniSpacer">length</div>
+                      <div class="col1-3 monospace">Number</div>
+                      <div class="col1-3">The amount of distance from the anchor the constraint should enforce</div>
+                      <!-- todo: .col1-3= param.optional-->
+                    </div>
+                  </div>
+                  <div id="options-minLength" class="col1">
+                    <div class="col1 miniSpacer">
+                      <div class="col1-3 red miniSpacer">minLength</div>
+                      <div class="col1-3 monospace">Number</div>
+                      <div class="col1-3">The minimum distance before the constraint is activated. Use this property for a &quot;rope&quot; effect.</div>
+                      <!-- todo: .col1-3= param.optional-->
+                    </div>
+                  </div>
+                  <div id="options-period" class="col1">
+                    <div class="col1 miniSpacer">
+                      <div class="col1-3 red miniSpacer">period</div>
+                      <div class="col1-3 monospace">Number</div>
+                      <div class="col1-3">The spring-like reaction when the constraint is broken.</div>
+                      <!-- todo: .col1-3= param.optional-->
+                    </div>
+                  </div>
+                  <div id="options-dampingRatio" class="col1">
+                    <div class="col1 miniSpacer">
+                      <div class="col1-3 red miniSpacer">dampingRatio</div>
+                      <div class="col1-3 monospace">Number</div>
+                      <div class="col1-3">The damping-like reaction when the constraint is broken.</div>
+                      <!-- todo: .col1-3= param.optional-->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h5 class="medium-grey miniSpacer col1-2">Methods</h5>
+              <div class="col1-2">
+                <label for="input-private" class="right">Show Private Methods</label>
+                <input type="checkbox" id="input-private" data-type="private" class="right down5"/>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#undefined" class="relative"><img src="../../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="undefined" class="mar-t1 left">()</h3>
+                  </div>
+                  <p>/** * Basic options setter * * @method setOptions * @param options {Objects}</p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#setOptions" class="relative"><img src="../../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="setOptions" class="mar-t1 left">setOptions(anchor)</h3>
+                  </div>
+                  <p>Set the anchor position</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">anchor</div>
+                    <div class="col1-3 monospace">Array</div>
+                    <div class="col1-3"></div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#applyConstraint" class="relative"><img src="../../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="applyConstraint" class="mar-t1 left">applyConstraint(targets, source, dt)</h3>
+                  </div>
+                  <p>Adds an impulse to a physics body's velocity due to the constraint</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">targets</div>
+                    <div class="col1-3 monospace">Array.Body</div>
+                    <div class="col1-3">Array of bodies to apply the constraint to</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">source</div>
+                    <div class="col1-3 monospace">Body</div>
+                    <div class="col1-3">The source of the constraint</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">dt</div>
+                    <div class="col1-3 monospace">Number</div>
+                    <div class="col1-3">Delta time</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="../../js/main.js"></script>
+</body>
+</html>

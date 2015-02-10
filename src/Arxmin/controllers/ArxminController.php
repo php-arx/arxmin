@@ -10,6 +10,7 @@ namespace Arxmin;
 
 use Arx\BaseController as ParentClass;
 
+use Redirect;
 
 class ArxminController extends ParentClass {
 
@@ -19,22 +20,26 @@ class ArxminController extends ParentClass {
 
     public function __construct()
     {
-        global $user;
-
-        $user = UserModel::getAuth();
-
-        $this->assign('user', $user);
+        $this->beforeFilter('arxmin-check');
+        $this->beforeFilter('arxmin-auth', array('except' => array('anyLogin')));
     }
 
+    public function missingMethods(){
+        dd(func_get_args());
+    }
+
+    public function anyIndex(){
+        return Redirect::action('Arxmin\\ModuleController@anyDashboard');
+    }
 
     /**
      *
-     * @todo better login handler !
+     * @todo better login handler
      * @return \Illuminate\View\View
      */
     public function anyLogin()
     {
-        return $this->viewMake('arxmin::layouts.login', get_defined_vars());
+        return $this->viewMake('arxmin::user.login', get_defined_vars());
     }
 
 }

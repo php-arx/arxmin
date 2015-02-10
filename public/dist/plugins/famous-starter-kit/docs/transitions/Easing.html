@@ -1,0 +1,493 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <meta name="description" content="A free, open source JavaScript framework for creating complex UIs for any screen. 3D layout and physics animation engines. Renders to DOM, Canvas, or WebGL"/>
+  <title>Famo.us</title>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <meta name="viewport" content="width=device-width"/>
+  <link href="http://fonts.googleapis.com/css?family=Lato&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css"/>
+  <link rel='icon' type='image/png' href='../favicon.png'/>
+  <link rel='stylesheet' href='../css/famous_styles.css'/>
+</head>
+<body>
+<div id="doc-container" class="col1">
+  <div class="col1 navigation-margin relative pad20">
+    <div class="col1">
+      <div class="col1-4">
+        <ul class="mar-20 sidebar nav">
+          <li>core</li>
+          <li><a href="../core/Context.html">Context</a>
+          </li>
+          <li><a href="../core/ElementAllocator.html">ElementAllocator</a>
+          </li>
+          <li><a href="../core/ElementOutput.html">ElementOutput</a>
+          </li>
+          <li><a href="../core/Engine.html">Engine</a>
+          </li>
+          <li><a href="../core/Entity.html">Entity</a>
+          </li>
+          <li><a href="../core/EventEmitter.html">EventEmitter</a>
+          </li>
+          <li><a href="../core/EventHandler.html">EventHandler</a>
+          </li>
+          <li><a href="../core/Group.html">Group</a>
+          </li>
+          <li><a href="../core/Modifier.html">Modifier</a>
+          </li>
+          <li><a href="../core/OptionsManager.html">OptionsManager</a>
+          </li>
+          <li><a href="../core/RenderNode.html">RenderNode</a>
+          </li>
+          <li><a href="../core/Scene.html">Scene</a>
+          </li>
+          <li><a href="../core/SpecParser.html">SpecParser</a>
+          </li>
+          <li><a href="../core/Transform.html">Transform</a>
+          </li>
+          <li><a href="../core/View.html">View</a>
+          </li>
+          <li><a href="../core/ViewSequence.html">ViewSequence</a>
+          </li>
+          <li>events</li>
+          <li><a href="../events/EventArbiter.html">EventArbiter</a>
+          </li>
+          <li><a href="../events/EventFilter.html">EventFilter</a>
+          </li>
+          <li><a href="../events/EventMapper.html">EventMapper</a>
+          </li>
+          <li>inputs</li>
+          <li><a href="../inputs/Accumulator.html">Accumulator</a>
+          </li>
+          <li><a href="../inputs/GenericSync.html">GenericSync</a>
+          </li>
+          <li><a href="../inputs/MouseSync.html">MouseSync</a>
+          </li>
+          <li><a href="../inputs/PinchSync.html">PinchSync</a>
+          </li>
+          <li><a href="../inputs/RotateSync.html">RotateSync</a>
+          </li>
+          <li><a href="../inputs/ScaleSync.html">ScaleSync</a>
+          </li>
+          <li><a href="../inputs/ScrollSync.html">ScrollSync</a>
+          </li>
+          <li><a href="../inputs/TouchSync.html">TouchSync</a>
+          </li>
+          <li><a href="../inputs/TouchTracker.html">TouchTracker</a>
+          </li>
+          <li><a href="../inputs/TwoFingerSync.html">TwoFingerSync</a>
+          </li>
+          <li>math</li>
+          <li><a href="../math/Matrix.html">Matrix</a>
+          </li>
+          <li><a href="../math/Quaternion.html">Quaternion</a>
+          </li>
+          <li><a href="../math/Random.html">Random</a>
+          </li>
+          <li><a href="../math/Utilities.html">Utilities</a>
+          </li>
+          <li><a href="../math/Vector.html">Vector</a>
+          </li>
+          <li>modifiers</li>
+          <li><a href="../modifiers/Draggable.html">Draggable</a>
+          </li>
+          <li><a href="../modifiers/Fader.html">Fader</a>
+          </li>
+          <li><a href="../modifiers/ModifierChain.html">ModifierChain</a>
+          </li>
+          <li><a href="../modifiers/StateModifier.html">StateModifier</a>
+          </li>
+          <li>physics</li>
+          <li><a href="../physics/PhysicsEngine.html">PhysicsEngine</a>
+          </li>
+          <li>physics/bodies</li>
+          <li><a href="../physics/bodies/Body.html">Body</a>
+          </li>
+          <li><a href="../physics/bodies/Circle.html">Circle</a>
+          </li>
+          <li><a href="../physics/bodies/Particle.html">Particle</a>
+          </li>
+          <li><a href="../physics/bodies/Rectangle.html">Rectangle</a>
+          </li>
+          <li>physics/constraints</li>
+          <li><a href="../physics/constraints/Surface.html">Surface</a>
+          </li>
+          <li><a href="../physics/constraints/Collision.html">Collision</a>
+          </li>
+          <li><a href="../physics/constraints/Constraint.html">Constraint</a>
+          </li>
+          <li><a href="../physics/constraints/Curve.html">Curve</a>
+          </li>
+          <li><a href="../physics/constraints/Distance.html">Distance</a>
+          </li>
+          <li><a href="../physics/constraints/Snap.html">Snap</a>
+          </li>
+          <li><a href="../physics/constraints/Wall.html">Wall</a>
+          </li>
+          <li><a href="../physics/constraints/Walls.html">Walls</a>
+          </li>
+          <li>physics/forces</li>
+          <li><a href="../physics/forces/Drag.html">Drag</a>
+          </li>
+          <li><a href="../physics/forces/Force.html">Force</a>
+          </li>
+          <li><a href="../physics/forces/Repulsion.html">Repulsion</a>
+          </li>
+          <li><a href="../physics/forces/RotationalDrag.html">RotationalDrag</a>
+          </li>
+          <li><a href="../physics/forces/RotationalSpring.html">RotationalSpring</a>
+          </li>
+          <li><a href="../physics/forces/Spring.html">Spring</a>
+          </li>
+          <li><a href="../physics/forces/VectorField.html">VectorField</a>
+          </li>
+          <li>physics/integrators</li>
+          <li><a href="../physics/integrators/SymplecticEuler.html">SymplecticEuler</a>
+          </li>
+          <li>surfaces</li>
+          <li><a href="../surfaces/CanvasSurface.html">CanvasSurface</a>
+          </li>
+          <li><a href="../surfaces/ContainerSurface.html">ContainerSurface</a>
+          </li>
+          <li><a href="../surfaces/ImageSurface.html">ImageSurface</a>
+          </li>
+          <li><a href="../surfaces/InputSurface.html">InputSurface</a>
+          </li>
+          <li><a href="../surfaces/TextareaSurface.html">TextareaSurface</a>
+          </li>
+          <li><a href="../surfaces/VideoSurface.html">VideoSurface</a>
+          </li>
+          <li>transitions</li>
+          <li><a href="../transitions/CachedMap.html">CachedMap</a>
+          </li>
+          <li><a href="../transitions/Easing.html">Easing</a>
+          </li>
+          <li><a href="../transitions/MultipleTransition.html">MultipleTransition</a>
+          </li>
+          <li><a href="../transitions/SnapTransition.html">SnapTransition</a>
+          </li>
+          <li><a href="../transitions/SpringTransition.html">SpringTransition</a>
+          </li>
+          <li><a href="../transitions/Transitionable.html">Transitionable</a>
+          </li>
+          <li><a href="../transitions/TransitionableTransform.html">TransitionableTransform</a>
+          </li>
+          <li><a href="../transitions/TweenTransition.html">TweenTransition</a>
+          </li>
+          <li><a href="../transitions/WallTransition.html">WallTransition</a>
+          </li>
+          <li>utilities</li>
+          <li><a href="../utilities/KeyCodes.html">KeyCodes</a>
+          </li>
+          <li><a href="../utilities/Timer.html">Timer</a>
+          </li>
+          <li><a href="../utilities/Utility.html">Utility</a>
+          </li>
+          <li>views</li>
+          <li><a href="../views/ContextualView.html">ContextualView</a>
+          </li>
+          <li><a href="../views/Deck.html">Deck</a>
+          </li>
+          <li><a href="../views/DrawerLayout.html">DrawerLayout</a>
+          </li>
+          <li><a href="../views/EdgeSwapper.html">EdgeSwapper</a>
+          </li>
+          <li><a href="../views/FlexibleLayout.html">FlexibleLayout</a>
+          </li>
+          <li><a href="../views/Flipper.html">Flipper</a>
+          </li>
+          <li><a href="../views/GridLayout.html">GridLayout</a>
+          </li>
+          <li><a href="../views/HeaderFooterLayout.html">HeaderFooterLayout</a>
+          </li>
+          <li><a href="../views/Lightbox.html">Lightbox</a>
+          </li>
+          <li><a href="../views/RenderController.html">RenderController</a>
+          </li>
+          <li><a href="../views/ScrollContainer.html">ScrollContainer</a>
+          </li>
+          <li><a href="../views/Scroller.html">Scroller</a>
+          </li>
+          <li><a href="../views/Scrollview.html">Scrollview</a>
+          </li>
+          <li><a href="../views/SequentialLayout.html">SequentialLayout</a>
+          </li>
+          <li>widgets</li>
+          <li><a href="../widgets/NavigationBar.html">NavigationBar</a>
+          </li>
+          <li><a href="../widgets/ToggleButton.html">TabBar</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col1-2">
+        <div id="docs-container" class="cf docs col1 pad-g1 main">
+          <div class="col1 pad-ls-g1 pad-t1">
+            <div class="col1 spacer">
+              <div class="col1 spacer-bar mar-b">
+                <h2 class="col1">Easing</h2>
+                <h6 class="miniSpacer">A library of curves which map an animation explicitly as a function of time.</h6>
+              </div>
+              <div class="col1 miniSpacer spacer-bar mar-b">
+                <h3 class="col-1">Overview</h3>
+                <div class="col1-3">
+                  <h5>Methods</h5><a href="#inQuad" class="col1">inQuad</a><a href="#outQuad" class="col1">outQuad</a><a href="#inOutQuad" class="col1">inOutQuad</a><a href="#inCubic" class="col1">inCubic</a><a href="#outCubic" class="col1">outCubic</a><a href="#inOutCubic" class="col1">inOutCubic</a><a href="#inQuart" class="col1">inQuart</a><a href="#outQuart" class="col1">outQuart</a><a href="#inOutQuart" class="col1">inOutQuart</a><a href="#inQuint" class="col1">inQuint</a><a href="#outQuint" class="col1">outQuint</a><a href="#inOutQuint" class="col1">inOutQuint</a><a href="#inSine" class="col1">inSine</a><a href="#outSine" class="col1">outSine</a><a href="#inOutSine" class="col1">inOutSine</a><a href="#inExpo" class="col1">inExpo</a><a href="#outExpo" class="col1">outExpo</a><a href="#inOutExpo" class="col1">inOutExpo</a><a href="#inCirc" class="col1">inCirc</a><a href="#outCirc" class="col1">outCirc</a><a href="#inOutCirc" class="col1">inOutCirc</a><a href="#inElastic" class="col1">inElastic</a><a href="#outElastic" class="col1">outElastic</a><a href="#inOutElastic" class="col1">inOutElastic</a><a href="#inBack" class="col1">inBack</a><a href="#outBack" class="col1">outBack</a><a href="#inOutBack" class="col1">inOutBack</a><a href="#inBounce" class="col1">inBounce</a><a href="#outBounce" class="col1">outBounce</a><a href="#inOutBounce" class="col1">inOutBounce</a>
+                </div>
+              </div>
+              <h5 class="medium-grey miniSpacer col1-2">Methods</h5>
+              <div class="col1-2">
+                <label for="input-private" class="right">Show Private Methods</label>
+                <input type="checkbox" id="input-private" data-type="private" class="right down5"/>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#inQuad" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="inQuad" class="mar-t1 left">inQuad()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#outQuad" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="outQuad" class="mar-t1 left">outQuad()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#inOutQuad" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="inOutQuad" class="mar-t1 left">inOutQuad()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#inCubic" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="inCubic" class="mar-t1 left">inCubic()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#outCubic" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="outCubic" class="mar-t1 left">outCubic()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#inOutCubic" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="inOutCubic" class="mar-t1 left">inOutCubic()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#inQuart" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="inQuart" class="mar-t1 left">inQuart()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#outQuart" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="outQuart" class="mar-t1 left">outQuart()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#inOutQuart" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="inOutQuart" class="mar-t1 left">inOutQuart()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#inQuint" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="inQuint" class="mar-t1 left">inQuint()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#outQuint" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="outQuint" class="mar-t1 left">outQuint()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#inOutQuint" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="inOutQuint" class="mar-t1 left">inOutQuint()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#inSine" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="inSine" class="mar-t1 left">inSine()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#outSine" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="outSine" class="mar-t1 left">outSine()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#inOutSine" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="inOutSine" class="mar-t1 left">inOutSine()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#inExpo" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="inExpo" class="mar-t1 left">inExpo()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#outExpo" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="outExpo" class="mar-t1 left">outExpo()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#inOutExpo" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="inOutExpo" class="mar-t1 left">inOutExpo()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#inCirc" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="inCirc" class="mar-t1 left">inCirc()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#outCirc" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="outCirc" class="mar-t1 left">outCirc()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#inOutCirc" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="inOutCirc" class="mar-t1 left">inOutCirc()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#inElastic" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="inElastic" class="mar-t1 left">inElastic()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#outElastic" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="outElastic" class="mar-t1 left">outElastic()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#inOutElastic" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="inOutElastic" class="mar-t1 left">inOutElastic()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#inBack" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="inBack" class="mar-t1 left">inBack()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#outBack" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="outBack" class="mar-t1 left">outBack()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#inOutBack" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="inOutBack" class="mar-t1 left">inOutBack()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#inBounce" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="inBounce" class="mar-t1 left">inBounce()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#outBounce" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="outBounce" class="mar-t1 left">outBounce()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#inOutBounce" class="relative"><img src="../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="inOutBounce" class="mar-t1 left">inOutBounce()<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Static</small></h3>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="../js/main.js"></script>
+</body>
+</html>

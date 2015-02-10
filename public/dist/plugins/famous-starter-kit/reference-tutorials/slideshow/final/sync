@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "Syncing to S3"
+aws s3 sync . s3://launch.famo.us/fu-assets/slideshow/change-animations-1 --acl public-read

@@ -1,0 +1,474 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <meta name="description" content="A free, open source JavaScript framework for creating complex UIs for any screen. 3D layout and physics animation engines. Renders to DOM, Canvas, or WebGL"/>
+  <title>Famo.us</title>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <meta name="viewport" content="width=device-width"/>
+  <link href="http://fonts.googleapis.com/css?family=Lato&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css"/>
+  <link rel='icon' type='image/png' href='../../favicon.png'/>
+  <link rel='stylesheet' href='../../css/famous_styles.css'/>
+</head>
+<body>
+<div id="doc-container" class="col1">
+  <div class="col1 navigation-margin relative pad20">
+    <div class="col1">
+      <div class="col1-4">
+        <ul class="mar-20 sidebar nav">
+          <li>core</li>
+          <li><a href="../../core/Context.html">Context</a>
+          </li>
+          <li><a href="../../core/ElementAllocator.html">ElementAllocator</a>
+          </li>
+          <li><a href="../../core/ElementOutput.html">ElementOutput</a>
+          </li>
+          <li><a href="../../core/Engine.html">Engine</a>
+          </li>
+          <li><a href="../../core/Entity.html">Entity</a>
+          </li>
+          <li><a href="../../core/EventEmitter.html">EventEmitter</a>
+          </li>
+          <li><a href="../../core/EventHandler.html">EventHandler</a>
+          </li>
+          <li><a href="../../core/Group.html">Group</a>
+          </li>
+          <li><a href="../../core/Modifier.html">Modifier</a>
+          </li>
+          <li><a href="../../core/OptionsManager.html">OptionsManager</a>
+          </li>
+          <li><a href="../../core/RenderNode.html">RenderNode</a>
+          </li>
+          <li><a href="../../core/Scene.html">Scene</a>
+          </li>
+          <li><a href="../../core/SpecParser.html">SpecParser</a>
+          </li>
+          <li><a href="../../core/Transform.html">Transform</a>
+          </li>
+          <li><a href="../../core/View.html">View</a>
+          </li>
+          <li><a href="../../core/ViewSequence.html">ViewSequence</a>
+          </li>
+          <li>events</li>
+          <li><a href="../../events/EventArbiter.html">EventArbiter</a>
+          </li>
+          <li><a href="../../events/EventFilter.html">EventFilter</a>
+          </li>
+          <li><a href="../../events/EventMapper.html">EventMapper</a>
+          </li>
+          <li>inputs</li>
+          <li><a href="../../inputs/Accumulator.html">Accumulator</a>
+          </li>
+          <li><a href="../../inputs/GenericSync.html">GenericSync</a>
+          </li>
+          <li><a href="../../inputs/MouseSync.html">MouseSync</a>
+          </li>
+          <li><a href="../../inputs/PinchSync.html">PinchSync</a>
+          </li>
+          <li><a href="../../inputs/RotateSync.html">RotateSync</a>
+          </li>
+          <li><a href="../../inputs/ScaleSync.html">ScaleSync</a>
+          </li>
+          <li><a href="../../inputs/ScrollSync.html">ScrollSync</a>
+          </li>
+          <li><a href="../../inputs/TouchSync.html">TouchSync</a>
+          </li>
+          <li><a href="../../inputs/TouchTracker.html">TouchTracker</a>
+          </li>
+          <li><a href="../../inputs/TwoFingerSync.html">TwoFingerSync</a>
+          </li>
+          <li>math</li>
+          <li><a href="../../math/Matrix.html">Matrix</a>
+          </li>
+          <li><a href="../../math/Quaternion.html">Quaternion</a>
+          </li>
+          <li><a href="../../math/Random.html">Random</a>
+          </li>
+          <li><a href="../../math/Utilities.html">Utilities</a>
+          </li>
+          <li><a href="../../math/Vector.html">Vector</a>
+          </li>
+          <li>modifiers</li>
+          <li><a href="../../modifiers/Draggable.html">Draggable</a>
+          </li>
+          <li><a href="../../modifiers/Fader.html">Fader</a>
+          </li>
+          <li><a href="../../modifiers/ModifierChain.html">ModifierChain</a>
+          </li>
+          <li><a href="../../modifiers/StateModifier.html">StateModifier</a>
+          </li>
+          <li>physics</li>
+          <li><a href="../../physics/PhysicsEngine.html">PhysicsEngine</a>
+          </li>
+          <li>physics/bodies</li>
+          <li><a href="../../physics/bodies/Body.html">Body</a>
+          </li>
+          <li><a href="../../physics/bodies/Circle.html">Circle</a>
+          </li>
+          <li><a href="../../physics/bodies/Particle.html">Particle</a>
+          </li>
+          <li><a href="../../physics/bodies/Rectangle.html">Rectangle</a>
+          </li>
+          <li>physics/constraints</li>
+          <li><a href="../../physics/constraints/Surface.html">Surface</a>
+          </li>
+          <li><a href="../../physics/constraints/Collision.html">Collision</a>
+          </li>
+          <li><a href="../../physics/constraints/Constraint.html">Constraint</a>
+          </li>
+          <li><a href="../../physics/constraints/Curve.html">Curve</a>
+          </li>
+          <li><a href="../../physics/constraints/Distance.html">Distance</a>
+          </li>
+          <li><a href="../../physics/constraints/Snap.html">Snap</a>
+          </li>
+          <li><a href="../../physics/constraints/Wall.html">Wall</a>
+          </li>
+          <li><a href="../../physics/constraints/Walls.html">Walls</a>
+          </li>
+          <li>physics/forces</li>
+          <li><a href="../../physics/forces/Drag.html">Drag</a>
+          </li>
+          <li><a href="../../physics/forces/Force.html">Force</a>
+          </li>
+          <li><a href="../../physics/forces/Repulsion.html">Repulsion</a>
+          </li>
+          <li><a href="../../physics/forces/RotationalDrag.html">RotationalDrag</a>
+          </li>
+          <li><a href="../../physics/forces/RotationalSpring.html">RotationalSpring</a>
+          </li>
+          <li><a href="../../physics/forces/Spring.html">Spring</a>
+          </li>
+          <li><a href="../../physics/forces/VectorField.html">VectorField</a>
+          </li>
+          <li>physics/integrators</li>
+          <li><a href="../../physics/integrators/SymplecticEuler.html">SymplecticEuler</a>
+          </li>
+          <li>surfaces</li>
+          <li><a href="../../surfaces/CanvasSurface.html">CanvasSurface</a>
+          </li>
+          <li><a href="../../surfaces/ContainerSurface.html">ContainerSurface</a>
+          </li>
+          <li><a href="../../surfaces/ImageSurface.html">ImageSurface</a>
+          </li>
+          <li><a href="../../surfaces/InputSurface.html">InputSurface</a>
+          </li>
+          <li><a href="../../surfaces/TextareaSurface.html">TextareaSurface</a>
+          </li>
+          <li><a href="../../surfaces/VideoSurface.html">VideoSurface</a>
+          </li>
+          <li>transitions</li>
+          <li><a href="../../transitions/CachedMap.html">CachedMap</a>
+          </li>
+          <li><a href="../../transitions/Easing.html">Easing</a>
+          </li>
+          <li><a href="../../transitions/MultipleTransition.html">MultipleTransition</a>
+          </li>
+          <li><a href="../../transitions/SnapTransition.html">SnapTransition</a>
+          </li>
+          <li><a href="../../transitions/SpringTransition.html">SpringTransition</a>
+          </li>
+          <li><a href="../../transitions/Transitionable.html">Transitionable</a>
+          </li>
+          <li><a href="../../transitions/TransitionableTransform.html">TransitionableTransform</a>
+          </li>
+          <li><a href="../../transitions/TweenTransition.html">TweenTransition</a>
+          </li>
+          <li><a href="../../transitions/WallTransition.html">WallTransition</a>
+          </li>
+          <li>utilities</li>
+          <li><a href="../../utilities/KeyCodes.html">KeyCodes</a>
+          </li>
+          <li><a href="../../utilities/Timer.html">Timer</a>
+          </li>
+          <li><a href="../../utilities/Utility.html">Utility</a>
+          </li>
+          <li>views</li>
+          <li><a href="../../views/ContextualView.html">ContextualView</a>
+          </li>
+          <li><a href="../../views/Deck.html">Deck</a>
+          </li>
+          <li><a href="../../views/DrawerLayout.html">DrawerLayout</a>
+          </li>
+          <li><a href="../../views/EdgeSwapper.html">EdgeSwapper</a>
+          </li>
+          <li><a href="../../views/FlexibleLayout.html">FlexibleLayout</a>
+          </li>
+          <li><a href="../../views/Flipper.html">Flipper</a>
+          </li>
+          <li><a href="../../views/GridLayout.html">GridLayout</a>
+          </li>
+          <li><a href="../../views/HeaderFooterLayout.html">HeaderFooterLayout</a>
+          </li>
+          <li><a href="../../views/Lightbox.html">Lightbox</a>
+          </li>
+          <li><a href="../../views/RenderController.html">RenderController</a>
+          </li>
+          <li><a href="../../views/ScrollContainer.html">ScrollContainer</a>
+          </li>
+          <li><a href="../../views/Scroller.html">Scroller</a>
+          </li>
+          <li><a href="../../views/Scrollview.html">Scrollview</a>
+          </li>
+          <li><a href="../../views/SequentialLayout.html">SequentialLayout</a>
+          </li>
+          <li>widgets</li>
+          <li><a href="../../widgets/NavigationBar.html">NavigationBar</a>
+          </li>
+          <li><a href="../../widgets/ToggleButton.html">TabBar</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col1-2">
+        <div id="docs-container" class="cf docs col1 pad-g1 main">
+          <div class="col1 pad-ls-g1 pad-t1">
+            <div class="col1 spacer">
+              <div class="col1 spacer-bar mar-b">
+                <h2 class="col1">Body</h2>
+                <h6 class="miniSpacer">A unit controlled by the physics engine which extends the zero-dimensional Particle to include geometry. In addition to maintaining the state of a Particle its state includes orientation, angular velocity and angular momentum and responds to torque forces.</h6>
+              </div>
+              <div class="col1 miniSpacer spacer-bar mar-b">
+                <h3 class="col-1">Overview</h3>
+                <div class="col1-3">
+                  <h5>Methods</h5><a href="#setMomentsOfInertia" class="col1">setMomentsOfInertia</a><a href="#updateAngularVelocity" class="col1">updateAngularVelocity</a><a href="#toWorldCoordinates" class="col1">toWorldCoordinates</a><a href="#getEnergy" class="col1">getEnergy</a><a href="#reset" class="col1">reset</a><a href="#setOrientation" class="col1">setOrientation</a><a href="#setAngularVelocity" class="col1">setAngularVelocity</a><a href="#setAngularMomentum" class="col1">setAngularMomentum</a><a href="#applyForce" class="col1">applyForce</a><a href="#applyTorque" class="col1">applyTorque</a><a href="#getTransform" class="col1">getTransform</a><a href="#integrateAngularMomentum" class="col1">integrateAngularMomentum</a><a href="#integrateOrientation" class="col1">integrateOrientation</a>
+                </div>
+              </div>
+              <h5 class="medium-grey miniSpacer col1-2">Methods</h5>
+              <div class="col1-2">
+                <label for="input-private" class="right">Show Private Methods</label>
+                <input type="checkbox" id="input-private" data-type="private" class="right down5"/>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#setMomentsOfInertia" class="relative"><img src="../../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="setMomentsOfInertia" class="mar-t1 left">setMomentsOfInertia()</h3>
+                  </div>
+                  <p>Setter for moment of inertia, which is necessary to give proper angular inertia depending on the geometry of the body.</p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#updateAngularVelocity" class="relative"><img src="../../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="updateAngularVelocity" class="mar-t1 left">updateAngularVelocity()</h3>
+                  </div>
+                  <p>Update the angular velocity from the angular momentum state.</p>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#toWorldCoordinates" class="relative"><img src="../../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="toWorldCoordinates" class="mar-t1 left">toWorldCoordinates(localPosition)</h3>
+                  </div>
+                  <p>Determine world coordinates from the local coordinate system. Useful if the Body has rotated in space.</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">localPosition</div>
+                    <div class="col1-3 monospace">Vector</div>
+                    <div class="col1-3">local coordinate vector</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                  <h5 class="medium-grey miniSpacer col1">Returns</h5>
+                  <col1 class="miniSpacer">
+                    <div class="col1-3 red">Vector</div>
+                    <div class="col2-3">global coordinate vector</div>
+                  </col1>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#getEnergy" class="relative"><img src="../../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="getEnergy" class="mar-t1 left">getEnergy()</h3>
+                  </div>
+                  <p>Calculates the kinetic and intertial energy of a body.</p>
+                  <h5 class="medium-grey miniSpacer col1">Returns</h5>
+                  <col1 class="miniSpacer">
+                    <div class="col1-3 red">Number</div>
+                    <div class="col2-3">energy</div>
+                  </col1>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#reset" class="relative"><img src="../../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="reset" class="mar-t1 left">reset(p, v, q, L)</h3>
+                  </div>
+                  <p>Extends Particle.reset to reset orientation, angular velocity and angular momentum.</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">p</div>
+                    <div class="col1-3 monospace">Array|Vector</div>
+                    <div class="col1-3">position</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">v</div>
+                    <div class="col1-3 monospace">Array|Vector</div>
+                    <div class="col1-3">velocity</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">q</div>
+                    <div class="col1-3 monospace">Array|Quaternion</div>
+                    <div class="col1-3">orientation</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">L</div>
+                    <div class="col1-3 monospace">Array|Vector</div>
+                    <div class="col1-3">angular momentum</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#setOrientation" class="relative"><img src="../../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="setOrientation" class="mar-t1 left">setOrientation(q)</h3>
+                  </div>
+                  <p>Setter for orientation</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">q</div>
+                    <div class="col1-3 monospace">Array|Quaternion</div>
+                    <div class="col1-3">orientation</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#setAngularVelocity" class="relative"><img src="../../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="setAngularVelocity" class="mar-t1 left">setAngularVelocity(w)</h3>
+                  </div>
+                  <p>Setter for angular velocity</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">w</div>
+                    <div class="col1-3 monospace">Array|Vector</div>
+                    <div class="col1-3">angular velocity</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#setAngularMomentum" class="relative"><img src="../../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="setAngularMomentum" class="mar-t1 left">setAngularMomentum(L)</h3>
+                  </div>
+                  <p>Setter for angular momentum</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">L</div>
+                    <div class="col1-3 monospace">Array|Vector</div>
+                    <div class="col1-3">angular momentum</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#applyForce" class="relative"><img src="../../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="applyForce" class="mar-t1 left">applyForce(force, location)</h3>
+                  </div>
+                  <p>Extends Particle.applyForce with an optional argument to apply the force at an off-centered location, resulting in a torque.</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">force</div>
+                    <div class="col1-3 monospace">Vector</div>
+                    <div class="col1-3">force</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">location</div>
+                    <div class="col1-3 monospace">Vector</div>
+                    <div class="col1-3">off-center location on the body</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#applyTorque" class="relative"><img src="../../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="applyTorque" class="mar-t1 left">applyTorque(torque)</h3>
+                  </div>
+                  <p>Applied a torque force to a body, inducing a rotation.</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">torque</div>
+                    <div class="col1-3 monospace">Vector</div>
+                    <div class="col1-3">torque</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#getTransform" class="relative"><img src="../../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="getTransform" class="mar-t1 left">getTransform()</h3>
+                  </div>
+                  <p>Extends Particle.getTransform to include a rotational component derived from the particle's orientation.</p>
+                  <h5 class="medium-grey miniSpacer col1">Returns</h5>
+                  <col1 class="miniSpacer">
+                    <div class="col1-3 red">Transform</div>
+                    <div class="col2-3">transform</div>
+                  </col1>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer private-method hidden">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#getTransform" class="relative"><img src="../../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="getTransform" class="mar-t1 left">getTransform(dt)<small class="mar-l-20 medium-grey-bg pad-5 up3 bor-2">Protected</small></h3>
+                  </div>
+                  <p>Extends Particle._integrate to also update the rotational states of the body.</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">dt</div>
+                    <div class="col1-3 monospace">Number</div>
+                    <div class="col1-3">delta time</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#integrateAngularMomentum" class="relative"><img src="../../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="integrateAngularMomentum" class="mar-t1 left">integrateAngularMomentum(dt)</h3>
+                  </div>
+                  <p>Updates the angular momentum via the its integrator.</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">dt</div>
+                    <div class="col1-3 monospace">Number</div>
+                    <div class="col1-3">delta time</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+              <div class="col1 method-block spacer-bar miniSpacer">
+                <div class="method-item">
+                  <div class="col1 linkable"><a href="#integrateOrientation" class="relative"><img src="../../images/link_white.svg" width="15" class="absolute anchor"/></a>
+                    <h3 id="integrateOrientation" class="mar-t1 left">integrateOrientation(dt)</h3>
+                  </div>
+                  <p>Updates the orientation via the its integrator.</p>
+                  <h5 class="medium-grey miniSpacer col1">Parameters</h5>
+                  <div class="col1 miniSpacer">
+                    <div class="col1-3 red miniSpacer">dt</div>
+                    <div class="col1-3 monospace">Number</div>
+                    <div class="col1-3">delta time</div>
+                    <!-- todo: .col1-3= param.optional-->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="../../js/main.js"></script>
+</body>
+</html>

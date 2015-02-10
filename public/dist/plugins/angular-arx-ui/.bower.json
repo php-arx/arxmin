@@ -1,0 +1,15 @@
+{
+  "name": "ngx-library",
+  "homepage": "https://github.com/lmc-eu/ngx-library",
+  "version": "0.3.2",
+  "_release": "0.3.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.3.2",
+    "commit": "c1a78d4a3ad7f310ca0e860fc6edb87c01733100"
+  },
+  "_source": "git@github.com:lmc-eu/ngx-library.git",
+  "_target": "~0.3.2",
+  "_originalSource": "git@github.com:lmc-eu/ngx-library.git",
+  "_direct": true
+}
