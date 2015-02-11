@@ -12,7 +12,7 @@ use LaravelBook\Ardent\Ardent;
  *
  * @package Arxmin
  */
-class User extends Ardent implements UserInterface {
+class User extends \App\User {
 
     /**
      * The database table used by the model.

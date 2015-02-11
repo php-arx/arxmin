@@ -26,8 +26,7 @@
     <div class="animated flipInX  row col-md-offset-3 col-md-6 login-container column-separation">
 
         <div class="col-md-12 "><br>
-
-            <form id="login-form" class="login-form" action="<?php echo action('Arxmin\\UserController@do_login') ?>" method="post">
+            <form id="login-form" class="login-form" method="post">
                 <div class="row">
                     <div class="form-group col-md-10">
                         <label class="form-label">Username</label>
@@ -55,7 +54,7 @@
                 </div>
                 <div class="row">
                     <div class="control-group  col-md-10">
-                        <div class="checkbox checkbox check-success"><a href="<?php echo action('Arxmin\\UserController@forgot_password') ?>">Trouble login in?</a>&nbsp;&nbsp;
+                        <div class="checkbox checkbox check-success"><a href="forgot">Trouble login in?</a>&nbsp;&nbsp;
                             <input type="checkbox" id="remember" value="1">
                             <label for="remember" name="remember">Keep me reminded </label>
                         </div>

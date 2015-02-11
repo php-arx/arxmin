@@ -81,7 +81,7 @@
 <div class="content" ng-app="labelApp" ng-controller="labelCtrl">
     <div class="page-title">
         <h3>
-            <% $this->pageTitle ?: implode('/', Request::segments()) %>
+            <?= $this->pageTitle ?: implode('/', Request::segments()) ?>
         </h3>
     </div>
 
@@ -95,7 +95,7 @@
         </div>
         <div class="col-sm-6">
 
-            <form action="<% url('admin/label-manager') %>" method="POST" enctype="multipart/form-data">
+            <form action="<?= url('admin/label-manager') ?>" method="POST" enctype="multipart/form-data">
                 <input type="file" name="file" />
                 <input type="submit" />
             </form>
@@ -141,16 +141,16 @@
 
             scope.columnCollection = [
                 {label: 'id', map: 'id'},
-                {label: 'uniqueid', map: 'uniqueid', headerTemplateUrl: '<% Request::url().'?filterHtml=true' %>'},
-                {label: 'en', map: 'en', isEditable: true, type: 'text', headerTemplateUrl: '<% Request::url().'?filterHtml=true' %>'},
-                {label: 'fr', map: 'fr', isEditable: true, type: 'text', headerTemplateUrl: '<% Request::url().'?filterHtml=true' %>'},
-                {label: 'nl', map: 'nl', isEditable: true, type: 'text', headerTemplateUrl: '<% Request::url().'?filterHtml=true' %>'},
+                {label: 'uniqueid', map: 'uniqueid', headerTemplateUrl: '<?= Request::url().'?filterHtml=true' ?>'},
+                {label: 'en', map: 'en', isEditable: true, type: 'text', headerTemplateUrl: '<?= Request::url().'?filterHtml=true' ?>'},
+                {label: 'fr', map: 'fr', isEditable: true, type: 'text', headerTemplateUrl: '<?= Request::url().'?filterHtml=true' ?>'},
+                {label: 'nl', map: 'nl', isEditable: true, type: 'text', headerTemplateUrl: '<?= Request::url().'?filterHtml=true' ?>'},
                 {label: 'updated_at', map:'updated_at'},
-                {label: 'key', map:'key', headerTemplateUrl: '<% Request::url().'?filterHtml=true' %>'},
-                {label: 'group', map:'group', headerTemplateUrl: '<% Request::url().'?filterHtml=true' %>'}
+                {label: 'key', map:'key', headerTemplateUrl: '<?= Request::url().'?filterHtml=true' ?>'},
+                {label: 'group', map:'group', headerTemplateUrl: '<?= Request::url().'?filterHtml=true' ?>'}
             ];
 
-            scope.rowCollection = <% json_encode(Label::all()->toArray()) %>;
+            scope.rowCollection = <?= json_encode(Label::all()->toArray()) ?>;
 
             scope.globalConfig = {
                 isPaginationEnabled: true,
@@ -163,7 +163,7 @@
                 http({
                     method: "POST",
                     data: arg.item,
-                    url: "<% Request::url() %>"
+                    url: "<?= Request::url() ?>"
                 }).success(function(data){
                     console.log(data);
                 });

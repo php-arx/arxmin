@@ -1,10 +1,9 @@
 <?php namespace Arxmin;
 
-use Arx\classes\Utils;
+use Arx\classes\ClassLoader;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\ClassLoader;
 use Arx\classes\Hook;
-use \View, \Lang, \Config, \App, \Auth;
+use \View, \Config, \App;
 
 class ArxminServiceProvider extends ServiceProvider
 {
@@ -23,25 +22,27 @@ class ArxminServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->package('arx/arxmin');
+        $this->loadTranslationsFrom(__DIR__ . '/../lang', 'arxmin');
+        $this->loadViewsFrom( __DIR__ . '/../views', 'arxmin');
 
-        Lang::addNamespace('arxmin', __DIR__ . '/../lang');
-        Config::addNamespace('arxmin', __DIR__ . '/../config');
-        View::addNamespace('arxmin', __DIR__ . '/../views');
+        $configPath = __DIR__ . '/../config/config.php';
+        $this->publishes([$configPath => config_path('config.php')], 'arxmin::config');
+        $this->mergeConfigFrom($configPath, 'arxmin::config');
 
         # Add Directories
-        ClassLoader::addDirectories( array(
-                __DIR__ . '/controllers',
-                __DIR__ . '/models',
-                __DIR__ . '/commands',
-                __DIR__ . '/providers',
-                __DIR__ . '/migrations'
+        ClassLoader::addDirectories(array(
+            __DIR__ . '/controllers',
+            __DIR__ . '/models',
+            __DIR__ . '/commands',
+            __DIR__ . '/helpers',
+            __DIR__ . '/providers',
+            __DIR__ . '/migrations'
         ));
 
         include_once __DIR__ . '/../start/global.php';
 
 
-        if(App::runningInConsole()){
+        if (App::runningInConsole()) {
             include_once __DIR__ . '/../start/artisan.php';
         }
 
@@ -58,6 +59,7 @@ class ArxminServiceProvider extends ServiceProvider
      */
     public function register()
     {
+
         /**
          * Register a new hook
          */

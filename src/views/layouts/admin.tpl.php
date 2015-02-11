@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 @section('html')
 <?php if ($this->ngapp) { $this->ngapp = 'ng-app="'.$this->ngapp.'" id="ng-app"';}  ?>
-<!--[if lt IE 7]><html <% $this->ngapp or '' %> class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"><![endif]-->
-<!--[if IE 7]><html <% $this->ngapp or '' %> class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
-<!--[if IE 8]><html <% $this->ngapp or '' %> class="no-js lt-ie9" lang="en"><![endif]-->
-<!--[if gt IE 8]><!--><html <% $this->ngapp or '' %> class="no-js" lang="en"><!--<![endif]-->
+<!--[if lt IE 7]><html <?= $this->ngapp or '' ?> class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"><![endif]-->
+<!--[if IE 7]><html <?= $this->ngapp or '' ?> class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if IE 8]><html <?= $this->ngapp or '' ?> class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html <?= $this->ngapp or '' ?> class="no-js" lang="en"><!--<![endif]-->
 @show
 <head>
     @section('head')
     <meta charset="utf-8"/>
-    <title><% $this->headtitle or 'Arxmin' %></title>
+    <title><?= $this->headtitle ?: 'Arxmin' ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     @show
     @section('css')
     <link href="<?php echo \Arxmin\Arxmin::getThemeUrl() ?>/css/arxmin-combined.css" rel="stylesheet" type="text/css"/>
     <link href="<?php echo \Arxmin\Arxmin::getThemeUrl() ?>/plugins/jquery-ui/jquery-ui.css" rel="stylesheet" type="text/css"/>
-    <%# Allow css hooking #%>
-    <% Asset::css(Hook::get('arxmin::css'));  %>
+    <?php /* Allow css hooking */ ?>
+    <?= Asset::css(Hook::get('arxmin::css'));  ?>
     @show
 
 
@@ -81,7 +81,7 @@
                         <div class="iconset top-down-arrow"></div>
                     </a>
                     <div class="profile-pic">
-                        <img alt="" src="<% $user->gravatar() %>" data-src="<% $user->gravatar() %>" data-src-retina="<% $user->gravatar() %>" width="35" height="35" />
+                        <img alt="" src="<?= $user->gravatar() ?>" data-src="<?= $user->gravatar() ?>" data-src-retina="<?= $user->gravatar() ?>" width="35" height="35" />
                     </div>
                 </div>
                 <ul class="nav quick-section ">
@@ -102,7 +102,7 @@
                         <div class="simple-chat-popup chat-menu-toggle hide" >
                             <div class="simple-chat-popup-arrow"></div><div class="simple-chat-popup-inner">
                                 <div style="width:100px">
-                                    <div class="semi-bold"><% $user->username %></div>
+                                    <div class="semi-bold"><?= $user->username ?></div>
                                     <div class="message">Hey you there </div>
                                 </div>
                             </div>
@@ -248,8 +248,8 @@
     <script src="<?php echo Arxmin::getThemeUrl() ?>/plugins/jquery-flot/jquery.flot.js" type="text/javascript"></script>
     <script src="<?php echo Arxmin::getThemeUrl() ?>/plugins/jquery-metrojs/MetroJs.min.js" type="text/javascript" ></script>
 
-    <%# Allow script hooking #%>
-    <% Asset::js(Hook::get('arxmin::js'));  %>
+    <?php /* Allow script hooking */ ?>
+    <?= Asset::js(Hook::get('arxmin::js'));  ?>
 @show
 </body>
 </html>

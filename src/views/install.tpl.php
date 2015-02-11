@@ -6,6 +6,7 @@ $this->ngapp = 'InstallApp';
 $this->body = array('attributes' => array(
     'ng-controller' => 'InstallCtrl'
 ));
+
 ?>
 
 @section('menu')
@@ -29,7 +30,7 @@ $this->body = array('attributes' => array(
         <div class="panel">
             <div class="panel-heading">
                 <h3 class="panel-title"><i
-                        class="icon-list-alt"></i> <?php echo Lang::get('arxmin::install.step.check.title') ?></h3>
+                        class="icon-list-alt"></i> <?php echo trans('arxmin::install.step.check.title') ?></h3>
 
                 <div class="btn-group">
                     <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse1"><i
@@ -39,7 +40,7 @@ $this->body = array('attributes' => array(
             <div class="panel-body collapse in" id="collapse1">
                 <div class="row">
                     <div class="col-sm-3">
-                        <h2><?= Lang::get("arxmin::install.step.check.requirements") ?><br></h2>
+                        <h2><?= trans("arxmin::install.step.check.requirements") ?><br></h2>
                         <?php
                         foreach ($requirements as $key => $value) {
                             echo '<dt>' . $key . '</dt>';
@@ -47,7 +48,7 @@ $this->body = array('attributes' => array(
                         ?>
                     </div>
                     <div class="col-sm-3">
-                        <h2><?= Lang::get("arxmin::install.step.check.value") ?></h2>
+                        <h2><?= trans("arxmin::install.step.check.value") ?></h2>
                         <?php
                         foreach ($requirements as $key => $value) {
                             echo '<dt>' . $value['value'] . '</dt>';
@@ -55,7 +56,7 @@ $this->body = array('attributes' => array(
                         ?>
                     </div>
                     <div class="col-sm-6">
-                        <h2><?= Lang::get("arxmin::install.step.check.comments") ?></h2>
+                        <h2><?= trans("arxmin::install.step.check.comments") ?></h2>
                         <?php
                         foreach ($requirements as $key => $value) {
                             echo '<dt>' . $value['comment'] . '</dt>';
@@ -64,7 +65,7 @@ $this->body = array('attributes' => array(
                     </div>
                 </div>
                 <a class="btn btn-success pull-right"
-                   href="#"><?php echo Lang::get('arxmin::install.action.refresh') ?></a>
+                   href="#"><?php echo trans('arxmin::install.action.refresh') ?></a>
             </div>
         </div>
 
@@ -75,7 +76,7 @@ $this->body = array('attributes' => array(
         <div class="panel">
             <div class="panel-heading">
                 <h3 class="panel-title"><i
-                        class="icon-list-alt"></i> <?php echo __('arxmin::install.step.db.title', 'Choose your default database') ?></h3>
+                        class="icon-list-alt"></i> <?php echo trans('arxmin::install.step.db.title') ?></h3>
 
                 <div class="btn-group">
                     <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse1"><i
@@ -116,7 +117,7 @@ $this->body = array('attributes' => array(
         <div class="panel">
             <div class="panel-heading">
                 <h3 class="panel-title"><i
-                        class="icon-list-alt"></i> <?php echo __('arxmin::install.step.project.title') ?></h3>
+                        class="icon-list-alt"></i> <?php echo trans('arxmin::install.step.project.title') ?></h3>
 
                 <div class="btn-group">
                     <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse1"><i
@@ -124,10 +125,10 @@ $this->body = array('attributes' => array(
                 </div>
             </div>
             <div class="panel-body collapse in" id="collapse1">
-                <form action="<?php echo action('Arxmin\\InstallController@postInstall'); ?>" method="POST">
-                    <%
-                        \Arx\BootstrapHelper::formGroup('Arxmin project name : ', 'select', 'category', Lang::get('arxmin::categories'));
-                    %>
+                <form action="<?php echo 'arxmin/install'; ?>" method="POST">
+                    <?=
+                        \Arx\BootstrapHelper::formGroup('Arxmin project name : ', 'select', 'category', trans('arxmin::categories'));
+                    ?>
                     <?php echo \Arx\BootstrapHelper::formGroup('Arxmin project name : ', 'text', 'project', Config::get('project.name')) ?>
                     <?php echo \Arx\BootstrapHelper::formGroup('Arxmin username : ', 'text', 'username', 'admin') ?>
                     <?php echo \Arx\BootstrapHelper::formGroup('Arxmin Email : ', 'text', 'email', '') ?>

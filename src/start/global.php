@@ -11,6 +11,4 @@
 |
 */
 
-ClassLoader::addDirectories(array(
-	__DIR__.'/../commands',
-));
+
