@@ -7,8 +7,6 @@ class ApiController extends BaseController {
 
     public function __construct(){
 
-        \Debugbar::disable();
-
         $this->beforeFilter('arxmin::auth', array('except' => array(
             'anyAuth'
         )));

@@ -16,7 +16,7 @@ function labelmanagerController($window, $scope) {
 
     var editor;
 
-    //console.log("url" +  window.__app.ajax.create.url);
+    var config = window.__app;
 
     editor = new $.fn.dataTable.Editor({
         ajax: {
@@ -47,7 +47,7 @@ function labelmanagerController($window, $scope) {
 
     $('#module-labelmanager').DataTable( {
         dom: "Tfrtip",
-        ajax: "http://loc.arx-contrib.com/arxmin/api/v1/labels?format=datatable",
+        ajax: config.base_url + "/arxmin/api/v1/labels?format=datatable",
         columns: [
             { data: null, defaultContent: '', orderable: false },
             {"data" : "ref"},

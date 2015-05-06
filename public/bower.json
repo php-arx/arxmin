@@ -38,5 +38,10 @@
     "jquery-masonry": "~3.2.2",
     "jquery.breakpoints": "*",
     "angular-ui-tree": "~2.2.0"
+  },
+  "resolutions": {
+    "angular": "~1.3.8",
+    "famous": "~0.3.5",
+    "outlayer": "~1.4.0"
   }
 }

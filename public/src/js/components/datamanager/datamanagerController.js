@@ -16,20 +16,21 @@ function datamanagerController($window, $scope) { console.log('-> datamanagerCon
     $scope = angular.extend($scope, __app.scope || {});
 
     var editor;
+    var config = window.__app;
 
     editor = new $.fn.dataTable.Editor( {
         ajax: {
             create: {
                 type: 'POST',
-                url:  "http://loc.arx-contrib.com/arxmin/api/v1/data"
+                url:  config.base_url + "/arxmin/api/v1/data"
             },
             edit: {
                 type: 'PUT',
-                url:  "http://loc.arx-contrib.com/arxmin/api/v1/data/_id_"
+                url:  config.base_url + "/arxmin/api/v1/data/_id_"
             },
             remove: {
                 type: 'DELETE',
-                url:  "http://loc.arx-contrib.com/arxmin/api/v1/data/_id_"
+                url:  config.base_url + "/arxmin/api/v1/data/_id_"
             }
         },
         table: "#module-datamanager",
@@ -50,7 +51,7 @@ function datamanagerController($window, $scope) { console.log('-> datamanagerCon
 
     $('#module-datamanager').DataTable( {
         dom: "Tfrtip",
-        ajax: "http://loc.arx-contrib.com/arxmin/api/v1/data?format=datatable&type="+$scope.type,
+        ajax: config.base_url + "/arxmin/api/v1/data?format=datatable&type="+$scope.type,
         columns: [
             { data: null, defaultContent: '', orderable: false },
             {"data" : "id"},

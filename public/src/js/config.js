@@ -15,13 +15,8 @@
     }
 
     var config = {
+
         baseUrl: window.__base_url,
-
-
-/*        Arxmin::getThemeUrl('/plugins').'/angular-form-builder/dist/angular-form-builder.js',
-        Arxmin::getThemeUrl('/plugins').'/angular-form-builder/dist/angular-form-builder-components.js',
-        Arxmin::getThemeUrl('/plugins').'/angular-validator/dist/angular-validator.js',
-        Arxmin::getThemeUrl('/plugins').'/angular-validator/dist/angular-validator-rules.js',*/
 
         // alias libraries paths
         paths: {

@@ -1,6 +1,7 @@
 <?php namespace Arxmin;
 
 use Arx\classes\ClassLoader;
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use \Arx\classes\Hook;
 use \View, \Config, \App;
@@ -63,14 +64,15 @@ class ArxminServiceProvider extends ServiceProvider
         /**
          * Register Arxmin
          */
-
         $this->app->bind('arxmin', function ($app) {
             return new Arxmin($app);
         });
 
-        $this->app->bindShared('command.arxmin.migration', function ($app) {
-            return new MigrationCommand();
-        });
+        $this->app['command.arxmin.migration'] = $this->app->share(
+            function ($app) {
+                return new MigrationCommand($app['config'], $app['files'], $app['view']);
+            }
+        );
 
         /**
          * Register hooks

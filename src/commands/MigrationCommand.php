@@ -1,8 +1,13 @@
 <?php namespace Arxmin;
 
+use Arx;
+use Arr;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
+
+use Arx\classes\Composer;
+use Arx\classes\Str;
 
 class MigrationCommand extends Command {
 
@@ -11,63 +16,87 @@ class MigrationCommand extends Command {
      *
      * @var string
      */
-    protected $name = 'confide:migration';
+    protected $name = 'arxmin:migration';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Creates a migration following the Confide especifications.';
+    protected $description = 'Create Arxmin Migration';
 
     /**
      * Create a new command instance.
      *
-     * @return void
      */
     public function __construct()
     {
         parent::__construct();
-        $app = app();
-        $app['view']->addNamespace('confide',substr(__DIR__,0,-8).'views');
     }
 
     /**
      * Execute the console command.
      *
-     * @return void
+     * @return mixed
      */
     public function fire()
     {
-        $table = lcfirst($this->option('table'));
 
-        $this->line('');
-        $this->info( "Table name: $table" );
-        $message = "A migration that creates the $table table will".
-        " be created in app/database/migrations directory";
+        $args = $this->argument();
 
-        $this->comment( $message );
-        $this->line('');
+        $opts = $this->option();
 
-        if ( $this->confirm("Proceed with the migration creation? [Yes|no]") )
-        {
-            $this->line('');
+        $type = $args['type'] ?: 'app';
 
-            $this->info( "Creating migration..." );
-            if( $this->createMigration( $table ) )
-            {
-                $this->info( "Migration successfully created!" );
-            }
-            else{
-                $this->error( 
-                    "Coudn't create migration.\n Check the write permissions".
-                    " within the app/database/migrations directory."
-                );
-            }
+        $file = file_get_contents(__DIR__.'/../../views/generators/angular/'.$type.'.js.stub');
 
-            $this->line('');
-
+        if ($type == 'app') {
+            $name = $args['name'];
+        } else{
+            $name = $args['name'].ucfirst(strtolower($type));
         }
+
+        $data = array_dot([
+            'namespace' => $args['name'],
+            'name' => $name,
+            'modules' => isset($opts['modules']) ? $opts['modules'] : '',
+        ]);
+
+        $file = Str::smrtr($file, $data, ['<%= ', ' %>']);
+
+        if (!$args['folder']) {
+            $args['folder'] = 'components';
+        }
+
+        $path = $opts['path'].'/'.$args['folder'].'/'.$args['name'].'/';
+
+        if (isset($opts['bench'])) {
+            $path = ('workench/'.$opts['bench'].'/public/src/js/');
+        }
+
+        if (!is_dir($path)) {
+            mkdir($path, 0775, true);
+        }
+
+        $filepath = $path . $name.'.js';
+
+        file_put_contents($filepath, $file);
+
+        $this->info($filepath.' created');
+    }
+
+    /**
+     * Get the console command arguments.
+     *
+     * @return array
+     */
+    protected function getArguments()
+    {
+        return array(
+            array('name', InputArgument::REQUIRED, false),
+            array('type', InputArgument::OPTIONAL, false),
+            array('folder', InputArgument::OPTIONAL, false),
+        );
     }
 
     /**
@@ -77,43 +106,11 @@ class MigrationCommand extends Command {
      */
     protected function getOptions()
     {
-        $app = app();
-
         return array(
-            array('table', null, InputOption::VALUE_OPTIONAL, 'Table name.', $app['config']->get('auth.table')),
+            array('path', null, InputOption::VALUE_OPTIONAL, 'Path to install', 'resources/assets/js'),
+            array('bench', null, InputOption::VALUE_OPTIONAL, 'Workbench', null),
+            array('modules', null, InputOption::VALUE_OPTIONAL, 'Modules to load', null),
         );
-    }
-
-    /**
-     * Create the migration
-     *
-     * @param  string $name
-     * @return bool
-     */
-    protected function createMigration( $table = 'users' )
-    {
-        $app = app();
-        $migration_file = $this->laravel->path."/database/migrations/".date('Y_m_d_His')."_confide_setup_users_table.php";
-        $output = $app['view']->make('confide::generators.migration')->with('table', $table)->render();
-
-        if( ! file_exists( $migration_file ) )
-        {
-            $fs = fopen($migration_file, 'x');
-            if ( $fs )
-            {
-                fwrite($fs, $output);
-                fclose($fs);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        else
-        {
-            return false;
-        }
     }
 
 }

@@ -6,7 +6,6 @@
  * @author : Daniel Sum <daniel@cherrypulp.com>
  */
 
-use Debugbar;
 use Hook;
 use Symfony\Component\Finder\Finder;
 use View, DB, URL, Auth, Input, Config, Exception;
@@ -36,8 +35,6 @@ class ModuleController extends BaseController{
         $widgets = Arxmin::getWidgets();
 
         $this->assign(get_defined_vars());
-
-        \Debugbar::disable();
     }
 
     /*public function missingMethod($parameters = Array()){

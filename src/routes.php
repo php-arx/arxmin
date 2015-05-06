@@ -49,4 +49,7 @@ Route::group(array('prefix' => $prefix, 'namespace' => 'Arxmin', 'before' => ['a
     Route::any('module', 'ModuleController@anyDashboard');
 });
 
+/**
+ * Allow a method to autoload packages from workbench
+ */
 Route::controller('packages', 'Arx\\AssetsController');
