@@ -1,0 +1,248 @@
+/**
+ * Arxmin
+ *
+ * SASS Document - ~/scss/components/sidebar.scss - Sidebar
+ *
+ * @author Daniel Sum <daniel@cherrypulp.com>
+ *
+ */
+
+.sidebar {
+    background-color: $sidebar-default-bg;
+    @include clearfix();
+    color: $sidebar-default-color;
+    font-size: 12px;
+    overflow: auto;
+
+    h1, h2, h3, h4, h5, h6 {
+        word-wrap: break-word;
+    }
+
+    a {
+        color: $sidebar-default-link-color;
+        font-weight: bold;
+
+        &:hover, &:focus {
+            background-color: $sidebar-default-link-hover-bg;
+            color: $sidebar-default-link-hover-color;
+        }
+
+        &:active {
+            background-color: $sidebar-default-link-active-bg;
+            color: $sidebar-default-link-active-color;
+        }
+
+        &:disabled {
+            background-color: $sidebar-default-link-disabled-bg;
+            color: $sidebar-default-link-disabled-color;
+        }
+
+        .pull-right {
+            font-size: 16px;
+        }
+    }
+
+    .nav-pills {
+        > li {
+            > a {
+                border-bottom: 1px solid $sidebar-default-border;
+                padding-bottom: 15px;
+                padding-top: 15px;
+            }
+
+            .nav {
+                background-color: $secondary-color;
+                padding-bottom: 0.8em;
+                padding-top: 0.8em;
+
+                a {
+                    background-color: $secondary-color;
+                    padding-bottom: 5px;
+                    padding-left: 1.5em;
+                    padding-top: 5px;
+
+                    &:hover, &:focus {
+                        color:$primary-color;
+                        background-color: $primary-invert-color;
+                    }
+                }
+            }
+        }
+
+        li {
+            position: relative;
+
+            &.active {
+                > a, > .toggle-collapse {
+                    background-color: transparent;
+                    color: $sidebar-default-link-active-color;
+
+                    &:hover, &:focus {
+                        background-color: transparent;
+                        color: $sidebar-default-link-active-color;
+                    }
+                }
+            }
+
+            a, .toggle-collapse {
+                background-color: $sidebar-default-bg;
+                -webkit-border-radius: 0;
+                        border-radius: 0;
+                color: $sidebar-default-link-color;
+
+                &:hover, &:focus {
+                    color: $sidebar-default-link-hover-color;
+                }
+
+                &:hover {
+                    background-color: $sidebar-default-link-hover-bg;
+                }
+            }
+
+            .toggle-collapse {
+                border: 0;
+                border-left: 1px solid $gray-dark;
+                padding: 15px;
+                position: absolute;
+                right: 0;
+                text-align: center;
+                top: 0;
+                width: 40px;
+                z-index: 1;
+
+                &:focus {
+                    outline: none;
+                }
+            }
+
+            .nav {
+                border-bottom: 1px solid $sidebar-default-border;
+            }
+        }
+    }
+}
+
+.sidebar-fixed-left, .sidebar-fixed-right {
+    display: inline-block;
+    bottom: 0;
+    position: fixed;
+    top: $navbar-height;
+    @include translate3d(0, 0, 0);
+    @include transition(250ms margin-left ease-in-out);
+    width: 250px;
+    z-index: 2;
+
+    & + div, & + section {
+        @include clearfix();
+        position: relative;
+        top: $navbar-height;
+    }
+
+    // @media (max-width: $screen-xs-max) {
+    //     top: $navbar-height * 2;
+
+    //     & + div, & + section {
+    //         top: $navbar-height * 2;
+    //     }
+    // }
+
+    width: percentage(3 / $grid-columns);
+
+    @media (min-width: $screen-sm-min) {
+        width: percentage(3 / $grid-columns);
+    }
+
+    @media (min-width: $screen-lg-min) {
+        width: percentage(2 / $grid-columns);
+    }
+}
+
+.sidebar-fixed-left {
+    // @media (max-width: $screen-xs-max) {
+    //     left: -250px;
+    //     @include transition(250ms left ease-in-out);
+
+    //     &.open {
+    //         @include box-shadow(1px 0 4px 1px rgba(0,0,0,.4));
+    //         left: 0;
+    //     }
+    // }
+
+    // @media (min-width: $grid-float-breakpoint) {
+        left: 0 !important;
+
+        &.collapse {
+            @media (min-width: $screen-sm-min) {
+                margin-left: -(percentage(3 / $grid-columns));
+
+                &.in + div, &.in + section {
+                    margin-left: percentage(3 / $grid-columns);
+                }
+            }
+
+            @media (min-width: $screen-lg-min) {
+                margin-left: -(percentage(2 / $grid-columns));
+
+                &.in + div, &.in + section {
+                    margin-left: percentage(2 / $grid-columns);
+                }
+            }
+
+            &.in,
+            & + div, & + section {
+                margin-left: 0;
+            }
+        }
+
+        & + div, & + section {
+            @include transition(250ms margin-left ease-in-out);
+
+            margin-left: percentage(3 / $grid-columns);
+
+            @media (min-width: $screen-sm-min) {
+                margin-left: percentage(3 / $grid-columns);
+            }
+
+            @media (min-width: $screen-lg-min) {
+                margin-left: percentage(2 / $grid-columns);
+            }
+        }
+    // }
+}
+
+.sidebar-fixed-right {
+    // @media (max-width: $screen-xs-max) {
+    //     right: -250px;
+    //     @include transition(250ms right ease-in-out);
+
+    //     &.open {
+    //         @include box-shadow(-1px 0 4px 1px rgba(0,0,0,.4));
+    //         right: 0;
+    //     }
+    // }
+    @media (min-width: $grid-float-breakpoint) {
+        right: 0 !important;
+
+        & + div, & + section {
+            @media (min-width: $screen-sm-min) {
+                margin-right: percentage(3 / $grid-columns);
+            }
+
+            @media (min-width: $screen-lg-min) {
+                margin-right: percentage(2 / $grid-columns);
+            }
+        }
+    }
+}
+
+.sidebar-static-left {
+    @media (min-width: $grid-float-breakpoint) {
+        float: left !important;
+    }
+}
+
+.sidebar-static-right {
+    @media (min-width: $grid-float-breakpoint) {
+        float: right !important;
+    }
+}

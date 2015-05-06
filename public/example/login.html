@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../dist/css/arxmin.css" rel="stylesheet" type="text/css" />
+    <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/4.0.3/es5-shim.min.js"></script>
+    <![endif]-->
+    <style>[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide {
+        display: none !important;
+    }</style>
+
+    <style type="text/css">
+        body{
+            background: #E5E5E5;
+        }
+        .well-centered {
+            margin: 50px auto 50px;
+            width: 400px;
+        }
+
+        .login-container{
+            background: #FFF;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<iframe scrolling="auto" allowtransparency="true" name="main" class="blok-full-background" src="//www.arx.io/api/v1/advert"> </iframe>
+
+<div class="container">
+    <div class="animated flipInX  row col-sm-offset-3 col-sm-6 vert-offset-top-10 login-container column-separation">
+        <div class="col-sm-12"><br>
+            <form id="login-form" class="login-form" method="post">
+                <div class="row">
+                    <div class="form-group col-md-10">
+                        <label class="form-label">Username</label>
+
+                        <div class="controls">
+                            <div class="input-with-icon  right">
+                                <i class=""></i>
+                                <input type="text" name="username" id="username" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-10">
+                        <label class="form-label">Password</label>
+                        <span class="help"></span>
+
+                        <div class="controls">
+                            <div class="input-with-icon  right">
+                                <i class=""></i>
+                                <input type="password" name="password" id="password" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="control-group  col-md-10">
+                        <div class="checkbox checkbox check-success"><a href="forgot">Trouble login in?</a>&nbsp;&nbsp;
+                            <input type="checkbox" id="remember" value="1">
+                            <label for="remember" name="remember">Keep me reminded </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <button class="btn btn-primary btn-cons pull-right" type="submit">Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="config.js"></script>
+<script data-main="../dist/js/components/home" src="../dist/js/vendor/require.js"></script>
+</body>
+</html>

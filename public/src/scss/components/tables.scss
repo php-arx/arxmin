@@ -1,0 +1,365 @@
+/**
+ * Arxmin
+ *
+ * SASS Document - ~/scss/components/tables.scss - Tables
+ *
+ * @author Daniel Sum <daniel@cherrypulp.com>
+ *
+ */
+
+
+.table {
+    border-radius: $border-radius-base;
+    overflow: hidden;
+
+    > thead {
+        &:first-child {
+            > tr {
+                > td, > th {
+                    &:first-child {
+                        border-radius: $border-radius-base 0 0 0;
+                    }
+                    &:last-child {
+                        border-radius: 0 $border-radius-base 0 0;
+                    }
+                }
+            }
+        }
+
+        > tr {
+            > td, > th {
+                background: none;
+                text-transform: capitalize;
+                text-align: left;
+                font-weight: bold;
+            }
+          border-bottom: 1px solid $gray-light;
+        }
+    }
+
+    > thead, > tbody, > tfoot {
+        > tr {
+            > td, > th {
+                border-bottom: 0;
+                border-left: 0;
+                border-right: 1px solid #e6e6e6;
+                border-top: 0;
+
+                &:last-child {
+                    border-right: 0;
+                }
+
+                a {
+                    color: $text-color;
+
+                    &.btn {
+                        color: $btn-default-color;
+
+                        &.btn-primary {
+                            color: $btn-primary-color;
+                        }
+
+                        &.btn-success {
+                            color: $btn-success-color;
+                        }
+
+                        &.btn-info {
+                            color: $btn-info-color;
+                        }
+
+                        &.btn-warning {
+                            color: $btn-warning-color;
+                        }
+
+                        &.btn-danger {
+                            color: $btn-danger-color;
+                        }
+                    }
+
+                    &:hover, &:focus {
+                        color: $link-hover-color;
+                    }
+                }
+            }
+        }
+    }
+
+    .label-facebook,
+    .label-flickr,
+    .label-foursquare,
+    .label-google,
+    .label-instagram,
+    .label-linkedin,
+    .label-pinterest,
+    .label-reddit,
+    .label-spotify,
+    .label-thumblr,
+    .label-twitter,
+    .label-yelp,
+    .label-youtube {
+        font-size: 12px;
+    }
+
+    .btn-icon {
+        border-radius: 50%;
+        margin: 0;
+        padding-left: 6px;
+        padding-right: 6px;
+    }
+
+    .sort-asc, .sort-desc, .sortable {
+        position: relative;
+
+        &:after {
+            display: inline-block;
+            font: normal normal normal 14px/1 FontAwesome;
+            font-size: inherit;
+            margin-top: -7px;
+            position: absolute;
+            right: 10px;
+            top: 50%;
+        }
+    }
+
+    .sortable {
+        &:after {
+            content: "\f0dc";
+        }
+    }
+
+    .sort-asc {
+        &:after {
+            content: "\f0de";
+        }
+    }
+
+    .sort-desc {
+        &:after {
+            content: "\f0dd";
+        }
+    }
+}
+
+.table-separated {
+    tbody {
+        border-bottom: 10px solid $gray-lighter;
+
+        &:last-child {
+            border-bottom: 0;
+        }
+
+        tr {
+            td {
+                background-color: white;
+            }
+        }
+    }
+}
+
+.dataTables_wrapper {
+    @extend .clearfix;
+
+    &.dataTables_scrollBody {
+        .dataTable {
+            thead  {
+                th {
+                    &.sorting:after,
+                    &.sorting_asc:after,
+                    &.sorting_desc:after {
+                        content: "";
+                    }
+                }
+            }
+        }
+    }
+
+    .dataTables_length {
+        @extend .pull-left;
+
+        label {
+            font-weight: normal;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        select {
+            @extend .form-control;
+            display: inline-block;
+            width: 75px;
+        }
+    }
+
+    .dataTables_filter {
+        @extend .pull-right;
+        text-align: right;
+
+        label {
+            font-weight: normal;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        input {
+            @extend .form-control;
+            display: inline-block;
+            margin-left: 0.5em;
+            width: 200px;
+        }
+    }
+
+    .dataTable {
+        clear: both;
+        margin-bottom: 6px !important;
+        margin-top: 6px !important;
+        max-width: none !important;
+
+        &.table {
+            tbody tr.active td,
+            tbody tr.active th {
+              background-color: #08C;
+              color: white;
+            }
+
+            tbody tr.active:hover td,
+            tbody tr.active:hover th {
+              background-color: #0075b0 !important;
+            }
+
+            tbody tr.active th &>a,
+            tbody tr.active td &>a {
+              color: white;
+            }
+        }
+
+        thead {
+            th {
+                background-image: none !important;
+                position: relative;
+            }
+
+            th.sorting:after {
+                content: "\f0dc";
+                color: #ddd;
+                font-size: 0.8em;
+                padding-top: 0.12em;
+            }
+
+            th.sorting_asc:after {
+                content: "\f0de";
+            }
+
+            th.sorting_desc:after {
+                content: "\f0dd";
+            }
+
+            & > tr {
+                & > th {
+                    padding-left: 18px;
+                    padding-right: 18px;
+                }
+            }
+
+            .sorting,
+            .sorting_asc,
+            .sorting_desc,
+            .sorting_asc_disabled,
+            .sorting_desc_disabled {
+                cursor: pointer;
+            }
+
+            th.sorting:after,
+            th.sorting_asc:after,
+            th.sorting_desc:after {
+                display: block;
+                font-family: FontAwesome;
+                position: absolute;
+                right: 8px;
+                top: 12px;
+            }
+        }
+
+        th {
+            -webkit-box-sizing: content-box;
+            -moz-box-sizing: content-box;
+            box-sizing: content-box;
+
+            &:active {
+                outline: none;
+            }
+        }
+    }
+
+    .dataTables_info {
+        @extend .pull-left;
+        padding-top: 8px;
+        white-space: nowrap;
+    }
+
+    .dataTables_paginate {
+        @extend .pull-right;
+        margin: 0;
+        text-align: right;
+        white-space: nowrap;
+
+        a {
+            @extend .btn;
+            &.paginate_button_disabled {
+                color: #777;
+                cursor: not-allowed;
+
+                &:hover, &:focus {
+                    text-decoration: none;
+                }
+            }
+
+            &.first, &.previous {
+                padding-left: 24px;
+                padding-right: 10px;
+                position: relative;
+
+                &:before {
+                    display: block;
+                    font-family: FontAwesome;
+                    left: 10px;
+                    position: absolute;
+                    top: 6px;
+                }
+            }
+
+            &.next, &.last {
+                padding-left: 10px;
+                padding-right: 24px;
+                position: relative;
+
+                &:after {
+                    display: block;
+                    font-family: FontAwesome;
+                    position: absolute;
+                    right: 10px;
+                    top: 6px;
+                }
+            }
+
+            &.first:before {
+                content: "\f100";
+            }
+            &.previous:before {
+                content: "\f104";
+            }
+            &.next:after {
+                content: "\f105";
+            }
+            &.last:after {
+                content: "\f101";
+            }
+        }
+
+        span {
+            a {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+        }
+    }
+
+}

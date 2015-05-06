@@ -1,0 +1,24 @@
+/**
+ * Arxmin
+ *
+ * SASS Document - ~/scss/components/panels.scss - Panels
+ *
+ * @author Daniel Sum <daniel@cherrypulp.com>
+ *
+ */
+
+.panel{
+  border-radius: 0;
+  padding: 5px;
+}
+
+.panel-group {
+    .panel-heading {
+        .panel-title {
+            .label {
+                position: relative;
+                top: -2px;
+            }
+        }
+    }
+}

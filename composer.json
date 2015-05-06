@@ -13,9 +13,7 @@
         }
     ],
     "require": {
-        "arx/core" : "4.2.*",
-        "zizaco/confide": "*",
-        "zizaco/entrust": "1.2.*",
+        "arx/core" : "5.*.*",
         "chumper/datatable" : "2.*",
         "fzaninotto/faker" : "*",
         "anahkiasen/former" : "*"
@@ -25,11 +23,8 @@
         "mockery/mockery": "0.7.2"
     },
     "autoload": {
-        "psr-0": {
-            "Arxmin": "src"
-        },
         "psr-4": {
-            "Arxmin\\": "src/Arxmin"
+            "Arxmin\\": "src/"
         },
         "classmap": [
             "src/Arxmin/commands",
@@ -37,8 +32,8 @@
             "src/Arxmin/models",
             "src/Arxmin/interfaces",
             "src/Arxmin/providers",
-            "seeds",
-            "migrations",
+            "database/seeds",
+            "database/migrations",
             "tests"
         ]
     },

@@ -1,0 +1,91 @@
+/**
+ * Arxmin
+ *
+ * SASS Document - ~/scss/components/buttons.scss - Buttons
+ *
+ * @author Daniel Sum <daniel@cherrypulp.com>
+ *
+ */
+
+// .btn {
+//     border: none;
+//     border-radius: 500px;
+//     margin: 0 5px;
+//     padding: 5px 30px;
+
+//     &:focus,
+//     &:active,
+//     &:active:focus {
+//         outline: none;
+//     }
+
+//     &:active {
+//         @extend inset-shadow;
+//     }
+// }
+
+/* Types
+---------------------------------------------- */
+.btn-default {
+    &:hover {
+        background-color: $brand-primary;
+    }
+
+    &.dropdown-toggle{
+        &:hover, &:focus {
+            background-color: $btn-default-bg;
+            border-color: darken($btn-default-border, 12%) !important;
+        }
+    }
+}
+
+.btn-black {
+    background-color: #000;
+    color: #fff;
+
+    &:hover {
+        color: $brand-primary;
+    }
+}
+
+.btn-link {
+    padding: 5px 10px;
+
+    &:hover {
+        text-decoration: none;
+    }
+
+    &:active {
+        box-shadow: none;
+    }
+}
+
+/* Shapes
+---------------------------------------------- */
+.btn-icon {
+    border-radius: 50%;
+    padding: 5px 9px;
+}
+
+.btn-lg {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 11px 40px;
+    text-transform: uppercase;
+}
+
+
+.btn-circle {
+    @include button-size(5px, 5px, 18px, 26px, 18px);
+    display: inline-block;
+    height: 36px;
+    text-align: center;
+    vertical-align: middle;
+    width: 36px;
+
+    &.btn-sm {
+        @include button-size(0, 0, 1em, 22px, 18px);
+        height: 22px;
+        width: 22px;
+    }
+}

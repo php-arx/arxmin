@@ -1,0 +1,36 @@
+/**
+ * Arxmin
+ *
+ * SASS Document - ~/scss/components/navs.scss - Navs
+ *
+ * @author Daniel Sum <daniel@cherrypulp.com>
+ *
+ */
+
+.nav {}
+
+.nav-tabs {
+    li {
+        //
+
+        &.active {
+            a {
+                color: $text-color;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+.nav-stacked.nav-pills {
+    li {
+        position: relative;
+
+        a.toggle-collapse {
+            position: absolute;
+            right: 0;
+            top: 0;
+            z-index: 1;
+        }
+    }
+}

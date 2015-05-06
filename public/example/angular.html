@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title page-title></title>
+    <link href="../dist/css/arxmin.css" rel="stylesheet" type="text/css"/>
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/4.0.3/es5-shim.min.js"></script>
+    <![endif]-->
+</head>
+<body class="">
+
+<div id="page-container">
+    <nav class="navbar navbar-default navbar-fixed-top" id="page-header">
+
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">
+                <img class="animated fadeIn" src="../dist/img/logo-b.png" height="50px" alt="" />
+            </a>
+            <button type="button" class="navbar-toggle" ng-click="$parent.displaySidebar = !$parent.displaySidebar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <div class="navbar-collapse">
+            <ul class="nav navbar-nav navbar-right animated fadeIn">
+                <li class="dropdown" dropdown>
+                    <a class="dropdown-toggle" href="#" data-toggle="dropdown" dropdown-toggle>
+                        <span class="visible-xs"><i class="fa fa-fw fa-user"></i></span>
+                        <span class="hidden-xs">admin2 admin <span class="caret"></span></span>
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="http://local./private/edit-user">Preferences</a>
+                        </li>
+                        <li>
+                            <a href="/user/logout">Se déconnecter</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="row">
+        <div class="side-menu-container col-sm-2">
+            <aside class="sidebar sidebar-fixed-left navbar-spy" id="page-sidebar" ng-controller="SidebarController as sidebar" ng-cloak>
+                <ul class="nav nav-pills nav-stacked animated fadeIn">
+                    <li ng-repeat="item in sidebar.menu track by $index" ng-class="{true: 'active'}[sidebar.isActive(item)]">
+                        <a ng-href="{{ item.link }}" ng-if="item.link" target="{{ item.target || '_self' }}">
+                            <i class="fa {{ item.ico }} fa-lg fa-fw" ng-if="item.ico"></i>
+                            <span>{{ item.name }}</span>
+                        </a>
+
+
+                        <button class="toggle-collapse" type="button" ng-init="item.isMenuCollapsed = !sidebar.isActive(item)"
+                                ng-if="item.children && item.link"
+                                ng-click="item.isMenuCollapsed = !item.isMenuCollapsed">
+                            <span ng-show="item.isMenuCollapsed">+</span>
+                            <span ng-show="!item.isMenuCollapsed">-</span>
+                        </button>
+
+                        <a href="#" ng-init="item.isMenuCollapsed = !sidebar.isActive(item)" ng-if="item.children && !item.link"
+                           ng-click="item.isMenuCollapsed = !item.isMenuCollapsed">
+                            <i class="fa {{ item.ico }} fa-lg fa-fw" ng-if="item.ico"></i>
+                            <span>{{ item.name }}</span>
+
+                            <span class="pull-right" ng-show="item.isMenuCollapsed">+</span>
+                            <span class="pull-right" ng-show="!item.isMenuCollapsed">-</span>
+                        </a>
+
+                        <ul class="nav" collapse="item.isMenuCollapsed" ng-if="item.children">
+                            <li ng-repeat="child in item.children" ng-class="{true: 'active'}[sidebar.isActive(child)]">
+                                <a ng-href="{{ child.link }}">
+                                    <i class="fa {{ child.ico }} fa-fw" ng-if="child.ico"></i>
+                                    <span>{{ child.name }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </aside>
+        </div><!-- /.navbar-collapse -->
+
+        <section  class="content container-fluid animated fadeIn col-sm-offset-2 vert-offset-top-3" id="page-content">
+            <div class="container-fluid">
+                <ul class="breadcrumb">
+                    <li>
+                        <p><i class="fa fa-home"></i></p>
+                    </li>
+                    <li><a href="#" class="active">Dashboard</a></li>
+                </ul>
+                <div class="page-title">
+                    <h3><i class="fa fa-angle-right"></i> Dashboard</h3 >
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12 sortable">
+                                <div class="grid simple ">
+                                    <div class="grid-title no-border">
+                                        <h4>Grid <span class="semi-bold">One</span></h4>
+                                        <div class="tools"> <a href="javascript:;" class="collapse"></a> <a href="#grid-config" data-toggle="modal" class="config"></a> <a href="javascript:;" class="reload"></a> <a href="javascript:;" class="remove"></a> </div>
+                                    </div>
+                                    <div class="grid-body no-border">
+                                        <div class="row-fluid">
+                                            <div class="scroller scrollbar-dynamic" data-height="245px">
+                                                <h3>Drag <span class="semi-bold">Me</span></h3>
+                                                <h4><span class="semi-bold">Open Me</span>, Light , <span class="semi-bold">Bold</span> , <i>Everything</i></h4>
+                                                <p>The overflow is clipped, and the rest of the content will be invisible, Play it ». scroll, The overflow is clipped, but a scroll-bar is added to see the rest of the </p>
+                                                <p> default, the textarea element comes with a vertical scrollbar (and maybe even a horizontal scrollbar). This vertical scrollbar enables the user to continue entering and reviewing their text (by scrolling up and down).</p>
+                                                <p>The scroll event is sent to an element when the user scrolls to a different place in the element. It applies to window objects, but also to scrollable frames and elements with the overflow CSS property set to scroll (or auto when the element's explicit height or width is less than the height or width of its contents).</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 sortable">
+                                <div class="grid simple vertical green">
+                                    <div class="grid-title no-border">
+                                        <h4>Grid <span class="semi-bold">One</span></h4>
+                                        <div class="tools"> <a href="javascript:;" class="collapse"></a> <a href="#grid-config" data-toggle="modal" class="config"></a> <a href="javascript:;" class="reload"></a> <a href="javascript:;" class="remove"></a> </div>
+                                    </div>
+                                    <div class="grid-body no-border">
+                                        <div class="scroller scrollbar-hidden" data-height="245px" >
+                                            <div class="row-fluid">
+                                                <div>
+                                                    <h3>Colored<span class="semi-bold"> Band</span></h3 >
+                                                    <div class="color-bands green"></div>
+                                                    <div class="color-bands purple"></div>
+                                                    <div class="color-bands red"></div>
+                                                    <div class="color-bands blue"></div>
+                                                    <br>
+                                                    <p>The overflow is clipped, and the rest of the content will be invisible, Play it ». scroll, The overflow is clipped, but a scroll-bar is added to see the rest of the </p>
+                                                    <p> default, the textarea element comes with a vertical scrollbar (and maybe even a horizontal scrollbar). This vertical scrollbar enables the user to continue entering and reviewing their text (by scrolling up and down).</p>
+                                                    <p>The scroll event is sent to an element when the user scrolls to a different place in the element. It applies to window objects, but also to scrollable frames and elements with the overflow CSS property set to scroll (or auto when the element's explicit height or width is less than the height or width of its contents).</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12 sortable">
+                                <div class="grid simple">
+                                    <div class="grid-title">
+                                        <h4>Grid Two</h4>
+                                        <div class="tools"> <a href="javascript:;" class="collapse"></a> <a href="#grid-config" data-toggle="modal" class="config"></a> <a href="javascript:;" class="reload"></a> <a href="javascript:;" class="remove"></a> </div>
+                                    </div>
+                                    <div class="grid-body">
+                                        <div class="scroller scrollbar-hidden" data-height="220px">
+                                            <h3>Scroll is <span class="semi-bold">hidden</span></h3>
+                                            <h4><span class="semi-bold">Open Me</span>, Light , <span class="semi-bold">Bold</span> , <i>Everything</i></h4>
+                                            <p>The overflow is clipped, and the rest of the content will be invisible, Play it ». scroll, The overflow is clipped, but a scroll-bar is added to see the rest of the </p>
+                                            <p> default, the textarea element comes with a vertical scrollbar (and maybe even a horizontal scrollbar). This vertical scrollbar enables the user to continue entering and reviewing their text (by scrolling up and down).</p>
+                                            <p>The scroll event is sent to an element when the user scrolls to a different place in the element. It applies to window objects, but also to scrollable frames and elements with the overflow CSS property set to scroll (or auto when the element's explicit height or width is less than the height or width of its contents).</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 sortable">
+                                <div class="grid simple vertical green">
+                                    <div class="grid-title no-border">
+                                        <h4>Grid <span class="semi-bold">One</span></h4>
+                                        <div class="tools"> <a href="javascript:;" class="collapse"></a> <a href="#grid-config" data-toggle="modal" class="config"></a> <a href="javascript:;" class="reload"></a> <a href="javascript:;" class="remove"></a> </div>
+                                    </div>
+                                    <div class="grid-body no-border">
+                                        <div class="row-fluid">
+                                            <div class="scroller scrollbar-hidden" data-height="245px" >
+                                                <h3>Colored<span class="semi-bold"> Band</span></h3 >
+                                                <div class="color-bands green"></div>
+                                                <div class="color-bands purple"></div>
+                                                <div class="color-bands red"></div>
+                                                <div class="color-bands blue"></div>
+                                                <br>
+                                                <p>The overflow is clipped, and the rest of the content will be invisible, Play it ». scroll, The overflow is clipped, but a scroll-bar is added to see the rest of the </p>
+                                                <p> default, the textarea element comes with a vertical scrollbar (and maybe even a horizontal scrollbar). This vertical scrollbar enables the user to continue entering and reviewing their text (by scrolling up and down).</p>
+                                                <p>The scroll event is sent to an element when the user scrolls to a different place in the element. It applies to window objects, but also to scrollable frames and elements with the overflow CSS property set to scroll (or auto when the element's explicit height or width is less than the height or width of its contents).</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<!-- CONFIG EXAMPLE -->
+<script src="config.js"></script>
+<script data-main="../dist/js/components/home" src="../dist/js/vendor/require.js"></script>
+</body>
+</html>

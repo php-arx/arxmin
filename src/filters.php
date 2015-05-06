@@ -18,8 +18,8 @@ use Arxmin\Arxmin;
  */
 Route::filter('arxmin-check-installed', function()
 {
-    if(! \Arxmin\Arxmin::isInstalled() ) {
-        return Redirect::to(action('Arxmin\\InstallController@getIndex'));
+    if(!Arxmin::isInstalled() ) {
+        return Redirect::to('arxmin/install');
     }
 });
 
@@ -29,7 +29,7 @@ Route::filter('arxmin-check-installed', function()
 Route::filter('arxmin-check-not-installed', function()
 {
     if(Arxmin::isInstalled() ) {
-        return Redirect::to(action('Arxmin\\ArxminController@anyLogin'));
+        return Redirect::to('arxmin/login')->with('notification', Lang::get('already installed'));
     }
 });
 
@@ -39,19 +39,11 @@ Route::filter('arxmin-check-not-installed', function()
 Route::filter('arxmin-auth', function()
 {
     # 1. Check if user is logged
-
     if(! Auth::check() ){
-        return Redirect::to(action('Arxmin\\ArxminController@anyLogin'));
+        return Redirect::to('arxmin/login');
     } else{
-
-        # Check if user have right to log to arxmin
-
+        global $user;
         $user = Auth::getUser();
-
-        /* @todo fix this stuff !
-         * if(!$user->hasRole('SuperAdmin') && !$user->can("access_arxmin")){
-            return Redirect::to(action('Arxmin\\ArxminController@anyLogin'))->withErrors(array('can_access_to_arxmin' => 'true'));
-        }*/
     }
 });
 

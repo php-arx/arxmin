@@ -1,0 +1,82 @@
+/**
+ * Arxmin
+ *
+ * SASS Document - ~/scss/components/status.scss - Boxes component
+ *
+ * @author Daniel Sum <daniel@cherrypulp.com>
+ *
+ */
+
+// .panel.status
+.status {
+    font-family: 'Source Sans Pro', sans-serif;
+    @include box-shadow(none);
+    overflow: hidden;
+
+    .panel-title {
+        font-family: 'Oswald', sans-serif;
+        font-size: 54px;
+        font-weight: bold;
+        color: #fff;
+        line-height: 45px;
+        padding-top: 20px;
+        letter-spacing: -0.8px;
+    }
+
+    &.panel-info {
+        border-color: $brand-info;
+
+        .panel-heading {
+            background-color: $brand-info;
+            color: #fff;
+        }
+    }
+    &.panel-primary {
+        border-color: $brand-primary;
+
+        .panel-heading {
+            background-color: $brand-primary;
+            color: #fff;
+        }
+    }
+    &.panel-inverse {
+        border-color: $gray-darker;
+
+        .panel-heading {
+            background-color: $gray-darker;
+            color: #fff;
+        }
+    }
+    &.panel-success {
+        border-color: $brand-success;
+
+        .panel-heading {
+            background-color: $brand-success;
+            color: #fff;
+        }
+    }
+    &.panel-warning {
+        border-color: $brand-warning;
+
+        .panel-heading {
+            background-color: $brand-warning;
+            color: #fff;
+        }
+    }
+    &.panel-danger {
+        border-color: $brand-danger;
+
+        .panel-heading {
+            background-color: $brand-danger;
+            color: #fff;
+        }
+    }
+}
+
+.panel-body {
+    .status {
+        .panel-body {
+            background-color: #f2f2f2;
+        }
+    }
+}

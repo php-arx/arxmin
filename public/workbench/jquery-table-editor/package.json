@@ -1,0 +1,36 @@
+{
+  "name": "jquery-table-editor",
+  "version": "0.0.1",
+  "description": "Table Editor Plugin",
+  "keywords": [
+    "jquery-plugin"
+  ],
+  "homepage": "https://github.com/danielsum/blok-table-editor",
+  "author": {
+    "name": "Daniel",
+    "email": "daniel@cherrypulp.com",
+    "url": "https://github.com/danielsum"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/danielsum/blok-table-editor.git"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ],
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-contrib-qunit": "~0.5.1",
+    "grunt-contrib-concat": "~0.4.0",
+    "grunt-contrib-uglify": "~0.5.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-connect": "~0.8.0",
+    "time-grunt": "~0.3.2",
+    "load-grunt-tasks": "~0.6.0",
+    "jshint-stylish": "~0.2.0",
+    "grunt": "~0.4.5"
+  }
+}

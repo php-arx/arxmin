@@ -1,0 +1,143 @@
+/**
+ * Admin Layouts
+ *
+ * SASS Document - ~/scss/layouts/generals.scss - Generals
+ *
+ * @author Daniel Sum <daniel@cherrypulp.com>
+ *
+ */
+
+html, body, #page-container, .container {
+    min-width: $screen-sm !important;
+}
+
+#page-container {}
+
+#page-header {
+    margin-bottom: 0;
+
+    @media (max-width: $screen-xs-max) {
+        .navbar-form {
+            border: 0;
+            max-width: 200px;
+            padding-bottom: 0;
+            padding-top: 0;
+        }
+
+        .navbar-collapse {
+            .navbar-left, .navbar-nav > li {
+                float: left;
+            }
+            .navbar-right {
+                float: right;
+            }
+
+            .navbar-nav {
+                margin: 0;
+
+                > li > a {
+                    padding-bottom: 20px;
+                    padding-top: 20px;
+                }
+            }
+
+            .open .dropdown-menu {
+                background-color: #FFF;
+                left: auto;
+                position: absolute;
+                right: 0;
+            }
+        }
+    }
+}
+
+#page-sidebar {}
+
+#page-content {
+    padding-bottom: 20px;
+    padding-top: 20px;
+
+    h1 {
+        .btn {
+            font-weight: bold;
+        }
+    }
+
+    .description {
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        border-color: #fff;
+        box-shadow: none;
+
+        &:focus, &:active {
+            border-color: $input-border-focus;
+        }
+    }
+
+    .has-error {
+        .form-control {
+            border-color: $state-danger-text;
+        }
+    }
+
+    .table-striped {
+        > tbody {
+            > tr:nth-child(even), .upload .upload-queue > tbody > tr:nth-child(even) {
+                .form-control {
+                    border-color: $gray-lighter;
+
+                    &:focus, &:active {
+                        border-color: $input-border-focus;
+                    }
+                }
+            }
+        }
+    }
+
+    .table-pricing {
+        .input-group {
+            input.form-control {
+                border-color: $input-border;
+            }
+        }
+    }
+
+    .navbar-fixed-top {
+        background-color: $gray-light;
+        border-color: $gray-light;
+        top: $navbar-height;
+        z-index: 999;
+
+        @media (max-width: $screen-xs-max) {
+            top: $navbar-height * 2;
+
+            .navbar-collapse {
+                .navbar-left, .navbar-nav > li {
+                    float: left;
+                }
+                .navbar-right {
+                    float: right;
+                }
+
+                .navbar-nav {
+                    margin: 0;
+
+                    > li > a {
+                        padding-bottom: 20px;
+                        padding-top: 20px;
+                    }
+                }
+            }
+        }
+
+        @media (min-width: $screen-sm-min) {
+            left: percentage((3 / $grid-columns));
+        }
+
+        @media (min-width: $screen-lg-min) {
+            left: percentage((2 / $grid-columns));
+        }
+    }
+}

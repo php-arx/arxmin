@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="shortcut icon" type="image/ico" href="http://www.datatables.net/favicon.ico">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0">
+
+	<title>Editor example - Basic initialisation</title>
+
+	<!-- Css Needed -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="plugins/datatables/media/css/jquery.dataTables.css">
+
+	<!-- Css Optionnal -->
+	<link rel="stylesheet" type="text/css" href="plugins/TableTools/css/dataTables.tableTools.css">
+
+	<!-- Css SOURCE -->
+	<link rel="stylesheet" type="text/css" href="../dist/css/jquery-table-editor.css">
+	
+	<!-- JS Needed -->
+	<script type="text/javascript" language="javascript" src="plugins/jquery/dist/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	<script type="text/javascript" language="javascript" src="plugins/datatables/media/js/jquery.dataTables.js"></script>
+
+	<!-- JS Optionnal -->
+	<script type="text/javascript" language="javascript" src="plugins/TableTools/js/dataTables.tableTools.js"></script>
+	
+	<!-- JS Source -->
+	<script type="text/javascript" language="javascript" src="../dist/js/jquery-table-editor.js"></script>
+	
+	<!-- @EXAMPLE SCRIPT -->
+	<script type="text/javascript" language="javascript" class="init">
+
+		var editor; // use a global for the submit and return data rendering in the examples
+
+		$(document).ready(function() {
+
+			editor = new $.fn.dataTable.Editor( {
+				ajax: "php/api.php",
+				table: "#example",
+				fields: [ {
+					label: "First name:",
+					name: "first_name"
+				}, {
+					label: "Last name:",
+					name: "last_name"
+				}, {
+					label: "Position:",
+					name: "position"
+				}, {
+					label: "Office:",
+					name: "office"
+				}, {
+					label: "Extension:",
+					name: "extn"
+				}, {
+					label: "Start date:",
+					name: "start_date",
+					type: "date"
+				}, {
+					label: "Salary:",
+					name: "salary"
+				}
+				]
+			} );
+
+			$('#example').DataTable( {
+				dom: "Tfrtip",
+				ajax: "php/api.php",
+				columns: [
+					{ data: null, render: function ( data, type, row ) {
+						// Combine the first and last names into a single table field
+						return data.first_name+' '+data.last_name;
+					} },
+					{ data: "position" },
+					{ data: "office" },
+					{ data: "extn" },
+					{ data: "start_date" },
+					{ data: "salary", render: $.fn.dataTable.render.number( ',', '.', 0, '$' ) }
+				],
+				tableTools: {
+					sRowSelect: "os",
+					aButtons: [
+						{ sExtends: "editor_create", editor: editor },
+						{ sExtends: "editor_edit",   editor: editor },
+						{ sExtends: "editor_remove", editor: editor }
+					]
+				}
+			} );
+		} );
+
+
+
+	</script>
+</head>
+
+<body class="dt-example">
+<div class="container">
+	<section>
+		<h1>Editor example <span>Basic initialisation</span></h1>
+
+		<div class="info">
+			<p><a href="//editor.datatables.net">Editor</a> is a Create, Read, Update and Delete (CRUD) extension
+				for <a href="//datatables.net">DataTables</a> that provides the ability to easily add, edit and delete
+				rows on a database that is displayed by a DataTable. Editor provides a clean and responsive interface
+				for end user manipulation of data, an expressive API for complete control and a well defined server
+				communications protocol for data submission.</p>
+
+			<p>This simple example shows a table with seven fields, each of which can be edited as plain text. In
+				other examples we will explore how to add date pickers, <code class="tag" title=
+						"HTML tag">select</code> elements and other controls to make form input intuitive for the system user,
+				among many other aspects of the Editor API.</p>
+		</div>
+
+		<table id="example" class="display" cellspacing="0" width="100%">
+			<thead>
+			<tr>
+				<th>Name</th>
+				<th>Position</th>
+				<th>Office</th>
+				<th>Extn.</th>
+				<th>Start date</th>
+				<th>Salary</th>
+			</tr>
+			</thead>
+
+			<tfoot>
+			<tr>
+				<th>Name</th>
+				<th>Position</th>
+				<th>Office</th>
+				<th>Extn.</th>
+				<th>Start date</th>
+				<th>Salary</th>
+			</tr>
+			</tfoot>
+		</table>
+	</section>
+</div>
+</body>
+</html>

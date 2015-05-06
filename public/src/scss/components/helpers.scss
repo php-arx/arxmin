@@ -1,0 +1,154 @@
+/**
+* Helpers
+*/
+
+.blur {
+  -webkit-filter: blur(4px);
+  filter: url('data:image/svg+xmlutf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="4" /></filter></svg>#filter');
+  filter: blur(4px);
+}
+
+// IOS : Prevent the body from scrolling when scrolling an overlay
+.lock-scroll-ios {
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  -webkit-overflow-scrolling: auto;
+}
+
+[ng-click] {
+  cursor: pointer;
+}
+
+.no-transition {
+  @include transition(none);
+}
+
+.no-margin {
+  margin: 0 !important;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+.vertical-align {
+  display: table;
+
+  > div, > p, > a {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
+
+#toTop {
+  background-color: $text-color;
+  border-radius: $border-radius-base;
+  bottom: 5px;
+  color: #fff;
+  display: none;
+  font: normal normal normal 16px/1 FontAwesome;
+  height: 50px;
+  line-height: 50px;
+  @include opacity(0.6);
+  position: fixed;
+  right: 5px;
+  text-align: center;
+  text-decoration: none;
+  @include transition(120ms opacity ease-in-out);
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  width: 50px;
+
+  &:before {
+    content: "\f062";
+  }
+
+  &:hover, &:focus {
+    @include opacity(0.9);
+  }
+}
+
+/* Vertical Offset Helpers */
+
+.vert-offset-top-12{
+  margin-top: 12em;
+}
+.vert-offset-top-11{
+  margin-top: 11em;
+}
+.vert-offset-top-10{
+  margin-top: 10em;
+}
+.vert-offset-top-9{
+  margin-top: 9em;
+}
+.vert-offset-top-8{
+  margin-top: 8em;
+}
+.vert-offset-top-7 {
+  margin-top: 7em;
+}
+.vert-offset-top-6{
+  margin-top: 6em;
+}
+.vert-offset-top-5{
+  margin-top: 5em;
+}
+.vert-offset-top-4{
+  margin-top: 4em;
+}
+.vert-offset-top-3{
+  margin-top: 3em;
+}
+.vert-offset-top-2{
+  margin-top: 2em;
+}
+.vert-offset-top-1{
+  margin-top: 1em;
+}
+.vert-offset-top-0{
+  margin-top: 0em;
+}
+/* Vertical Offset Bottom */
+.vert-offset-bottom-12{
+  margin-bottom: 12em;
+}
+.vert-offset-bottom-11{
+  margin-bottom: 11em;
+}
+.vert-offset-bottom-10{
+  margin-bottom: 10em;
+}
+.vert-offset-bottom-9{
+  margin-bottom: 9em;
+}
+.vert-offset-bottom-8{
+  margin-bottom: 8em;
+}
+.vert-offset-bottom-7{
+  margin-bottom: 7em;
+}
+.vert-offset-bottom-6{
+  margin-bottom: 6em;
+}
+.vert-offset-bottom-5{
+  margin-bottom: 5em;
+}
+.vert-offset-bottom-4{
+  margin-bottom: 4em;
+}
+.vert-offset-bottom-3{
+  margin-bottom: 3em;
+}
+.vert-offset-bottom-2{
+  margin-bottom: 2em;
+}
+.vert-offset-bottom-1{
+  margin-bottom: 1em;
+}
+.vert-offset-bottom-0{
+  margin-bottom: 0em;
+}
+

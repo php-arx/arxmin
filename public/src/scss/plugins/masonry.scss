@@ -1,0 +1,94 @@
+/**** base styles ****/
+* 		{ margin:0; padding:0; }
+body 	{ overflow-y: scroll; }
+
+
+/**** queryLoader ****/
+.QOverlay 	{ z-index:9999; }
+.QLoader 	{ height:0px; }
+.QAmt 		{ top:0; left:0; height:25px; width:100px; margin:0; }
+
+
+/**** typography ****/
+body,
+#fancybox-auto-category  { font:normal 400 12px/18px "bookman-1","bookman-2", serif; }
+
+h1, h2, h3, .QAmt, #filtering-nav,
+#fancybox_error { font:normal 400 24px/30px "bookman-1","bookman-2", serif; }
+
+p 	{ padding-bottom: 17px; /* same as leading = linebreak */ }
+h3 	{ padding-bottom: 15px; /* same as leading = linebreak */ }
+a img, img 	{ padding-bottom:3px; padding-top:3px; }
+.everything 	{  }
+
+
+/**** link styles ****/
+a 			{ text-decoration:none; focus:none; }
+a:hover 	{ text-decoration:none; focus:none; }
+a img, img 	{ border:none; focus:none; }
+a:focus, img:focus 	{ outline: none; }
+
+p a { text-decoration: underline; }
+p a:hover { color:#89724F; text-decoration: underline; }
+
+/**** colours ****/
+a 		{ color:#493E2C; }
+a:hover { color:#89724F; }
+
+body			{ background:#F2EFEB; color:#493E2C; }
+#menu, #fancybox_error, h1, h2, h3 	{ color:#493E2C; }
+
+.QOverlay, .QLoader { background:#F2EFEB; }
+.QAmt { color:#493E2C; }
+
+#filtering-nav li a:active,
+#filtering-nav li a.selected,
+#filtering-nav li a.selected.everything	{ color:#89724F; }
+
+#fancybox-overlay 		{ background:#000; }
+#fancybox-wrap 			{ background:#F2EFEB; }
+#fancybox-outer 		{ background:#F2EFEB; }
+
+.fancybox-title-over 	{ color:#FFF; }
+.fancybox-title-inside 	{ color:#333; }
+#fancybox-title-over 	{ } /* type color on slide titles */
+#fancybox-auto-category { color:#89724F; }
+
+
+/**** filtering menu ****/
+#filtering-nav 				{ margin: 0px 0px 29px 0px; }
+#filtering-nav li 			{ float:left; list-style:none; }
+#filtering-nav li a 		{ display:block; width:auto; }
+#filtering-nav li a:active 	{ text-decoration:none; }
+#filtering-nav li a.selected, #filtering-nav li a.selected.everything	{ text-decoration:none; }
+
+
+/**** first menu col extra ****/
+#filtering-nav li.col3 { height: 91px; }
+#filtering-nav li.col3, #filtering-nav li.col2 { margin-right: 20px; }
+
+
+/**** content ****/
+.wall 		{ overflow:visible; margin-bottom:0px; }
+#content 	{ padding:20px 0px 25px 25px; /*display:none;*/ }
+.hidden 	{ display:none; }
+
+
+/**** masonry css ****/
+.box { margin:0px 0px 12px 0px; float:left; }
+
+.col1 { width:90px; }
+.col2 { width:200px; }
+.col3 { width:310px; }
+.col4 { width:420px; }
+.col5 { width:530px; }
+
+.col1 img { max-width:90px; }
+.col2 img { max-width:200px; }
+.col3 img { max-width:310px; }
+.col4 img { max-width:420px; }
+.col5 img { max-width:530px; }
+
+
+/**** Clearfixes ****/
+.wall:after, #filtering-nav:after { content:''; display:block; height:0; clear:both; visibility:hidden; }
