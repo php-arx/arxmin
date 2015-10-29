@@ -1,0 +1,59 @@
+/*!
+ *   AdminLTE v2.1.0
+ *   Author: Almsaeed Studio
+ *	 Website: Almsaeed Studio <http://almsaeedstudio.com>
+ *   License: Open source - MIT
+ *           Please visit http://opensource.org/licenses/MIT for more information
+!*/
+
+//google fonts
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic);
+
+//MISC
+//----
+@import "shared/variables";
+@import "shared/core";
+@import "shared/mixins";
+
+//COMPONENTS
+//-----------
+@import "components/header";
+@import "components/sidebar";
+@import "components/sidebar-mini";
+@import "components/control-sidebar";
+@import "components/dropdown";
+@import "components/forms";
+@import "components/progress-bars";
+@import "components/small-box";
+@import "components/boxes";
+@import "components/info-box";
+@import "components/timeline";
+@import "components/buttons";
+@import "components/callout";
+@import "components/alerts";
+@import "components/navs";
+@import "components/products";
+@import "components/table";
+@import "components/labels";
+@import "components/direct-chat";
+@import "components/users-list";
+@import "components/carousel";
+@import "components/modal";
+
+//PAGES
+//------
+@import "components/mailbox";
+@import "components/lockscreen";
+@import "components/login_and_register";
+@import "components/404_500_errors";
+@import "components/invoice";
+
+//Plugins
+//--------
+@import "components/bootstrap-social";
+@import "components/fullcalendar";
+
+//Miscellaneous
+//-------------
+@import "components/miscellaneous";
+@import "components/print";

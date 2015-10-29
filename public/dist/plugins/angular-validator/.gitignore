@@ -1,0 +1,15 @@
+# OS X noise
+.DS_Store
+
+# PyCharm
+.idea
+
+# node modules
+node_modules
+
+# bower components
+bower_components
+
+# compass
+.sass-cache
+.project

@@ -1,0 +1,26 @@
+{
+  "name": "breakpoints",
+  "main": "breakpoints.js",
+  "version": "2.0.0",
+  "homepage": "https://github.com/angelcustodio/breakpoints",
+  "authors": [
+    "Angel Custodio <ancude@gmail.com>"
+  ],
+  "description": "A jQuery plugin to add classes to the DOM depending on your defined breakpoints for responsive/adaptive design",
+  "keywords": [
+    "breakpoints",
+    "dom",
+    "responsive",
+    "adaptive",
+    "plugin",
+    "jquery"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

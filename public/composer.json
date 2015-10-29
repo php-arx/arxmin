@@ -1,0 +1,30 @@
+{
+  "name": "arx/arxmin-ui",
+  "description": "Admin control panel forked from AdminLTE and highly maintened by a dedicated Agency",
+  "homepage": "http://www.cherrypulp.com/",
+  "keywords": [
+    "css",
+    "js",
+    "less",
+    "responsive",
+    "back-end",
+    "template",
+    "theme",
+    "web",
+    "admin"
+  ],
+  "authors": [
+    {
+      "name": "Abdullah Almsaeed",
+      "email": "support@almsaeedstudio.com"
+    },
+    {
+      "name": "Daniel Sum",
+      "email": "daniel@cherrypulp.com"
+    }
+  ],
+  "license": "MIT",
+  "support": {
+    "issues": "https://github.com/cherrylabs/arxmin-ui/issues"
+  }
+}
