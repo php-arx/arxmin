@@ -2,7 +2,6 @@
 
 use Hook;
 use Redirect;
-use DebugBar\DebugBar;
 use Input;
 
 class ModuleDataManagerController extends ModuleController {
@@ -14,8 +13,6 @@ class ModuleDataManagerController extends ModuleController {
     public function __construct(){
 
         parent::__construct();
-
-        \Debugbar::disable();
     }
 
     /**
