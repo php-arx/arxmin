@@ -187,7 +187,10 @@ class Arxmin extends Arx\classes\Singleton
     }
 
     /**
+     *
+     *
      * @param $data
+     * @return bool
      */
     public static function install($data){
 
@@ -215,7 +218,7 @@ class Arxmin extends Arx\classes\Singleton
            return true;
         }
 
-        if( Schema::hasTable('users') && Schema::hasTable('roles') ){
+        if( Arxmin::getOption('arxmin.super_email') ){
             self::$isInstalled = true;
             return true;
         }

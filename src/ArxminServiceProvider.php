@@ -25,6 +25,7 @@ class ArxminServiceProvider extends ServiceProvider
     protected $providers = [
         'Pingpong\Modules\ModulesServiceProvider',
         'Collective\Remote\RemoteServiceProvider',
+        'Zofe\Rapyd\RapydServiceProvider',
     ];
 
     /**

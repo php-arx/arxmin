@@ -34,6 +34,12 @@ class InstallController extends BaseController {
         return $this->viewMake('arxmin::install', $data);
     }
 
+    /**
+     * Install the admin
+     *
+     * @return $this|\Illuminate\Http\RedirectResponse
+     * @throws Exception
+     */
     public function postIndex()
     {
 
@@ -51,72 +57,12 @@ class InstallController extends BaseController {
         # Set Super Admin User
         Arxmin::setOption('arxmin.project_name', Input::get('project'));
         Arxmin::setOption('arxmin.project_category', Input::get('category'));
+        Arxmin::setOption('arxmin.super_first_name', Input::get('first_name'));
+        Arxmin::setOption('arxmin.super_last_name', Input::get('last_name'));
+        Arxmin::setOption('arxmin.super_email', Input::get('email'));
+        Arxmin::setOption('arxmin.super_password', Hash::make(Input::get('password')));
 
-        # Create Default Role
-        try {
-
-            # Generate Role from group
-
-            $group = config('arxmin.acl.group');
-
-            # Create Admin Role
-
-            if(!Role::where('name' , 'admin')->first()){
-                $admin = new Role();
-                $admin->name = 'admin';
-                $admin->save();
-            } else {
-                $admin = Role::where('name' , 'admin')->first();
-            }
-
-            # admin is already instanciated
-
-            unset($group['admin']);
-
-            /**
-             * Force refresh group
-             */
-            foreach($group as $item){
-                if(!Role::where('name' , $item['name'])->first()){
-                    $admin = new Role();
-                    $admin->name = $item['name'];
-                    $admin->save();
-                }
-            }
-
-            # Create A User as super admin
-            $user = new User();
-
-            $user->first_name = Input::get('first_name');
-            $user->last_name = Input::get('last_name');
-            $user->email = Input::get('email');
-
-            $user->password = bcrypt(Input::get( 'password' ));
-
-            // Save if valid. Password field will be hashed before save
-            $user->save();
-
-            #$user->attachRole($admin);
-
-            if ( $user->id )
-            {
-                dd($user);
-
-                Auth::loginUsingId($user->id, true);
-                return Redirect::action('\\Arxmin\\ModuleController@anyDashboard');
-            }
-            else
-            {
-                // Get validation errors (see Ardent package)
-                $error = $user->errors()->all(':message');
-            }
-
-        } catch (Exception $e) {
-            Api::handleError($e);
-            Throw $e;
-        }
-
-        return Redirect::to('arxmin/install')->withErrors(['add']);
+        return Redirect::to('arxmin/manage/modules');
     }
 
     /**

@@ -37,11 +37,6 @@ class AuthController extends BaseController {
     {
         global $user;
 
-        /**
-         * @todo login process
-         */
-        Auth::loginUsingId(1);
-
         # Redirect to the first element of the dynamic menu
         $menu = \Arxmin::getMenu();
 
