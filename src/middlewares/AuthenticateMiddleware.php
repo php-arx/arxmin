@@ -1,9 +1,10 @@
-<?php namespace App\Http\Middleware;
+<?php namespace Arxmin;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 
-class Authenticate {
+
+class AuthenticateMiddleware {
 
 	/**
 	 * The Guard implementation.

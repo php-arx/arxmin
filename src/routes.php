@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Get Arxmin configuration
+ */
+
 $config = Config::get('arxmin');
 
 $auth = Config::get('arxmin.auth');
@@ -12,22 +16,28 @@ $filter = $auth['filter'];
 
 $authController = $auth['controller'];
 
+/**
+ * Launch install if project is not already configured
+ */
 Route::group(array('prefix' => $prefix, 'before' => array('arxmin-check-not-installed')),function() use ($namespace, $filter, $authController){
     Route::controller('install', 'Arxmin\\InstallController');
 });
 
-Route::group(array('prefix' => $prefix), function() use ($namespace, $filter, $authController){
+/**
+ * Non Auth protected route
+ */
+Route::group(array('prefix' => $prefix), function() use ($namespace, $filter, $authController) {
 
-    Route::get('login', $authController.'@login');
-    Route::post('login', $authController.'@do_login');
+    Route::get('login', $authController . '@getLogin');
+    Route::post('login', $authController . '@postLogin');
 
-    Route::get('logout', $authController.'@logout');
-    Route::get('user/logout', $authController.'@logout');
+    Route::get('logout', $authController . '@getLogout');
+    Route::get('auth/logout', $authController . '@getLogout');
 
-    Route::controller( 'user', $authController);
+    Route::controller('auth', $authController);
 
+    # Somes endpoint might or need to be protected with Middleware => @see ApiController
     Route::controller('api/v1', 'Arxmin\\ApiController');
-
 });
 
 /**
@@ -35,18 +45,15 @@ Route::group(array('prefix' => $prefix), function() use ($namespace, $filter, $a
  */
 Route::group(array('prefix' => $prefix, 'namespace' => 'Arxmin', 'before' => ['arxmin-auth', 'arxmin-check-installed']), function() use ($namespace, $filter, $authController){
 
-    $segments = Request::segments();
+    Route::controller('/config', 'ConfigController');
+    Route::controller('/manage', 'ManageController');
 
-    Route::controller('module/user', 'ModuleUserController');
+    # Assets interceptors and file-resolvers
+    Route::controller('/packages', '\\Arx\\AssetsController');
 
-    Route::controller('module/data-manager', 'ModuleDataManagerController');
-
-    Route::controller('module/structure', 'ModuleStructureController');
-
-    Route::controller('module', 'ModuleController');
-
-    # Index
-    Route::any('module', 'ModuleController@anyDashboard');
+    # Redirect homepage to first link in the menu
+    Route::any('/', 'ArxminControler@anyIndex');
 });
 
-Route::controller('packages', 'Arx\\AssetsController');
+Route::controller('/packages', '\\Arx\\AssetsController');
+Route::controller('/modules', '\\Arxmin\\AssetsController');

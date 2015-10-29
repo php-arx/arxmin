@@ -7,8 +7,6 @@ class Option extends EloquentModel {
 
     protected $table = "options";
 
-
-
     /**
      * Set option
      *

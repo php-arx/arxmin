@@ -10,10 +10,6 @@ class InstallController extends BaseController {
 
     public $layout = 'arxmin::install';
 
-    public function __construct(){
-        parent::__construct();
-    }
-
     /**
      * Show install page
      *
@@ -156,6 +152,11 @@ class InstallController extends BaseController {
         }
     }
 
+    /**
+     * Check if configuration is ok
+     *
+     * @return array|\Symfony\Component\HttpFoundation\Response
+     */
     public function anyCheck(){
 
         $requirements = array();

@@ -39,7 +39,7 @@ Route::filter('arxmin-check-not-installed', function()
 Route::filter('arxmin-auth', function()
 {
     # 1. Check if user is logged
-    if(! Auth::check() ){
+    if(!Auth::driver('arxmin')->check()){
         return Redirect::to('arxmin/login');
     } else{
         global $user;

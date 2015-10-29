@@ -2,12 +2,16 @@
 
 use Response, Auth, Input, Exception, Request;
 
+/**
+ * Class ApiController
+ *
+ * @package Arxmin
+ */
 class ApiController extends BaseController {
-
 
     public function __construct(){
 
-        \Debugbar::disable();
+        parent::__construct();
 
         $this->beforeFilter('arxmin::auth', array('except' => array(
             'anyAuth'
@@ -53,17 +57,6 @@ class ApiController extends BaseController {
     }
 
     /**
-     * Call when no methods is defined => by default allow to access to some ApiModel
-     *
-     * @param array $parameters
-     * @return \Illuminate\Http\JsonResponse|mixed
-     */
-    public function missingMethod($parameters = array())
-    {
-        return Response::json(array('msg' => 'Method not found', 'results' => array()), 404);
-    } // missingMethod
-
-    /**
      *
      *
      * @return \Illuminate\Http\JsonResponse
@@ -86,6 +79,7 @@ class ApiController extends BaseController {
      *
      * @param $name
      * @param $action
+     * @return \Illuminate\Http\JsonResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function anyModule($name, $action){
         global $app;
@@ -144,8 +138,6 @@ class ApiController extends BaseController {
         return Response::json(Arxmin::getConfig());
     }
 
-
-
     /**
      * Get Options
      *
@@ -166,185 +158,9 @@ class ApiController extends BaseController {
     }
 
     /**
-     * Return all available labels
-     */
-    public function getLabels()
-    {
-
-        $param = Input::all();
-
-        $data = Label::all()->toArray();
-
-        if ($param['format'] = 'datatable') {
-
-            $i = 0;
-
-            $data = array_map(function($item) use(&$i) {
-                $i++;
-                $item['DT_RowId'] = $item['id'];
-
-                return $item;
-
-            }, $data);
-        }
-
-        return Api::responseJson($data, 200);
-    }
-
-    /**
-     * Return all available labels
-     */
-    public function getForms()
-    {
-
-        $param = Input::all();
-
-        $data = Form::all()->toArray();
-
-        if ($param['format'] = 'datatable') {
-
-            $i = 0;
-
-            $data = array_map(function($item) use(&$i) {
-                $i++;
-                $item['DT_RowId'] = $item['id'];
-
-                return $item;
-
-            }, $data);
-        }
-
-        return Api::responseJson($data, 200);
-    }
-
-    /**
-     * Label
+     * Handle model design interface class
      *
-     * @param null $id
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws Exception
      */
-    public function anyLabel($id = null){
-
-        $action = Input::get('action');
-
-        if (!$action) {
-            switch (\Request::method()) {
-                case 'POST':
-                    $action = 'create';
-                    break;
-                case 'PUT':
-                    $action = 'edit';
-                    break;
-                case 'DELETE':
-                    $action = 'remove';
-                    break;
-            }
-        }
-
-        if ($action == 'create') {
-
-            $label = new Label();
-
-            $data = Input::get('data');
-
-            $label->ref = $data['ref'];
-
-            foreach (Label::getLocales() as $lang) {
-                $label->$lang = $data[$lang];
-            }
-
-            $label->save();
-
-            return Response::json([
-                'row' => $label->toArray()
-            ], 200);
-        } else {
-
-            $label = Label::findOrFail($id);
-
-            if ($action == 'edit') {
-                $data = Input::get('data');
-                foreach (Label::getLocales() as $lang) {
-                    $label->$lang = $data[$lang];
-                }
-
-                if(isset($data['meta']))
-                    $label->meta = $data['meta'];
-
-                $label->save();
-            } elseif ($action == 'remove') {
-                Response::json(['delete' => $label->delete(), Input::all()], 200);
-            }
-
-            return Response::json([
-                'row' => $label->toArray()
-            ], 200);
-
-        }
-
-    }
-
-    /**
-     * Label
-     *
-     * @param null $id
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws Exception
-     */
-    public function anyForm($id = null){
-
-        $action = Input::get('action');
-
-        if (!$action) {
-            switch (\Request::method()) {
-                case 'POST':
-                    $action = 'create';
-                    break;
-                case 'PUT':
-                    $action = 'edit';
-                    break;
-                case 'DELETE':
-                    $action = 'remove';
-                    break;
-            }
-        }
-
-        if ($action == 'create') {
-
-            $label = new Form();
-
-            $data = Input::get('data');
-
-            $label->save();
-
-            return Response::json([
-                'row' => $label->toArray()
-            ], 200);
-        } else {
-
-            $label = Form::findOrFail($id);
-
-            if ($action == 'edit') {
-
-                $data = Input::get('data');
-
-                if(isset($data['meta']))
-                    $label->meta = $data['meta'];
-
-                $label->save();
-            } elseif ($action == 'remove') {
-                Response::json(['delete' => $label->delete(), Input::all()], 200);
-            }
-
-            return Response::json([
-                'row' => $label->toArray()
-            ], 200);
-
-        }
-
-    }
-
     public function handleModel($class, $id = null, $method = null){
 
         if (is_string($id)) {
@@ -360,7 +176,6 @@ class ApiController extends BaseController {
 
         $param = Request::segments();
 
-        # @todo make more dynamic autodetection
         unset($param[0],$param[1],$param[2],$param[3], $param[4]);
 
         if (Input::all()) {
@@ -374,34 +189,6 @@ class ApiController extends BaseController {
         }
 
         return Api::responseJson($response);
-    }
-
-    /**
-     * Data Injection Api
-     */
-    public function anyData($id = null, $method = null)
-    {
-        if (!$id && !$method) {
-
-            $data = Post::search(Input::all())->toArray();
-
-            if ($param['format'] = 'datatable') {
-
-                $i = 0;
-
-                $data = array_map(function($item) use(&$i) {
-                    $i++;
-                    $item['DT_RowId'] = $item['id'];
-
-                    return $item;
-
-                }, $data);
-            }
-
-            return Api::responseJson($data, 200);
-        }
-
-        return $this->handleModel('Data', $id, $method);
     }
 
 } 

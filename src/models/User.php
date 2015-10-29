@@ -9,7 +9,12 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
-    use Authenticatable, CanResetPassword, UserTrait, getFilesHandlingTrait, modelUtilsTrait;
+    use Authenticatable,
+        CanResetPassword,
+        UserTrait,
+        getFilesHandlingTrait,
+        modelUserTrait,
+        modelUtilsTrait;
 
     /**
      * The database table used by the model.
@@ -145,7 +150,22 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @return string
      */
-    public function gravatar()
+    public function getGravatar()
+    {
+        // Generate the Gravatar hash
+        $gravatar = md5(strtolower(trim($this->email)));
+
+        // Return the Gravatar url
+        return "//gravatar.org/avatar/{$gravatar}";
+    }
+
+
+    /**
+     * Returns the user Gravatar image url.
+     *
+     * @return string
+     */
+    public function getGravatarAttribute()
     {
         // Generate the Gravatar hash
         $gravatar = md5(strtolower(trim($this->email)));

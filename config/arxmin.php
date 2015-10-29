@@ -48,7 +48,7 @@ return Hook::get('arxmin::config', array(
      */
     'auth' => array(
         'filter' => 'arxmin-auth',
-        'controller' => 'Arxmin\\UserController',
+        'controller' => 'Arxmin\\AuthController',
         'model' => 'Arxmin\\UserModel',
         'throttle_limit' => 9,
         'throttle_time_period' => 2,
@@ -63,102 +63,5 @@ return Hook::get('arxmin::config', array(
         'signup_email'      => false,
         'signup_confirm'    => false,
     ),
-
-    'acl' => array(
-        /*
-        |--------------------------------------------------------------------------
-        | Arxmin Role Model
-        |--------------------------------------------------------------------------
-        |
-        | This is the Role model used by Arxmin to create correct relations.  Update
-        | the role if it is in a different namespace.
-        |
-        */
-        'role' => '\Role',
-        /*
-        |--------------------------------------------------------------------------
-        | Arxmin Roles Table
-        |--------------------------------------------------------------------------
-        |
-        | This is the roles table used by Arxmin to save roles to the database.
-        |
-        */
-        'roles_table' => 'roles',
-        /*
-        |--------------------------------------------------------------------------
-        | Arxmin Permission Model
-        |--------------------------------------------------------------------------
-        |
-        | This is the Permission model used by Arxmin to create correct relations.
-        | Update the permission if it is in a different namespace.
-        |
-        */
-        'permission' => '\Permission',
-        /*
-        |--------------------------------------------------------------------------
-        | Arxmin Permissions Table
-        |--------------------------------------------------------------------------
-        |
-        | This is the permissions table used by Arxmin to save permissions to the
-        | database.
-        |
-        */
-        'permissions_table' => 'permissions',
-        /*
-        |--------------------------------------------------------------------------
-        | Arxmin permission_role Table
-        |--------------------------------------------------------------------------
-        |
-        | This is the permission_role table used by Arxmin to save relationship
-        | between permissions and roles to the database.
-        |
-        */
-        'permission_role_table' => 'permission_role',
-        /*
-        |--------------------------------------------------------------------------
-        | Arxmin role_user Table
-        |--------------------------------------------------------------------------
-        |
-        | This is the role_user table used by Arxmin to save assigned roles to the
-        | database.
-        |
-        */
-        'role_user_table' => 'role_user',
-
-
-
-        /**
-         * Default group strategy
-         */
-        'group' => array(
-            'admin' => array(
-                'name' => 'admin',
-                'permissions' => array(
-                    'user.create' => 1,
-                    'user.delete' => 1,
-                    'user.view' => 1,
-                    'user.update' => 1,
-                )
-            ),
-            'moderator' => array(
-                'name' => 'editor',
-                'permissions' => array(
-                    'user.create' => 0,
-                    'user.delete' => 0,
-                    'user.view' => 1,
-                    'user.update' => 1,
-                )
-            ),
-            'reader' => array(
-                'name' => 'viewer',
-                'permissions' => array(
-                    'user.create' => 0,
-                    'user.delete' => 0,
-                    'user.view' => 1,
-                    'user.update' => 0,
-                )
-            )
-        ),
-    )
 
 ));

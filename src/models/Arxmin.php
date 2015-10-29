@@ -1,7 +1,10 @@
 <?php namespace Arxmin;
 
+use Arr;
 use Arx;
 use Arx\classes\File, Arx\classes\Hook;
+use Log;
+use Module;
 use Symfony\Component\Finder\Finder;
 use Config, Schema, Crypt, Hash, Lang;
 
@@ -89,7 +92,7 @@ class Arxmin extends Arx\classes\Singleton
      *
      * @todo more reflexive paths
      */
-    public static function loadPlugin(){
+    public static function loadPlugin($pluginOrArray){
 
         $files = func_get_args();
 
@@ -220,28 +223,24 @@ class Arxmin extends Arx\classes\Singleton
         return false;
     }
 
+    /**
+     * Get Arxmin Menu and assign to current instance
+     *
+     * @return array|string
+     */
     public static function getMenu()
     {
         $instance = self::getInstance();
 
-        $finder = new Finder();
+        $menu = Lang::get('arxmin::menu');
 
-        $menu = self::getDbMenu();
+        $menu = array_merge(Hook::get('arxmin::menu'), $menu);
+
+        $menu = Arr::sort($menu, 'position');
 
         $instance->menu = $menu;
 
         return $menu;
-
-    }
-
-    /**
-     * Get Menu
-     *
-     * @return string
-     */
-    public static function getDbMenu(){
-
-        return Lang::get('arxmin::menu');
     }
 
     /**
@@ -265,6 +264,13 @@ class Arxmin extends Arx\classes\Singleton
         return Config::get('arxmin.api.base').'/';
     }
 
+    public static function getModules()
+    {
+        $modules = Module::getOrdered();
+
+        return $modules;
+    }
+
     /**
      * Checks if the current user has a role by its name
      *
@@ -279,6 +285,7 @@ class Arxmin extends Arx\classes\Singleton
         }
         return false;
     }
+
     /**
      * Check if the current user has a permission by its name
      *
@@ -293,6 +300,7 @@ class Arxmin extends Arx\classes\Singleton
         }
         return false;
     }
+
     /**
      * Get the currently authenticated user or null.
      *
@@ -302,6 +310,28 @@ class Arxmin extends Arx\classes\Singleton
     {
         return $this->app->auth->user();
     }
+
+
+    /**
+     * Register a new menu link
+     */
+    public static function registerMenu($data, $params = ['position' => null], $ref = 'arxmin::menu')
+    {
+        $params = Arr::mergeWithDefaultParams($params);
+
+        $menu = Hook::get($ref);
+
+        if ($params['position'] !== null) {
+            Arr::insert($menu, [$data], $params['position']);
+        } else {
+            $menu[] = $data;
+        }
+
+        Hook::set($ref, $menu);
+
+        return Hook::get($ref);
+    }
+
     /**
      * Filters a route for a role or set of roles.
      *

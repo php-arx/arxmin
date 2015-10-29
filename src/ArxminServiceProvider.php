@@ -1,6 +1,8 @@
 <?php namespace Arxmin;
 
 use Arx\classes\ClassLoader;
+use Illuminate\Foundation\AliasLoader;
+use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use \Arx\classes\Hook;
 use \View, \Config, \App;
@@ -16,12 +18,64 @@ class ArxminServiceProvider extends ServiceProvider
     protected $defer = false;
 
     /**
+     * The providers autoloaded by this module
+     *
+     * @var array
+     */
+    protected $providers = [
+        'Pingpong\Modules\ModulesServiceProvider',
+        'Collective\Remote\RemoteServiceProvider',
+    ];
+
+    /**
+     * The facades that will be autoloaded
+     *
+     * @var array
+     */
+    protected $facades = [
+        'Module' => 'Pingpong\Modules\Facades\Module',
+        'SSH' => 'Collective\Remote\RemoteFacade',
+    ];
+
+
+    /**
+     * Register the providers.
+     */
+    public function registerProviders()
+    {
+        foreach ($this->providers as $provider) {
+            $this->app->register($provider);
+        }
+    }
+    /**
+     * Register the facades.
+     */
+    public function registerFacades()
+    {
+        AliasLoader::getInstance($this->facades);
+
+        # Auto-register alias
+        foreach ($this->facades as $alias => $name) {
+            AliasLoader::getInstance()->alias($alias, $name);
+        }
+    }
+
+    /**
      * Bootstrap the application events.
      *
-     * @return void
+     * @param Illuminate\Routing\Router $router
      */
-    public function boot()
+    public function boot(Router $router)
     {
+        #Add custom middleware
+        $router->middleware('arxmin-auth', 'Arxmin\AuthenticateMiddleware');
+
+        $this->app['auth']->extend('arxmmin-auth',function()
+        {
+            return new \Arxmin\AuthProvider();
+        });
+
+        # Load lang and views resources
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'arxmin');
         $this->loadViewsFrom( __DIR__ . '/../resources/views', 'arxmin');
 
@@ -34,7 +88,7 @@ class ArxminServiceProvider extends ServiceProvider
         # Merge with default config to override only what you need
         $this->mergeConfigFrom($configPath, 'arxmin');
 
-        # Add Directories
+        # Autoload Directories
         ClassLoader::addDirectories(array(
             __DIR__ . '/controllers',
             __DIR__ . '/models',
@@ -45,8 +99,13 @@ class ArxminServiceProvider extends ServiceProvider
             __DIR__ . '/migrations'
         ));
 
-        # Add helpers filters and routes
-        include_once __DIR__ . '/helpers.php';
+        # Register custom auth provider
+        $this->app['auth']->extend('arxmin',function()
+        {
+            return new AuthProvider(new User);
+        });
+
+        # Add filters and routes
         include_once __DIR__ . '/filters.php';
         include_once __DIR__ . '/routes.php';
 
@@ -61,15 +120,15 @@ class ArxminServiceProvider extends ServiceProvider
     public function register()
     {
         /**
+         * need to load helpers before other third-parties vendors
+         */
+        include_once __DIR__ . '/helpers.php';
+
+        /**
          * Register Arxmin
          */
-
         $this->app->bind('arxmin', function ($app) {
             return new Arxmin($app);
-        });
-
-        $this->app->bindShared('command.arxmin.migration', function ($app) {
-            return new MigrationCommand();
         });
 
         /**
@@ -80,14 +139,10 @@ class ArxminServiceProvider extends ServiceProvider
         Hook::register('arxmin::menu');
         Hook::register('arxmin::rightbar');
         Hook::register('arxmin::widgets');
-        Hook::register('arxmin::dashboard_widgets');
         Hook::register('arxmin::api.modules');
 
-        $app = $this->app;
-
-        $app['arxmin.modules.data'] = new Post();
-        $app['arxmin.modules.labels'] = new Label();
-        $app['arxmin.modules.options'] = new Option();
+        $this->registerProviders();
+        $this->registerFacades();
     }
 
     /**
@@ -98,7 +153,7 @@ class ArxminServiceProvider extends ServiceProvider
     public function provides()
     {
         return array(
-            'command.arxmin.migration'
+            'arxmin'
         );
     }
 

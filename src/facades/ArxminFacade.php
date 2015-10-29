@@ -1,6 +1,8 @@
 <?php namespace Arxmin;
 
-class ArxminFacade {
+use Arx\classes\Facade;
+
+class ArxminFacade extends Facade {
     /**
      * Get the registered name of the component.
      *
@@ -12,6 +14,9 @@ class ArxminFacade {
     }
 }
 
+/**
+ * @deprecated please use auto resolvers !
+ */
 namespace Arxmin\facades;
 
 use Arxmin\ArxminFacade as ParentClass;
