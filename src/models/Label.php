@@ -73,8 +73,6 @@ class Label extends EloquentModel {
     */
     public static function getAll($param = [])
     {
-
-
         return self::all();
     }
 

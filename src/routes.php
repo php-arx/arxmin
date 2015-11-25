@@ -52,7 +52,7 @@ Route::group(array('prefix' => $prefix, 'namespace' => 'Arxmin', 'before' => ['a
     Route::controller('/packages', '\\Arx\\AssetsController');
 
     # Redirect homepage to first link in the menu
-    Route::any('/', 'ArxminControler@anyIndex');
+    Route::any('/', 'ArxminController@anyIndex');
 });
 
 Route::controller('/packages', '\\Arx\\AssetsController');

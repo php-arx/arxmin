@@ -1,5 +1,4 @@
 <?php namespace Arxmin;
-use Arx\classes\Utils;
 
 /**
  * Class Api

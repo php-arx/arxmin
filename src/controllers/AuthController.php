@@ -20,10 +20,12 @@ class AuthController extends BaseController {
         //$this->middleware('guest', ['except' => 'getLogout']);
     }
 
+    /**
+     * Login process
+     *
+     * @return View
+     */
     public function getLogin(){
-        /**
-         * @todo login process
-         */
         return view('arxmin::auth.login');
     }
 
@@ -35,10 +37,14 @@ class AuthController extends BaseController {
      */
     public function postLogin(Request $request)
     {
-        global $user;
+        global $user, $auth;
+
+        # Check if user is in the DB
+
+        $auth = Arxmin::attempt(Request::all(), Request::get('remember'));
 
         # Redirect to the first element of the dynamic menu
-        $menu = \Arxmin::getMenu();
+        $menu = Arxmin::getMenu();
 
         return redirect($menu[0]['link']);
     }

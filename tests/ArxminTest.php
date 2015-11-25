@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Main arx test
+ * Main Arxmin test
  */
 class ArxminTest extends Illuminate\Foundation\Testing\TestCase {
 

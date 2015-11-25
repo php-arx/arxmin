@@ -3,19 +3,15 @@
 use Arr;
 use Arx;
 use Arx\classes\File, Arx\classes\Hook;
-use Log;
-use Module;
-use Symfony\Component\Finder\Finder;
-use Config, Schema, Crypt, Hash, Lang;
+use Config, Hash, Lang;
 
+/**
+ * Class Arxmin
+ *
+ * @package Arxmin
+ */
 class Arxmin extends Arx\classes\Singleton
 {
-
-    protected $menu = array();
-
-    private static $isInstalled = false;
-
-	private static $_aInstances = array();
 
     /**
      * Laravel application
@@ -25,10 +21,21 @@ class Arxmin extends Arx\classes\Singleton
     public $app;
 
     /**
+    * Admin user logged
+    */
+    public static $user = null;
+
+    protected $menu = array();
+
+    private static $isInstalled = false;
+
+	private static $_aInstances = array();
+
+    /**
      * Create a new arxmin instance.
      *
      * @param \Illuminate\Foundation\Application $app
-     *
+     * @param \Session $session
      */
     public function __construct($app = null)
     {
@@ -73,6 +80,8 @@ class Arxmin extends Arx\classes\Singleton
      */
 	public static function attempt($credentials, $remember = false){
 
+        global $user;
+
 		#1. try to get the super user admin
 
 		$email = Arxmin::getOption( 'arxmin.super_email' );
@@ -80,7 +89,10 @@ class Arxmin extends Arx\classes\Singleton
 
 		if ( $credentials['email'] == $email && $password == Hash::make( $credentials['password'] ) ) {
 			Session::put( 'super_admin', true );
-			return true;
+
+            return [
+                'first_name'
+            ];
 		}
 
 
@@ -122,6 +134,11 @@ class Arxmin extends Arx\classes\Singleton
         }
     }
 
+    /**
+     * Get availables langs
+     *
+     * @return mixed
+     */
     public static function getLangs()
     {
         return Config::get('app.locales', [Config::get('app.locale', 'en')]);
@@ -148,7 +165,8 @@ class Arxmin extends Arx\classes\Singleton
     }
 
     /**
-     * Get appsolute path of the current theme
+     * Get appsolute path of the current arxmin theme
+     *
      * @param null $path
      * @return string
      */
@@ -164,7 +182,7 @@ class Arxmin extends Arx\classes\Singleton
     }
 
     /**
-     * Get url of the current theme
+     * Get url of the current arxmin theme
      *
      * @param null $path
      * @return string
@@ -174,7 +192,7 @@ class Arxmin extends Arx\classes\Singleton
     }
 
     /**
-     * Generate a url for the application.
+     * Generate an url for the application.
      *
      * @param  string  $path
      * @param  mixed   $parameters
@@ -187,26 +205,15 @@ class Arxmin extends Arx\classes\Singleton
     }
 
     /**
-     *
-     *
-     * @param $data
-     * @return bool
-     */
-    public static function install($data){
-
-        if ( ! self::isInstalled()) {
-
-        }
-
-        return false;
-    }
-
-    /**
-     * Check if User is Auth
+     * Check if Arxmin User is Auth
      */
     public static function isAuth()
     {
-        dd(\Auth::check());
+        if (self::$user) {
+            return self::$user;
+        }
+
+        return false;
     }
 
     /**
@@ -393,6 +400,7 @@ class Arxmin extends Arx\classes\Singleton
         // previously created filter.
         $this->app->router->when($route, $filterName);
     }
+
     /**
      * Filters a route for role(s) and/or permission(s).
      *
