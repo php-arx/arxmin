@@ -35,7 +35,7 @@ class Arxmin extends Arx\classes\Singleton
      * Create a new arxmin instance.
      *
      * @param \Illuminate\Foundation\Application $app
-     * @param \Session $session
+     * @internal param \Session $session
      */
     public function __construct($app = null)
     {
@@ -115,7 +115,7 @@ class Arxmin extends Arx\classes\Singleton
      */
     public static function getLangs()
     {
-        return Config::get('app.locales', [Config::get('app.locale', 'en')]);
+        return array_keys(Config::get('app.locales', [Config::get('app.locale', 'en')]));
     }
 
     /**

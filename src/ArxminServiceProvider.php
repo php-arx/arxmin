@@ -35,6 +35,7 @@ class ArxminServiceProvider extends ServiceProvider
      * @var array
      */
     protected $facades = [
+        'Arxmin' => 'Arxmin\Arxmin',
         'Module' => 'Pingpong\Modules\Facades\Module',
         'SSH' => 'Collective\Remote\RemoteFacade',
         'Former' => 'Former\Facades\Former',
