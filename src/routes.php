@@ -3,7 +3,6 @@
 /**
  * Get Arxmin configuration
  */
-
 $config = Config::get('arxmin');
 
 $auth = Config::get('arxmin.auth');
@@ -17,16 +16,17 @@ $filter = $auth['filter'];
 $authController = $auth['controller'];
 
 /**
- * Launch install if project is not already configured
+ * Access to install only if project is not already configured
  */
-Route::group(array('prefix' => $prefix, 'before' => array('arxmin-check-not-installed')),function() use ($namespace, $filter, $authController){
-    Route::controller('install', 'Arxmin\\InstallController');
-});
+Route::group(array('prefix' => $prefix, 'before' => ['arxmin-check-not-installed']),
+    function () use ($namespace, $filter, $authController) {
+        Route::controller('install', 'Arxmin\\InstallController');
+    });
 
 /**
  * Non Auth protected route
  */
-Route::group(array('prefix' => $prefix), function() use ($namespace, $filter, $authController) {
+Route::group(array('prefix' => $prefix), function () use ($namespace, $filter, $authController) {
 
     Route::get('login', $authController . '@getLogin');
     Route::post('login', $authController . '@postLogin');
@@ -43,7 +43,7 @@ Route::group(array('prefix' => $prefix), function() use ($namespace, $filter, $a
 /**
  * Auth protected route
  */
-Route::group(array('prefix' => $prefix, 'namespace' => 'Arxmin', 'before' => ['arxmin-auth', 'arxmin-check-installed']), function() use ($namespace, $filter, $authController){
+Route::group(array('prefix' => $prefix, 'namespace' => 'Arxmin', 'before' => ['arxmin-auth', 'arxmin-check-installed']), function () use ($namespace, $filter, $authController) {
 
     Route::controller('/config', 'ConfigController');
     Route::controller('/manage', 'ManageController');
@@ -55,5 +55,6 @@ Route::group(array('prefix' => $prefix, 'namespace' => 'Arxmin', 'before' => ['a
     Route::any('/', 'ArxminController@anyIndex');
 });
 
+// Auto Assets injector
 Route::controller('/packages', '\\Arx\\AssetsController');
 Route::controller('/modules', '\\Arxmin\\AssetsController');

@@ -72,32 +72,6 @@ class Arxmin extends Arx\classes\Singleton
         return Config::get('arxmin.api.base').'/'.$endpoint;
     }
 
-    /**
-     *
-     * @param $credentials
-     * @param bool $remember
-     * @return bool
-     */
-	public static function attempt($credentials, $remember = false){
-
-        global $user;
-
-		#1. try to get the super user admin
-
-		$email = Arxmin::getOption( 'arxmin.super_email' );
-		$password = Arxmin::getOption( 'arxmin.super_password' );
-
-		if ( $credentials['email'] == $email && $password == Hash::make( $credentials['password'] ) ) {
-			Session::put( 'super_admin', true );
-
-            return [
-                'first_name'
-            ];
-		}
-
-
-	}
-
 
     /**
      * addPlugin to the page
@@ -274,6 +248,11 @@ class Arxmin extends Arx\classes\Singleton
         return Config::get('arxmin.api.base').'/';
     }
 
+    /**
+     * Get modules
+     *
+     * @return mixed
+     */
     public static function getModules()
     {
         $modules = Module::getOrdered();

@@ -50,18 +50,6 @@ return Hook::get('arxmin::config', array(
         'filter' => 'arxmin-auth',
         'controller' => 'Arxmin\\AuthController',
         'model' => 'Arxmin\\UserModel',
-        'throttle_limit' => 9,
-        'throttle_time_period' => 2,
-        'login_cache_field' => 'email',
-        'login_form' =>             'arxmin::user.login',
-        'signup_form' =>            'arxmin::user.signup',
-        'forgot_password_form' =>   'arxmin::user.forgot_password',
-        'reset_password_form' =>    'arxmin::user.reset_password',
-        'email_reset_password' =>       'arxmin::emails.passwordreset', // with $user and $token.
-        'email_account_confirmation' => 'arxmin::emails.confirm', // with $user
-        'signup_cache' => 120,
-        'signup_email'      => false,
-        'signup_confirm'    => false,
     ),
 
 ));

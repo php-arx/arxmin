@@ -4,6 +4,11 @@ use Closure;
 use Illuminate\Contracts\Routing\Middleware;
 use Illuminate\Http\Response;
 
+/**
+ * Class CorsMiddleware
+ *
+ * @package Arxmin\middlewares
+ */
 class CorsMiddleware implements Middleware {
 
     /**

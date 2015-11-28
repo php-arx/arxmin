@@ -4,6 +4,7 @@
 use Illuminate\Auth\GenericUser;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\UserProvider;
+use Session;
 
 class AuthProvider implements UserProvider {
 
@@ -17,7 +18,6 @@ class AuthProvider implements UserProvider {
      */
     public function retrieveById($identifier)
     {
-        // TODO: Implement retrieveById() method.
         return $this->arxminUser();
     }
 
@@ -30,7 +30,8 @@ class AuthProvider implements UserProvider {
      */
     public function retrieveByToken($identifier, $token)
     {
-        // TODO: Implement retrieveByToken() method.
+
+        dd($identifier, $token);
 
         return $this->arxminUser();
     }
@@ -44,7 +45,7 @@ class AuthProvider implements UserProvider {
      */
     public function updateRememberToken(Authenticatable $user, $token)
     {
-        // TODO: Implement updateRememberToken() method.
+        dd($user, $token);
     }
 
     /**
@@ -55,9 +56,18 @@ class AuthProvider implements UserProvider {
      */
     public function retrieveByCredentials(array $credentials)
     {
-        // TODO: Implement retrieveByCredentials() method.
+        #1. try to get the super user admin
+        $email = Arxmin::getOption('arxmin.super_email');
+        $password = Arxmin::getOption('arxmin.super_password');
 
-        return $this->arxminUser();
+        if ( $credentials['email'] == $email && $password == bcrypt( $credentials['password'] ) ) {
+
+            Session::put('super_admin',true);
+
+            return $this->arxminUser();
+        }
+
+        return null;
     }
 
     /**
@@ -69,6 +79,7 @@ class AuthProvider implements UserProvider {
      */
     public function validateCredentials(Authenticatable $user, array $credentials)
     {
+        dd($user, $credentials);
         return true;
     }
 
@@ -81,16 +92,16 @@ class AuthProvider implements UserProvider {
     protected function arxminUser(){
 
         $attributes = array(
-            'id' => 123,
-            'remember_token' => "",
-            'username' => 'Admin',
-            'first_name' => 'Admin',
-            'last_name' => 'Admin',
-            'password' => \Hash::make('SuperSecret'),
-            'name' => 'Dummy User',
-            'email' => 'daniel@cherrypulp.com',
-            'type' => 'admin',
-            'role' => 'admin',
+            'id' => 0,
+            'username' => Arxmin::getOption('arxmin.super_first_name'),
+            'first_name' => Arxmin::getOption('arxmin.super_first_name'),
+            'last_name' => Arxmin::getOption('arxmin.super_last_name'),
+            'password' => Arxmin::getOption('arxmin.super_password'),
+            'name' => Arxmin::getOption('arxmin.super_first_name'),
+            'email' => Arxmin::getOption('arxmin.super_email'),
+            'type' => 'superadmin',
+            'role' => 'superadmin',
+            'remember_token' => ''
         );
 
         return new SuperUser($attributes);

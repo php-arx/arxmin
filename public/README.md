@@ -1,4 +1,4 @@
-# arxmin-ui
+# Arxmin UI
 
 [![Software License][ico-license]](LICENSE.md)
 [![Total Downloads][ico-downloads]][link-downloads]
@@ -18,9 +18,21 @@ Via Bower
 $ bower install arxmin
 ```
 
+## How it works
+
+-
+-- gulp-config.js => contains all that you need to compile the source
+-- gulpfile.js => compile stuff
+
+
 ## Usage
 
-See the example folder for some example.
+See the example folder for some example of how it works.
+
+## TODO
+
+- Move less to sass
+- Cleaning AdminLTE unwanted plugins
 
 ## Change log
 

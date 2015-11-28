@@ -1,7 +1,13 @@
 <?php namespace Arxmin;
 
+/**
+ * Class modelUserTrait
+ *
+ * Method needed for your User model
+ *
+ * @package Arxmin
+ */
 trait modelUserTrait {
-
 
     /**
      * Return
@@ -10,7 +16,6 @@ trait modelUserTrait {
     {
         return $this->name;
     }
-
 
     /**
      * Get Meta
@@ -53,6 +58,20 @@ trait modelUserTrait {
     public function getFirstNameAttribute($value)
     {
         return ucfirst(strtolower($value));
+    }
+
+    /**
+     * Returns the user Gravatar image url.
+     *
+     * @return string
+     */
+    public function getGravatar()
+    {
+        // Generate the Gravatar hash
+        $gravatar = md5(strtolower(trim($this->email)));
+
+        // Return the Gravatar url
+        return "//gravatar.org/avatar/{$gravatar}";
     }
 
     /**

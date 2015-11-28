@@ -13,12 +13,3 @@ class ArxminFacade extends Facade {
         return 'arxmin';
     }
 }
-
-/**
- * @deprecated please use auto resolvers !
- */
-namespace Arxmin\facades;
-
-use Arxmin\ArxminFacade as ParentClass;
-
-class ArxminFacade extends ParentClass {}

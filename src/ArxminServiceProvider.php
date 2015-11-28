@@ -26,6 +26,7 @@ class ArxminServiceProvider extends ServiceProvider
         'Pingpong\Modules\ModulesServiceProvider',
         'Collective\Remote\RemoteServiceProvider',
         'Zofe\Rapyd\RapydServiceProvider',
+        'Former\FormerServiceProvider'
     ];
 
     /**
@@ -36,6 +37,7 @@ class ArxminServiceProvider extends ServiceProvider
     protected $facades = [
         'Module' => 'Pingpong\Modules\Facades\Module',
         'SSH' => 'Collective\Remote\RemoteFacade',
+        'Former' => 'Former\Facades\Former',
     ];
 
 

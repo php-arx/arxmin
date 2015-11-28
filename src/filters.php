@@ -42,8 +42,9 @@ Route::filter('arxmin-auth', function()
     if(!Auth::driver('arxmin')->check()){
         return Redirect::to('arxmin/login');
     } else{
-        global $user;
-        $user = Auth::getUser();
+        global $arxminUser, $arxminAuth;
+        $arxminAuth = true;
+        $arxminUser = Auth::driver('arxmin')->getUser();
     }
 });
 

@@ -28,7 +28,7 @@ abstract class ModuleController extends BaseController
 
         $auth = Auth::driver('arxmin');
 
-        $auth->check();
+        $isAuth = $auth->check();
 
         $user = $auth->getUser();
 

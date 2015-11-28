@@ -2,12 +2,10 @@
 
 use ZipArchive;
 
-class Module
+use Module as ParentClass;
+
+class Module extends ParentClass
 {
-
-    public function __construct(){
-
-    }
 
     /**
      * Download a Git

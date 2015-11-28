@@ -38,20 +38,6 @@ module.exports = {
             ]
         },
 
-        /*
-         // Todo => move project to Sass
-         scss: {
-         *//**
-         * Here you can put your main stylesheets
-         *
-         * For perf reason is better to import css inside one main.scss
-         *
-         *//*
-         arxmin : [
-         '<%= src_dir  %>/scss/arxmin.scss'
-         ]
-         },*/
-
         js: {
             /**
              * Here you can put the main plugins that you use everywhere

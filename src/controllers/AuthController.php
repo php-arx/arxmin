@@ -3,8 +3,8 @@
 use App\Services\Registrar;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Input, View, User, Config, Redirect, Lang, Auth, Confide;
-use Illuminate\Support\Facades\Request;
+use View, User, Auth;
+use Request;
 
 class AuthController extends BaseController {
 
@@ -15,9 +15,8 @@ class AuthController extends BaseController {
     public function __construct(Guard $auth, Registrar $registrar)
     {
         parent::__construct();
-        $this->auth = $auth;
+        $this->auth = Auth::driver('arxmin');
         $this->registrar = $registrar;
-        //$this->middleware('guest', ['except' => 'getLogout']);
     }
 
     /**
@@ -40,8 +39,7 @@ class AuthController extends BaseController {
         global $user, $auth;
 
         # Check if user is in the DB
-
-        $auth = Arxmin::attempt(Request::all(), Request::get('remember'));
+        $auth = $this->auth->attempt(Request::only(['email','password']), Request::get('remember'));
 
         # Redirect to the first element of the dynamic menu
         $menu = Arxmin::getMenu();
