@@ -1,11 +1,16 @@
 <?php namespace Arxmin;
 
+use Illuminate\Foundation\Bus\DispatchesCommands;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+
 /**
  * Class BaseController for all Controller
  *
  * @package Arxmin
  */
 class BaseController extends \Arx\BaseController {
+
+    use DispatchesCommands, ValidatesRequests;
 
     protected $menu;
 

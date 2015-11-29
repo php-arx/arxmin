@@ -111,11 +111,22 @@ class Arxmin extends Arx\classes\Singleton
     /**
      * Get availables langs
      *
+     * @param string $type
      * @return mixed
      */
-    public static function getLangs()
+    public static function getLocales($type = 'array')
     {
-        return array_keys(Config::get('app.locales', [Config::get('app.locale', 'en')]));
+        $locales = Config::get('app.locales');
+
+        if ($type == 'select') {
+            $data = [];
+            foreach ($locales as $key => $item) {
+                $data[$key] = $item['name'];
+            }
+            return $data;
+        }
+
+        return $locales;
     }
 
     /**

@@ -36,7 +36,7 @@ class AuthController extends BaseController {
      */
     public function postLogin(Request $request)
     {
-        global $user, $auth;
+        global $auth;
 
         # Check if user is in the DB
         $auth = $this->auth->attempt(Request::only(['email','password']), Request::get('remember'));

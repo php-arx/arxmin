@@ -3,8 +3,9 @@
 use Arx\classes\Facade;
 
 class ArxminFacade extends Facade {
+
     /**
-     * Get the registered name of the component.
+     * Return Arxmin instanciated in app
      *
      * @return string
      */
@@ -12,4 +13,5 @@ class ArxminFacade extends Facade {
     {
         return 'arxmin';
     }
+
 }

@@ -1,6 +1,7 @@
 <?php namespace Arxmin;
 
 
+use Hash;
 use Illuminate\Auth\GenericUser;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\UserProvider;
@@ -30,10 +31,9 @@ class AuthProvider implements UserProvider {
      */
     public function retrieveByToken($identifier, $token)
     {
-
-        dd($identifier, $token);
-
-        return $this->arxminUser();
+        if ($token == Arxmin::getOption('arxmin.remember')) {
+            return $this->arxminUser();
+        }
     }
 
     /**
@@ -45,7 +45,7 @@ class AuthProvider implements UserProvider {
      */
     public function updateRememberToken(Authenticatable $user, $token)
     {
-        dd($user, $token);
+        Arxmin::setOption('arxmin.remember', $token);
     }
 
     /**
@@ -60,10 +60,8 @@ class AuthProvider implements UserProvider {
         $email = Arxmin::getOption('arxmin.super_email');
         $password = Arxmin::getOption('arxmin.super_password');
 
-        if ( $credentials['email'] == $email && $password == bcrypt( $credentials['password'] ) ) {
-
+        if($credentials['email'] == $email) {
             Session::put('super_admin',true);
-
             return $this->arxminUser();
         }
 
@@ -79,7 +77,6 @@ class AuthProvider implements UserProvider {
      */
     public function validateCredentials(Authenticatable $user, array $credentials)
     {
-        dd($user, $credentials);
         return true;
     }
 

@@ -60,7 +60,7 @@ class InstallController extends BaseController {
         Arxmin::setOption('arxmin.super_first_name', Input::get('first_name'));
         Arxmin::setOption('arxmin.super_last_name', Input::get('last_name'));
         Arxmin::setOption('arxmin.super_email', Input::get('email'));
-        Arxmin::setOption('arxmin.super_password', Hash::make(Input::get('password')));
+        Arxmin::setOption('arxmin.super_password', bcrypt(Input::get('password')));
 
         return Redirect::to('arxmin/manage/modules');
     }
