@@ -1,22 +1,18 @@
 <?php namespace Arxmin;
 
-use App\Services\Registrar;
 use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use View, User, Auth;
+use View, Auth;
 use Request;
 
 class AuthController extends BaseController {
 
-    use ValidatesRequests;
 
     public $layout = "arxmin::layouts.html";
 
-    public function __construct(Guard $auth, Registrar $registrar)
+    public function __construct(Guard $auth)
     {
         parent::__construct();
         $this->auth = Auth::driver('arxmin');
-        $this->registrar = $registrar;
     }
 
     /**

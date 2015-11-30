@@ -8,6 +8,7 @@
  */
 
 use Arx\BootstrapHelper;
+use Arx\classes\Utils;
 use Arxmin\helpers\DatacrudHelper;
 use Arxmin\helpers\DataformHelper;
 use Arxmin\helpers\DatagridHelper;
@@ -31,27 +32,27 @@ class ManageController extends ModuleController
 
     public function anyModules($action = "view"){
 
+        $aModules = Utils::getJSON('http://www.arx.io/api/v1/modules', true);
+
         if ($action == 'download') {
             $result = Module::download(
-                'https://github.com/cherrylabs/adapter-youtube/archive/master.zip',
-                "Youtube",
+                Input::get('link'),
+                Input::get('name').'2',
                 \Module::getPath()
             );
         }
 
         $title = __("Modules Discovery");
 
-        $oModules = Arxmin::getModules();
-
-        $aModules = [];
+        /*$oModules = Arxmin::getModules();
 
         foreach ($oModules as $module) {
 
             $aModules[] = [
-                'name' => $module->name,
+                'title' => $module->name,
                 'description' => $module->name,
             ];
-        }
+        }*/
 
         return $this->viewMake('arxmin::modules.home', get_defined_vars());
     }

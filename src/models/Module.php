@@ -29,6 +29,7 @@ class Module extends ParentClass
             if ($zip->open(__DIR__."/".$tmpName) === true) {
 
                 $destFolder = $dest . '/' . $name;
+                $oldFolder = "";
 
                 if (is_dir($destFolder)) {
 
