@@ -37,7 +37,7 @@ class ManageController extends ModuleController
         if ($action == 'download') {
             $result = Module::download(
                 Input::get('link'),
-                Input::get('name').'2',
+                Input::get('name'),
                 \Module::getPath()
             );
         }
