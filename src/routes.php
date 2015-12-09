@@ -43,7 +43,7 @@ Route::group(array('prefix' => $prefix), function () use ($namespace, $filter, $
 /**
  * Auth protected route
  */
-Route::group(array('prefix' => $prefix, 'namespace' => 'Arxmin', 'before' => ['arxmin-auth', 'arxmin-check-installed']), function () use ($namespace, $filter, $authController) {
+Route::group(array('prefix' => $prefix, 'namespace' => 'Arxmin', 'before' => ['arxmin-check-installed']), function () use ($namespace, $filter, $authController) {
 
     Route::controller('/config', 'ConfigController');
     Route::controller('/manage', 'ManageController');

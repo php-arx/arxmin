@@ -236,7 +236,7 @@ $body['attributes']['class'] .= ' skin-black sidebar-mini';
         @section('content-header')
         <section class="content-header">
             <ol class="breadcrumb">
-                <li><a href="<?=$user->type; ?>/"><i class="fa fa-dashboard"></i>Home</a></li>
+                <li><a href="<?= @$user->type; ?>/"><i class="fa fa-dashboard"></i>Home</a></li>
                 <li class="active">Here</li>
             </ol>
             <h1>
