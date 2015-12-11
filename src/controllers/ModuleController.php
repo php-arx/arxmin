@@ -1,17 +1,14 @@
 <?php namespace Arxmin;
 
+use Auth;
+
 /**
- * ModuleController
+ * Class ModuleController
  *
  * ModuleController template to use when you create your ModuleController
  *
- *
- * @project : arx/arxmin
- * @author : Daniel Sum <daniel@cherrypulp.com>
+ * @package Arxmin
  */
-
-use Auth;
-
 abstract class ModuleController extends BaseController
 {
 

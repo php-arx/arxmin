@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 <?php
 /**
- * Simple content page withou header and sidebar example
+ * Simple content page without header and sidebar example
  */
 $noheader = true;
 $nosidebar = true;

@@ -90,7 +90,7 @@ class ManageController extends ModuleController
             return file_put_contents('test.php', "<?php \n\n return " . $this->beautify(var_export(Input::get('data'), true)) . ";");
         }
 
-        return $this->viewMake('arxmin::modules.jsonviewer', get_defined_vars());
+        return $this->viewMake('arxmin::shared.jsonviewer', get_defined_vars());
     }
 
     /**

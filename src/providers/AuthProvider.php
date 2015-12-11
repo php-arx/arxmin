@@ -1,10 +1,9 @@
 <?php namespace Arxmin;
 
-
-use Hash;
 use Illuminate\Auth\GenericUser;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\UserProvider;
+use Log;
 use Session;
 
 class AuthProvider implements UserProvider {
@@ -34,6 +33,8 @@ class AuthProvider implements UserProvider {
         if ($token == Arxmin::getOption('arxmin.remember')) {
             return $this->arxminUser();
         }
+
+        Log::info('arxmin error');
     }
 
     /**

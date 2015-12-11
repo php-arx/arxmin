@@ -57,11 +57,12 @@ class ApiController extends BaseController {
     }
 
     /**
-     *
+     * Auth authentifier
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function anyAuth(){
+
         $data = Input::all();
 
         try {
@@ -156,39 +157,4 @@ class ApiController extends BaseController {
     public function getMenu(){
         return Response::json(Arxmin::getMenu());
     }
-
-    /**
-     * Handle model design interface class
-     *
-     */
-    public function handleModel($class, $id = null, $method = null){
-
-        if (is_string($id)) {
-            $oClass = new Post();
-            $method = $id;
-        } elseif (is_integer($id)) {
-            $oClass = Post::findOrFail($id);
-        } else {
-            $oClass = new $class();
-        }
-
-        $method = studly_case($method);
-
-        $param = Request::segments();
-
-        unset($param[0],$param[1],$param[2],$param[3], $param[4]);
-
-        if (Input::all()) {
-            $param[] = Input::all();
-        }
-
-        if (method_exists($oClass, $method)) {
-            $response = call_user_func_array([$oClass, $method], $param);
-        } else {
-            $response = $oClass->toArray();
-        }
-
-        return Api::responseJson($response);
-    }
-
 } 

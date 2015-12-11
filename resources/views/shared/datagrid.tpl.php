@@ -1,9 +1,5 @@
 @extends('arxmin::layouts.admin')
 
-@section('css')
-@parent
-@stop
-
 @section('content')
 <div class="container-fluid">
     <div class="box">
@@ -17,8 +13,4 @@
         </div>
     </div>
 </div>
-@stop
-
-@section('js')
-@parent
 @stop
