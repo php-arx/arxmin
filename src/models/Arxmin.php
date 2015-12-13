@@ -3,7 +3,7 @@
 use Arr;
 use Arx;
 use Arx\classes\File, Arx\classes\Hook;
-use Config, Hash, Lang;
+use Config, Lang;
 
 /**
  * Class Arxmin
@@ -31,11 +31,12 @@ class Arxmin extends Arx\classes\Singleton
 
 	private static $_aInstances = array();
 
+    public static $currentModule = null;
+
     /**
      * Create a new arxmin instance.
      *
      * @param \Illuminate\Foundation\Application $app
-     * @internal param \Session $session
      */
     public function __construct($app = null)
     {
@@ -152,10 +153,21 @@ class Arxmin extends Arx\classes\Singleton
     /**
      * Get appsolute path of the current arxmin theme
      *
+     * @deprecated please use getAssetsPath instead
      * @param null $path
      * @return string
      */
     public static function getThemePath($path = null){
+        return self::getAssetsPath($path);
+    }
+
+    /**
+     * Get Assets path
+     *
+     * @param null $path
+     * @return string
+     */
+    public static function getAssetsPath($path = null){
 
         $base = Config::get('arxmin.paths.theme');
 
@@ -169,11 +181,22 @@ class Arxmin extends Arx\classes\Singleton
     /**
      * Get url of the current arxmin theme
      *
+     * @deprecated please use getAssetsUrl instead
      * @param null $path
      * @return string
      */
     public static function getThemeUrl($path = null){
-        return url('/packages').'/'.Config::get('arxmin.theme').$path;
+        return self::getAssetsUrl($path);
+    }
+
+    /**
+     * Get Assets full url
+     *
+     * @param null $path
+     * @return string
+     */
+    public static function getAssetsUrl($path = null, $params = [], $secure = null){
+        return url('/packages', $params, $secure).'/'.Config::get('arxmin.theme').$path;
     }
 
     /**
@@ -272,6 +295,57 @@ class Arxmin extends Arx\classes\Singleton
     }
 
     /**
+     * Guess the current module name
+     *
+     * @param string $type
+     * @return string
+     * @throws \Exception
+     */
+    public static function getCurrentModule($type = 'name')
+    {
+        if (!self::$currentModule) {
+            self::guestCurrentModule();
+        }
+
+        $module = Module::getUsedNow();
+
+        if ($type == 'name') {
+            return $module->name;
+        } elseif($type == 'path'){
+            return $module->path;
+        } else {
+            return $module;
+        }
+    }
+
+    /**
+     * Method to guess the current module used
+     *
+     * @todo : improve this method
+     */
+    public static function guestCurrentModule()
+    {
+        $aDebug = debug_backtrace(1);
+        $modules = \Module::all();
+
+        if(isset($aDebug[1])){
+            foreach ($aDebug as $item) {
+                if (isset($item['file'])) {
+                    foreach ($modules as $module) {
+                        if (strpos($item['file'], $module->path)) {
+                            self::$currentModule = $module->name;
+                            Module::setCurrent($module->name);
+                            break;
+                        }
+                    }
+                }
+            }
+        } else {
+            Throw new \Exception('Cannot set current module dynamically');
+        }
+    }
+
+    /**
      * Checks if the current user has a role by its name
      *
      * @param string $name Role name.
@@ -306,14 +380,18 @@ class Arxmin extends Arx\classes\Singleton
      *
      * @return Illuminate\Auth\UserInterface|null
      */
-    public function user()
+    public function user(\Auth $auth)
     {
-        return $this->app->auth->user();
+        return $auth->driver('arxmin')->getUser();
     }
-
 
     /**
      * Register a new menu link
+     * @param $data
+     * @param array $params
+     * @param string $ref
+     * @return array
+     * @throws \Exception
      */
     public static function registerMenu($data, $params = ['position' => null], $ref = 'arxmin::menu')
     {
@@ -333,99 +411,15 @@ class Arxmin extends Arx\classes\Singleton
     }
 
     /**
-     * Filters a route for a role or set of roles.
+     * Translate language of the interface
      *
-     * If the third parameter is null then abort with status code 403.
-     * Otherwise the $result is returned.
-     *
-     * @param string       $route      Route pattern. i.e: "admin/*"
-     * @param array|string $roles      The role(s) needed
-     * @param mixed        $result     i.e: Redirect::to('/')
-     * @param bool         $requireAll User must have all roles
-     *
-     * @return mixed
+     * @param null $id
+     * @param array $parameters
+     * @param string $domain
+     * @param null $locale
+     * @return string
      */
-    public function routeNeedsRole($route, $roles, $result = null, $requireAll = true)
-    {
-        $filterName  = is_array($roles) ? implode('_', $roles) : $roles;
-        $filterName .= '_'.substr(md5($route), 0, 6);
-        $closure = function () use ($roles, $result, $requireAll) {
-            $hasRole = $this->hasRole($roles, $requireAll);
-            if (!$hasRole) {
-                return empty($result) ? $this->app->abort(403) : $result;
-            }
-        };
-        // Same as Route::filter, registers a new filter
-        $this->app->router->filter($filterName, $closure);
-        // Same as Route::when, assigns a route pattern to the
-        // previously created filter.
-        $this->app->router->when($route, $filterName);
-    }
-    /**
-     * Filters a route for a permission or set of permissions.
-     *
-     * If the third parameter is null then abort with status code 403.
-     * Otherwise the $result is returned.
-     *
-     * @param string       $route       Route pattern. i.e: "admin/*"
-     * @param array|string $permissions The permission(s) needed
-     * @param mixed        $result      i.e: Redirect::to('/')
-     * @param bool         $requireAll  User must have all permissions
-     *
-     * @return mixed
-     */
-    public function routeNeedsPermission($route, $permissions, $result = null, $requireAll = true)
-    {
-        $filterName  = is_array($permissions) ? implode('_', $permissions) : $permissions;
-        $filterName .= '_'.substr(md5($route), 0, 6);
-        $closure = function () use ($permissions, $result, $requireAll) {
-            $hasPerm = $this->can($permissions, $requireAll);
-            if (!$hasPerm) {
-                return empty($result) ? $this->app->abort(403) : $result;
-            }
-        };
-        // Same as Route::filter, registers a new filter
-        $this->app->router->filter($filterName, $closure);
-        // Same as Route::when, assigns a route pattern to the
-        // previously created filter.
-        $this->app->router->when($route, $filterName);
-    }
-
-    /**
-     * Filters a route for role(s) and/or permission(s).
-     *
-     * If the third parameter is null then abort with status code 403.
-     * Otherwise the $result is returned.
-     *
-     * @param string       $route       Route pattern. i.e: "admin/*"
-     * @param array|string $roles       The role(s) needed
-     * @param array|string $permissions The permission(s) needed
-     * @param mixed        $result      i.e: Redirect::to('/')
-     * @param bool         $requireAll  User must have all roles and permissions
-     *
-     * @return void
-     */
-    public function routeNeedsRoleOrPermission($route, $roles, $permissions, $result = null, $requireAll = false)
-    {
-        $filterName  =      is_array($roles)       ? implode('_', $roles)       : $roles;
-        $filterName .= '_'.(is_array($permissions) ? implode('_', $permissions) : $permissions);
-        $filterName .= '_'.substr(md5($route), 0, 6);
-        $closure = function () use ($roles, $permissions, $result, $requireAll) {
-            $hasRole  = $this->hasRole($roles, $requireAll);
-            $hasPerms = $this->can($permissions, $requireAll);
-            if ($requireAll) {
-                $hasRolePerm = $hasRole && $hasPerms;
-            } else {
-                $hasRolePerm = $hasRole || $hasPerms;
-            }
-            if (!$hasRolePerm) {
-                return empty($result) ? $this->app->abort(403) : $result;
-            }
-        };
-        // Same as Route::filter, registers a new filter
-        $this->app->router->filter($filterName, $closure);
-        // Same as Route::when, assigns a route pattern to the
-        // previously created filter.
-        $this->app->router->when($route, $filterName);
+    public static function trans($id = null, $parameters = array(), $domain = 'messages', $locale = null){
+        return trans($id, $parameters, $domain, $locale);
     }
 }

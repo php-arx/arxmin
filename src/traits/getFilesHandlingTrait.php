@@ -10,7 +10,7 @@ trait getFilesHandlingTrait {
     protected $_currentPath_checked = null;
     protected $currentPath = null;
 
-    protected static $filepath = null;
+    //protected static $filepath = null;
 
     /**
      * Check if folders exists

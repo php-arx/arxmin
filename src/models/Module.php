@@ -1,14 +1,14 @@
 <?php namespace Arxmin;
 
+use Arx\classes\Str;
 use ZipArchive;
-
 use Module as ParentClass;
 
 class Module extends ParentClass
 {
 
     /**
-     * Download a Git
+     * Download the module from an url
      *
      * @param $url
      * @param $dest
@@ -64,5 +64,28 @@ class Module extends ParentClass
         }
 
         return false;
+    }
+
+    public static function moduleAsset($path)
+    {
+        return self::asset(self::getUsed().':').Str::mustBeginWith('/', $path);
+    }
+
+    public static function modulePath($path){
+        return self::getModulePath(self::getUsed()).$path;
+    }
+
+    public static function moduleUrl($path = null)
+    {
+        return arxminUrl('modules/'.strtolower(self::getUsed()).Str::mustBeginWith('/', $path));
+    }
+
+    /**
+     * Set the current used module
+     *
+     * @param $name
+     */
+    public static function setCurrent($name){
+        self::setUsed($name);
     }
 }

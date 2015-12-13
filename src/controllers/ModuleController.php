@@ -1,6 +1,6 @@
 <?php namespace Arxmin;
 
-use Auth;
+use Auth, Module;
 
 /**
  * Class ModuleController
@@ -11,9 +11,7 @@ use Auth;
  */
 abstract class ModuleController extends BaseController
 {
-
     public $layout = 'arxmin::layouts.admin';
-
     public $data = array();
 
     /**
@@ -32,6 +30,14 @@ abstract class ModuleController extends BaseController
         $menu = Arxmin::getMenu();
 
         $widgets = Arxmin::getWidgets();
+
+        $moduleName = \Arxmin::getCurrentModule();
+
+        $moduleAssets = Module::asset($moduleName.':');
+
+        $modulePath = Module::getModulePath($moduleName);
+
+        $module_assets = $moduleAssets;
 
         $this->assign(get_defined_vars());
     }

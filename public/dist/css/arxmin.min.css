@@ -255,7 +255,6 @@ a:active,a:focus,a:hover{outline:0;text-decoration:none;color:#72afd2}
 .form-control::-moz-placeholder{color:#bbb;opacity:1}
 .form-control:-ms-input-placeholder{color:#bbb}
 .form-control::-webkit-input-placeholder{color:#bbb}
-.form-control:not(select){-webkit-appearance:none;-moz-appearance:none;appearance:none}
 .form-group.has-success label{color:#00a65a}
 .form-group.has-success .form-control{border-color:#00a65a!important;box-shadow:none}
 .form-group.has-warning label{color:#f39c12}

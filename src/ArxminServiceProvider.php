@@ -1,21 +1,25 @@
 <?php namespace Arxmin;
 
 use Arx\classes\ClassLoader;
-use Illuminate\Foundation\AliasLoader;
+use Arx\ServiceProviderTrait;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use \Arx\classes\Hook;
-use \View, \Config, \App;
+use \App;
 
 class ArxminServiceProvider extends ServiceProvider
 {
-
     /**
      * Indicates if loading of the provider is deferred.
      *
      * @var bool
      */
     protected $defer = false;
+
+    /**
+     * Use ServiceProviderTrait helpers to autoload providers and facades
+     */
+    use ServiceProviderTrait;
 
     /**
      * The providers autoloaded by this module
@@ -41,42 +45,20 @@ class ArxminServiceProvider extends ServiceProvider
         'Former' => 'Former\Facades\Former',
     ];
 
-
-    /**
-     * Register the providers.
-     */
-    public function registerProviders()
-    {
-        foreach ($this->providers as $provider) {
-            $this->app->register($provider);
-        }
-    }
-    /**
-     * Register the facades.
-     */
-    public function registerFacades()
-    {
-        AliasLoader::getInstance($this->facades);
-
-        # Auto-register alias
-        foreach ($this->facades as $alias => $name) {
-            AliasLoader::getInstance()->alias($alias, $name);
-        }
-    }
-
     /**
      * Bootstrap the application events.
      *
-     * @param Illuminate\Routing\Router $router
+     * @param Illuminate\Routing\Router|Router $router
      */
     public function boot(Router $router)
     {
         #Add custom middleware
         $router->middleware('arxmin-auth', 'Arxmin\AuthenticateMiddleware');
 
-        $this->app['auth']->extend('arxmmin-auth',function()
+        # Register custom auth provider
+        $this->app['auth']->extend('arxmin',function()
         {
-            return new \Arxmin\AuthProvider();
+            return new AuthProvider(new SuperUser());
         });
 
         # Load lang and views resources
@@ -103,17 +85,9 @@ class ArxminServiceProvider extends ServiceProvider
             __DIR__ . '/migrations'
         ));
 
-        # Register custom auth provider
-        $this->app['auth']->extend('arxmin',function()
-        {
-            return new AuthProvider(new User);
-        });
-
-        # Add filters and routes
+        # Add filters and routes on boot
         include_once __DIR__ . '/filters.php';
         include_once __DIR__ . '/routes.php';
-
-        Hook::put('config.app.aliases.Arxmin', 'Arxmin\\facades\\ArxminFacade');
     }
 
     /**
@@ -124,19 +98,20 @@ class ArxminServiceProvider extends ServiceProvider
     public function register()
     {
         /**
-         * need to load helpers before other third-parties vendors
+         * Add usefull helpers on register
          */
         include_once __DIR__ . '/helpers.php';
 
         /**
-         * Register Arxmin
+         * Register Arxmin with current app setting
+         *
          */
         $this->app->bind('arxmin', function ($app) {
             return new Arxmin($app);
         });
 
         /**
-         * Register hooks
+         * Register common arxmin hooks
          */
         Hook::register('arxmin::css');
         Hook::register('arxmin::js');

@@ -5,7 +5,7 @@ use Illuminate\Auth\GenericUser;
 /**
  * Class SuperUser
  *
- * Mock a super user
+ * Mock a Super Admin User from the option table
  *
  * @package Arxmin
  */
