@@ -18,8 +18,7 @@ use Symfony\Component\Finder\Finder;
 use View, DB, URL, Auth, Input, Config, Exception;
 use Zofe\Rapyd\DataGrid\DataGrid;
 
-
-class ManageController extends ModuleController
+class ManageController extends BaseController
 {
 
     /**
@@ -32,7 +31,7 @@ class ManageController extends ModuleController
 
     public function anyModules($action = "view"){
 
-        $aModules = Utils::getJSON('http://www.arx.io/api/v1/modules', true);
+        $aModules = Arxmin::getModulesAvailables();
 
         if ($action == 'download') {
             $result = Module::download(
@@ -42,7 +41,7 @@ class ManageController extends ModuleController
             );
         }
 
-        $title = __("Modules Discovery");
+        $title = trans("Modules Discovery");
 
         /*$oModules = Arxmin::getModules();
 

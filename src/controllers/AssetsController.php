@@ -1,11 +1,15 @@
 <?php namespace Arxmin;
 
-use Arx\classes\Composer;
-
+/**
+ * Class AssetsController
+ *
+ * Autoload script from modules folder
+ *
+ * @package Arxmin
+ */
 class AssetsController extends \Arx\AssetsController
 {
     public $_paths = array('modules');
-
 
     /**
      * Check file from registered path
@@ -15,8 +19,6 @@ class AssetsController extends \Arx\AssetsController
      */
     public function path($file = null)
     {
-        $base_path = base_path();
-
         $pieces = explode('/', $file);
 
         foreach($this->_paths as $path){

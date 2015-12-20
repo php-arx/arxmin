@@ -2,6 +2,7 @@
 
 use Arx\classes\ClassLoader;
 use Arx\ServiceProviderTrait;
+use Arxmin\models\User;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use \Arx\classes\Hook;
@@ -45,6 +46,10 @@ class ArxminServiceProvider extends ServiceProvider
         'Former' => 'Former\Facades\Former',
     ];
 
+    protected $commands = [
+        'arxmin:install' => 'Arxmin\commands\InstallCommand'
+    ];
+
     /**
      * Bootstrap the application events.
      *
@@ -52,13 +57,15 @@ class ArxminServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
+        $app = $this->app;
+
         #Add custom middleware
         $router->middleware('arxmin-auth', 'Arxmin\AuthenticateMiddleware');
 
         # Register custom auth provider
-        $this->app['auth']->extend('arxmin',function()
+        $this->app['auth']->extend('arxmin', function() use($app)
         {
-            return new AuthProvider(new SuperUser());
+            return new AuthProvider($app['hash'], User::class);
         });
 
         # Load lang and views resources
@@ -70,6 +77,10 @@ class ArxminServiceProvider extends ServiceProvider
 
         # Publish arxmin config to project
         $this->publishes([$configPath => config_path('arxmin.php')], 'arxmin');
+
+        $this->publishes([
+            __DIR__.'/../database/migrations/' => database_path('migrations')
+        ], 'migrations');
 
         # Merge with default config to override only what you need
         $this->mergeConfigFrom($configPath, 'arxmin');
@@ -120,6 +131,7 @@ class ArxminServiceProvider extends ServiceProvider
         Hook::register('arxmin::widgets');
         Hook::register('arxmin::api.modules');
 
+        $this->registerCommands();
         $this->registerProviders();
         $this->registerFacades();
     }

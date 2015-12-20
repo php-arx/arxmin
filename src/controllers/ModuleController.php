@@ -1,6 +1,7 @@
 <?php namespace Arxmin;
 
 use Auth, Module;
+use SebastianBergmann\GlobalState\Exception;
 
 /**
  * Class ModuleController
@@ -21,23 +22,17 @@ abstract class ModuleController extends BaseController
     {
         parent::__construct();
 
-        $auth = Auth::driver('arxmin');
+        try {
+            $moduleName = \Arxmin::getCurrentModule();
 
-        $isAuth = $auth->check();
+            $moduleAssets = Module::asset($moduleName.':');
 
-        $user = $auth->getUser();
+            $modulePath = Module::getModulePath($moduleName);
 
-        $menu = Arxmin::getMenu();
+            $module_assets = $moduleAssets;
+        } catch (Exception $e) {
 
-        $widgets = Arxmin::getWidgets();
-
-        $moduleName = \Arxmin::getCurrentModule();
-
-        $moduleAssets = Module::asset($moduleName.':');
-
-        $modulePath = Module::getModulePath($moduleName);
-
-        $module_assets = $moduleAssets;
+        }
 
         $this->assign(get_defined_vars());
     }

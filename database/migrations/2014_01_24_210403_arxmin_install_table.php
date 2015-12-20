@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-
 use Arxmin\SchemaModel as Schema;
+use Illuminate\Database\Schema\Blueprint;
 
 class ArxminInstallTable extends Migration {
 
@@ -13,8 +13,8 @@ class ArxminInstallTable extends Migration {
      */
     public function up()
     {
-        if (!Schema::hasTable('options')) {
-            Schema::create('options', function($table)
+        if (!Schema::hasTable('arxmin_options')) {
+            Schema::create('arxmin_options', function(Blueprint $table)
             {
                 $table->increments('id');
                 $table->string('name')->unique();
@@ -22,6 +22,18 @@ class ArxminInstallTable extends Migration {
                 $table->string('type')->default('string');
                 $table->string('autoload')->default('yes');
                 $table->string('context')->nullable();
+                $table->timestamps();
+            });
+        }
+
+        if (!Schema::hasTable('arxmin_users')) {
+            Schema::create('arxmin_users', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('name');
+                $table->string('email')->unique();
+                $table->string('password', 60);
+                $table->string('role')->nullable();
+                $table->rememberToken();
                 $table->timestamps();
             });
         }
@@ -34,7 +46,7 @@ class ArxminInstallTable extends Migration {
      */
     public function down()
     {
-        Schema::drop('options');
+        Schema::drop('arxmin_options');
+        Schema::drop('arxmin_users');
     }
-
 }

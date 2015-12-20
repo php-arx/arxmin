@@ -42,7 +42,7 @@ $body['attributes']['class'] .= ' skin-black sidebar-mini';
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b><img src="<?= $theme_url.'/img/logo-square.png'; ?>" width="20" alt=""/></b></span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><?= Arxmin::getOption('arxmin.project_name', '<b>Arxmin</b><sup>Beta</sup>'); ?></span>
+            <span class="logo-lg"><?= Arxmin::getOption('arxmin::project_name', '<b>Arxmin</b><sup>Beta</sup>'); ?></span>
         </a>
 
         <!-- Header Navbar -->

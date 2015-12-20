@@ -2,17 +2,21 @@
 
 use Arr;
 use Arx;
+use Arx\classes\Exception;
 use Arx\classes\File, Arx\classes\Hook;
+use Arx\classes\Utils;
 use Config, Lang;
+use Schema;
 
 /**
  * Class Arxmin
+ *
+ * Contains all the business logic of the package
  *
  * @package Arxmin
  */
 class Arxmin extends Arx\classes\Singleton
 {
-
     /**
      * Laravel application
      *
@@ -131,11 +135,34 @@ class Arxmin extends Arx\classes\Singleton
     }
 
     /**
+     * Get a list of available modules from Arx.io
+     * @param array $params
+     * @return array|bool|mixed
+     * @throws \Exception
+     */
+    public static function getModulesAvailables($params = ['type' => 'array'])
+    {
+        Arr::mergeWithDefaultParams($params);
+
+        $result = Utils::getJSON('http://www.arx.io/api/v1/modules', true);
+
+        if ($params['type'] == 'list') {
+            return array_column($result, 'name');
+        } elseif ($params['type'] == 'infolist') {
+            return array_map(function($item){
+                return $item['name'] . ' : ' . $item['description'];
+            }, $result);
+        }
+
+        return $result;
+    }
+
+    /**
      * Set Option
      */
     public static function setOption($name, $value, $context = null, $type = null)
     {
-        return Option::set($name, $value, $context, $type);
+        return Option::setEntry($name, $value, $context, $type);
     }
 
     /**
@@ -147,7 +174,17 @@ class Arxmin extends Arx\classes\Singleton
      * @return mixed|string
      */
     public static function getOption($name, $default = null, $decode = true){
-        return Option::get($name, $default, $decode);
+        return Option::getEntry($name, $default, $decode);
+    }
+
+    /**
+     * Check if Arxmin as a particular option
+     *
+     * @param $name
+     * @return \Illuminate\Database\Eloquent\Model|null|static
+     */
+    public static function hasOption($name){
+        return Option::hasEntry($name);
     }
 
     /**
@@ -230,15 +267,16 @@ class Arxmin extends Arx\classes\Singleton
     public static function isInstalled()
     {
         if (self::$isInstalled) {
-           return true;
-        }
-
-        if( Arxmin::getOption('arxmin.super_email') ){
-            self::$isInstalled = true;
             return true;
         }
 
-        return false;
+        if (!Schema::hasTable('arxmin_options')) {
+            Throw new Exception('Please run arxmin:install command first');
+        }
+
+        self::$isInstalled = true;
+
+        return true;
     }
 
     /**
@@ -307,7 +345,11 @@ class Arxmin extends Arx\classes\Singleton
             self::guestCurrentModule();
         }
 
-        $module = Module::getUsedNow();
+        try {
+            $module = Module::getUsedNow();
+        } catch (Exception $e) {
+            return false;
+        }
 
         if ($type == 'name') {
             return $module->name;

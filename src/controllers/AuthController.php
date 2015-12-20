@@ -1,15 +1,15 @@
 <?php namespace Arxmin;
 
-use Illuminate\Contracts\Auth\Guard;
+use Arxmin\requests\LoginRequest;
+use Illuminate\Http\Response;
 use View, Auth;
-use Request;
 
 class AuthController extends BaseController {
 
 
     public $layout = "arxmin::layouts.html";
 
-    public function __construct(Guard $auth)
+    public function __construct()
     {
         parent::__construct();
         $this->auth = Auth::driver('arxmin');
@@ -28,16 +28,16 @@ class AuthController extends BaseController {
      * Handle a login request to the application.
      *
      * @param \Illuminate\Http\Request|Request $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function postLogin(Request $request)
+    public function postLogin(LoginRequest $request)
     {
         global $auth;
 
         # Check if user is in the DB
-        $auth = $this->auth->attempt(Request::only(['email','password']), Request::get('remember'));
+        $auth = $this->auth->attempt($request->only(['email','password']), $request->get('remember'));
 
-        # Redirect to the first element of the dynamic menu
+        # Redirect to the first element of the dynamic arx menu
         $menu = Arxmin::getMenu();
 
         return redirect($menu[0]['link']);

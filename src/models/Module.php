@@ -4,6 +4,11 @@ use Arx\classes\Str;
 use ZipArchive;
 use Module as ParentClass;
 
+/**
+ * Class Module
+ *
+ * @package Arxmin
+ */
 class Module extends ParentClass
 {
 

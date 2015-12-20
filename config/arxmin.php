@@ -2,14 +2,8 @@
 
 return Hook::get('arxmin::config', array(
 
-    'api' => array(
-        'base' => url('arxmin/api/v1')
-    ),
-
     /**
-     * route default prefix
-     *
-     * put false if you want to disable it
+     * route default prefix for Arxmin Module
      */
     'prefix' => 'arxmin',
 
@@ -28,7 +22,9 @@ return Hook::get('arxmin::config', array(
     'namespace' => 'Arxmin\\',
 
     /**
-     * Default database (if you need to define an other one => simply add you database connection key here
+     * Default database used for Arxmin
+     *
+     * If you need to define an other one => simply add you database connection key here
      */
     'database' => array(
         'default' => Config::get('database.default')
@@ -40,6 +36,7 @@ return Hook::get('arxmin::config', array(
     'paths' => array(
         'packages' => app_path('packages'),
         'workbench' => base_path('workbench'),
+        'modules' => base_path('modules'),
         'theme' => public_path('packages/arx/arxmin/dist')
     ),
 

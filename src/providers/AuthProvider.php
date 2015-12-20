@@ -1,107 +1,21 @@
 <?php namespace Arxmin;
 
-use Illuminate\Auth\GenericUser;
-use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Contracts\Auth\UserProvider;
-use Log;
-use Session;
+use Illuminate\Contracts\Hashing\Hasher as HasherContract;
+use Illuminate\Auth\EloquentUserProvider;
 
-class AuthProvider implements UserProvider {
-
-    use modelUserTrait;
+class AuthProvider extends EloquentUserProvider {
 
     /**
-     * Retrieve a user by their unique identifier.
+     * Create a new database user provider.
      *
-     * @param  mixed $identifier
-     * @return \Illuminate\Contracts\Auth\Authenticatable|null
+     * @param  \Illuminate\Contracts\Hashing\Hasher $hasher
+     * @param  string $model
      */
-    public function retrieveById($identifier)
+    public function __construct(HasherContract $hasher, $model)
     {
-        return $this->arxminUser();
+        parent::__construct($hasher, $model);
+        $this->model = $model;
+        $this->hasher = $hasher;
     }
 
-    /**
-     * Retrieve a user by by their unique identifier and "remember me" token.
-     *
-     * @param  mixed $identifier
-     * @param  string $token
-     * @return \Illuminate\Contracts\Auth\Authenticatable|null
-     */
-    public function retrieveByToken($identifier, $token)
-    {
-        if ($token == Arxmin::getOption('arxmin.remember')) {
-            return $this->arxminUser();
-        }
-
-        Log::info('arxmin error');
-    }
-
-    /**
-     * Update the "remember me" token for the given user in storage.
-     *
-     * @param  \Illuminate\Contracts\Auth\Authenticatable $user
-     * @param  string $token
-     * @return void
-     */
-    public function updateRememberToken(Authenticatable $user, $token)
-    {
-        Arxmin::setOption('arxmin.remember', $token);
-    }
-
-    /**
-     * Retrieve a user by the given credentials.
-     *
-     * @param  array $credentials
-     * @return \Illuminate\Contracts\Auth\Authenticatable|null
-     */
-    public function retrieveByCredentials(array $credentials)
-    {
-        #1. try to get the super user admin
-        $email = Arxmin::getOption('arxmin.super_email');
-        $password = Arxmin::getOption('arxmin.super_password');
-
-        if($credentials['email'] == $email) {
-            Session::put('super_admin',true);
-            return $this->arxminUser();
-        }
-
-        return null;
-    }
-
-    /**
-     * Validate a user against the given credentials.
-     *
-     * @param  \Illuminate\Contracts\Auth\Authenticatable $user
-     * @param  array $credentials
-     * @return bool
-     */
-    public function validateCredentials(Authenticatable $user, array $credentials)
-    {
-        return true;
-    }
-
-
-    /**
-     * Generate ArxminUser
-     *
-     * @return GenericUser
-     */
-    protected function arxminUser(){
-
-        $attributes = array(
-            'id' => 0,
-            'username' => Arxmin::getOption('arxmin.super_first_name'),
-            'first_name' => Arxmin::getOption('arxmin.super_first_name'),
-            'last_name' => Arxmin::getOption('arxmin.super_last_name'),
-            'password' => Arxmin::getOption('arxmin.super_password'),
-            'name' => Arxmin::getOption('arxmin.super_first_name'),
-            'email' => Arxmin::getOption('arxmin.super_email'),
-            'type' => 'superadmin',
-            'role' => 'superadmin',
-            'remember_token' => ''
-        );
-
-        return new SuperUser($attributes);
-    }
 }

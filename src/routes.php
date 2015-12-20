@@ -16,14 +16,6 @@ $filter = $auth['filter'];
 $authController = $auth['controller'];
 
 /**
- * Access to install only if project is not already configured
- */
-Route::group(array('prefix' => $prefix, 'before' => ['arxmin-check-not-installed']),
-    function () use ($namespace, $filter, $authController) {
-        Route::controller('install', 'Arxmin\\InstallController');
-    });
-
-/**
  * Non Auth protected route
  */
 Route::group(array('prefix' => $prefix), function () use ($namespace, $filter, $authController) {
@@ -55,6 +47,6 @@ Route::group(array('prefix' => $prefix, 'namespace' => 'Arxmin', 'before' => ['a
     Route::any('/', 'ArxminController@anyIndex');
 });
 
-// Auto Assets injector
+// Special auto Assets injector //if not published will autoload assets in public
 Route::controller('/packages', '\\Arx\\AssetsController');
 Route::controller('/modules', '\\Arxmin\\AssetsController');

@@ -5,7 +5,7 @@ use Arx\EloquentModel;
 
 class Option extends EloquentModel {
 
-    protected $table = "options";
+    protected $table = "arxmin_options";
 
     /**
      * Set option
@@ -16,7 +16,7 @@ class Option extends EloquentModel {
      * @param null $type
      * @return bool
      */
-	public static function set($name, $value, $context = null, $type = null){
+	public static function setEntry($name, $value, $context = null, $type = null){
 
 		$item = self::where('name', $name)->first();
 
@@ -53,6 +53,10 @@ class Option extends EloquentModel {
 		return $item->save();
 	}
 
+	public static function hasEntry($name){
+		return self::where('name', $name)->first();
+	}
+
     /**
      * Get Value
      *
@@ -60,9 +64,9 @@ class Option extends EloquentModel {
      * @param null $default
      * @return \Illuminate\Database\Eloquent\Collection|mixed|string|static[]
      */
-	public static function get($name, $default = null, $decode = true){
+	public static function getEntry($name, $default = null, $decode = true){
 
-		$item = self::where('name', $name)->first();
+		$item = self::hasEntry($name);
 
 		if (!$item) {
 			return false;

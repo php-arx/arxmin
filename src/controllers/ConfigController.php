@@ -4,7 +4,7 @@ use Arxmin\helpers\DatacrudHelper;
 use Arxmin\helpers\DatagridHelper;
 use Input;
 
-class ConfigController extends ModuleController {
+class ConfigController extends BaseController {
 
     /**
      * Config Handler
@@ -20,14 +20,14 @@ class ConfigController extends ModuleController {
 
         $grid->title = 'Options manager';
 
-        $grid->add('name', __("name"));
-        $grid->add('value', __("value"));
-        $grid->add('type', __("type"));
-        $grid->add('created_at', __("created_at"));
-        $grid->add('updated_at', __("updated_at"));
-        $grid->addActions('config/option', __("Actions"));
+        $grid->add('name', trans("name"));
+        $grid->add('value', trans("value"));
+        $grid->add('type', trans("type"));
+        $grid->add('created_at', trans("created_at"));
+        $grid->add('updated_at', trans("updated_at"));
+        $grid->addActions('config/option', trans("Actions"));
 
-        $grid->link("arxmin/config/option?create=true", __("Add a new option"), "TR");
+        $grid->link("arxmin/config/option?create=true", trans("Add a new option"), "TR");
 
         return $this->viewMake('arxmin::shared.datagrid', get_defined_vars());
     }
@@ -46,7 +46,7 @@ class ConfigController extends ModuleController {
             $source = Option::find(Input::get('delete'));
             $source->delete();
 
-            return redirect('arxmin/config')->with('flash', __('Option deleted'));
+            return redirect('arxmin/config')->with('flash', trans('Option deleted'));
 
         } else {
             $source = new Option();
@@ -56,10 +56,10 @@ class ConfigController extends ModuleController {
 
         $form->title = 'Option';
 
-        $form->link("arxmin/config", __("config"), "TR")->back();
-        $form->add('name', __("Name"), 'text')->rule('required');
-        $form->add('value', __("Value"), 'textarea')->rule('required');
-        $form->add('type', __("Type"), 'text')->rule('required');
+        $form->link("arxmin/config", trans("config"), "TR")->back();
+        $form->add('name', trans("Name"), 'text')->rule('required');
+        $form->add('value', trans("Value"), 'textarea')->rule('required');
+        $form->add('type', trans("Type"), 'text')->rule('required');
 
         return $this->viewMake('arxmin::shared.datacrud', get_defined_vars());
     }
