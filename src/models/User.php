@@ -15,9 +15,9 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
  * @package Arxmin
  */
 
-class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract{
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract{
 
-    use Authenticatable, Authorizable, CanResetPassword;
+    use Authenticatable, CanResetPassword;
     use modelUserTrait;
 
     const ROLE_ADMIN = 'admin';
