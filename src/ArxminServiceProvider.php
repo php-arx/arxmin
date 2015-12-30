@@ -75,6 +75,10 @@ class ArxminServiceProvider extends ServiceProvider
         # Get Arxmin Config path
         $configPath = __DIR__ . '/../config/arxmin.php';
 
+        $this->publishes([
+            __DIR__.'/../public' => public_path('packages/arx/arxmin'),
+        ], 'public');
+
         # Publish arxmin config to project
         $this->publishes([$configPath => config_path('arxmin.php')], 'arxmin');
 
