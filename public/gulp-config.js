@@ -18,7 +18,7 @@ module.exports = {
      */
     main_files: {
 
-        less: {
+        sass : {
             /**
              * Here you can put your main stylesheets
              *
@@ -26,15 +26,11 @@ module.exports = {
              *
              */
             arxmin: [
-                '<%= src_dir  %>/less/arxmin.less'
+                '<%= src_dir  %>/scss/arxmin.scss'
             ],
 
             plugins: [
-                '<%= src_dir  %>/less/plugins.less'
-            ],
-
-            'skins/': [
-                '<%= src_dir  %>/less/skins/*.less'
+                '<%= src_dir  %>/less/plugins.scss'
             ]
         },
 
@@ -108,178 +104,7 @@ module.exports = {
          * value = file(s) or folders to copy
          */
         copy: {
-            'modernizr': [
-                '<%= pkg_dir %>/modernizr/modernizr.js'
-            ],
-            'html5shiv': [
-                '<%= pkg_dir %>/html5shiv/dist'
-            ]
-        },
 
-        /**
-         * Folder that will override default plugins folder
-         */
-        override_folder: '<%= src_dir  %>/plugins',
-
-        /**
-         * Declare your Require dependencies here if you want to use Browserify or RequireJs (Optionnal)
-         */
-        shim: {
-            jquery: {
-                path: 'bower_components/jquery/dist/jquery.js',
-                deps:[],
-                exports: 'jQuery'
-            },
-            angular: {
-                path: 'bower_components/angular/angular.js',
-                deps: ['jquery'],
-                exports: 'angular'
-            },
-            bootstrap: {
-                path: 'bower_components/bootstrap/dist/js/bootstrap.js',
-                deps: ['jquery'],
-                exports: 'bootstrap'
-            },
-
-            'spin': {
-                path: 'dist/plugins/spin.js/spin',
-                deps: [],
-                exports: ''
-            },
-            'jquery-ui': {
-                path: 'dist/plugins/jquery-ui/jquery-ui.min',
-                deps: [],
-                exports: ''
-            },
-            'datatables': {
-                path: 'dist/plugins/datatables/js/jquery.dataTables.min',
-                deps: [],
-                exports: ''
-            },
-            'datatables-tabletools': {
-                path: 'dist/plugins/datatables-tabletools/js/dataTables.tableTools',
-                deps: [],
-                exports: ''
-            },
-            'angular-datatables': {
-                path: 'dist/plugins/angular-datatables/angular-datatables',
-                deps: [],
-                exports: ''
-            },
-            'jquery-table-editor': {
-                path: 'dist/plugins/jquery-table-editor/js/jquery-table-editor',
-                deps: [],
-                exports: ''
-            },
-            'jquery-isotope': {
-                path: 'dist/plugins/jquery-isotope/jquery.isotope',
-                deps: [],
-                exports: ''
-            },
-            'masonry': {
-                path: 'dist/plugins/masonry/masonry.min',
-                deps: [],
-                exports: ''
-            },
-            'breakpoints': {
-                path: 'dist/plugins/breakpoints/breakpoints',
-                deps: [],
-                exports: ''
-            },
-            'ckeditor': {
-                path: 'dist/plugins/ckeditor/ckeditor',
-                deps: [],
-                exports: ''
-            },
-            'lodash': {
-                path: 'dist/plugins/lodash/lodash',
-                deps: [],
-                exports: ''
-            },
-
-
-            // Angular package @deprecated
-
-            'angular-base64': {
-                path: 'dist/plugins/angular-base64/angular-base64.min',
-                deps: [],
-                exports: ''
-            },
-            'angular-bootstrap': {
-                path: 'dist/plugins/angular-bootstrap/ui-bootstrap.min',
-                deps: [],
-                exports: ''
-            },
-            'angular-bootstrap-tpls': {
-                path: 'dist/plugins/angular-bootstrap/ui-bootstrap-tpls.min',
-                deps: [],
-                exports: ''
-            },
-            'angular-form-builder': {
-                path: 'dist/plugins/angular-form-builder/dist/angular-form-builder',
-                deps: ['angular-form-builder-components', 'angular-validator', 'angular-validator-rules'],
-                exports: ''
-            },
-            'angular-form-builder-components': {
-                path: 'dist/plugins/angular-form-builder/dist/angular-form-builder-components',
-                deps: [],
-                exports: ''
-            },
-            'angular-validator': {
-                path: 'dist/plugins/angular-validator/dist/angular-validator',
-                deps: [],
-                exports: ''
-            },
-            'angular-validator-rules': {
-                path: 'dist/plugins/angular-validator/dist/angular-validator-rules',
-                deps: [],
-                exports: ''
-            },
-            'angular-notify': {
-                path: 'dist/plugins/angular-notify/angular-notify.min',
-                deps: [],
-                exports: ''
-            },
-            'angular-isotope': {
-                path: 'dist/plugins/angular-isotope/angular-isotope.min',
-                deps: [],
-                exports: ''
-            },
-            'angular-storage': {
-                path: 'dist/plugins/angular-storage/angular-storage.min',
-                deps: [],
-                exports: ''
-            },
-            'angular-ui-utils': {
-                path: 'dist/plugins/angular-ui-utils/ui-utils.min',
-                deps: [],
-                exports: ''
-            },
-            'angular-ui-tree': {
-                path: 'dist/plugins/angular-ui-tree/angular-ui-tree.min',
-                deps: [],
-                exports: ''
-            },
-            'famous': {
-                path: 'dist/plugins/famous/famous-global',
-                deps: [],
-                exports: ''
-            },
-            'angular-famous': {
-                path: 'dist/plugins/angular-famous/famous-angular',
-                deps: [],
-                exports: ''
-            },
-            'angular-strap': {
-                path: 'dist/plugins/angular-strap/angular-strap.min',
-                deps: [],
-                exports: ''
-            },
-            'angular-strap-tpl': {
-                path: 'dist/plugins/angular-strap/angular-strap.tpl.min',
-                deps: [],
-                exports: ''
-            }
         }
     },
 

@@ -21,7 +21,7 @@ if (typeof jQuery === "undefined") {
 /* Arxmin
  *
  * @type Object
- * @description $.Arxmin is the main object for the template's app.
+ * @description $.Arxmin is he main object for the template's app.
  *              It's used for implementing functions and options related
  *              to the template. Keeping everything wrapped in an object
  *              prevents conflict with other plugins and is a better

@@ -1,0 +1,9 @@
+// Default icons font path variables
+$icon-font-path: '../fonts/';
+
+@import "./../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "./../../bower_components/bootstrap-social/bootstrap-social";
+@import "./../plugins/admin-lte.scss/scss/admin-lte";
+@import "./../plugins/admin-lte.scss/scss/skins/all-skins";
+
+@import "common/helpers";

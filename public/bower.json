@@ -31,11 +31,9 @@
     "documentation"
   ],
   "dependencies": {
-    "jquery": "2.1.4",
-    "bootstrap": "~3.3.4",
+    "jquery": "~2.1.4",
     "bootstrap-sass": "~3.3.4",
     "angular": "~1.4.0",
-    "modernizr": "~2.8.3",
-    "html5shiv": "~3.7.2"
+    "bootstrap-social": "~4.11.0"
   }
 }

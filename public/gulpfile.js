@@ -2,6 +2,7 @@
  * Gulps Variables
  */
 var args = require('yargs').argv;
+var browserify = require('gulp-browserify');
 var concat = require('gulp-concat');
 var connect = require('gulp-connect');
 var imagemin = require('gulp-imagemin');
@@ -10,15 +11,11 @@ var gulpif = require('gulp-if');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var gutil = require('gulp-util');
-var babelify = require('babelify');
 var include = require('gulp-include');
 var ngAnnotate = require('gulp-ng-annotate');
 var notify = require('gulp-notify');
 var rename = require('gulp-rename');
 var sass = require('gulp-sass');
-var csso = require('gulp-csso');
-var less = require('gulp-less');
-var minifyCSS = require('gulp-minify-css');
 var size = require('gulp-filesize');
 var sourcemaps = require('gulp-sourcemaps');
 var expect = require('gulp-expect-file');
@@ -27,36 +24,17 @@ var uglify = require('gulp-uglify');
 var watch = require('gulp-watch');
 var _ = require('lodash');
 var fs = require('fs');
-var browserify = require('gulp-browserify');
 
 /**
  * Include the config file
  */
 var config = require('./gulp-config.js');
+
 var DEVMODE = true;
-var NORELOAD = false;
-var LOG = false;
 
 if (args.prod || args.production) {
     DEVMODE = false;
 }
-
-if (args.noreload) {
-    NORELOAD = true;
-}
-
-if (args.logs) {
-    LOG = true;
-}
-
-/**
- * Tasks @see handleXXX function to see what happens
- */
-gulp.task('css', handleCSS);
-gulp.task('js', handleJS);
-gulp.task('img', handleImg);
-gulp.task('watch', handleWatch);
-gulp.task('copy', handleCopy);
 
 /**
  * Gulp accessibles Tasks
@@ -80,102 +58,33 @@ gulp.task('build', function () {
 });
 
 gulp.task('server', function () {
-
-    var serverConf = {
+    connect.server({
         root: '.',
-        livereload: false
-    };
-
-    if(!NORELOAD) {
-        serverConf.livereload = true;
-    }
-
-    connect.server(serverConf);
+        livereload: true
+    });
 });
+
+// allow to use `--watch` to start watch
+// ex. `gulp css --watch`
+if (args.watch) {
+    gulp.start('watch');
+}
+
+/**
+ * Tasks @see handleXXX function to see what happens
+ */
+
+gulp.task('css', handleCSS);
+gulp.task('js', handleJS);
+gulp.task('img', handleImg);
+gulp.task('watch', handleWatch);
+gulp.task('copy', handleCopy);
 
 /**
  * Handlers
  * =========>
  */
-
-
-function handleJS() {
-
-    //console.log('Config', config);
-    if(typeof config.plugin_files.shim !== 'undefined'){
-        var shim = config.plugin_files.shim;
-    } else {
-        var shim = {};
-    }
-
-    // Concat files in main_files
-    _.forEach(config.main_files.js, function(items, name) {
-
-        if(LOG){
-            console.log('JsCompile : ' + name);
-        }
-
-        items = smrtr(items, config);
-
-        gulp.src(items)
-            .pipe(expect(items)) // check if files exists
-            .pipe(include())
-            .pipe(ngAnnotate({
-                single_quotes: true
-            }))
-            .pipe(concat( name + '.js'))
-            .pipe(gulp.dest(config.public_dir + '/'+ config.js_dir))
-            .on('error', swallowErrors);
-
-        if(!DEVMODE){
-            gulp.src(config.public_dir + '/' + config.js_dir +'/'+name+'.js')
-                .pipe(uglify({mangle:false}))
-                .pipe(rename(name+'.min.js'))
-                .pipe(gulp.dest(config.public_dir + '/' + config.js_dir));
-        }
-    });
-
-    if(typeof config.main_files.js_folders !== 'undefined'){
-
-        _.forEach(config.main_files.js_folders, function(items, name) {
-
-            fs.readdir(config.src_dir + '/'+config.js_dir+'/'+name+'/', function (err, files) {
-                if (files) {
-                    for (var i = 0, len = files.length; i < len; i++) {
-
-                        if(LOG){
-                            console.log('JsCompile : ' + config.src_dir + '/'+ config.js_dir+'/'+name+'/' + files[i] + '/' + files[i] + '.js');
-                            //console.log('JsCompile : ' + files[i]);
-                            console.log('To : ' +config.public_dir + '/'+ config.js_dir+'/'+name+'/'+files[i]);
-                        }
-
-                        gulp.src(config.src_dir + '/'+ config.js_dir+'/'+name+'/' + files[i] + '/' + files[i] + '.js')
-                            .pipe(include())
-                            .pipe(ngAnnotate({
-                                single_quotes: true
-                            }))
-                            .pipe(browserify({
-                                debug : DEVMODE
-                            }))
-                            .pipe(gulp.dest(config.public_dir + '/'+ config.js_dir+'/'+name+'/'))
-                            .on('error', swallowErrors);
-
-                        if(!DEVMODE){
-                            gulp.src(config.public_dir + '/'+ config.js_dir+'/'+name+'/'+ files[i] + '.js')
-                                .pipe(uglify({mangle:false}))
-                                .pipe(rename(files[i]+'.min.js'))
-                                .pipe(gulp.dest(config.public_dir + '/'+ config.js_dir +'/'+name));
-                        }
-                    }
-                }
-            });
-        });
-    }
-
-} // handleJS
-
 function handleCopy() {
-
     var file = '';
 
     /**
@@ -196,7 +105,6 @@ function handleCopy() {
         }
 
         for (var i = 0, len = config.main_files.copy[name].length; i < len; i++) {
-
             file = smrtr(config.main_files.copy[name][i], config);
 
             if (fs.lstatSync(file).isDirectory()) {
@@ -245,65 +153,92 @@ function handleImg(){
 
 function handleCSS() {
 
-    _.forEach(config.main_files.scss, function(items, name) {
-        // Shake if name is a folders
-        var folder = '';
-
-        if(name.match(/\//)){
-            folder = '/' + folder;
-        }
-
-        _.forEach(items, function(file, k) {
-
-            file = smrtr(file, config);
-
-            gulp.src(file)
+    _.forEach(config.main_files.css, function(items, name) {
+        gulp.src(config.src_dir + '/scss/'+name+'.scss')
             .pipe(gulpif(DEVMODE, sourcemaps.init()))
             .pipe(sass({
                 errLogToConsole: true
             }))
-            .pipe(gulpif(!DEVMODE, minifyCSS()))
+            //.pipe(gulpif(!DEVMODE, csso()))
             .pipe(gulpif(!DEVMODE, size()))
             .pipe(gulpif(DEVMODE, sourcemaps.write('./')))
-            .pipe(gulp.dest(config.public_dir + '/' + config.css_dir+folder));
-        });
-    });
-
-    _.forEach(config.main_files.less, function(items, name) {
-
-        // Shake if name is a folders
-        var folder = '';
-
-        if(name.match(/\//)){
-            folder = '/' + name;
-        }
-
-        _.forEach(items, function(file, k) {
-
-            file = smrtr(file, config);
-
-            gulp.src(file)
-                .pipe(gulpif(DEVMODE, sourcemaps.init()))
-                .pipe(less({
-                    errLogToConsole: true
-                }))
-                .pipe(gulpif(!DEVMODE, minifyCSS({processImport: false,keepBreaks: true})))
-                .pipe(gulpif(!DEVMODE, rename({
-                    suffix: '.min'
-                })))
-                .pipe(gulpif(DEVMODE, sourcemaps.write('./')))
-                .pipe(gulp.dest(config.public_dir + '/' + config.css_dir+folder));
-        });
+            .pipe(gulp.dest(config.public_dir + '/' + config.css_dir));
     });
 }
 
 
+function handleJS() {
+
+    //console.log('Config', config);
+    if(typeof config.plugin_files.shim !== 'undefined'){
+        var shim = config.plugin_files.shim;
+    } else {
+        var shim = {};
+    }
+    
+    // Concat files in main_files
+    _.forEach(config.main_files.js, function(items, name) {
+
+        items = smrtr(items, config);
+
+        gulp.src(items)
+            .pipe(expect(items))
+            /*.pipe(browserify({
+                debug: false,
+                shim : shim
+            }))*/
+            .pipe(include())
+            .pipe(ngAnnotate({
+                single_quotes: true
+            }))
+            .pipe(concat( name + '.js'))
+            .pipe(gulp.dest(config.public_dir + '/'+ config.js_dir))
+            .on('error', swallowErrors);
+
+        if(!DEVMODE){
+            gulp.src(config.public_dir + '/' + config.js_dir +'/'+name+'.js')
+                .pipe(uglify({mangle:false}))
+                .pipe(rename(name+'.min.js'))
+                .pipe(gulp.dest(config.public_dir + '/' + config.js_dir));
+        }
+    });
+
+    if(typeof config.main_files.js_folders !== 'undefined'){
+
+        _.forEach(config.main_files.js_folders, function(items, name) {
+
+            fs.readdir(config.src_dir + '/'+config.js_dir+'/'+name+'/', function (err, files) {
+                if (files) {
+                    for (var i = 0, len = files.length; i < len; i++) {
+                        gulp.src(config.src_dir + '/'+ config.js_dir+'/'+name+'/' + files[i] + '/' + files[i] + '.js')
+                            /*.pipe(browserify({
+                                debug: false,
+                                shim : shim
+                            }))*/
+                            .pipe(include())
+                            .pipe(ngAnnotate({
+                                single_quotes: true
+                            }))
+                            .pipe(gulp.dest(config.public_dir + '/'+ config.js_dir+'/'+name+'/'))
+                            .on('error', swallowErrors);
+
+                        if(!DEVMODE){
+                            gulp.src(config.public_dir + '/'+ config.js_dir+'/'+name+'/'+ files[i] + '.js')
+                                .pipe(uglify({mangle:false}))
+                                .pipe(rename(files[i]+'.min.js'))
+                                .pipe(gulp.dest(config.public_dir + '/'+ config.js_dir +'/'+name));
+                        }
+                    }
+                }
+            });
+        });
+    }
+}
 
 /**
  * Files Watch Handler
  */
 function handleWatch() {
-
     DEVMODE = true;
 
     gulp.start('server');
@@ -318,15 +253,13 @@ function handleWatch() {
 
     gulp.watch(watch_dev, ['dev']);
 
-    if(!NORELOAD) {
-        gulp.watch(config.livereload)
-            .on('change', function (file) {
-                gulp.src(file.path)
-                    .pipe(connect.reload())
-                    .pipe(notify(' ʕ•ᴥ•ʔ <( Reload! ) '));
-                gutil.log(gutil.colors.inverse(' ʕ•ᴥ•ʔ <( Reload! ) '));
-            });
-    }
+    gulp.watch(config.livereload)
+        .on('change', function (file) {
+            gulp.src(file.path)
+                .pipe(connect.reload())
+                .pipe(notify(' ʕ•ᴥ•ʔ <( Reload! ) '));
+            gutil.log(gutil.colors.inverse(' ʕ•ᴥ•ʔ <( Reload! ) '));
+        });
 
     gutil.log(gutil.colors.inverse(' ( Ready to work! )> ᕙ(`▽´)ᕗ '));
 }
@@ -368,9 +301,5 @@ function swallowErrors(error) {
 
     gulp.src('./').pipe(notify('✖ Error'));
 
-    //this.emit('end');
-}
-
-if (args.watch) {
-    gulp.start('watch');
+    this.emit('end');
 }

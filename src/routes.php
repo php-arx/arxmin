@@ -43,7 +43,7 @@ Route::group(array('prefix' => $prefix, 'namespace' => 'Arxmin', 'before' => ['a
     # Assets interceptors and file-resolvers
     Route::controller('/packages', '\\Arx\\AssetsController');
 
-    # Redirect homepage to first link in the menu
+    # Redirect homepage to first link in the menu or Login
     Route::any('/', 'ArxminController@anyIndex');
 });
 
