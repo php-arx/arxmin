@@ -20,7 +20,7 @@ class AuthenticateMiddleware {
 	 */
 	public function __construct(Guard $auth)
 	{
-		$this->auth = $auth;
+		$this->auth = Arxmin::getAuth();
 	}
 
 	/**

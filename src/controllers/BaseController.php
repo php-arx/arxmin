@@ -24,7 +24,7 @@ class BaseController extends  \Arx\controllers\BaseController {
             parent::__construct();
         }
 
-        $auth = Auth::driver('arxmin');
+        $auth = Arxmin::getAuth();
 
         $isAuth = $auth->check();
 
@@ -44,7 +44,7 @@ class BaseController extends  \Arx\controllers\BaseController {
          */
         \Hook::put('__app.debug', \Config::get('app.debug') ? 1 : 0);
         \Hook::put('__app.theme_url',  $theme_url);
-        \Hook::put('__app.base_url',  url());
+        \Hook::put('__app.base_url',  url('/'));
         \Hook::put('__app.api_url',  Arxmin::getApiUrl());
     }
 

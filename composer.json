@@ -16,9 +16,10 @@
     "arx/core": "5.x",
     "laravelcollective/remote": "~5.0",
     "pingpong/modules": "~2.0",
-    "zofe/rapyd": "2.0.*",
+    "zofe/rapyd": "2.*",
     "fzaninotto/faker": "*",
-    "anahkiasen/former": "*"
+    "anahkiasen/former": "*",
+    "baum/baum" : "*"
   },
   "require-dev": {
     "phpunit/phpunit": "3.7.*",

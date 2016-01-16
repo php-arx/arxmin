@@ -101,7 +101,7 @@ class ArxminServiceProvider extends ServiceProvider
         ));
 
         # Add filters and routes on boot
-        include_once __DIR__ . '/filters.php';
+
         include_once __DIR__ . '/routes.php';
     }
 

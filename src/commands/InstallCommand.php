@@ -86,6 +86,10 @@ class InstallCommand extends Command
             mkdir(base_path('modules'));
         }
 
+        if (!file_exists(storage_path('app/modules'))) {
+            $this->info('Create modules folder');
+            mkdir(storage_path('app/modules'));
+        }
 
         touch(storage_path('app/modules/modules.used'));
 

@@ -21,7 +21,7 @@
     <script>
         // globals declaration
         window.__base_url = '<?='/packages/arx/arxmin'; ?>/js';
-        window.__public_url = '<?=url(); ?>';
+        window.__public_url = '<?=url("/"); ?>';
         window.__app = <?= Hook::getJson('__app', (object) array()); ?>;
     </script>
 </head>
@@ -184,7 +184,7 @@ $body['attributes']['class'] .= ' skin-black sidebar-mini';
                             <li class="user-footer">
                                 @section('user-footer')
                                 <div class="pull-right">
-                                    <a href="<?= url(); ?>/arxmin/logout" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="<?= url("/"); ?>/arxmin/logout" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
                                 @show
                             </li>

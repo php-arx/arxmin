@@ -18,10 +18,10 @@ class ArxminController extends BaseController
         global $arxminUser,$arxminAuth;
 
         try {
-            $arxminAuth = Auth::provider('arxmin')->check();
+            $arxminAuth = Arxmin::getAuth()->check();
 
             if ($arxminAuth) {
-                $menu = \Arxmin::getMenu();
+                $menu = Arxmin::getMenu();
                 return redirect($menu[0]['link']);
             }
         } catch (Exception $e) {

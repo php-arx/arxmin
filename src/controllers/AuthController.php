@@ -12,7 +12,7 @@ class AuthController extends BaseController {
     public function __construct()
     {
         parent::__construct();
-        $this->auth = Auth::driver('arxmin');
+        $this->auth = Arxmin::getAuth();
     }
 
     /**

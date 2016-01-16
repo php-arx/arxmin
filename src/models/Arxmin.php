@@ -6,6 +6,7 @@ use Arx\classes\Exception;
 use Arx\classes\File, Arx\classes\Hook;
 use Arx\classes\Utils;
 use Config, Lang;
+use Illuminate\Support\Facades\Auth;
 use Schema;
 
 /**
@@ -49,6 +50,18 @@ class Arxmin extends Arx\classes\Singleton
         }
 
         $this->app = $app;
+    }
+
+    /**
+     * Get Laravel Auth (5.2 or 5.0 compatibility)
+     */
+    public static function getAuth()
+    {
+        if (method_exists('Auth', 'driver')) {
+            return Auth::driver('arxmin');
+        } else {
+            return auth()->guard('arxmin');
+        }
     }
 
     /**
