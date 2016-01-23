@@ -11,6 +11,8 @@ use Module as ParentClass;
  */
 class Module extends ParentClass
 {
+    
+    public static $currentModule = null;
 
     /**
      * Download the module from an url
@@ -83,6 +85,17 @@ class Module extends ParentClass
     public static function moduleUrl($path = null)
     {
         return arxminUrl('modules/'.strtolower(self::getUsed()).Str::mustBeginWith('/', $path));
+    }
+
+
+    /**
+     * Apply current module
+     *
+     * @param $name
+     */
+    public static function setUsed($name){
+        self::$currentModule = $name;
+        parent::setUsed($name);
     }
 
     /**
