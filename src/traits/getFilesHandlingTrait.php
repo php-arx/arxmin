@@ -5,6 +5,12 @@ use Arx\classes\Image;
 use Exception, File;
 use Input;
 
+/**
+ * Class getFilesHandlingTrait
+ *
+ * @deprecated pleas use modelFilesHandlingTrait
+ * @package Arxmin
+ */
 trait getFilesHandlingTrait {
 
     protected $_currentPath_checked = null;
