@@ -57,10 +57,12 @@ class Arxmin extends Arx\classes\Singleton
      */
     public static function getAuth()
     {
-        if (method_exists('Auth', 'driver')) {
-            return Auth::driver('arxmin');
+        $auth = auth();
+
+        if (method_exists($auth, 'guard')) {
+            return $auth->guard('arxmin');
         } else {
-            return auth()->guard('arxmin');
+            return Auth::driver('arxmin');
         }
     }
 
