@@ -6,8 +6,8 @@
 <head>
     <meta charset="utf-8"/>
     @section('head')
-    <title><?=  $this->title ?: '△rxmin' ?></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+        <title><?= $this->title ?: '△rxmin' ?></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     @show
     <!--[if lt IE 9]>
     <?= HTML::script('//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js') ?>
@@ -212,21 +212,20 @@ $body['attributes']['class'] .= ' skin-black sidebar-mini';
                 @foreach($menu as $item)
                 @if(isset($item['children']))
                 <li class="treeview">
-                    <a href="<?=$item['link']; ?>"><i class="fa <?=$item['ico']; ?>"></i> <span><?=$item['name']; ?></span></a>
+                    <a href="<?= $item['link']; ?>"><i class="fa <?= $item['ico']; ?>"></i> <span><?= $item['name']; ?></span></a>
                     <ul class="treeview-menu">
                         @foreach($item['children'] as $item2)
-                        <li><a href="<?=$item2['link']; ?>"><i class="fa <?=$item2['ico']; ?>"></i> <span><?=$item2['name']; ?></span></a></li>
+                        <li><a href="<?= $item2['link']; ?>"><i class="fa <?= $item2['ico']; ?>"></i> <span><?= $item2['name']; ?></span></a></li>
                         @endforeach
                     </ul>
                 </li>
                 @else
-                <li><a href="<?=$item['link']; ?>"><i class="fa <?=$item['ico']; ?>"></i> <span><?=$item['name']; ?></span></a></li>
+                <li><a href="<?= $item['link']; ?>"><i class="fa <?= $item['ico']; ?>"></i> <span><?= $item['name']; ?></span></a></li>
                 @endif
                 @endforeach
-            </ul><!-- /.sidebar-menu -->
+            </ul>
             @show
         </section>
-        <!-- /.sidebar -->
         @show
     </aside>
 
@@ -240,8 +239,8 @@ $body['attributes']['class'] .= ' skin-black sidebar-mini';
                 <li class="active">Here</li>
             </ol>
             <h1>
-                <?=$this->title; ?>
-                <small><?=$this->description; ?></small>
+                <?= $this->title; ?>
+                <small><?= $this->description; ?></small>
             </h1>
         </section>
         @show
@@ -250,8 +249,8 @@ $body['attributes']['class'] .= ' skin-black sidebar-mini';
             @section('content')
 
             @show
-        </section><!-- /.content -->
-    </div><!-- /.content-wrapper -->
+        </section>
+    </div>
 
     @section('footer')
 
@@ -272,27 +271,26 @@ $body['attributes']['class'] .= ' skin-black sidebar-mini';
                 @section('control-sidebar-home-tab')
 
                 @show
-            </div><!-- /.tab-pane -->
+            </div>
+
             <!-- Settings tab content -->
             <div class="tab-pane" id="control-sidebar-settings-tab">
                 @section('control-sidebar-settings-tab')
 
                 @show
-            </div><!-- /.tab-pane -->
+            </div>
             @show
         </div>
-    </aside><!-- /.control-sidebar -->
+    </aside>
     <div class='control-sidebar-bg'></div>
     @show
-</div><!-- ./wrapper -->
+</div>
 
 @section('js')
-    <?=
-        Asset::js([
-           'packages/arx/arxmin/dist/js/plugins.js',
-           'packages/arx/arxmin/dist/js/arxmin.js'
-        ]);
-    ?>
+    <?= Asset::js([
+       'packages/arx/arxmin/dist/js/plugins.js',
+       'packages/arx/arxmin/dist/js/arxmin.js'
+    ]) ?>
 @show
 </body>
 </html>

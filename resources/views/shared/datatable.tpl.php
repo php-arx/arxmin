@@ -1,14 +1,16 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div id="container" ng-controller="tablemanagerController as tablemanager">
-        <div class="row-fluid">
-            <div class="span12">
-                <div class="grid simple ">
+    <div class="container-fluid" id="container" ng-controller="tablemanagerController as tablemanager">
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="grid simple">
                     <div class="grid-title">
                         <h4><?php echo ucfirst($this->title) ?></h4>
                     </div>
-                    <div class="grid-body ">
+                    <div class="grid-body">
+
                         <table id="module-tablemanager" class="display table datatable arx-table table-bordered table-hover table-condensed" cellspacing="0" width="100%">
                             <thead>
                             <tr>
@@ -22,10 +24,12 @@
                             </tr>
                             </thead>
                         </table>
+
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 @stop
 
