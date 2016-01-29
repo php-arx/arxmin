@@ -144,6 +144,8 @@ class Arxmin extends Arx\classes\Singleton
                 $data[$key] = $item['name'];
             }
             return $data;
+        } elseif ($type == 'keys') {
+            return array_keys($locales);
         }
 
         return $locales;
