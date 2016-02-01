@@ -452,7 +452,12 @@ class Arxmin extends Arx\classes\Singleton
      * @return array
      * @throws \Exception
      */
-    public static function registerMenu($data, $params = ['position' => null], $ref = 'arxmin::menu')
+    public static function registerMenu($data = [
+        'name' => null,
+        'link' => null,
+        'type' => 'module',
+        'ico' => 'fa-pencil'
+    ], $params = ['position' => null], $ref = 'arxmin::menu')
     {
         $params = Arr::mergeWithDefaultParams($params);
 
