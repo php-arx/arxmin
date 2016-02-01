@@ -1,5 +1,6 @@
 <?php namespace Arxmin;
 
+use Arxmin\Events\InitMenuEvent;
 use Auth;
 use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -31,6 +32,10 @@ class BaseController extends  \Arx\controllers\BaseController {
         $user = $auth->getUser();
 
         $menu = Arxmin::getMenu();
+
+        // Apply_filters
+        $menu = event(new InitMenuEvent($menu, $user));
+        $menu = array_pop($menu);
 
         $widgets = Arxmin::getWidgets();
 
