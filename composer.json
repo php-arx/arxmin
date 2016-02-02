@@ -32,9 +32,15 @@
     "classmap": [
       "src/commands",
       "src/controllers",
-      "src/models",
+      "src/events",
+      "src/facades",
+      "src/helpers",
       "src/interfaces",
+      "src/middlewares",
+      "src/models",
       "src/providers",
+      "src/requests",
+      "src/traits",
       "database/seeders",
       "database/migrations",
       "tests"
