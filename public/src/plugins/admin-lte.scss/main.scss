@@ -1,0 +1,10 @@
+$icon-font-path: '../fonts/';
+
+@import url(http://fonts.useso.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic);
+
+// bower:scss
+@import "bower_components/bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+@import "scss/admin-lte";
+@import "scss/skins/all-skins";

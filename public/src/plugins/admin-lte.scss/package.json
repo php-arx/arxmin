@@ -1,0 +1,25 @@
+{
+  "name": "AdminLTE.scss",
+  "version": "3.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/aguegu/AdminLTE.git"
+  },
+  "devDependencies": {
+    "autoprefixer-core": "^5.2.0",
+    "del": "^1.2.0",
+    "gulp": "^3.9.0",
+    "gulp-csso": "^1.0.0",
+    "gulp-jshint": "^1.11.0",
+    "gulp-load-plugins": "^1.0.0-rc.1",
+    "gulp-postcss": "^5.1.8",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.0.1",
+    "gulp-sourcemaps": "^1.5.2",
+    "jshint-stylish": "^2.0.0",
+    "run-sequence": "^1.1.0"
+  },
+  "dependencies": {
+    "main-bower-files": "^2.8.0"
+  }
+}

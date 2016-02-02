@@ -1,0 +1,76 @@
+/**
+* Helpers used in Arxmin environment
+*/
+
+.vertical-align {
+    @include vertical-align();
+}
+
+.nomargin{
+    margin: 0 !important;
+}
+.nopadding{
+    padding: 0 !important;
+}
+
+
+$ratio : 0, 10, 20, 25, 50, 75, 90, 100;
+$margin : $ratio;
+
+/**
+* Vertical and horizontal helpers
+*/
+@each $item in $ratio {
+    .vert-#{$item}{
+        top: 1% * $item;
+        position: absolute;
+        text-align: center;
+        width: 100%;
+    }
+
+    .hor-#{$item}{
+        left : 1% * $item;
+        position: absolute;
+        text-align: center;
+        width: 100%;
+    }
+}
+
+/**
+* Margin helpers
+*/
+@each $item in  $margin {
+    @each $n in  'm', 'p' {
+        .#{$n}t-#{$item}{
+            margin-top: 1px * $item !important;
+        }
+        .#{$n}b-#{$item}{
+            margin-bottom: 1px * $item !important;
+        }
+        .#{$n}l-#{$item}{
+            margin-left: 1px * $item !important;
+        }
+        .#{$n}r-#{$item}{
+            margin-right: 1px * $item !important;
+        }
+        .#{$n}-#{$item}{
+            margin: 1px * $item !important;
+        }
+
+        .#{$n}t--#{$item}{
+            margin-top: -1px * $item !important;
+        }
+        .#{$n}b--#{$item}{
+            margin-bottom: -1px * $item !important;
+        }
+        .#{$n}l--#{$item}{
+            margin-left: -1px * $item !important;
+        }
+        .#{$n}r--#{$item}{
+            margin-right: -1px * $item !important;
+        }
+        .#{$n}--#{$item}{
+            margin: -1px * $item !important;
+        }
+    }
+}

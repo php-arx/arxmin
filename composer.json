@@ -1,0 +1,47 @@
+{
+  "name": "arx/arxmin",
+  "type": "Admin Management System",
+  "description": "Arxmin is an universal admin management system for an Arx project",
+  "homepage": "http://www.arx.io",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Daniel Sum",
+      "email": "daniel@cherrylabs.net",
+      "homepage": "http://www.cherrylabs.net",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "arx/core": "5.x",
+    "laravelcollective/remote": "~5.0",
+    "pingpong/modules": "~2.0",
+    "zofe/rapyd": "2.*",
+    "fzaninotto/faker": "*",
+    "anahkiasen/former": "*",
+    "baum/baum" : "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "3.7.*",
+    "mockery/mockery": "0.7.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Arxmin\\": "src/"
+    },
+    "classmap": [
+      "src/commands",
+      "src/controllers",
+      "src/models",
+      "src/interfaces",
+      "src/providers",
+      "database/seeders",
+      "database/migrations",
+      "tests"
+    ]
+  },
+  "config": {
+    "preferred-install": "dist"
+  },
+  "minimum-stability": "dev"
+}

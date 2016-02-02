@@ -1,10 +1,18 @@
-## Arxmin - Simple Admin package for Laravel Project
+## Arxmin (alpha) - Simple Admin package for Laravel Project
 
-Arxmin is a simple Admin package for Laravel. It simply consist of some helpers to help you to build an awesome admin for your Laravel project.
+Arxmin is a simple Admin package for Laravel. It consist of some wrapping helpers to help you to build an awesome admin for your Laravel project.
+
+It includes : 
+
+- Admin LTE + starter template
+- ModuleController Helper
+- Pingpong Modules
+- Rapyd Zofe
+- Nested Baum
 
 ## Composer
 
-To install Administrator as a Composer package to be used with Laravel 5, simply run:
+To install Arxmin as a Composer package to be used with Laravel 5, simply run:
 
 ```sh
 composer require "arx/arxmin: 5.*"
@@ -18,11 +26,14 @@ Once it's installed, you can register the service provider in `config/app.php` i
 ]
 ```
 
-Then publish Administrator's assets with `php artisan vendor:publish`.
+Then publish Arxmin's assets with `php artisan vendor:publish`.
 
-After that, you need to go to : 
+After that, you need to go run : 
 
-$$your_url$$/arxmin/install and follow the instructions.
+
+````sh
+php artisan arxmin:install
+````
 
 ## Documentation
 
@@ -30,9 +41,9 @@ The documentation is available at www.arx.io.
 
 ### Philosophy
 
-The Arxmin package is totally agnostic. It means that everything is separated as a module so you download only that you really needs in your Laravel Project.
+The Arxmin package is totally agnostic. It means that everything is separated as a module so you download only that you really needs in your Laravel Project and in Your Admin.
 
-The package consist of some helper to build your admin but you are free to manage your User management, Blog and Data management as you want.
+The package consist of some helpers your admin but you are free to manage your User management, Blog and Data management as you want.
 
 Please go to Modules Tab and begin to build or explore something amazing !
 
@@ -45,8 +56,6 @@ php artisan module:make your_module
 ```
 
 Then after that you will see a modules/$$your_module$$  folder with a start.php at the begining.
-
-
 
 #### How to add your module in the Arxmin ?
 
@@ -103,7 +112,6 @@ Example
 ````
 
 * Please look at the Arxmin documentation for available section.
-
 
 For more information, please go to [(http://www.arx.io)](http://www.arx.io)
 
