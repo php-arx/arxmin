@@ -42,7 +42,6 @@
       "src/requests",
       "src/traits",
       "database/seeders",
-      "database/migrations",
       "tests"
     ]
   },
