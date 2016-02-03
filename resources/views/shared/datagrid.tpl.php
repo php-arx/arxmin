@@ -1,5 +1,11 @@
 @extends('arxmin::layouts.admin')
 
+<?php
+/**
+ * @see https://github.com/zofe/rapyd-laravel
+ */
+?>
+
 @section('content')
 <div class="container-fluid">
 

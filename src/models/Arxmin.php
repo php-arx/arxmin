@@ -26,15 +26,15 @@ class Arxmin extends Arx\classes\Singleton
     public $app;
 
     /**
-    * Admin user logged
-    */
+     * Admin user logged
+     */
     public static $user = null;
 
     protected $menu = array();
 
     private static $isInstalled = false;
 
-	private static $_aInstances = array();
+    private static $_aInstances = array();
 
     public static $currentModule = null;
 
@@ -45,7 +45,7 @@ class Arxmin extends Arx\classes\Singleton
      */
     public function __construct($app = null)
     {
-        if(!$app){
+        if (!$app) {
             $app = \App::getInstance();
         }
 
@@ -61,9 +61,9 @@ class Arxmin extends Arx\classes\Singleton
 
         if (method_exists($auth, 'guard')) {
             return $auth->guard('arxmin');
-        } else {
-            return Auth::driver('arxmin');
         }
+
+        return Auth::driver('arxmin');
     }
 
     /**
@@ -71,15 +71,16 @@ class Arxmin extends Arx\classes\Singleton
      *
      * @return mixed
      */
-	public static function getInstance(){
-		$sClass = get_called_class();
+    public static function getInstance()
+    {
+        $sClass = get_called_class();
 
-		if (!isset(self::$_aInstances[$sClass])) {
-			self::$_aInstances[$sClass] = new $sClass(app());
-		}
+        if (!isset(self::$_aInstances[$sClass])) {
+            self::$_aInstances[$sClass] = new $sClass(app());
+        }
 
-		return self::$_aInstances[$sClass];
-	}
+        return self::$_aInstances[$sClass];
+    }
 
     /**
      * Construct and Arxmin Endpoint
@@ -88,8 +89,9 @@ class Arxmin extends Arx\classes\Singleton
      * @param array $data
      * @return string
      */
-    public static function api($endpoint, $data = array()){
-        return Config::get('arxmin.api.base').'/'.$endpoint;
+    public static function api($endpoint, $data = array())
+    {
+        return Config::get('arxmin.api.base') . '/' . $endpoint;
     }
 
 
@@ -98,11 +100,12 @@ class Arxmin extends Arx\classes\Singleton
      *
      * @todo more reflexive paths
      */
-    public static function loadPlugin($pluginOrArray){
+    public static function loadPlugin($pluginOrArray)
+    {
 
         $files = func_get_args();
 
-        if(count($files) == 1 && is_array($files[0])){
+        if (count($files) == 1 && is_array($files[0])) {
             $files = $files[0];
         }
 
@@ -111,18 +114,18 @@ class Arxmin extends Arx\classes\Singleton
 
             $min = '';
 
-            if(!Config::get('app.debug')){
+            if (!Config::get('app.debug')) {
                 $min = '.min.';
             }
 
-            $css = '/plugins/'.$file.'/'.$file.$min.'.css';
-            $js = '/plugins/'.$file.'/'.$file.$min.'.js';
+            $css = '/plugins/' . $file . '/' . $file . $min . '.css';
+            $js = '/plugins/' . $file . '/' . $file . $min . '.js';
 
-            if(is_file(self::getThemePath($css))){
+            if (is_file(self::getThemePath($css))) {
                 Hook::add('arxmin::css', self::getThemeUrl($css));
             };
 
-            if(is_file(self::getThemePath($js))){
+            if (is_file(self::getThemePath($js))) {
                 Hook::add('arxmin::js', self::getThemeUrl($js));
             }
         }
@@ -166,7 +169,7 @@ class Arxmin extends Arx\classes\Singleton
         if ($params['type'] == 'list') {
             return array_column($result, 'name');
         } elseif ($params['type'] == 'infolist') {
-            return array_map(function($item){
+            return array_map(function ($item) {
                 return $item['name'] . ' : ' . $item['description'];
             }, $result);
         }
@@ -190,7 +193,8 @@ class Arxmin extends Arx\classes\Singleton
      * @param bool $decode
      * @return mixed|string
      */
-    public static function getOption($name, $default = null, $decode = true){
+    public static function getOption($name, $default = null, $decode = true)
+    {
         return Option::getEntry($name, $default, $decode);
     }
 
@@ -200,7 +204,8 @@ class Arxmin extends Arx\classes\Singleton
      * @param $name
      * @return \Illuminate\Database\Eloquent\Model|null|static
      */
-    public static function hasOption($name){
+    public static function hasOption($name)
+    {
         return Option::hasEntry($name);
     }
 
@@ -211,7 +216,8 @@ class Arxmin extends Arx\classes\Singleton
      * @param null $path
      * @return string
      */
-    public static function getThemePath($path = null){
+    public static function getThemePath($path = null)
+    {
         return self::getAssetsPath($path);
     }
 
@@ -221,7 +227,8 @@ class Arxmin extends Arx\classes\Singleton
      * @param null $path
      * @return string
      */
-    public static function getAssetsPath($path = null){
+    public static function getAssetsPath($path = null)
+    {
 
         $base = Config::get('arxmin.paths.theme');
 
@@ -229,7 +236,7 @@ class Arxmin extends Arx\classes\Singleton
             $base = base_path('/workbench/arx/arxmin/public/dist');
         }
 
-        return $base.$path;
+        return $base . $path;
     }
 
     /**
@@ -239,7 +246,8 @@ class Arxmin extends Arx\classes\Singleton
      * @param null $path
      * @return string
      */
-    public static function getThemeUrl($path = null){
+    public static function getThemeUrl($path = null)
+    {
         return self::getAssetsUrl($path);
     }
 
@@ -249,21 +257,22 @@ class Arxmin extends Arx\classes\Singleton
      * @param null $path
      * @return string
      */
-    public static function getAssetsUrl($path = null, $params = [], $secure = null){
-        return url('/packages', $params, $secure).'/'.Config::get('arxmin.theme').$path;
+    public static function getAssetsUrl($path = null, $params = [], $secure = null)
+    {
+        return url('/packages', $params, $secure) . '/' . Config::get('arxmin.theme') . $path;
     }
 
     /**
      * Generate an url for the application.
      *
-     * @param  string  $path
-     * @param  mixed   $parameters
-     * @param  bool    $secure
+     * @param  string $path
+     * @param  mixed $parameters
+     * @param  bool $secure
      * @return string
      */
     public static function url($path = null, $parameters = array(), $secure = null)
     {
-        return url(Config::get('arxmin.prefix').'/'.$path, $parameters, $secure);
+        return url(Config::get('arxmin.prefix') . '/' . $path, $parameters, $secure);
     }
 
     /**
@@ -334,7 +343,7 @@ class Arxmin extends Arx\classes\Singleton
 
     public static function getApiUrl()
     {
-        return Config::get('arxmin.api.base').'/';
+        return Config::get('arxmin.api.base') . '/';
     }
 
     /**
@@ -370,7 +379,7 @@ class Arxmin extends Arx\classes\Singleton
 
         if ($type == 'name') {
             return $module->name;
-        } elseif($type == 'path'){
+        } elseif ($type == 'path') {
             return $module->path;
         } else {
             return $module;
@@ -387,7 +396,7 @@ class Arxmin extends Arx\classes\Singleton
         $aDebug = debug_backtrace(1);
         $modules = \Module::all();
 
-        if(isset($aDebug[1])){
+        if (isset($aDebug[1])) {
             foreach ($aDebug as $item) {
                 if (isset($item['file'])) {
                     foreach ($modules as $module) {
@@ -483,7 +492,8 @@ class Arxmin extends Arx\classes\Singleton
      * @param null $locale
      * @return string
      */
-    public static function trans($id = null, $parameters = array(), $domain = 'messages', $locale = null){
+    public static function trans($id = null, $parameters = array(), $domain = 'messages', $locale = null)
+    {
         return trans($id, $parameters, $domain, $locale);
     }
 }

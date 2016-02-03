@@ -15,7 +15,7 @@ class ArxminController extends BaseController
      */
     public function anyIndex()
     {
-        global $arxminUser,$arxminAuth;
+        global $arxminUser, $arxminAuth;
 
         try {
             $arxminAuth = Arxmin::getAuth()->check();
