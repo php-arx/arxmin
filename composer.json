@@ -1,6 +1,6 @@
 {
   "name": "arx/arxmin",
-  "type": "Admin Management System",
+  "type": "package",
   "description": "Arxmin is an universal admin management system for an Arx project",
   "homepage": "http://www.arx.io",
   "license": "MIT",
