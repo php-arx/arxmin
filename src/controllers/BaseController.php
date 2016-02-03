@@ -34,8 +34,11 @@ class BaseController extends  \Arx\controllers\BaseController {
         $menu = Arxmin::getMenu();
 
         // Apply_filters
-        $menu = event(new InitMenuEvent($menu, $user));
-        $menu = array_pop($menu);
+        $eventMenu = event(new InitMenuEvent($menu, $user));
+
+        if ($eventMenu) {
+            $menu = array_pop($menu);
+        }
 
         $widgets = Arxmin::getWidgets();
 
