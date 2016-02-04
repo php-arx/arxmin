@@ -1,11 +1,13 @@
 ## Arxmin (alpha) - Simple Admin package for Laravel Project
 
-Arxmin is a simple Admin package for Laravel. It consist of some wrapping helpers to help you to build an awesome admin for your Laravel project.
+![](https://scrutinizer-ci.com/g/php-arx/arxmin/badges/quality-score.png?b=master) ![](https://scrutinizer-ci.com/g/php-arx/arxmin/badges/build.png?b=master)
+
+Arxmin is a simple Admin package for Laravel. It consist of some wrapped packages and helpers to help you to build an awesome admin for your Laravel project.
 
 It includes : 
 
 - Admin LTE + starter template
-- ModuleController Helper
+- ModuleController Helpers
 - Pingpong Modules
 - Rapyd Zofe
 - Nested Baum
